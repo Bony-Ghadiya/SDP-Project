@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
@@ -9,6 +9,7 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import { AuthContext } from '../shared/context/auth-context';
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
@@ -40,6 +41,8 @@ const useStyles1 = makeStyles(theme => ({
 }));
 
 export default function ProgressMobileStepper() {
+	const auth = useContext(AuthContext);
+	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const classes = useStyles();
 	const classes1 = useStyles1();
 	const theme = useTheme();
@@ -53,6 +56,42 @@ export default function ProgressMobileStepper() {
 	const [form6Data, setForm6Data] = useState(null);
 	const [form7Data, setForm7Data] = useState(null);
 	const [values, setValues] = useState({ weight: '', height: '', age: '' });
+
+	const formSubmitHandler = async () => {
+		let responseData;
+		console.log(
+			auth.userId,
+			form1Data,
+			form2Data,
+			form3Data,
+			form4Data,
+			form5Data,
+			form6Data,
+			form7Data,
+			values
+		);
+		try {
+			responseData = await sendRequest(
+				'http://localhost:5000/api/trainers/approve',
+				'POST',
+				JSON.stringify({
+					userid: auth.userId,
+					gender: form1Data,
+					goal: form2Data,
+					time: form3Data,
+					strength: form4Data,
+					pushups: form5Data,
+					workout: form6Data,
+					Difficulty: form7Data,
+					values: values,
+				}),
+				{
+					'Content-Type': 'application/json',
+				}
+			);
+			console.log(responseData);
+		} catch (err) {}
+	};
 
 	const handleNext = () => {
 		setNextActive(false);
@@ -167,6 +206,8 @@ export default function ProgressMobileStepper() {
 
 	return (
 		<React.Fragment>
+			<ErrorModal error={error} onClear={clearError} />
+			{isLoading && <LoadingSpinner asOverlay />}
 			<MobileStepper
 				variant="dots"
 				steps={8}
@@ -461,7 +502,7 @@ export default function ProgressMobileStepper() {
 						type="submit"
 						onClick={e => {
 							e.preventDefault();
-							console.log(values);
+							formSubmitHandler();
 						}}
 					/>
 				</form>
