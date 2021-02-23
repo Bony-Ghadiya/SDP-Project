@@ -1,12 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import Button from '@material-ui/core/Button';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import { AuthContext } from '../shared/context/auth-context';
+import ErrorModal from '../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
+import { useHttpClient } from '../shared/hooks/http-hook';
+import './getData.css';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
+	root: {
+		maxWidth: 400,
+		flexGrow: 1,
+	},
+	progress: {
+		backgroundColor: 'green',
+	},
+});
+const useStyles1 = makeStyles(theme => ({
 	root: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -22,99 +40,14 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-// export default function InputAdornments() {
-//   const classes = useStyles();
-//   const [values, setValues] = React.useState({
-//     amount: '',
-//     password: '',
-//     weight: '',
-//     weightRange: '',
-//     showPassword: false,
-//   });
-
-const GetData = () => {
-	// const [from1, setForm1] = useState(true);
-	// const [from2, setForm2] = useState(false);
-	// const [from3, setForm3] = useState(false);
-	// const [from4, setForm4] = useState(false);
-	// const [from5, setForm5] = useState(false);
-	// const [from6, setForm6] = useState(false);
-	// const [from7, setForm7] = useState(false);
-	// const [from8, setForm8] = useState(false);
-
-	// const viewfrom2 = () => {
-	// 	setForm1(false);
-	// 	setForm2(true);
-	// 	setForm3(false);
-	// 	setForm4(false);
-	// 	setForm5(false);
-	// 	setForm6(false);
-	// 	setForm7(false);
-	// 	setForm8(false);
-	// };
-
-	// const viewfrom3 = () => {
-	// 	setForm1(false);
-	// 	setForm2(false);
-	// 	setForm3(true);
-	// 	setForm4(false);
-	// 	setForm5(false);
-	// 	setForm6(false);
-	// 	setForm7(false);
-	// 	setForm8(false);
-	// };
-	// const viewfrom4 = () => {
-	// 	setForm1(false);
-	// 	setForm2(false);
-	// 	setForm3(false);
-	// 	setForm4(true);
-	// 	setForm5(false);
-	// 	setForm6(false);
-	// 	setForm7(false);
-	// 	setForm8(false);
-	// };
-	// const viewfrom5 = () => {
-	// 	setForm1(false);
-	// 	setForm2(false);
-	// 	setForm3(false);
-	// 	setForm4(false);
-	// 	setForm5(true);
-	// 	setForm6(false);
-	// 	setForm7(false);
-	// 	setForm8(false);
-	// };
-	// const viewfrom6 = () => {
-	// 	setForm1(false);
-	// 	setForm2(false);
-	// 	setForm3(false);
-	// 	setForm4(false);
-	// 	setForm5(false);
-	// 	setForm6(true);
-	// 	setForm7(false);
-	// 	setForm8(false);
-	// };
-	// const viewfrom7 = () => {
-	// 	setForm1(false);
-	// 	setForm2(false);
-	// 	setForm3(false);
-	// 	setForm4(false);
-	// 	setForm5(false);
-	// 	setForm6(false);
-	// 	setForm7(true);
-	// 	setForm8(false);
-	// };
-	// const viewfrom8 = () => {
-	// 	setForm1(false);
-	// 	setForm2(false);
-	// 	setForm3(false);
-	// 	setForm4(false);
-	// 	setForm5(false);
-	// 	setForm6(false);
-	// 	setForm7(false);
-	// 	setForm8(true);
-	// };
-
-	const [viewFormNumber, setViewFormNumber] = useState(1);
+export default function ProgressMobileStepper() {
+	const auth = useContext(AuthContext);
+	const { isLoading, error, sendRequest, clearError } = useHttpClient();
+	const classes = useStyles();
+	const classes1 = useStyles1();
+	const theme = useTheme();
+	const [nextActive, setNextActive] = useState(false);
+	const [activeStep, setActiveStep] = useState(0);
 	const [form1Data, setForm1Data] = useState(null);
 	const [form2Data, setForm2Data] = useState(null);
 	const [form3Data, setForm3Data] = useState(null);
@@ -122,99 +55,191 @@ const GetData = () => {
 	const [form5Data, setForm5Data] = useState(null);
 	const [form6Data, setForm6Data] = useState(null);
 	const [form7Data, setForm7Data] = useState(null);
-	const [values, setValues] = useState({ weight: '', height: '' });
-	const classes = useStyles();
+	const [values, setValues] = useState({ weight: '', height: '', age: '' });
 
-	const handleChange = prop => event => {
-		setValues({ ...values, [prop]: event.target.value });
+	const formSubmitHandler = async () => {
+		let responseData;
+		console.log(
+			auth.userId,
+			form1Data,
+			form2Data,
+			form3Data,
+			form4Data,
+			form5Data,
+			form6Data,
+			form7Data,
+			values
+		);
+		try {
+			responseData = await sendRequest(
+				'http://localhost:5000/api/getplan/plan',
+				'POST',
+				JSON.stringify({
+					userid: auth.userId,
+					gender: form1Data,
+					goal: form2Data,
+					time: form3Data,
+					strength: form4Data,
+					pushups: form5Data,
+					workout: form6Data,
+					difficulty: form7Data,
+					values: values,
+				}),
+				{
+					'Content-Type': 'application/json',
+				}
+			);
+			console.log(responseData);
+		} catch (err) {}
 	};
 
-	const nextHandler = () => {
-		setViewFormNumber(viewFormNumber >= 8 ? 8 : viewFormNumber + 1);
-		console.log(viewFormNumber);
+	const handleNext = () => {
+		setNextActive(false);
+		setActiveStep(prevActiveStep => prevActiveStep + 1);
 	};
 
-	const previousHandler = () => {
-		setViewFormNumber(viewFormNumber < 2 ? 1 : viewFormNumber - 1);
-		console.log(viewFormNumber);
+	const handleBack = () => {
+		setNextActive(false);
+		setActiveStep(prevActiveStep => prevActiveStep - 1);
 	};
 
 	const form1MaleSubmitHandler = () => {
 		setForm1Data('male');
+		setNextActive(true);
 	};
 	const form1FemaleSubmitHandler = () => {
 		setForm1Data('female');
+		setNextActive(true);
 	};
 	const form2LoseSubmitHandler = () => {
 		setForm2Data('lose');
+		setNextActive(true);
 	};
 	const form2GainSubmitHandler = () => {
 		setForm2Data('gain');
+		setNextActive(true);
 	};
 	const form2BuildSubmitHandler = () => {
 		setForm2Data('build');
+		setNextActive(true);
 	};
 	const form31SubmitHandler = () => {
 		setForm3Data('HARDLY');
+		setNextActive(true);
 	};
 	const form32SubmitHandler = () => {
 		setForm3Data('SOMETIMES');
+		setNextActive(true);
 	};
 	const form33SubmitHandler = () => {
 		setForm3Data('2-3 TIMES A WEEK');
+		setNextActive(true);
 	};
 	const form34SubmitHandler = () => {
 		setForm3Data('OVER 4 TIMES A WEEK');
+		setNextActive(true);
 	};
 	const form41SubmitHandler = () => {
 		setForm4Data('SHORTNESS OF BREATH');
+		setNextActive(true);
 	};
 	const form42SubmitHandler = () => {
 		setForm4Data('A LITTLE TIRED');
+		setNextActive(true);
 	};
 
 	const form43SubmitHandler = () => {
 		setForm4Data('EASY');
+		setNextActive(true);
 	};
 	const form44SubmitHandler = () => {
 		setForm4Data('I CAN RUN UP THERE');
+		setNextActive(true);
 	};
 	const form51SubmitHandler = () => {
 		setForm5Data('Less Than 10');
+		setNextActive(true);
 	};
 	const form52SubmitHandler = () => {
 		setForm5Data('10-20');
+		setNextActive(true);
 	};
 	const form53SubmitHandler = () => {
 		setForm5Data('21-40');
+		setNextActive(true);
 	};
 	const form54SubmitHandler = () => {
 		setForm5Data('OVER 40');
+		setNextActive(true);
 	};
 	const form61SubmitHandler = () => {
 		setForm6Data('FULL BODY');
+		setNextActive(true);
 	};
 	const form62SubmitHandler = () => {
 		setForm6Data('ABS');
+		setNextActive(true);
 	};
 	const form63SubmitHandler = () => {
 		setForm6Data('ARM');
+		setNextActive(true);
 	};
 	const form64SubmitHandler = () => {
 		setForm6Data('LEG');
+		setNextActive(true);
 	};
 	const form71SubmitHandler = () => {
 		setForm7Data('EASY');
+		setNextActive(true);
 	};
 	const form72SubmitHandler = () => {
 		setForm7Data('MEDIUM');
+		setNextActive(true);
 	};
 	const form73SubmitHandler = () => {
 		setForm7Data('HARD');
+		setNextActive(true);
 	};
+	const handleChange = prop => event => {
+		setValues({ ...values, [prop]: event.target.value });
+	};
+
 	return (
 		<React.Fragment>
-			{viewFormNumber === 1 && (
+			<ErrorModal error={error} onClear={clearError} />
+			{isLoading && <LoadingSpinner asOverlay />}
+			<MobileStepper
+				variant="dots"
+				steps={8}
+				position="static"
+				activeStep={activeStep}
+				className={classes.root}
+				nextButton={
+					<Button
+						size="small"
+						onClick={handleNext}
+						disabled={!nextActive || activeStep === 7}
+					>
+						Next
+						{theme.direction === 'rtl' ? (
+							<KeyboardArrowLeft />
+						) : (
+							<KeyboardArrowRight />
+						)}
+					</Button>
+				}
+				backButton={
+					<Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+						{theme.direction === 'rtl' ? (
+							<KeyboardArrowRight />
+						) : (
+							<KeyboardArrowLeft />
+						)}
+						Back
+					</Button>
+				}
+			/>
+			{activeStep === 0 && (
 				<div>
 					<p>
 						Please let us know you better to help boost your workout results
@@ -234,7 +259,7 @@ const GetData = () => {
 					<p>{form1Data}</p>
 				</div>
 			)}
-			{viewFormNumber === 2 && (
+			{activeStep === 1 && (
 				<div>
 					<p>Achieve your goal with your personalized plan</p>
 					<input
@@ -258,7 +283,7 @@ const GetData = () => {
 					{<p>{form2Data}</p>}
 				</div>
 			)}
-			{viewFormNumber === 3 && (
+			{activeStep === 2 && (
 				<div>
 					<h3>How often do you Exercise?</h3>
 					<input
@@ -288,7 +313,7 @@ const GetData = () => {
 					<p>{form3Data}</p>
 				</div>
 			)}
-			{viewFormNumber === 4 && (
+			{activeStep === 3 && (
 				<div>
 					<h4>HOW DO YOU FEEL AFTER CLIMBING 5 FLOORS?</h4>
 					<input
@@ -318,7 +343,7 @@ const GetData = () => {
 					{<p>{form4Data}</p>}
 				</div>
 			)}
-			{viewFormNumber === 5 && (
+			{activeStep === 4 && (
 				<div>
 					<h3>HOW MANY PUSH-UPS CAN YOU DO AT ONE TIME??</h3>
 					<input
@@ -348,7 +373,7 @@ const GetData = () => {
 					<p>{form5Data}</p>
 				</div>
 			)}
-			{viewFormNumber === 6 && (
+			{activeStep === 5 && (
 				<div>
 					<h3>PLEASE SELECT YOUR WORKOUT PLAN</h3>
 					<input
@@ -357,12 +382,7 @@ const GetData = () => {
 						value="FULL BODY WORKOUT"
 						onClick={form61SubmitHandler}
 					/>
-					<input
-						type="button"
-						className="button"
-						value="ABS WORKOUT"
-						onClick={form62SubmitHandler}
-					/>
+					<button onClick={form62SubmitHandler}>ABS WORKOUT</button>
 					<input
 						type="button"
 						className="button"
@@ -378,7 +398,7 @@ const GetData = () => {
 					<p>{form6Data}</p>
 				</div>
 			)}
-			{viewFormNumber === 7 && (
+			{activeStep === 6 && (
 				<div>
 					<h3>PLEASE SELECT DIFFICULTY</h3>
 					<input
@@ -402,75 +422,91 @@ const GetData = () => {
 					<p>{form7Data}</p>
 				</div>
 			)}
-			{viewFormNumber === 8 && (
-				<div>
-					<FormControl
-						className={clsx(
-							classes.margin,
-							classes.withoutLabel,
-							classes.textField
-						)}
-					>
-						<Input
-							id="standard-adornment-weight"
-							value={values.weight}
-							onChange={handleChange('weight')}
-							endAdornment={<InputAdornment position="end">Kg</InputAdornment>}
-							aria-describedby="standard-weight-helper-text"
-							inputProps={{
-								'aria-label': 'weight',
-							}}
-						/>
-						<FormHelperText id="standard-weight-helper-text">
-							Weight
-						</FormHelperText>
-					</FormControl>
-					<FormControl
-						className={clsx(
-							classes.margin,
-							classes.withoutLabel,
-							classes.textField
-						)}
-					>
-						<Input
-							id="standard-adornment-height"
-							value={values.height}
-							onChange={handleChange('height')}
-							endAdornment={<InputAdornment position="end">cm</InputAdornment>}
-							aria-describedby="standard-height-helper-text"
-							inputProps={{
-								'aria-label': 'height',
-							}}
-						/>
-						<FormHelperText id="standard-weight-helper-text">
-							Height
-						</FormHelperText>
-					</FormControl>
-					<p>
-						weight : {values.weight}
-						height: {values.height}
-					</p>
-				</div>
-			)}
-			<br />
-			{viewFormNumber !== 1 && (
-				<input
-					type="button"
-					className="button"
-					value="PREVIOUS"
-					onClick={previousHandler}
-				/>
-			)}
-			{viewFormNumber !== 8 && (
-				<input
-					type="button"
-					className="button"
-					value="NEXT"
-					onClick={nextHandler}
-				/>
+			{activeStep === 7 && (
+				<form>
+					<div>
+						<FormControl
+							className={clsx(
+								classes1.margin,
+								classes1.withoutLabel,
+								classes1.textField
+							)}
+						>
+							<Input
+								id="standard-adornment-age"
+								value={values.age}
+								onChange={handleChange('age')}
+								endAdornment={
+									<InputAdornment position="end">years</InputAdornment>
+								}
+								aria-describedby="standard-age-helper-text"
+								inputProps={{
+									'aria-label': 'age',
+								}}
+							/>
+							<FormHelperText id="standard-age-helper-text">Age</FormHelperText>
+						</FormControl>
+						<FormControl
+							className={clsx(
+								classes1.margin,
+								classes1.withoutLabel,
+								classes1.textField
+							)}
+						>
+							<Input
+								id="standard-adornment-weight"
+								value={values.weight}
+								onChange={handleChange('weight')}
+								endAdornment={
+									<InputAdornment position="end">Kg</InputAdornment>
+								}
+								aria-describedby="standard-weight-helper-text"
+								inputProps={{
+									'aria-label': 'weight',
+								}}
+							/>
+							<FormHelperText id="standard-weight-helper-text">
+								Weight
+							</FormHelperText>
+						</FormControl>
+						<FormControl
+							className={clsx(
+								classes1.margin,
+								classes1.withoutLabel,
+								classes1.textField
+							)}
+						>
+							<Input
+								id="standard-adornment-height"
+								value={values.height}
+								onChange={handleChange('height')}
+								endAdornment={
+									<InputAdornment position="end">cm</InputAdornment>
+								}
+								aria-describedby="standard-height-helper-text"
+								inputProps={{
+									'aria-label': 'height',
+								}}
+							/>
+							<FormHelperText id="standard-weight-helper-text">
+								Height
+							</FormHelperText>
+						</FormControl>
+						<p>
+							Age: {values.age}
+							weight : {values.weight}
+							height: {values.height}
+						</p>
+					</div>
+					<input
+						type="submit"
+						onClick={e => {
+							e.preventDefault();
+							formSubmitHandler();
+						}}
+					/>
+				</form>
 			)}
 		</React.Fragment>
 	);
-};
-
-export default GetData;
+}

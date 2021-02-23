@@ -12,6 +12,7 @@ const selectRoutes = require('./routes/select-routes');
 const trainerRoutes = require('./routes/trainer-routes');
 const adminRoutes = require('./routes/admin-routes');
 const showRoutes = require('./routes/show-routes');
+const planRoutes = require('./routes/plan-routes');
 
 const app = express();
 
@@ -41,6 +42,8 @@ app.use('/api/trainers', trainerRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.use('/api/show', showRoutes);
+
+app.use('/api/getplan', planRoutes);
 
 app.use((req, res, next) => {
 	const error = new HttpError('Could not find this route.', 404);

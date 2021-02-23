@@ -19,7 +19,6 @@ import ApplyTrainer from './ApplyTrainers/ApplyTrainer';
 import ApproveTrainer from './admin/approvetrainer';
 import ShowTrainee from './trainer/showtrainee';
 import GetData from './getData/getData';
-import Stepper from './getData/Stepper';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
@@ -73,7 +72,7 @@ const App = () => {
 					<OneTrainer />
 				</Route>
 				<Route path="/getdata" exact>
-					<Stepper />
+					<GetData />
 				</Route>
 				<Route path="/" exact>
 					<Home />
