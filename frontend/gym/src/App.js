@@ -73,7 +73,7 @@ const App = () => {
 					<OneTrainer />
 				</Route>
 				<Route path="/getdata" exact>
-					<GetData />
+					<Stepper />
 				</Route>
 				<Route path="/" exact>
 					<Home />
@@ -141,9 +141,6 @@ const App = () => {
 				</Route>
 				<Route path="/reset/:token">
 					<NewPassword />
-				</Route>
-				<Route path="/stepper" exact>
-					<Stepper />
 				</Route>
 				<Redirect to="/" />
 			</Switch>
