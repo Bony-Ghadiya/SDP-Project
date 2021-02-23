@@ -1,0 +1,24 @@
+.authentication__header {
+	color: white;
+	text-align: center;
+}
+
+.authentication {
+	width: 90%;
+	max-width: 25rem;
+	margin: auto;
+}
+
+.authentication form {
+	margin-bottom: 1rem;
+}
+
+a:visited,
+a:link {
+	color: black !important;
+}
+
+a:hover,
+a:active {
+	color: #4169e1 !important;
+}

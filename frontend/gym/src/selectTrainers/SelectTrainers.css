@@ -1,0 +1,12 @@
+.users-list {
+	margin: auto;
+	color: black;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	list-style-type: none;
+	grid-gap: 10px;
+}
+
+.react-stars-wrapper-0010644723422983171 {
+	padding-left: 45px;
+}

@@ -1,0 +1,14 @@
+.outerDiv {
+	text-align: center;
+}
+
+.form {
+	margin: 500px;
+}
+
+.input {
+	border: none;
+	height: 40px;
+	font-size: medium;
+	background-color: inherit;
+}

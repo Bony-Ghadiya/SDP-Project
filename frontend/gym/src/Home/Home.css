@@ -1,0 +1,11 @@
+.container {
+	position: relative;
+	text-align: center;
+	color: white;
+}
+
+.bottom-left {
+	position: absolute;
+	bottom: 8px;
+	left: 16px;
+}
