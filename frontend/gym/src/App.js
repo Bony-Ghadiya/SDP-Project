@@ -19,6 +19,7 @@ import ApplyTrainer from './ApplyTrainers/ApplyTrainer';
 import ApproveTrainer from './admin/approvetrainer';
 import ShowTrainee from './trainer/showtrainee';
 import GetData from './getData/getData';
+import Stepper from './getData/Stepper';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
@@ -141,8 +142,8 @@ const App = () => {
 				<Route path="/reset/:token">
 					<NewPassword />
 				</Route>
-				<Route path="/selecttrainer/:tid" exact>
-					<OneTrainer />
+				<Route path="/stepper" exact>
+					<Stepper />
 				</Route>
 				<Redirect to="/" />
 			</Switch>

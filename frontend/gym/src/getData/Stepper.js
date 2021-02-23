@@ -9,6 +9,7 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import './getData.css';
 
 const useStyles = makeStyles({
 	root: {
@@ -39,6 +40,7 @@ export default function ProgressMobileStepper() {
 	const classes = useStyles();
 	const classes1 = useStyles1();
 	const theme = useTheme();
+	const [nextActive, setNextActive] = useState(false);
 	const [activeStep, setActiveStep] = useState(0);
 	const [form1Data, setForm1Data] = useState(null);
 	const [form2Data, setForm2Data] = useState(null);
@@ -47,88 +49,114 @@ export default function ProgressMobileStepper() {
 	const [form5Data, setForm5Data] = useState(null);
 	const [form6Data, setForm6Data] = useState(null);
 	const [form7Data, setForm7Data] = useState(null);
-	const [values, setValues] = useState({ weight: '', height: '' });
+	const [values, setValues] = useState({ weight: '', height: '', age: '' });
 
 	const handleNext = () => {
+		setNextActive(false);
 		setActiveStep(prevActiveStep => prevActiveStep + 1);
 	};
 
 	const handleBack = () => {
+		setNextActive(false);
 		setActiveStep(prevActiveStep => prevActiveStep - 1);
 	};
 
 	const form1MaleSubmitHandler = () => {
 		setForm1Data('male');
+		setNextActive(true);
 	};
 	const form1FemaleSubmitHandler = () => {
 		setForm1Data('female');
+		setNextActive(true);
 	};
 	const form2LoseSubmitHandler = () => {
 		setForm2Data('lose');
+		setNextActive(true);
 	};
 	const form2GainSubmitHandler = () => {
 		setForm2Data('gain');
+		setNextActive(true);
 	};
 	const form2BuildSubmitHandler = () => {
 		setForm2Data('build');
+		setNextActive(true);
 	};
 	const form31SubmitHandler = () => {
 		setForm3Data('HARDLY');
+		setNextActive(true);
 	};
 	const form32SubmitHandler = () => {
 		setForm3Data('SOMETIMES');
+		setNextActive(true);
 	};
 	const form33SubmitHandler = () => {
 		setForm3Data('2-3 TIMES A WEEK');
+		setNextActive(true);
 	};
 	const form34SubmitHandler = () => {
 		setForm3Data('OVER 4 TIMES A WEEK');
+		setNextActive(true);
 	};
 	const form41SubmitHandler = () => {
 		setForm4Data('SHORTNESS OF BREATH');
+		setNextActive(true);
 	};
 	const form42SubmitHandler = () => {
 		setForm4Data('A LITTLE TIRED');
+		setNextActive(true);
 	};
 
 	const form43SubmitHandler = () => {
 		setForm4Data('EASY');
+		setNextActive(true);
 	};
 	const form44SubmitHandler = () => {
 		setForm4Data('I CAN RUN UP THERE');
+		setNextActive(true);
 	};
 	const form51SubmitHandler = () => {
 		setForm5Data('Less Than 10');
+		setNextActive(true);
 	};
 	const form52SubmitHandler = () => {
 		setForm5Data('10-20');
+		setNextActive(true);
 	};
 	const form53SubmitHandler = () => {
 		setForm5Data('21-40');
+		setNextActive(true);
 	};
 	const form54SubmitHandler = () => {
 		setForm5Data('OVER 40');
+		setNextActive(true);
 	};
 	const form61SubmitHandler = () => {
 		setForm6Data('FULL BODY');
+		setNextActive(true);
 	};
 	const form62SubmitHandler = () => {
 		setForm6Data('ABS');
+		setNextActive(true);
 	};
 	const form63SubmitHandler = () => {
 		setForm6Data('ARM');
+		setNextActive(true);
 	};
 	const form64SubmitHandler = () => {
 		setForm6Data('LEG');
+		setNextActive(true);
 	};
 	const form71SubmitHandler = () => {
 		setForm7Data('EASY');
+		setNextActive(true);
 	};
 	const form72SubmitHandler = () => {
 		setForm7Data('MEDIUM');
+		setNextActive(true);
 	};
 	const form73SubmitHandler = () => {
 		setForm7Data('HARD');
+		setNextActive(true);
 	};
 	const handleChange = prop => event => {
 		setValues({ ...values, [prop]: event.target.value });
@@ -143,7 +171,11 @@ export default function ProgressMobileStepper() {
 				activeStep={activeStep}
 				className={classes.root}
 				nextButton={
-					<Button size="small" onClick={handleNext} disabled={activeStep === 7}>
+					<Button
+						size="small"
+						onClick={handleNext}
+						disabled={!nextActive || activeStep === 7}
+					>
 						Next
 						{theme.direction === 'rtl' ? (
 							<KeyboardArrowLeft />
@@ -347,54 +379,89 @@ export default function ProgressMobileStepper() {
 				</div>
 			)}
 			{activeStep === 7 && (
-				<div>
-					<FormControl
-						className={clsx(
-							classes1.margin,
-							classes1.withoutLabel,
-							classes1.textField
-						)}
-					>
-						<Input
-							id="standard-adornment-weight"
-							value={values.weight}
-							onChange={handleChange('weight')}
-							endAdornment={<InputAdornment position="end">Kg</InputAdornment>}
-							aria-describedby="standard-weight-helper-text"
-							inputProps={{
-								'aria-label': 'weight',
-							}}
-						/>
-						<FormHelperText id="standard-weight-helper-text">
-							Weight
-						</FormHelperText>
-					</FormControl>
-					<FormControl
-						className={clsx(
-							classes1.margin,
-							classes1.withoutLabel,
-							classes1.textField
-						)}
-					>
-						<Input
-							id="standard-adornment-height"
-							value={values.height}
-							onChange={handleChange('height')}
-							endAdornment={<InputAdornment position="end">cm</InputAdornment>}
-							aria-describedby="standard-height-helper-text"
-							inputProps={{
-								'aria-label': 'height',
-							}}
-						/>
-						<FormHelperText id="standard-weight-helper-text">
-							Height
-						</FormHelperText>
-					</FormControl>
-					<p>
-						weight : {values.weight}
-						height: {values.height}
-					</p>
-				</div>
+				<form>
+					<div>
+						<FormControl
+							className={clsx(
+								classes1.margin,
+								classes1.withoutLabel,
+								classes1.textField
+							)}
+						>
+							<Input
+								id="standard-adornment-age"
+								value={values.age}
+								onChange={handleChange('age')}
+								endAdornment={
+									<InputAdornment position="end">years</InputAdornment>
+								}
+								aria-describedby="standard-age-helper-text"
+								inputProps={{
+									'aria-label': 'age',
+								}}
+							/>
+							<FormHelperText id="standard-age-helper-text">Age</FormHelperText>
+						</FormControl>
+						<FormControl
+							className={clsx(
+								classes1.margin,
+								classes1.withoutLabel,
+								classes1.textField
+							)}
+						>
+							<Input
+								id="standard-adornment-weight"
+								value={values.weight}
+								onChange={handleChange('weight')}
+								endAdornment={
+									<InputAdornment position="end">Kg</InputAdornment>
+								}
+								aria-describedby="standard-weight-helper-text"
+								inputProps={{
+									'aria-label': 'weight',
+								}}
+							/>
+							<FormHelperText id="standard-weight-helper-text">
+								Weight
+							</FormHelperText>
+						</FormControl>
+						<FormControl
+							className={clsx(
+								classes1.margin,
+								classes1.withoutLabel,
+								classes1.textField
+							)}
+						>
+							<Input
+								id="standard-adornment-height"
+								value={values.height}
+								onChange={handleChange('height')}
+								endAdornment={
+									<InputAdornment position="end">cm</InputAdornment>
+								}
+								aria-describedby="standard-height-helper-text"
+								inputProps={{
+									'aria-label': 'height',
+								}}
+							/>
+							<FormHelperText id="standard-weight-helper-text">
+								Height
+							</FormHelperText>
+						</FormControl>
+						<p>
+							Age: {values.age}
+							weight : {values.weight}
+							height: {values.height}
+						</p>
+					</div>
+					<input
+						type="submit"
+						onClick={e => {
+							e.preventDefault();
+							console.log(values);
+						}}
+					/>
+				</form>
 			)}
 		</React.Fragment>
 	);
