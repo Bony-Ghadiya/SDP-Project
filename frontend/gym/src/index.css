@@ -6,7 +6,7 @@ html {
 
 body {
 	margin: 0;
-	background: white;
+	background-image: url("bg.jpg");
 }
 
 .slide-in-left-enter {
