@@ -5,6 +5,34 @@ const Trainer = require('../models/trainers');
 const Trainee = require('../models/trainee');
 const UserData = require('../models/userdata');
 
+const getDetails = async (req, res, next) => {
+	console.log('get details');
+	const tid = req.params.tid;
+	console.log(tid);
+	let exe;
+	try {
+		exe = await UserData.findOne({ traineeid: tid });
+		console.log(tid);
+		console.log(exe);
+	} catch (err) {
+		const error = new HttpError(
+			'Something went wrong, could not find data.',
+			500
+		);
+		return next(error);
+	}
+
+	if (!exe) {
+		const error = new HttpError(
+			'Could not find data for the provided id.',
+			404
+		);
+		return next(error);
+	}
+
+	res.json({ exe: exe.toObject({ getters: true }) });
+};
+
 const saveData = async (req, res, next) => {
 	const {
 		userid,
@@ -79,3 +107,4 @@ const saveData = async (req, res, next) => {
 };
 
 exports.saveData = saveData;
+exports.getDetails = getDetails;

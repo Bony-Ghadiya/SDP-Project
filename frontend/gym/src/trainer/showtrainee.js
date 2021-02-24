@@ -6,7 +6,9 @@ import { useHttpClient } from '../shared/hooks/http-hook';
 import Card1 from '../shared/components/UIElements/Card';
 import { AuthContext } from '../shared/context/auth-context';
 import { Container, Card, Image } from 'react-bootstrap';
+import ViewData from './viewData';
 
+export let traineeid;
 const Home = () => {
 	const history = useHistory();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -20,6 +22,7 @@ const Home = () => {
 					`http://localhost:5000/api/show/showtrainees/${auth.userId}`
 				);
 				setTrainer(responseData.trainees);
+				console.log(responseData.trainees);
 			} catch (err) {}
 		};
 		fetchRequests();
@@ -75,7 +78,7 @@ const Home = () => {
 											backgroundColor: '#F5F5F5',
 										}}
 									>
-										{t.name}
+										{t.name} {t.id}
 									</Card.Header>
 									<Card.Body>
 										<Image
@@ -93,7 +96,11 @@ const Home = () => {
 												type="button"
 												className="button"
 												value="VIEW DATA"
-												onClick={clickSubmithandler}
+												onClick={() => {
+													traineeid = t.id;
+													console.log(t.id, traineeid);
+													history.push('/showtrainees/viewdata');
+												}}
 											/>
 										</div>
 									</Card.Footer>
