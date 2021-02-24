@@ -18,6 +18,7 @@ import OneTrainer from './selectTrainers/OneTrainer';
 import ApplyTrainer from './ApplyTrainers/ApplyTrainer';
 import ApproveTrainer from './admin/approvetrainer';
 import ShowTrainee from './trainer/showtrainee';
+import ViewData from './trainer/viewData';
 import GetData from './getData/getData';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
@@ -96,9 +97,13 @@ const App = () => {
 				<Route path="/applytrainer" exact>
 					<ApplyTrainer />
 				</Route>
+				<Route path="/showtrainees/viewdata" exact>
+					<ViewData />
+				</Route>
 				<Route path="/showtrainees" exact>
 					<ShowTrainee />
 				</Route>
+
 				<Redirect to="/" />
 			</Switch>
 		);

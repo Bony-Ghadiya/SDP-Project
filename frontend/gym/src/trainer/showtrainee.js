@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
@@ -7,6 +8,7 @@ import { AuthContext } from '../shared/context/auth-context';
 import { Container, Card, Image } from 'react-bootstrap';
 
 const Home = () => {
+	const history = useHistory();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 	const [trainer, setTrainer] = useState();
@@ -25,6 +27,7 @@ const Home = () => {
 
 	const clickSubmithandler = () => {
 		console.log('[click');
+		history.push('/showtrainees/viewdata');
 	};
 
 	if (trainer && trainer.length === 0 && !isLoading) {
@@ -89,9 +92,8 @@ const Home = () => {
 											<input
 												type="button"
 												className="button"
-												value="VIEW PLAN"
+												value="VIEW DATA"
 												onClick={clickSubmithandler}
-												to="/"
 											/>
 										</div>
 									</Card.Footer>
