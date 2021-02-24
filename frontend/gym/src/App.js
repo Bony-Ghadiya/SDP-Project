@@ -20,6 +20,7 @@ import ApproveTrainer from './admin/approvetrainer';
 import ShowTrainee from './trainer/showtrainee';
 import ViewData from './trainer/viewData';
 import GetData from './getData/getData';
+import GivePlan from './trainer/GivePlan';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
@@ -99,6 +100,9 @@ const App = () => {
 				</Route>
 				<Route path="/showtrainees/viewdata" exact>
 					<ViewData />
+				</Route>
+				<Route path="/showtrainees/giveplan" exact>
+					<GivePlan />
 				</Route>
 				<Route path="/showtrainees" exact>
 					<ShowTrainee />

@@ -113,15 +113,15 @@ export default function ProgressMobileStepper() {
 		setNextActive(true);
 	};
 	const form2LoseSubmitHandler = () => {
-		setForm2Data('lose');
+		setForm2Data('lose weight');
 		setNextActive(true);
 	};
 	const form2GainSubmitHandler = () => {
-		setForm2Data('gain');
+		setForm2Data('gain weight');
 		setNextActive(true);
 	};
 	const form2BuildSubmitHandler = () => {
-		setForm2Data('build');
+		setForm2Data('build muscle');
 		setNextActive(true);
 	};
 	const form31SubmitHandler = () => {

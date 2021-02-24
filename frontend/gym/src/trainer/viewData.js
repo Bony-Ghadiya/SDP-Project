@@ -3,7 +3,7 @@ import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
-import { traineeid } from './showtrainee';
+import { traineeid, traineename } from './showtrainee';
 import { Card } from 'react-bootstrap';
 import './viewdata.css';
 
@@ -34,28 +34,59 @@ const ViewData = () => {
 				</div>
 			)}
 			{!isLoading && data && (
-				<Card>
-					<div style={{ disply: 'inline' }}>
-						<h4>gender : </h4>
-						<p>{data.gender}</p>
-						<h4>Goal : </h4>
-						{data.goal}
-						<h4>Time :</h4>
-						{data.time}
-						<h4>Strength :</h4>
-						{data.strength}
-						<h4>Workout : </h4>
-						{data.workout}
-						<h4>Difficulty : </h4>
-						{data.difficulty}
-						<h4>Height : </h4>
-						{data.values.height}
-						<h4>Weight : </h4>
-						{data.values.weight}
-						<h4>Age : </h4>
-						{data.values.age}
-					</div>
-				</Card>
+				<div style={{ textAlign: 'center' }}>
+					<Card style={{ width: '35%', textAlign: 'center', margin: 'auto' }}>
+						<table className="table1" id="t01">
+							<caption>{traineename}'s data</caption>
+							<tr className="row">
+								<td className="data1">gender</td>
+								<td className="data2">{data.gender}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">Goal</td>
+								<td className="data2">{data.goal}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">Time</td>
+								<td className="data2">{data.time}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">Strength</td>
+								<td className="data2">{data.strength}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">pushups</td>
+								<td className="data2">{data.pushups}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">Workout</td>
+								<td className="data2">{data.workout}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">Difficulty</td>
+								<td className="data2">{data.difficulty}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">Height</td>
+								<td className="data2">{data.values.height}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">Weight</td>
+								<td className="data2">{data.values.weight}</td>
+							</tr>
+							<tr className="row">
+								<td className="data1">Age</td>
+								<td className="data2">{data.values.age}</td>
+							</tr>
+						</table>
+						<input
+							type="button"
+							className="btn2"
+							value="View Plan"
+							onClick={console.log('b')}
+						/>
+					</Card>
+				</div>
 			)}
 		</React.Fragment>
 	);
