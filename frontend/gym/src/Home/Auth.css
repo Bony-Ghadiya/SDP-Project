@@ -3,19 +3,28 @@
 	text-align: center;
 }
 
+hr {
+	color:#4caf50;
+}
+
 .authentication {
 	width: 90%;
 	max-width: 25rem;
 	margin: auto;
+	background:none;
+	color: white;
+	border: solid #4caf50;
 }
 
 .authentication form {
 	margin-bottom: 1rem;
+	
+	
 }
 
 a:visited,
 a:link {
-	color: black !important;
+	color: white !important;
 }
 
 a:hover,
