@@ -17,13 +17,15 @@ const saveData = async (req, res, next) => {
 		difficulty,
 		values,
 	} = req.body;
-	let existingUser, createdData;
+	let existingUser, createdData, existingTrainer;
 
 	try {
 		existingUser = await Trainee.findOne({ userid: userid });
 		console.log('savedata');
 		console.log(userid);
 		console.log(existingUser);
+		existingTrainer = await Trainer.findById(existingUser.trainerid);
+		console.log(existingTrainer);
 	} catch (err) {
 		const error = new HttpError(
 			'Fetching trainees failed, please try again later.',
@@ -34,7 +36,7 @@ const saveData = async (req, res, next) => {
 
 	try {
 		createdData = new UserData({
-			userid,
+			traineeuserid: userid,
 			gender,
 			goal,
 			time,
@@ -45,6 +47,7 @@ const saveData = async (req, res, next) => {
 			values,
 			traineeid: existingUser.id,
 			trainerid: existingUser.trainerid,
+			traineruserid: existingTrainer.userid,
 		});
 		console.log(createdData);
 	} catch (err) {

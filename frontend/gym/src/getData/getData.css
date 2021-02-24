@@ -16,3 +16,34 @@ button:active {
 	background: #292929;
 	color: white;
 }
+
+.btn1 {
+	cursor: pointer;
+
+	border: 1px solid DodgerBlue;
+	color: #1e90ff;
+	background: transparent;
+	padding: 0.5rem;
+	font: inherit;
+	border-radius: 4px;
+	margin: 5px auto;
+	display: block;
+}
+
+.btn1:focus {
+	outline: none;
+}
+
+.btn1:hover,
+.btn1:active {
+	color: white;
+	background: #00bfff;
+}
+.MuiMobileStepper-root {
+	display: flex;
+	padding: 8px;
+	background: transparent;
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+}

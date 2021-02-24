@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userdataSchema = new Schema({
-	userid: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
+	traineeuserid: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
 	gender: { type: String, required: true },
 	goal: { type: String, required: true },
 	time: { type: String, required: true },
@@ -18,6 +18,7 @@ const userdataSchema = new Schema({
 	},
 	trainerid: { type: mongoose.Types.ObjectId, ref: 'Trainers' },
 	traineeid: { type: mongoose.Types.ObjectId, ref: 'Trainees' },
+	traineruserid: { type: mongoose.Types.ObjectId, ref: 'User' },
 });
 
 // module.exports = mongoose.model('User', userSchema);
