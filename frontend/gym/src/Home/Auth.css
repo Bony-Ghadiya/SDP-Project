@@ -7,6 +7,31 @@ hr {
 	color: #4caf50;
 }
 
+hr.style-line {
+	overflow: visible;
+	height: 30px;
+	border-style: solid;
+	border-color: #4caf50;
+	border-width: 3px 0 0 0;
+	border-radius: 20px;
+}
+hr.style-line:before {
+	display: block;
+	content: '';
+	height: 30px;
+	margin-top: -31px;
+	border-style: solid;
+	border-color: #4caf50;
+	border-width: 0 0 3px 0;
+	border-radius: 20px;
+}
+
+/* hr.style-line {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px #;
+} */
+
 .authentication {
 	width: 90%;
 	max-width: 25rem;
@@ -17,6 +42,7 @@ hr {
 }
 
 .authentication form {
+	margin-bottom: 1rem;
 	margin-bottom: 1rem;
 }
 

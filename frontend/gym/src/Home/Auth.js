@@ -153,7 +153,7 @@ const Auth = () => {
 			<Card className="authentication">
 				{isLoading && <LoadingSpinner asOverlay />}
 				<h2>{!isLoginMode ? 'SIGNUP' : 'LOGIN'}</h2>
-				<hr />
+				<hr className="style-line" />
 				<form onSubmit={authSubmitHandler}>
 					{!isLoginMode && (
 						<Input
@@ -220,6 +220,8 @@ const Auth = () => {
 				<Button inverse onClick={switchModeHandler}>
 					SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
 				</Button>
+				<br/>
+				<br/>
 				{isLoginMode && (
 					<h4>
 						<Link style={{ textDecoration: 'none' }} to="/reset">
