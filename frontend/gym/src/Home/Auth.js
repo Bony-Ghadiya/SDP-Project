@@ -220,8 +220,8 @@ const Auth = () => {
 				<Button inverse onClick={switchModeHandler}>
 					SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
 				</Button>
-				<br/>
-				<br/>
+				<br />
+				<br />
 				{isLoginMode && (
 					<h4>
 						<Link style={{ textDecoration: 'none' }} to="/reset">
