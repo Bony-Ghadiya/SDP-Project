@@ -4,22 +4,20 @@
 }
 
 hr {
-	color:#4caf50;
+	color: #4caf50;
 }
 
 .authentication {
 	width: 90%;
 	max-width: 25rem;
 	margin: auto;
-	background:none;
+	background: none;
 	color: white;
 	border: solid #4caf50;
 }
 
 .authentication form {
 	margin-bottom: 1rem;
-	
-	
 }
 
 a:visited,
@@ -29,5 +27,5 @@ a:link {
 
 a:hover,
 a:active {
-	color: #4169e1 !important;
+	color: #4caf50 !important;
 }
