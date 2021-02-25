@@ -6,9 +6,9 @@ import { useHttpClient } from '../shared/hooks/http-hook';
 import Card1 from '../shared/components/UIElements/Card';
 import { AuthContext } from '../shared/context/auth-context';
 import { Container, Card, Image } from 'react-bootstrap';
-import ViewData from './viewData';
 
 export let traineeid;
+export let traineename;
 const Home = () => {
 	const history = useHistory();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -27,11 +27,6 @@ const Home = () => {
 		};
 		fetchRequests();
 	}, [sendRequest, auth.userId]);
-
-	const clickSubmithandler = () => {
-		console.log('[click');
-		history.push('/showtrainees/viewdata');
-	};
 
 	if (trainer && trainer.length === 0 && !isLoading) {
 		return (
@@ -98,6 +93,7 @@ const Home = () => {
 												value="VIEW DATA"
 												onClick={() => {
 													traineeid = t.id;
+													traineename = t.name;
 													console.log(t.id, traineeid);
 													history.push('/showtrainees/viewdata');
 												}}
