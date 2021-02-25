@@ -1,15 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
-import { AuthContext } from '../shared/context/auth-context';
 import { traineeid, traineename } from './showtrainee';
 import { Card } from 'react-bootstrap';
 import './viewdata.css';
 
 const ViewData = () => {
+	const history = useHistory();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const auth = useContext(AuthContext);
 	const [data, setData] = useState();
 
 	useEffect(() => {
@@ -19,7 +19,6 @@ const ViewData = () => {
 					`http://localhost:5000/api/getplan/getdetails/${traineeid}`
 				);
 				setData(responseData.exe);
-				console.log(responseData.exe);
 			} catch (err) {}
 		};
 		fetchRequests();
@@ -83,7 +82,10 @@ const ViewData = () => {
 							type="button"
 							className="btn2"
 							value="View Plan"
-							onClick={console.log('b')}
+							onClick={e => {
+								e.preventDefault();
+								history.push('/showtrainees/giveplan');
+							}}
 						/>
 					</Card>
 				</div>

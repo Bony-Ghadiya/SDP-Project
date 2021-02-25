@@ -12,7 +12,6 @@ const ExerciseItem = props => {
 			<Card
 				border="primary"
 				style={{
-					maxWidth: '215px',
 					padding: '0px',
 					color: 'black',
 					maxheight: '40rem',
@@ -29,14 +28,18 @@ const ExerciseItem = props => {
 				>
 					<Card.Link
 						href={`/search/${props.id}`}
-						style={{ marginBottom: '30px', textDecoration: 'none' }}
+						style={{
+							marginBottom: '30px',
+							textDecoration: 'none',
+							backgroundColor: 'black',
+						}}
 						onClick={e => {
 							console.log(e);
 							e.preventDefault();
 							history.push(`/search/${props.id}`);
 						}}
 					>
-						{props.ename}
+						{props.id}
 					</Card.Link>
 				</Card.Header>
 				<Card.Body>
