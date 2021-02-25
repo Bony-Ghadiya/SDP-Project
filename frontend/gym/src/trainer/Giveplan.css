@@ -31,9 +31,9 @@ h3 {
 	color: white;
 }
 .data101 {
-	max-width: 480px;
+	width: auto;
 	display: grid !important;
-	grid-template-columns: auto auto 50px 30px !important;
+	grid-template-columns: 175px auto 50px 30px !important;
 	grid-gap: 10px;
 	background-color: gray;
 	padding: 5px;
@@ -54,4 +54,26 @@ h3 {
 	color: white;
 	font-weight: bold;
 	cursor: pointer;
+}
+
+.anotherData h4 {
+	display: inline;
+	text-align: left;
+}
+
+.anotherData {
+	margin: 5px;
+	border: 2px dotted white;
+	text-align: left;
+	padding: 10px;
+}
+.anotherData button {
+	padding: 10px;
+	width: 100%;
+}
+
+.MuiOutlinedInput-root {
+	position: relative;
+	border-radius: 4px;
+	width: 200px;
 }

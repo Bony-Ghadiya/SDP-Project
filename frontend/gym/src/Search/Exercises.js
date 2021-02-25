@@ -6,9 +6,9 @@ import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import './Search.css';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import './Search.css';
 
 const CssTextField = withStyles({
 	root: {
@@ -38,11 +38,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Exercises = () => {
-	const classes = useStyles();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [allExercises, setAllExercises] = useState();
 	const [loadedExercises, setloadedExercises] = useState();
 	let temp;
+	const classes = useStyles();
 	const [searched, setSearched] = useState();
 
 	useEffect(() => {
