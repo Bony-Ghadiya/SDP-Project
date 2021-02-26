@@ -14,9 +14,11 @@ const NavLinks = props => {
 		<ul className="nav-links">
 			{auth.userType !== 'admin' && (
 				<li>
+				
 					<NavLink to="/search" exact>
 						SEARCH
 					</NavLink>
+					
 				</li>
 			)}
 			{auth.isLoggedIn &&
