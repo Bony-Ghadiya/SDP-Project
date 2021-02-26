@@ -194,22 +194,29 @@ const Auth = () => {
 					)}
 					{!isLoginMode && (
 						<div className="RadioButton">
-							<label>Register as a User :</label>
-							<input
-								type="radio"
-								name="type"
-								value="user"
-								onChange={userChangeHandler}
-								checked={userType === 'user'}
-							/>
-							<br />
-							<label>Register as a trainer :</label>
-							<input
-								type="radio"
-								name="type"
-								value="trainer"
-								onChange={trainerChangeHandler}
-							/>
+							<label className="RadioBu">
+								Register as a USER
+								<input
+									type="radio"
+									name="type"
+									value="user"
+									onChange={userChangeHandler}
+									checked={userType === 'user'}
+								/>
+								<span className="checkmark"></span>
+							</label>
+
+							<label className="RadioBu">
+								{' '}
+								Register as a TRAINER
+								<input
+									type="radio"
+									name="type"
+									value="trainer"
+									onChange={trainerChangeHandler}
+								/>
+								<span className="checkmark"></span>
+							</label>
 						</div>
 					)}
 					<br />

@@ -2,10 +2,17 @@
 	position: relative;
 	margin: 10px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	border: solid #4caf50;
 	border-radius: 6px;
 	padding: 1rem;
 	overflow: hidden;
-	background: white;
+	background: none;
 	width: auto;
 	text-align: center;
+	
+}
+
+.card-header{
+	background-color:none !important;
+	color:#4caf50;
 }
