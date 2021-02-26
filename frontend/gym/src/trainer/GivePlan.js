@@ -91,20 +91,19 @@ const GivePlan = () => {
 	const [loadedExercises, setloadedExercises] = useState();
 	const [searched, setSearched] = useState();
 	const [isDays, setIsDays] = useState(true);
-	const [plan, setPlan] = useState();
 	const [trainerPlan, setTrainerPlan] = useState();
 	const [exer, setexer] = useState();
 	const [showNew, setShowNew] = useState(false);
 	const [searched1, setSerched1] = useState(false);
-	const [data, setData] = useState({
-		difficulty: '',
-		gender: '',
-		goal: '',
-		time: '',
-		strength: '',
-		pushup: '',
-		workout: '',
-	});
+	// const [data, setData] = useState({
+	// 	difficulty: '',
+	// 	gender: '',
+	// 	goal: '',
+	// 	time: '',
+	// 	strength: '',
+	// 	pushup: '',
+	// 	workout: '',
+	// });
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
 	const deleteexercise = (p1, e) => {
@@ -153,17 +152,17 @@ const GivePlan = () => {
 		}
 	};
 
-	useEffect(() => {
-		const fetchRequests = async () => {
-			try {
-				const responseData = await sendRequest(
-					`http://localhost:5000/api/getplan/getdetails/${traineeid}`
-				);
-				setData(responseData.exe);
-			} catch (err) {}
-		};
-		fetchRequests();
-	}, [sendRequest]);
+	// useEffect(() => {
+	// 	const fetchRequests = async () => {
+	// 		try {
+	// 			const responseData = await sendRequest(
+	// 				`http://localhost:5000/api/getplan/getdetails/${traineeid}`
+	// 			);
+	// 			setData(responseData.exe);
+	// 		} catch (err) {}
+	// 	};
+	// 	fetchRequests();
+	// }, [sendRequest]);
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -184,7 +183,6 @@ const GivePlan = () => {
 				const responseData = await sendRequest(
 					`http://localhost:5000/api/getplan/getdefaultplan/${traineeid}`
 				);
-				setPlan(responseData.defaultexercise);
 				setTrainerPlan(responseData.defaultexercise);
 			} catch (err) {}
 		};
