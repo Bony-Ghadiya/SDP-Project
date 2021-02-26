@@ -187,6 +187,7 @@ const saveDay = async (req, res, next) => {
 		for (i = 0; i < plans.plan.length; i++) {
 			l = plans.plan[i].exercises.length;
 			if (plans.plan[i].dayNo === day) {
+				plans.plan[i].isSaved = 1;
 				for (j = 0; j < l; j++) {
 					plans.plan[i].exercises.pop();
 				}

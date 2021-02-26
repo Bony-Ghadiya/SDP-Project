@@ -10,6 +10,7 @@ const TrainerPlanSchema = new Schema({
 	plan: [
 		{
 			dayNo: { type: Number, required: true },
+			isSaved: { type: Number, Default: 0 },
 			exercises: [
 				{
 					exerciseid: {

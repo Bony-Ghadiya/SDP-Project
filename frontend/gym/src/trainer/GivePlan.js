@@ -186,15 +186,6 @@ const GivePlan = () => {
 				);
 				setPlan(responseData.defaultexercise);
 				setTrainerPlan(responseData.defaultexercise);
-				console.log(responseData.defaultexercise);
-			} catch (err) {}
-			try {
-				const responseData = await sendRequest(
-					`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
-				);
-				setPlan(responseData.defaultexercise);
-				setTrainerPlan(responseData.defaultexercise);
-				console.log(responseData.defaultexercise);
 			} catch (err) {}
 		};
 		fetchRequests();
@@ -454,10 +445,8 @@ const GivePlan = () => {
 												<button
 													onClick={async e => {
 														e.preventDefault();
-
 														try {
-															let responseData;
-															responseData = await sendRequest(
+															const responseData = await sendRequest(
 																`http://localhost:5000/api/getplan/saveday`,
 																'PATCH',
 																JSON.stringify({
@@ -474,14 +463,6 @@ const GivePlan = () => {
 															console.log(responseData);
 														} catch (err) {
 														} finally {
-															try {
-																const responseData = await sendRequest(
-																	`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
-																);
-																setPlan(responseData.defaultexercise);
-																setTrainerPlan(responseData.defaultexercise);
-																console.log(responseData.defaultexercise);
-															} catch (err) {}
 														}
 													}}
 												>
