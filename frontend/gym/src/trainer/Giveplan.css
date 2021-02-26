@@ -1,0 +1,79 @@
+.header1 {
+	text-align: center;
+	color: aliceblue;
+}
+
+h1,
+h3 {
+	color: aliceblue;
+}
+
+.card1 {
+	text-align: center;
+	margin: auto;
+}
+.grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 1rem;
+	grid-auto-rows: minmax(50px, auto);
+}
+.cells {
+	padding: 5px;
+	border: 1px solid black;
+	vertical-align: middle;
+}
+.cells p {
+	text-align: center;
+}
+.daysButton {
+	border: 4px double white;
+	color: white;
+}
+.data101 {
+	width: auto;
+	display: grid !important;
+	grid-template-columns: 175px auto 50px 30px !important;
+	grid-gap: 10px;
+	background-color: gray;
+	padding: 5px;
+	text-align: start;
+}
+
+.goto {
+	padding: 0;
+	border: none;
+	font-weight: bold;
+}
+
+.close {
+	height: 30px;
+	align-items: center;
+	padding: 0px;
+	vertical-align: top;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.anotherData h4 {
+	display: inline;
+	text-align: left;
+}
+
+.anotherData {
+	margin: 5px;
+	border: 2px dotted white;
+	text-align: left;
+	padding: 10px;
+}
+.anotherData button {
+	padding: 10px;
+	width: 100%;
+}
+
+.MuiOutlinedInput-root {
+	position: relative;
+	border-radius: 4px;
+	width: 200px;
+}

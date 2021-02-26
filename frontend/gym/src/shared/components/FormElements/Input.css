@@ -1,5 +1,5 @@
 .form-control {
-	margin: 1rem 0;	
+	margin: 1rem 0;
 }
 
 .form-control label,
@@ -10,7 +10,7 @@
 
 .form-control label {
 	font-weight: bold;
-	color:white;
+	color: white;
 	margin-bottom: 0.5rem;
 }
 
@@ -18,8 +18,8 @@
 .form-control textarea {
 	width: 100%;
 	font: inherit;
-	border: 1px solid #4caf50;
 	background: none;
+	border: 1px solid #4caf50;
 	padding: 0.15rem 0.25rem;
 	color: white;
 }
@@ -29,7 +29,7 @@
 	outline: none;
 	background: none;
 	border-color: white;
-	color:white;
+	color: white;
 }
 
 .form-control--invalid label,

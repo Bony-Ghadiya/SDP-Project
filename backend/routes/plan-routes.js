@@ -8,4 +8,6 @@ router.post('/plan', planController.saveData);
 
 router.get('/getdetails/:tid', planController.getDetails);
 
+router.get('/getdefaultplan', planController.getPlans);
+
 module.exports = router;

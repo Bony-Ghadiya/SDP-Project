@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
@@ -42,6 +43,7 @@ const useStyles1 = makeStyles(theme => ({
 }));
 
 export default function ProgressMobileStepper() {
+	const history = useHistory();
 	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const classes = useStyles();
@@ -91,7 +93,10 @@ export default function ProgressMobileStepper() {
 				}
 			);
 			console.log(responseData);
-		} catch (err) {}
+		} catch (err) {
+		} finally {
+			history.push('/');
+		}
 	};
 
 	const handleNext = () => {
