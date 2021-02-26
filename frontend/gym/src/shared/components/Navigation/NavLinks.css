@@ -25,7 +25,7 @@
 .nav-links a:hover,
 .nav-links a:active,
 .nav-links a.active {
-	background: DodgerBlue;
+	background: white;
 	border-color: #292929;
 	color: #292929;
 }
@@ -59,7 +59,7 @@
 	}
 
 	.nav-links a {
-		color: white;
+		color: black;
 		text-decoration: none;
 	}
 
@@ -71,7 +71,7 @@
 
 	.nav-links button:hover,
 	.nav-links button:active {
-		background: DodgerBlue;
-		color: #292929;
+		background: white;
+		color: #4caf50;
 	}
 }
