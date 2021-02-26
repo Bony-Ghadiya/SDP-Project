@@ -516,11 +516,6 @@ export default function ProgressMobileStepper() {
 										Height
 									</FormHelperText>
 								</FormControl>
-								<p>
-									Age: {values.age}
-									weight : {values.weight}
-									height: {values.height}
-								</p>
 							</div>
 							<input
 								className="btn1"

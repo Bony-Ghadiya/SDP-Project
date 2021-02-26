@@ -8,13 +8,19 @@ h3 {
 	color: aliceblue;
 }
 
+.mh {
+	width: auto;
+	padding: auto;
+	display: inline;
+}
+
 .card1 {
 	text-align: center;
 	margin: auto;
 }
 .grid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	grid-gap: 1rem;
 	grid-auto-rows: minmax(50px, auto);
 }
@@ -26,10 +32,16 @@ h3 {
 .cells p {
 	text-align: center;
 }
-.daysButton {
+.daysButton--notsaved {
 	border: 4px double white;
 	color: white;
 }
+
+.daysButton--saved {
+	border: 4px double #4caf50;
+	color: #4caf50;
+}
+
 .data101 {
 	width: 450px;
 	display: grid !important;

@@ -88,14 +88,11 @@ const getPlans = async (req, res, next) => {
 
 const getPlans1 = async (req, res, next) => {
 	const tid = req.params.tid;
-	let trainers, exe, plans, createdPlan, tplan, tes;
+	let trainers;
 	try {
-		exe = await UserData.findOne({ traineeid: tid });
 		trainers = await TrainerPlan.find({ traineeid: tid }).populate(
 			'plan.exercises.exerciseid'
 		);
-		tes = await Trainee.findById(tid).populate('trainerid');
-		console.log('trainers', trainers);
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
