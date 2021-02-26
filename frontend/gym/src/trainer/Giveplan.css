@@ -31,9 +31,9 @@ h3 {
 	color: white;
 }
 .data101 {
-	width: auto;
+	width: 450px;
 	display: grid !important;
-	grid-template-columns: 175px auto 50px 30px !important;
+	grid-template-columns: 175px 200px 30px 30px !important;
 	grid-gap: 10px;
 	background-color: gray;
 	padding: 5px;
@@ -76,4 +76,15 @@ h3 {
 	position: relative;
 	border-radius: 4px;
 	width: 200px;
+}
+
+.gif__preview {
+	width: 170px;
+	height: 170px;
+	border: 1px solid #ccc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-bottom: 1rem;
 }
