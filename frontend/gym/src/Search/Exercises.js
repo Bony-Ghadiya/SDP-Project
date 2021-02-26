@@ -8,31 +8,34 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import './Search.css';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles, withTheme } from '@material-ui/core/styles';
+import { red } from '@material-ui/core/colors';
+import { withWidth } from '@material-ui/core';
 
 const CssTextField = withStyles({
 	root: {
-		color: 'black',
+		color: 'white',
+
 		'& label': {
-			color: 'black',
+			color: 'white',
 		},
 		'& label.Mui-focused': {
-			color: 'black',
+			color: 'white',
 		},
 	},
 })(TextField);
 
 const useStyles = makeStyles(theme => ({
 	inputRoot: {
-		color: 'black',
+		color: 'white',
 		'& .MuiOutlinedInput-notchedOutline': {
-			borderColor: 'black',
+			borderColor: '#4caf50',
 		},
 		'&:hover .MuiOutlinedInput-notchedOutline': {
-			borderColor: 'black',
+			borderColor: '#4caf50',
 		},
 		'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-			borderColor: 'black',
+			borderColor: '#4caf50',
 		},
 	},
 }));
@@ -121,7 +124,9 @@ const Exercises = () => {
 						width: '20%',
 						height: '100%',
 						zIndex: '1',
-						backgroundColor: 'white',
+						backgroundColor: 'none',
+						border: '1px solid #4caf50',
+						color:'white',
 						position: 'fixed',
 						overflow: 'auto',
 						marginRight: '0px',
@@ -136,7 +141,8 @@ const Exercises = () => {
 							padding: '8px 16px',
 							width: '100%',
 							display: 'block',
-							textAlign: 'left',
+							textAlign: 'left'
+							,
 						}}
 					>
 						<h3>Search By Category</h3>
@@ -144,6 +150,7 @@ const Exercises = () => {
 							style={{
 								textAlign: 'left',
 								paddingLeft: '20px',
+								color:'white',
 							}}
 						>
 							<li>
@@ -151,6 +158,7 @@ const Exercises = () => {
 									className="input"
 									type="button"
 									value="Legs"
+									style={{color:'white',}}
 									onClick={LagcategorySubmitHandler}
 								></input>
 							</li>
@@ -159,6 +167,7 @@ const Exercises = () => {
 									className="input"
 									type="button"
 									value="Arms"
+									style={{color:'white',}}
 									onClick={ArmcategorySubmitHandler}
 								></input>
 							</li>
@@ -167,6 +176,7 @@ const Exercises = () => {
 									className="input"
 									type="button"
 									value="Abs"
+									style={{color:'white',}}
 									onClick={AbscategorySubmitHandler}
 								></input>
 							</li>

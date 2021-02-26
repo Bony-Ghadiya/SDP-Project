@@ -41,3 +41,8 @@
 .user-item__info h3 {
 	margin: 0;
 }
+
+.card-header{
+	background: red !important;
+	
+}

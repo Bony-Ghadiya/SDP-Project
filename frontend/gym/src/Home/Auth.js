@@ -194,7 +194,7 @@ const Auth = () => {
 					)}
 					{!isLoginMode && (
 						<div className="RadioButton">
-							<label>Register as a User :</label>
+							<label className="RadioBu">Register as a USER :
 							<input
 								type="radio"
 								name="type"
@@ -202,14 +202,18 @@ const Auth = () => {
 								onChange={userChangeHandler}
 								checked={userType === 'user'}
 							/>
-							<br />
-							<label>Register as a trainer :</label>
+							<span className="checkmark"></span>
+							</label>
+							
+							<label className="RadioBu"> Register as a TRAINER :
 							<input
 								type="radio"
 								name="type"
 								value="trainer"
 								onChange={trainerChangeHandler}
 							/>
+							<span className="checkmark"></span>
+							</label>
 						</div>
 					)}
 					<br />

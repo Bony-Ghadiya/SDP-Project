@@ -70,7 +70,7 @@ const Exercise = props => {
 											marginTop: '0px',
 											borderBottom: '1px solid black',
 											padding: '10px 0',
-											backgroundColor: '#F5F5F5',
+											backgroundColor: 'none',
 										}}
 									>
 										{ename}
@@ -78,8 +78,8 @@ const Exercise = props => {
 								)}
 								{!isLoading && flag && (
 									<div style={{ textAlign: 'left' }}>
-										<h4 style={{ display: 'inline' }}>Exercise Category :</h4>
-										<p style={{ display: 'inline', marginLeft: '22px' }}>
+										<h4 style={{ display: 'inline', color: '#4caf50' }}>Exercise Category :</h4>
+										<p style={{ display: 'inline', marginLeft: '22px' , color: 'white' }}>
 											{' '}
 											{category}
 										</p>
@@ -103,6 +103,7 @@ const Exercise = props => {
 												marginTop: '16px',
 												marginRight: '5px',
 												willChange: 'transform',
+												color: '#4caf50',
 											}}
 										>
 											Exercise Description :
@@ -117,6 +118,7 @@ const Exercise = props => {
 												paddingTop: '10px',
 												fontSize: '14px',
 												paddingRight: '10px',
+												color: 'white',
 											}}
 										>
 											{' '}

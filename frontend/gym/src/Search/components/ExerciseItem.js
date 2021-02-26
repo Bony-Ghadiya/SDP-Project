@@ -24,7 +24,7 @@ const ExerciseItem = props => {
 						marginTop: '0px',
 						borderBottom: '1px solid black',
 						padding: '5px 0',
-						backgroundColor: '#F5F5F5',
+						backgroundColor: 'none',
 					}}
 				>
 					<Card.Link
