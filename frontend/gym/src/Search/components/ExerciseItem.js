@@ -39,7 +39,7 @@ const ExerciseItem = props => {
 							history.push(`/search/${props.id}`);
 						}}
 					>
-						{props.id}
+						{props.ename}
 					</Card.Link>
 				</Card.Header>
 				<Card.Body>

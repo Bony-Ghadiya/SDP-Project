@@ -259,7 +259,12 @@ export default function ProgressMobileStepper() {
 					/>
 				</div>
 				<Card
-					style={{ maxWidth: '500px', margin: 'auto', textAlign: 'center' }}
+					style={{
+						maxWidth: '500px',
+						margin: 'auto',
+						textAlign: 'center',
+						color: 'white',
+					}}
 				>
 					{activeStep === 0 && (
 						<div>
@@ -283,7 +288,7 @@ export default function ProgressMobileStepper() {
 					)}
 					{activeStep === 1 && (
 						<div>
-							<p>Achieve your goal with your personalized plan</p>
+							<p>Achieve your goal with our personalized plan</p>
 							<input
 								type="button"
 								className="btn1"
@@ -444,9 +449,9 @@ export default function ProgressMobileStepper() {
 							<p>{form7Data}</p>
 						</div>
 					)}
-					{activeStep === 7 && (
+					{!isLoading && activeStep === 7 && (
 						<form>
-							<div>
+							<div style={{ background: 'white' }}>
 								<FormControl
 									className={clsx(
 										classes1.margin,

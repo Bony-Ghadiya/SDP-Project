@@ -240,7 +240,7 @@ const GivePlan = () => {
 																	<div className="ename">
 																		<h3>{e.exerciseid.ename}</h3>
 																		{e.reps !== 0 && <h3>{e.reps}x</h3>}
-																		{e.time !== 0 && <h3>{e.time}x</h3>}
+																		{e.time !== 0 && <h3>{e.time}s</h3>}
 																	</div>
 																	<button
 																		className="close"
@@ -398,6 +398,7 @@ const GivePlan = () => {
 											{!isDays && (
 												<div>
 													<button
+														style={{ margin: 'auto 5px' }}
 														onClick={() => {
 															setIsDays(true);
 														}}
@@ -405,6 +406,7 @@ const GivePlan = () => {
 														BACK
 													</button>
 													<button
+														style={{ margin: 'auto 5px' }}
 														onClick={async e => {
 															e.preventDefault();
 															try {

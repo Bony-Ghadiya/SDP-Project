@@ -77,7 +77,7 @@ const Home = () => {
 									style={{
 										maxWidth: '18rem',
 										padding: '0px',
-										color: 'black',
+										color: 'white',
 										maxheight: '40rem',
 									}}
 								>
@@ -108,7 +108,6 @@ const Home = () => {
 										<br />
 										<h4
 											style={{
-												borderTop: '1px solid black',
 												paddingTop: '10px',
 												textAlign: 'left',
 												display: 'inline',
@@ -122,7 +121,6 @@ const Home = () => {
 										</h4>
 										<p
 											style={{
-												borderTop: '1px solid black',
 												paddingTop: '10px',
 												textAlign: 'left',
 												display: 'inline',
@@ -162,9 +160,7 @@ const Home = () => {
 
 										<br />
 									</Card.Body>
-									<Card.Footer
-										style={{ borderTop: '1px solid black', padding: '5px 0' }}
-									>
+									<Card.Footer style={{ padding: '5px 0' }}>
 										<Modal
 											show={acceptModal}
 											onCancel={cancelAccepthandler}

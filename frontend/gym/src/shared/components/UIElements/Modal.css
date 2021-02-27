@@ -5,6 +5,7 @@
 	left: 10%;
 	width: 80%;
 	background: white;
+	color: black;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 	border-radius: 8px;
 }
@@ -14,8 +15,7 @@
 	border-top-right-radius: 8px;
 	width: 100%;
 	padding: 1rem 0rem;
-	background: #1e90ff;
-	color: white;
+	background: #4caf50;
 }
 
 .modal__header h2 {

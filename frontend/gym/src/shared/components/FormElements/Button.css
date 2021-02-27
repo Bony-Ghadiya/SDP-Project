@@ -22,13 +22,13 @@
 }
 
 .button--inverse {
-	background: none;
+	background: #4caf50;
 	color: white;
 }
 
 .button--inverse:hover,
 .button--inverse:active {
-	color: white;
+	color: black;
 	background: #4caf50;
 }
 

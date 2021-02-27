@@ -20,8 +20,8 @@ button:active {
 .btn1 {
 	cursor: pointer;
 
-	border: 1px solid DodgerBlue;
-	color: #1e90ff;
+	border: 1px solid;
+	color: #66ad68;
 	background: transparent;
 	padding: 0.5rem;
 	font: inherit;
@@ -37,7 +37,7 @@ button:active {
 .btn1:hover,
 .btn1:active {
 	color: white;
-	background: #00bfff;
+	background: #4caf50;
 }
 .MuiMobileStepper-root {
 	display: flex;

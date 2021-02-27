@@ -158,7 +158,10 @@ const App = () => {
 	return (
 		<AuthContext.Provider
 			value={{
-				isLoggedIn: !!token,
+				isLoggedIn:
+					userType === 'user' || userType === 'trainer' || userType === 'admin'
+						? true
+						: false,
 				token: token,
 				userId: userId,
 				userType: userType,

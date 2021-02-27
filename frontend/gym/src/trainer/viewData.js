@@ -33,7 +33,7 @@ const ViewData = () => {
 				</div>
 			)}
 			{!isLoading && data && (
-				<div style={{ textAlign: 'center' }}>
+				<div style={{ textAlign: 'center', color: 'black' }}>
 					<Card style={{ width: '35%', textAlign: 'center', margin: 'auto' }}>
 						<table className="table1" id="t01">
 							<caption>{traineename}'s data</caption>

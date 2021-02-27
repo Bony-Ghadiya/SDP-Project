@@ -73,7 +73,7 @@ const Home = () => {
 											backgroundColor: '#F5F5F5',
 										}}
 									>
-										{t.name} {t.id}
+										{t.name}
 									</Card.Header>
 									<Card.Body>
 										<Image

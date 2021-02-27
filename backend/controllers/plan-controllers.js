@@ -273,6 +273,7 @@ const saveData = async (req, res, next) => {
 		// 	plan: [
 		// 		{
 		// 			dayNo: '1',
+		// 			isSaved: 0,
 		// 			exercises: [
 		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '5' },
 		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '5' },
@@ -282,6 +283,7 @@ const saveData = async (req, res, next) => {
 		// 		},
 		// 		{
 		// 			dayNo: '2',
+		// 			isSaved: 0,
 		// 			exercises: [
 		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '8' },
 		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '5' },
@@ -291,6 +293,7 @@ const saveData = async (req, res, next) => {
 		// 		},
 		// 		{
 		// 			dayNo: '3',
+		// 			isSaved: 0,
 		// 			exercises: [
 		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '5' },
 		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '8' },
@@ -300,15 +303,238 @@ const saveData = async (req, res, next) => {
 		// 		},
 		// 		{
 		// 			dayNo: '4',
+		// 			isSaved: 0,
 		// 			exercises: [],
 		// 		},
 		// 		{
 		// 			dayNo: '5',
+		// 			isSaved: 0,
 		// 			exercises: [
 		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '7' },
 		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '5' },
 		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '12' },
 		// 				{ exerciseid: '602d450584102354900d9f45', time: '35' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '6',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '6' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '8' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '14' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '35' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '7',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '8' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '10' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '14' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '35' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '8',
+		// 			isSaved: 0,
+		// 			exercises: [],
+		// 		},
+		// 		{
+		// 			dayNo: '9',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '6' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '8' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '14' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '40' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '10',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '8' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '10' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '16' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '40' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '11',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '10' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '10' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '16' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '40' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '12',
+		// 			isSaved: 0,
+		// 			exercises: [],
+		// 		},
+		// 		{
+		// 			dayNo: '13',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '12' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '8' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '16' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '45' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '14',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '10' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '14' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '18' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '45' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '15',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '15' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '15' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '18' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '45' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '16',
+		// 			isSaved: 0,
+		// 			exercises: [],
+		// 		},
+		// 		{
+		// 			dayNo: '17',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '8' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '10' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '18' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '50' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '18',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '10' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '15' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '20' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '50' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '19',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '12' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '10' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '20' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '50' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '20',
+		// 			isSaved: 0,
+		// 			exercises: [],
+		// 		},
+		// 		{
+		// 			dayNo: '21',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '10' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '13' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '20' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '55' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '22',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '12' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '15' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '22' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '55' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '23',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '14' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '10' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '22' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '55' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '24',
+		// 			isSaved: 0,
+		// 			exercises: [],
+		// 		},
+		// 		{
+		// 			dayNo: '25',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '13' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '12' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '22' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '60' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '26',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '15' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '10' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '24' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '60' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '27',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '12' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '15' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '24' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '60' },
+		// 			],
+		// 		},
+		// 		{
+		// 			dayNo: '28',
+		// 			isSaved: 0,
+		// 			exercises: [],
+		// 		},
+		// 		{
+		// 			dayNo: '29',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '15' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '13' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '24' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '60' },
+		// 			],
+		// 		},
+
+		// 		{
+		// 			dayNo: '30',
+		// 			isSaved: 0,
+		// 			exercises: [
+		// 				{ exerciseid: '601a4cd6153ccdf72e174e94', reps: '15' },
+		// 				{ exerciseid: '602d43f184102354900d9f44', reps: '15' },
+		// 				{ exerciseid: '601a4d47153ccdf72e174e96', reps: '26' },
+		// 				{ exerciseid: '602d450584102354900d9f45', time: '60' },
 		// 			],
 		// 		},
 		// 	],
