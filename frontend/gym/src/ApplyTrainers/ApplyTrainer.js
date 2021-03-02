@@ -11,14 +11,23 @@ import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
 
 const useStyles = makeStyles(theme => ({
-	container: {
-		display: 'flex',
-		flexWrap: 'wrap',
-	},
 	textField: {
 		marginLeft: theme.spacing(1),
 		marginRight: theme.spacing(1),
 		width: 200,
+		backgroundColor: 'white',
+	},
+	input: {
+		color: 'white',
+	},
+	inputLabel: {
+		color: 'white',
+		'& label': {
+			color: 'white',
+		},
+		'& label.Mui-focused': {
+			color: 'white',
+		},
 	},
 }));
 
@@ -27,8 +36,8 @@ const ApplyTrainer = () => {
 	const auth = useContext(AuthContext);
 	let Exp = 0;
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const [startTime, setStartTime] = useState('00:00');
-	const [endTime, setEndTime] = useState('01:00');
+	const [startTime, setStartTime] = useState('01:00');
+	const [endTime, setEndTime] = useState('02:00');
 	const classes = useStyles();
 	let temp;
 
@@ -92,17 +101,28 @@ const ApplyTrainer = () => {
 						<form onSubmit={searchSubmitHandler}>
 							<h4 style={{ margin: '1rem auto' }}>Select Starting time</h4>
 							<TextField
-								style={{}}
 								id="time"
 								label="Starting Time"
 								type="time"
 								value={temp}
+								defaultValue="01:00"
 								className={classes.textField}
 								InputLabelProps={{
 									shrink: true,
+									style: {
+										color: 'white',
+									},
 								}}
 								inputProps={{
 									step: 300, // 5 min
+								}}
+								style={{
+									backgroundColor: 'white',
+								}}
+								InputProps={{
+									style: {
+										color: 'white',
+									},
 								}}
 								onChange={StartTimeSubmitHandler}
 							/>
@@ -113,6 +133,7 @@ const ApplyTrainer = () => {
 								label="Ending Time"
 								value={temp}
 								type="time"
+								defaultValue="02:00"
 								className={classes.textField}
 								InputLabelProps={{
 									shrink: true,
@@ -134,6 +155,8 @@ const ApplyTrainer = () => {
 										borderBottom: '1px solid black',
 										paddingBottom: '3px',
 										paddingTop: '3px',
+										backgroundColor: 'black',
+										color: 'white',
 									},
 								}}
 								min={0}

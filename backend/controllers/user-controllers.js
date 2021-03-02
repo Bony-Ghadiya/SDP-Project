@@ -128,7 +128,7 @@ const signup = async (req, res, next) => {
 		to: createdUser.email,
 		from: 'mgediya00@gmail.com',
 		subject: 'signup success',
-		html: '<h1>welcome</h1>',
+		html: `<h1>welcome</h1>`,
 	});
 
 	res.json({
