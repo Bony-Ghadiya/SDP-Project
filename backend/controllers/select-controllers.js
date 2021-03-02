@@ -76,6 +76,7 @@ const acceptRequest = async (req, res, next) => {
 			name: user.name,
 			image: user.image,
 			trainerid: trainerid,
+			isDataGiven: 0,
 		});
 	} catch (err) {
 		const error = new HttpError(

@@ -101,7 +101,8 @@ const Auth = () => {
 					responseData.userType,
 					responseData.requested,
 					responseData.approved,
-					responseData.selected
+					responseData.selected,
+					responseData.given
 				);
 				// localStorage.setItem('auth', JSON.stringify(responseData));
 				tec.setSelection();
@@ -133,7 +134,8 @@ const Auth = () => {
 					responseData.userType,
 					responseData.requested,
 					responseData.approved,
-					responseData.selected
+					responseData.selected,
+					responseData.given
 				);
 
 				tec.setSelection();

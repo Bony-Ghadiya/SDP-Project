@@ -7,15 +7,17 @@ export const useAuth = () => {
 	const [req, setReq] = useState(0);
 	const [app, setApp] = useState(0);
 	const [sel, setSel] = useState(0);
+	const [dataG, setDataG] = useState(0);
 
 	const login = useCallback(
-		(uid, token, type, requested, approved, selected) => {
+		(uid, token, type, requested, approved, selected, given) => {
 			setToken(token);
 			setUserId(uid);
 			setUserType(type);
 			setReq(requested);
 			setApp(approved);
 			setSel(selected);
+			setDataG(given);
 			localStorage.setItem(
 				'auth',
 				JSON.stringify({
@@ -25,6 +27,7 @@ export const useAuth = () => {
 					requested: requested,
 					approved: approved,
 					selected: selected,
+					given: given,
 				})
 			);
 		},
@@ -42,9 +45,10 @@ export const useAuth = () => {
 				requested: 1,
 				approved: app,
 				selected: sel,
+				given: dataG,
 			})
 		);
-	}, [userId, token, userType, app, sel]);
+	}, [userId, token, userType, app, sel, dataG]);
 
 	const setApproval = useCallback(() => {
 		setApp(1);
@@ -57,9 +61,10 @@ export const useAuth = () => {
 				requested: req,
 				approved: 1,
 				selected: sel,
+				given: dataG,
 			})
 		);
-	}, [userId, token, userType, req, sel]);
+	}, [userId, token, userType, req, sel, dataG]);
 
 	const setSelection = useCallback(() => {
 		setSel(1);
@@ -72,9 +77,26 @@ export const useAuth = () => {
 				requested: req,
 				approved: app,
 				selected: 1,
+				given: dataG,
 			})
 		);
-	}, [userId, token, userType, req, app]);
+	}, [userId, token, userType, req, app, dataG]);
+
+	const setDataGiven = useCallback(() => {
+		setDataG(1);
+		localStorage.setItem(
+			'auth',
+			JSON.stringify({
+				userId: userId,
+				token: token,
+				userType: userType,
+				requested: req,
+				approved: app,
+				selected: sel,
+				given: 1,
+			})
+		);
+	}, [userId, token, userType, req, app, sel]);
 
 	const logout = useCallback(() => {
 		setToken(null);
@@ -83,6 +105,7 @@ export const useAuth = () => {
 		setReq(0);
 		setApp(0);
 		setSel(0);
+		setDataG(0);
 		localStorage.removeItem('auth');
 	}, []);
 
@@ -97,7 +120,8 @@ export const useAuth = () => {
 					storedData.userType,
 					storedData.requested,
 					storedData.approved,
-					storedData.selected
+					storedData.selected,
+					storedData.given
 				);
 				setToken(storedData.token);
 				setUserId(storedData.userId);
@@ -105,6 +129,7 @@ export const useAuth = () => {
 				setReq(storedData.requested);
 				setApp(storedData.approved);
 				setSel(storedData.selected);
+				setDataG(storedData.given);
 			}
 		}
 		func();
@@ -122,5 +147,7 @@ export const useAuth = () => {
 		setApproval,
 		sel,
 		setSelection,
+		dataG,
+		setDataGiven,
 	};
 };

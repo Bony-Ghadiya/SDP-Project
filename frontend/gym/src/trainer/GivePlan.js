@@ -761,6 +761,7 @@ const GivePlan = () => {
 															setDay(0);
 															setReps(0);
 															setTime(0);
+															setNotZero(true);
 														}}
 													>
 														BACK
@@ -833,6 +834,7 @@ const GivePlan = () => {
 																	setSavedCount(savedCount + 1);
 																	setIsDays(true);
 																	setShowNew(false);
+																	setNotZero(true);
 																}
 															}
 														}}

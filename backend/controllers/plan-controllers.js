@@ -294,10 +294,7 @@ const saveData = async (req, res, next) => {
 	try {
 		existingUser = await Trainee.findOne({ userid: userid });
 		console.log('savedata');
-		console.log(userid);
-		console.log(existingUser);
 		existingTrainer = await Trainer.findById(existingUser.trainerid);
-		console.log(existingTrainer);
 	} catch (err) {
 		const error = new HttpError(
 			'Fetching trainees failed, please try again later.',
@@ -307,6 +304,7 @@ const saveData = async (req, res, next) => {
 	}
 
 	try {
+		existingUser.isDataGiven = 1;
 		createdData = new UserData({
 			traineeuserid: userid,
 			gender,
@@ -613,6 +611,7 @@ const saveData = async (req, res, next) => {
 		const sess = await mongoose.startSession();
 		sess.startTransaction();
 		await createdData.save({ session: sess });
+		await existingUser.save({ session: sess });
 		// await createdPlan.save({ session: sess });
 		await sess.commitTransaction();
 		console.log('saved');

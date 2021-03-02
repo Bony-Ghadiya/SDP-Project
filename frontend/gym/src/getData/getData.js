@@ -95,6 +95,7 @@ export default function ProgressMobileStepper() {
 			console.log(responseData);
 		} catch (err) {
 		} finally {
+			auth.setDataGiven();
 			history.push('/');
 		}
 	};
