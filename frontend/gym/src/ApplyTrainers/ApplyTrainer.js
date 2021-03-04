@@ -9,16 +9,27 @@ import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
 
 import { AuthContext } from '../shared/context/auth-context';
+import { red } from '@material-ui/core/colors';
+import {
+	MuiPickersUtilsProvider,
+	KeyboardTimePicker,
+	KeyboardDatePicker,
+  } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
+		color:"red",
 	},
 	textField: {
 		marginLeft: theme.spacing(1),
 		marginRight: theme.spacing(1),
 		width: 200,
+		color:"red",
+		'&::placeholder': {
+			color: 'white'
+		  }
 	},
 }));
 
@@ -91,24 +102,27 @@ const ApplyTrainer = () => {
 						<hr />
 						<form onSubmit={searchSubmitHandler}>
 							<h4 style={{ margin: '1rem auto' }}>Select Starting time</h4>
-							<div style={{backgroundColor:"red"}} >
+							<div style={{backgroundColor:"gray"}} >
 							<TextField
 								style={{color:"red"}}
 								id="time"
+	
 								label="Starting Time"
 								type="time"
+								color="white"
 								value={temp}
 								className={classes.textField}
 								InputLabelProps={{
 									shrink: true,
-									
+									style:{color:"white"}
 								}}
 								inputProps={{
 									step: 300, // 5 min
-									
+									style:{color:"white"}
 								}}
 								onChange={StartTimeSubmitHandler}
 							/>
+							
 							<br />
 							<h4 style={{ margin: '1rem auto' }}>Select Ending time</h4>
 							<TextField
@@ -119,9 +133,11 @@ const ApplyTrainer = () => {
 								className={classes.textField}
 								InputLabelProps={{
 									shrink: true,
+									style:{color:"white"}
 								}}
 								inputProps={{
 									step: 300, // 5 min
+									style:{color:"white"}
 								}}
 								onChange={EndTimeSubmitHandler}
 							/>
