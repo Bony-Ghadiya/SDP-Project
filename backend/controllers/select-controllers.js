@@ -113,7 +113,7 @@ const acceptRequest = async (req, res, next) => {
 	// });
 
 	res.json({
-		trainers: trainer.toObject({ getters: true }),
+		trainers: createdTrainees.toObject({ getters: true }),
 	});
 };
 

@@ -793,7 +793,7 @@ const submit = async (req, res, next) => {
 	const { traineeid } = req.body;
 	console.log(traineeid);
 
-	let trainer, trainee, createdTraineePlan;
+	let trainer, trainee, createdTraineePlan, obj;
 	try {
 		trainer = await TrainerPlan.findOne({ traineeid: traineeid }).populate(
 			'plan.exercises.exerciseid'
@@ -832,11 +832,21 @@ const submit = async (req, res, next) => {
 			var i, j, k;
 			for (i = 0; i < trainer.plan.length; i++) {
 				// createdTraineePlan.plan[i].dayNo = trainer.plan[i].dayNo;
-				const obj = {
-					dayNo: trainer.plan[i].dayNo,
-					dayComplated: 0,
-					exercises: trainer.plan[i].exercises,
-				};
+				if (i === 0) {
+					obj = {
+						dayNo: trainer.plan[i].dayNo,
+						dayComplated: 0,
+						previousDayComplated: 1,
+						exercises: trainer.plan[i].exercises,
+					};
+				} else {
+					obj = {
+						dayNo: trainer.plan[i].dayNo,
+						dayComplated: 0,
+						previousDayComplated: 0,
+						exercises: trainer.plan[i].exercises,
+					};
+				}
 				createdTraineePlan.plan.push(obj);
 			}
 
@@ -868,17 +878,34 @@ const submit = async (req, res, next) => {
 	} else {
 		console.log(trainer.plan);
 		try {
-			var i, l;
+			var i,
+				l,
+				daylist = [];
 			l = trainee.plan.length;
+			for (i = 0; i < l; i++) {
+				daylist.push(trainee.plan[i].dayComplated);
+			}
 			for (i = 0; i < l; i++) {
 				trainee.plan.pop();
 			}
+			console.log('okay');
+			console.log(daylist);
 			for (i = 0; i < trainer.plan.length; i++) {
-				const obj = {
-					dayNo: trainer.plan[i].dayNo,
-					dayComplated: 0,
-					exercises: trainer.plan[i].exercises,
-				};
+				if (i === 0) {
+					obj = {
+						dayNo: trainer.plan[i].dayNo,
+						dayComplated: daylist[i],
+						previousDayComplated: 1,
+						exercises: trainer.plan[i].exercises,
+					};
+				} else {
+					obj = {
+						dayNo: trainer.plan[i].dayNo,
+						dayComplated: daylist[i],
+						previousDayComplated: 0,
+						exercises: trainer.plan[i].exercises,
+					};
+				}
 				trainee.plan.push(obj);
 			}
 		} catch (err) {

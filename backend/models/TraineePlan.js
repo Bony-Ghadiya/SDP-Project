@@ -11,6 +11,7 @@ const TraineePlanSchema = new Schema({
 	plan: [
 		{
 			dayNo: { type: Number, required: true },
+			previousDayComplated: { type: Number, Default: 0 },
 			dayComplated: { type: Number, Default: 0 },
 			exercises: [
 				{

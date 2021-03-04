@@ -51,7 +51,15 @@ h3 {
 	padding: 5px;
 	text-align: start;
 }
-
+.data201 {
+	width: 450px;
+	display: grid !important;
+	grid-template-columns: 175px 200px 30px!important;
+	grid-gap: 10px;
+	background-color: gray;
+	padding: 5px;
+	text-align: start;
+}
 .goto {
 	padding: 0;
 	border: none;
