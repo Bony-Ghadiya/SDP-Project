@@ -7,6 +7,7 @@ const traineeSchema = new Schema({
 	name: { type: String, required: true },
 	image: { type: String, required: true },
 	trainerid: { type: mongoose.Types.ObjectId, ref: 'Trainers' },
+	isDataGiven: { type: Number, default: 0 },
 });
 
 global.traineeSchema =

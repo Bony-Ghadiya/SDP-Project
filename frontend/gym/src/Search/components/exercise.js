@@ -6,7 +6,7 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { Container, Card } from 'react-bootstrap';
 
-const Exercise = props => {
+const Exercise = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [category, setcategory] = useState();
 	const [videoLink, setVideoLink] = useState();
@@ -78,8 +78,16 @@ const Exercise = props => {
 								)}
 								{!isLoading && flag && (
 									<div style={{ textAlign: 'left' }}>
-										<h4 style={{ display: 'inline', color: '#4caf50' }}>Exercise Category :</h4>
-										<p style={{ display: 'inline', marginLeft: '22px' , color: 'white' }}>
+										<h4 style={{ display: 'inline', color: '#4caf50' }}>
+											Exercise Category :
+										</h4>
+										<p
+											style={{
+												display: 'inline',
+												marginLeft: '22px',
+												color: 'white',
+											}}
+										>
 											{' '}
 											{category}
 										</p>

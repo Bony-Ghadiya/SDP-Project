@@ -21,6 +21,7 @@ import ShowTrainee from './trainer/showtrainee';
 import ViewData from './trainer/viewData';
 import GetData from './getData/getData';
 import GivePlan from './trainer/GivePlan';
+import ViewPlan from './traineePlan/ViewPlan';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
@@ -39,6 +40,8 @@ const App = () => {
 		setRequested,
 		sel,
 		setSelection,
+		dataG,
+		setDataGiven,
 	} = useAuth();
 
 	const removeSelection = () => {};
@@ -75,6 +78,9 @@ const App = () => {
 				</Route>
 				<Route path="/getdata" exact>
 					<GetData />
+				</Route>
+				<Route path="/viewplan" exact>
+					<ViewPlan />
 				</Route>
 				<Route path="/" exact>
 					<Home />
@@ -168,12 +174,14 @@ const App = () => {
 				isTrainerApproved: app,
 				isTrainerSelected: sel,
 				isRequested: req,
+				isDataGiven: dataG,
 				login: login,
 				logout: logout,
 				setApproval: setApproval,
 				setSelection: setSelection,
 				removeSelection: removeSelection,
 				setRequested: setRequested,
+				setDataGiven: setDataGiven,
 			}}
 		>
 			<Router>

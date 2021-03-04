@@ -7,6 +7,7 @@ const UserData = require('../models/userdata');
 const DefaultPlan = require('../models/DefaultPlan');
 const Exercise = require('../models/exercise');
 const TrainerPlan = require('../models/TrainerPlan');
+const TraineePlan = require('../models/TraineePlan');
 
 const getPlans = async (req, res, next) => {
 	const tid = req.params.tid;
@@ -51,8 +52,6 @@ const getPlans = async (req, res, next) => {
 				traineruserid: tes.trainerid.userid,
 				plan: plans[0].plan,
 			});
-			console.log('created', createdPlan);
-			console.log('plan', createdPlan.plan);
 		} catch (err) {
 			console.log(err);
 			const error = new HttpError(
@@ -166,7 +165,7 @@ const saveDay = async (req, res, next) => {
 	const { day, traineeid, exercise } = req.body;
 	console.log(exercise.length);
 	console.log('save day');
-	let plans, abc, temp;
+	let plans;
 	try {
 		plans = await TrainerPlan.findOne({ traineeid: traineeid }).populate(
 			'plan.exercise.exerciseid'
@@ -217,6 +216,67 @@ const saveDay = async (req, res, next) => {
 	res.json({ defaultexercise: plans.toObject({ getters: true }) });
 };
 
+const saveReps = async (req, res, next) => {
+	const { day, traineeid, exerciseid, reps, time } = req.body;
+	console.log('save reps', reps, exerciseid, time);
+	let plans, abc, temp;
+	try {
+		plans = await TrainerPlan.findOne({ traineeid: traineeid }).populate(
+			'plan.exercises.exerciseid'
+		);
+
+		var i,
+			j,
+			k = 0,
+			l;
+
+		for (i = 0; i < plans.plan.length; i++) {
+			l = plans.plan[i].exercises.length;
+			if (plans.plan[i].dayNo === day) {
+				// plans.plan[i].isSaved = 1;
+				// for (j = 0; j < l; j++) {
+				// 	plans.plan[i].exercises.pop();
+				// }
+				// for (j = 0; j < exercise.length; j++) {
+				// 	plans.plan[i].exercises.push(exercise[[k++]]);
+				// }
+				// plans.plan.exercises = exercise;
+				for (j = 0; j < l; j++) {
+					if (plans.plan[i].exercises[j].exerciseid.id === exerciseid) {
+						console.log(plans.plan[i].exercises[j].reps);
+						plans.plan[i].exercises[j].reps = reps;
+						plans.plan[i].exercises[j].time = time;
+					}
+				}
+			}
+		}
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Something went wrong, could not find data.',
+			500
+		);
+		return next(error);
+	}
+
+	try {
+		const sess = await mongoose.startSession();
+		sess.startTransaction();
+		await plans.save({ session: sess });
+		await sess.commitTransaction();
+		console.log('saved');
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Something went wrong, could not find data.',
+			500
+		);
+		return next(error);
+	}
+
+	res.json({ defaultexercise: plans.toObject({ getters: true }) });
+};
+
 const saveData = async (req, res, next) => {
 	const {
 		userid,
@@ -234,10 +294,7 @@ const saveData = async (req, res, next) => {
 	try {
 		existingUser = await Trainee.findOne({ userid: userid });
 		console.log('savedata');
-		console.log(userid);
-		console.log(existingUser);
 		existingTrainer = await Trainer.findById(existingUser.trainerid);
-		console.log(existingTrainer);
 	} catch (err) {
 		const error = new HttpError(
 			'Fetching trainees failed, please try again later.',
@@ -247,6 +304,7 @@ const saveData = async (req, res, next) => {
 	}
 
 	try {
+		existingUser.isDataGiven = 1;
 		createdData = new UserData({
 			traineeuserid: userid,
 			gender,
@@ -553,6 +611,7 @@ const saveData = async (req, res, next) => {
 		const sess = await mongoose.startSession();
 		sess.startTransaction();
 		await createdData.save({ session: sess });
+		await existingUser.save({ session: sess });
 		// await createdPlan.save({ session: sess });
 		await sess.commitTransaction();
 		console.log('saved');
@@ -570,9 +629,318 @@ const saveData = async (req, res, next) => {
 	});
 };
 
+const resetDay = async (req, res, next) => {
+	const tid = req.params.tid;
+	console.log(tid);
+	const { day } = req.body;
+	let trainers, plans, tplan, exe;
+	try {
+		exe = await UserData.findOne({ traineeid: tid });
+		trainers = await DefaultPlan.find({}).populate('plan.exercises.exerciseid');
+		tplan = await TrainerPlan.findOne({ traineeid: tid }).populate(
+			'plan.exercises.exerciseid'
+		);
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Fetching trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+	try {
+		plans = trainers.filter(p1 => p1.gender === exe.gender);
+		plans = plans.filter(p1 => p1.goal === exe.goal);
+		plans = plans.filter(p1 => p1.difficulty === exe.difficulty);
+		plans = plans.filter(p1 => p1.pushups === exe.pushups);
+		plans = plans.filter(p1 => p1.workout === exe.workout);
+		plans = plans.filter(p1 => p1.strength === exe.strength);
+		plans = plans.filter(p1 => p1.time === exe.time);
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'filtering trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+
+	try {
+		let abc = plans[0].plan.filter(p => p.dayNo === day);
+		abc = abc[0].exercises;
+		console.log('abc', abc);
+
+		var i,
+			j,
+			k = 0,
+			l;
+
+		for (i = 0; i < tplan.plan.length; i++) {
+			l = tplan.plan[i].exercises.length;
+			if (tplan.plan[i].dayNo === day) {
+				tplan.plan[i].isSaved = 0;
+				for (j = 0; j < l; j++) {
+					tplan.plan[i].exercises.pop();
+				}
+				for (j = 0; j < abc.length; j++) {
+					tplan.plan[i].exercises.push(abc[k++]);
+				}
+			}
+		}
+		const xyz = tplan.plan.filter(p => p.dayNo === day);
+		console.log(xyz[0].exercises);
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Something went wrong, could not update trainers.',
+			500
+		);
+		return next(error);
+	}
+
+	try {
+		const sess = await mongoose.startSession();
+		sess.startTransaction();
+		await tplan.save({ session: sess });
+		await sess.commitTransaction();
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Something went wrong, could not update trainee in db.',
+			500
+		);
+		return next(error);
+	}
+
+	res.json({
+		defaultexercise: tplan.toObject({ getters: true }),
+	});
+};
+
+const resetAll = async (req, res, next) => {
+	const tid = req.params.tid;
+	console.log(tid);
+	let trainers, exe, plans, createdPlan, tplan, tes;
+	try {
+		exe = await UserData.findOne({ traineeid: tid });
+		trainers = await DefaultPlan.find({}).populate('plan.exercises.exerciseid');
+		tes = await Trainee.findById(tid).populate('trainerid');
+		tplan = await TrainerPlan.findOne({ traineeid: tid });
+		console.log('1');
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Fetching trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+	try {
+		plans = trainers.filter(p1 => p1.gender === exe.gender);
+		plans = plans.filter(p1 => p1.goal === exe.goal);
+		plans = plans.filter(p1 => p1.difficulty === exe.difficulty);
+		plans = plans.filter(p1 => p1.pushups === exe.pushups);
+		plans = plans.filter(p1 => p1.workout === exe.workout);
+		plans = plans.filter(p1 => p1.strength === exe.strength);
+		plans = plans.filter(p1 => p1.time === exe.time);
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'filtering trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+	try {
+		createdPlan = new TrainerPlan({
+			traineeid: tid,
+			traineeuserid: tes.userid,
+			trainerid: tes.trainerid.id,
+			traineruserid: tes.trainerid.userid,
+			plan: plans[0].plan,
+		});
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'creating trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+
+	try {
+		const sess = await mongoose.startSession();
+		sess.startTransaction();
+		tplan.remove();
+		await createdPlan.save({ session: sess });
+		await sess.commitTransaction();
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Something went wrong, could not update trainee in db.',
+			500
+		);
+		return next(error);
+	}
+
+	res.json({
+		defaultexercise: createdPlan.toObject({ getters: true }),
+	});
+};
+
+const submit = async (req, res, next) => {
+	console.log('submit');
+	const { traineeid } = req.body;
+	console.log(traineeid);
+
+	let trainer, trainee, createdTraineePlan, obj;
+	try {
+		trainer = await TrainerPlan.findOne({ traineeid: traineeid }).populate(
+			'plan.exercises.exerciseid'
+		);
+		trainee = await TraineePlan.findOne({ traineeid: traineeid });
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Something went wrong, could not find  data.',
+			500
+		);
+		return next(error);
+	}
+	if (!trainee) {
+		try {
+			console.log('create');
+			createdTraineePlan = new TraineePlan({
+				traineeid: traineeid,
+				traineeuserid: trainer.traineeuserid,
+				trainerid: trainer.trainerid,
+				traineruserid: trainer.traineruserid,
+				plan: [],
+			});
+		} catch (err) {
+			console.log(err);
+			const error = new HttpError(
+				'Something went wrong, could not create plan.',
+				500
+			);
+			return next(error);
+		}
+
+		try {
+			console.log('created', createdTraineePlan);
+			trainer.isComplate = 1;
+			var i, j, k;
+			for (i = 0; i < trainer.plan.length; i++) {
+				// createdTraineePlan.plan[i].dayNo = trainer.plan[i].dayNo;
+				if (i === 0) {
+					obj = {
+						dayNo: trainer.plan[i].dayNo,
+						dayComplated: 0,
+						previousDayComplated: 1,
+						exercises: trainer.plan[i].exercises,
+					};
+				} else {
+					obj = {
+						dayNo: trainer.plan[i].dayNo,
+						dayComplated: 0,
+						previousDayComplated: 0,
+						exercises: trainer.plan[i].exercises,
+					};
+				}
+				createdTraineePlan.plan.push(obj);
+			}
+
+			console.log('created', createdTraineePlan.plan);
+		} catch (err) {
+			console.log(err);
+			const error = new HttpError(
+				'Something went wrong, could not create plan.',
+				500
+			);
+			return next(error);
+		}
+
+		try {
+			const sess = await mongoose.startSession();
+			sess.startTransaction();
+			await trainer.save({ session: sess });
+			await createdTraineePlan.save({ session: sess });
+			await sess.commitTransaction();
+		} catch (err) {
+			console.log(err);
+			const error = new HttpError(
+				'Something went wrong, could not update trainee in db.',
+				500
+			);
+			return next(error);
+		}
+		res.json({ message: 'okay' });
+	} else {
+		console.log(trainer.plan);
+		try {
+			var i,
+				l,
+				daylist = [];
+			l = trainee.plan.length;
+			for (i = 0; i < l; i++) {
+				daylist.push(trainee.plan[i].dayComplated);
+			}
+			for (i = 0; i < l; i++) {
+				trainee.plan.pop();
+			}
+			console.log('okay');
+			console.log(daylist);
+			for (i = 0; i < trainer.plan.length; i++) {
+				if (i === 0) {
+					obj = {
+						dayNo: trainer.plan[i].dayNo,
+						dayComplated: daylist[i],
+						previousDayComplated: 1,
+						exercises: trainer.plan[i].exercises,
+					};
+				} else {
+					obj = {
+						dayNo: trainer.plan[i].dayNo,
+						dayComplated: daylist[i],
+						previousDayComplated: 0,
+						exercises: trainer.plan[i].exercises,
+					};
+				}
+				trainee.plan.push(obj);
+			}
+		} catch (err) {
+			console.log(err);
+			const error = new HttpError(
+				'Something went wrong, could not create plan.',
+				500
+			);
+			return next(error);
+		}
+
+		try {
+			const sess = await mongoose.startSession();
+			sess.startTransaction();
+			await trainee.save({ session: sess });
+			await sess.commitTransaction();
+		} catch (err) {
+			console.log(err);
+			const error = new HttpError(
+				'Something went wrong, could not update trainee in db.',
+				500
+			);
+			return next(error);
+		}
+		res.json({ message: 'already submitted' });
+	}
+};
+
 exports.saveData = saveData;
 exports.getDetails = getDetails;
 exports.getPlans = getPlans;
 exports.getExercise = getExercise;
 exports.saveDay = saveDay;
 exports.getPlans1 = getPlans1;
+exports.saveReps = saveReps;
+exports.resetDay = resetDay;
+exports.resetAll = resetAll;
+exports.submit = submit;

@@ -128,7 +128,7 @@ const signup = async (req, res, next) => {
 		to: createdUser.email,
 		from: 'mgediya00@gmail.com',
 		subject: 'signup success',
-		html: '<h1>welcome</h1>',
+		html: `<h1>welcome</h1>`,
 	});
 
 	res.json({
@@ -140,6 +140,7 @@ const signup = async (req, res, next) => {
 		requested: 0,
 		approved: 0,
 		selected: 0,
+		given: 0,
 	});
 };
 
@@ -230,6 +231,7 @@ const login = async (req, res, next) => {
 			requested: trainer.requested,
 			approved: trainer.approved,
 			selected: 0,
+			given: 0,
 			token: token,
 		});
 	} else if (existingUser.userType === 'user' && flag && isTrainer) {
@@ -241,6 +243,7 @@ const login = async (req, res, next) => {
 			requested: 0,
 			approved: 0,
 			selected: trainee.trainerid ? 1 : 0,
+			given: trainee.isDataGiven,
 			token: token,
 		});
 	} else {

@@ -38,8 +38,8 @@ const ApplyTrainer = () => {
 	const auth = useContext(AuthContext);
 	let Exp = 0;
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const [startTime, setStartTime] = useState('00:00');
-	const [endTime, setEndTime] = useState('01:00');
+	const [startTime, setStartTime] = useState('01:00');
+	const [endTime, setEndTime] = useState('02:00');
 	const classes = useStyles();
 	let temp;
 
@@ -111,6 +111,7 @@ const ApplyTrainer = () => {
 								type="time"
 								color="white"
 								value={temp}
+								defaultValue="01:00"
 								className={classes.textField}
 								InputLabelProps={{
 									shrink: true,
@@ -119,6 +120,14 @@ const ApplyTrainer = () => {
 								inputProps={{
 									step: 300, // 5 min
 									style:{color:"white"}
+								}}
+								style={{
+									backgroundColor: 'white',
+								}}
+								InputProps={{
+									style: {
+										color: 'white',
+									},
 								}}
 								onChange={StartTimeSubmitHandler}
 							/>
@@ -130,6 +139,7 @@ const ApplyTrainer = () => {
 								label="Ending Time"
 								value={temp}
 								type="time"
+								defaultValue="02:00"
 								className={classes.textField}
 								InputLabelProps={{
 									shrink: true,
@@ -154,6 +164,8 @@ const ApplyTrainer = () => {
 										borderBottom: '1px solid black',
 										paddingBottom: '3px',
 										paddingTop: '3px',
+										backgroundColor: 'black',
+										color: 'white',
 									},
 								}}
 								min={0}

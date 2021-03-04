@@ -1,6 +1,7 @@
 const express = require('express');
 
 const planController = require('../controllers/plan-controllers');
+const ExerciseController = require('../controllers/exercise-controllers');
 
 const router = express.Router();
 
@@ -15,5 +16,17 @@ router.get('/getdefaultplan/:tid', planController.getPlans);
 router.get('/getdefaultplan1/:tid', planController.getPlans1);
 
 router.patch('/saveday', planController.saveDay);
+
+router.patch('/savereps', planController.saveReps);
+
+router.patch('/resetday/:tid', planController.resetDay);
+
+router.get('/resetall/:tid', planController.resetAll);
+
+router.patch('/submit', planController.submit);
+
+router.get('/viewdefaultplan/:tuid', ExerciseController.viewPlan);
+
+router.patch('/zerocomplete', ExerciseController.completeZero);
 
 module.exports = router;

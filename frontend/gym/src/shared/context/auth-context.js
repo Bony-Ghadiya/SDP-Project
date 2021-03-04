@@ -14,4 +14,6 @@ export const AuthContext = createContext({
 	removeSelection: () => {},
 	isRequested: false,
 	setRequested: () => {},
+	isDataGiven: false,
+	setDataGiven: () => {},
 });

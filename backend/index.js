@@ -45,6 +45,8 @@ app.use('/api/show', showRoutes);
 
 app.use('/api/getplan', planRoutes);
 
+app.use('/api/viewplan', planRoutes);
+
 app.use((req, res, next) => {
 	const error = new HttpError('Could not find this route.', 404);
 	throw error;
