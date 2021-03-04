@@ -91,8 +91,9 @@ const ApplyTrainer = () => {
 						<hr />
 						<form onSubmit={searchSubmitHandler}>
 							<h4 style={{ margin: '1rem auto' }}>Select Starting time</h4>
+							<div style={{backgroundColor:"red"}} >
 							<TextField
-								style={{}}
+								style={{color:"red"}}
 								id="time"
 								label="Starting Time"
 								type="time"
@@ -100,9 +101,11 @@ const ApplyTrainer = () => {
 								className={classes.textField}
 								InputLabelProps={{
 									shrink: true,
+									
 								}}
 								inputProps={{
 									step: 300, // 5 min
+									
 								}}
 								onChange={StartTimeSubmitHandler}
 							/>
@@ -128,6 +131,7 @@ const ApplyTrainer = () => {
 								style={{
 									input: {
 										width: '204px',
+										background:'none',
 										borderTop: '0px',
 										borderLeft: '0px',
 										borderRight: '0px',
@@ -149,6 +153,7 @@ const ApplyTrainer = () => {
 								onClick={searchSubmitHandler}
 								value="Submit"
 							/>
+							</div>
 						</form>
 					</Card>
 				</div>

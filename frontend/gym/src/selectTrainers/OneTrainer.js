@@ -65,7 +65,7 @@ const OneTrainer = props => {
 								style={{
 									maxWidth: '500px',
 									margin: 'auto',
-									color: 'black',
+									color: 'white',
 									marginBottom: '50px',
 									padding: '0 10px',
 								}}
@@ -77,7 +77,7 @@ const OneTrainer = props => {
 											marginTop: '0px',
 											borderBottom: '1px solid black',
 											padding: '10px 0',
-											backgroundColor: '#F5F5F5',
+											backgroundColor: 'none',
 										}}
 									>
 										{trainer.name}
@@ -172,7 +172,7 @@ const OneTrainer = props => {
 										size={36}
 										edit={false}
 										value={trainer.rating}
-										activeColor="black"
+										activeColor="#fbcd0a"
 									/>
 								</div>
 								{!isLoading && trainer && trainer.feedback.length !== 0 && (
@@ -188,7 +188,7 @@ const OneTrainer = props => {
 										</li>
 									))}
 								{!isLoading && trainer && (
-									<Card.Footer style={{ borderTop: '1px solid black' }}>
+									<Card.Footer style={{ borderTop: '1px solid black',marginBottom:'13px' }}>
 										<input
 											type="button"
 											className="button"

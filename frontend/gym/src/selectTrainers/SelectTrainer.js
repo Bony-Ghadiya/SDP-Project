@@ -69,7 +69,7 @@ const Home = () => {
 										marginTop: '0px',
 										borderBottom: '1px solid black',
 										padding: '5px 0',
-										backgroundColor: '#F5F5F5',
+										background:'none',
 									}}
 								>
 									<Card.Link
@@ -95,6 +95,7 @@ const Home = () => {
 											dispaly: 'inline',
 											width: '150px',
 											margin: 'auto',
+											
 										}}
 									>
 										<ReactStars
@@ -104,7 +105,7 @@ const Home = () => {
 											size={36}
 											edit={false}
 											value={t.rating}
-											activeColor="black"
+											activeColor="#fbcd0a"
 										/>
 									</div>
 								</Card.Body>
