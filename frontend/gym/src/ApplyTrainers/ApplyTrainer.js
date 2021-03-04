@@ -1,20 +1,14 @@
-import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import NumericInput from 'react-numeric-input';
+import React, { useContext, useState } from 'react';
 import { Card } from 'react-bootstrap';
+import NumericInput from 'react-numeric-input';
+import { useHistory } from 'react-router-dom';
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
+import { AuthContext } from '../shared/context/auth-context';
 import { useHttpClient } from '../shared/hooks/http-hook';
 
-import { AuthContext } from '../shared/context/auth-context';
-import { red } from '@material-ui/core/colors';
-import {
-	MuiPickersUtilsProvider,
-	KeyboardTimePicker,
-	KeyboardDatePicker,
-  } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
 	container: {
