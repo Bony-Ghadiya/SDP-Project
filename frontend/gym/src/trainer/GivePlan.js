@@ -284,30 +284,58 @@ const GivePlan = () => {
 										<div className="grid">
 											{trainerPlan.plan.map(p => (
 												<div className="mh" id={p.dayNo}>
-													{p.isSaved !== 1 && (
-														<button
-															className="daysButton--notsaved"
-															onClick={() => {
-																setDay(p.dayNo);
-																setIsDays(false);
-																setexer(p.exercises);
-															}}
-														>
-															Day {p.dayNo}
-														</button>
-													)}
-													{p.isSaved === 1 && (
-														<button
-															className="daysButton--saved"
-															onClick={() => {
-																setDay(p.dayNo);
-																setIsDays(false);
-																setexer(p.exercises);
-															}}
-														>
-															Day {p.dayNo}
-														</button>
-													)}
+													{trainerPlan.traineeDay === p.dayNo &&
+														p.isSaved !== 1 && (
+															<button
+																className="daysButton--notsaved"
+																onClick={() => {
+																	setDay(p.dayNo);
+																	setIsDays(false);
+																	setexer(p.exercises);
+																}}
+															>
+																Day {p.dayNo}*
+															</button>
+														)}
+													{!(trainerPlan.traineeDay === p.dayNo) &&
+														p.isSaved !== 1 && (
+															<button
+																className="daysButton--notsaved"
+																onClick={() => {
+																	setDay(p.dayNo);
+																	setIsDays(false);
+																	setexer(p.exercises);
+																}}
+															>
+																Day {p.dayNo}
+															</button>
+														)}
+													{trainerPlan.traineeDay === p.dayNo &&
+														p.isSaved === 1 && (
+															<button
+																className="daysButton--saved"
+																onClick={() => {
+																	setDay(p.dayNo);
+																	setIsDays(false);
+																	setexer(p.exercises);
+																}}
+															>
+																Day {p.dayNo}*
+															</button>
+														)}
+													{!(trainerPlan.traineeDay === p.dayNo) &&
+														p.isSaved === 1 && (
+															<button
+																className="daysButton--saved"
+																onClick={() => {
+																	setDay(p.dayNo);
+																	setIsDays(false);
+																	setexer(p.exercises);
+																}}
+															>
+																Day {p.dayNo}
+															</button>
+														)}
 												</div>
 											))}
 										</div>

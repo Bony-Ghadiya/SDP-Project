@@ -156,8 +156,9 @@ const ViewPlan = () => {
 
 																		<div className="ename">
 																			<h3>{e.exerciseid.ename}</h3>
-																			{e.reps !== 0 && <p>{e.reps}x</p>}
-																			{e.time !== 0 && <p>{e.time}s</p>}
+																			<br />
+																			{e.reps !== 0 && <h3>{e.reps}x</h3>}
+																			{e.time !== 0 && <h3>{e.time}s</h3>}
 																		</div>
 
 																		<button
@@ -218,41 +219,26 @@ const ViewPlan = () => {
 												<div>
 													{p1.dayNo === day && p1.exercises.length !== 0 && (
 														<div>
-															<Exercise
-																items={p1.exercises[exerciseNo].exerciseid}
-															/>
+															<Exercise items={p1} />
 														</div>
 													)}
 												</div>
 											))}
 											<button
 												style={{ margin: 'auto 5px' }}
-												disabled={exerciseNo === 0}
-												onClick={() => {
-													setExerciseNo(exerciseNo - 1);
-												}}
-											>
-												&lt;
-											</button>
-											<button
-												style={{ margin: 'auto 5px' }}
-												onClick={() => {
+												onClick={async () => {
 													setExer(false);
+													setIsDays(true);
+													try {
+														const responseData = await sendRequest(
+															`http://localhost:5000/api/viewplan/viewdefaultplan/${auth.userId}`
+														);
+														setTrainerPlan(responseData.defaultexercise);
+														console.log(responseData.defaultexercise);
+													} catch (err) {}
 												}}
 											>
-												START
-											</button>
-											<button
-												style={{ margin: 'auto 5px' }}
-												disabled={
-													exerciseNo ===
-													trainerPlan.plan[day - 1].exercises.length - 1
-												}
-												onClick={() => {
-													setExerciseNo(exerciseNo + 1);
-												}}
-											>
-												&gt;
+												EXIT
 											</button>
 										</div>
 									</div>

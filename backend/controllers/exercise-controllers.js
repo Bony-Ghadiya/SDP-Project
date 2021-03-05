@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Trainer = require('../models/trainers');
 const Trainees = require('../models/trainee');
 const TraineePlan = require('../models/TraineePlan');
+const TrainerPlan = require('../models/TrainerPlan');
 
 const viewPlan = async (req, res, next) => {
 	const tuid = req.params.tuid;
@@ -39,9 +40,12 @@ const completeZero = async (req, res, next) => {
 	const { tuid, day } = req.body;
 	console.log(tuid);
 
-	let trainers;
+	let trainers, plans;
 	try {
 		trainers = await TraineePlan.findOne({ traineeuserid: tuid }).populate(
+			'plan.exercises.exerciseid'
+		);
+		plans = await TrainerPlan.findOne({ traineeuserid: tuid }).populate(
 			'plan.exercises.exerciseid'
 		);
 	} catch (err) {
@@ -65,6 +69,7 @@ const completeZero = async (req, res, next) => {
 				}
 			}
 		}
+		plans.traineeDay = day;
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
@@ -78,6 +83,7 @@ const completeZero = async (req, res, next) => {
 		const sess = await mongoose.startSession();
 		sess.startTransaction();
 		await trainers.save({ session: sess });
+		await plans.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (err) {
 		console.log(err);
