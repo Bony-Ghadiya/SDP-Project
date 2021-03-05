@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Card, Image, Container } from 'react-bootstrap';
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
@@ -45,7 +44,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const GivePlan = () => {
-	const history = useHistory();
 	let temp;
 	const [savedCount, setSavedCount] = useState(0);
 	const classes = useStyles();

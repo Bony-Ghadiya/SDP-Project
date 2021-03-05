@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import React, { useContext, useState } from 'react';
 import { Card } from 'react-bootstrap';
@@ -9,21 +9,47 @@ import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../shared/context/auth-context';
 import { useHttpClient } from '../shared/hooks/http-hook';
 
+const CssTextField = withStyles({
+	root: {
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#4caf50',
+		},
+		'& .MuiOutlinedInput-root': {
+			'& fieldset': {
+				borderColor: 'white',
+			},
+			'&:hover fieldset': {
+				borderColor: 'white',
+			},
+			'&.Mui-focused fieldset': {
+				borderColor: '#4caf50',
+			},
+		},
+		'& .MuiInputLabel-formControl': {
+			color: '#4caf50',
+		},
+	},
+})(TextField);
 
 const useStyles = makeStyles(theme => ({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		color:"red",
+		color: 'red',
 	},
 	textField: {
 		marginLeft: theme.spacing(1),
 		marginRight: theme.spacing(1),
 		width: 200,
-		color:"red",
+		color: 'red',
 		'&::placeholder': {
-			color: 'white'
-		  }
+			color: 'white',
+		},
+	},
+	outlinedRoot: {
+		'&:hover': {
+			border: '1px solid red',
+		},
 	},
 }));
 
@@ -94,87 +120,128 @@ const ApplyTrainer = () => {
 					<Card>
 						<h2 style={{}}>Select Data</h2>
 						<hr />
+						<h4 style={{ margin: '1rem auto' }}>Select Your Experience</h4>
+						<NumericInput
+							required
+							style={{
+								wrap: {
+									borderRadius: '6px 3px 3px 6px',
+									border: '2px solid #4caf50',
+								},
+								input: {
+									border: '1px solid #4caf50',
+									width: '204px',
+									background: 'transparent',
+									color: 'white',
+									borderTop: '0px',
+									borderLeft: '0px',
+									borderRight: '0px',
+									borderBottom: '0px',
+								},
+								'input:focus': {
+									border: '1px inset #4caf50',
+									outline: 'none',
+								},
+								'input:active': {
+									border: '1px inset #4caf50',
+									outline: 'none',
+								},
+								arrowUp: {
+									padding: '0',
+									borderBottomColor: '#4caf50',
+								},
+								arrowDown: {
+									borderTopColor: '#4caf50',
+								},
+							}}
+							min={0}
+							max={100}
+							value={0}
+							onChange={ExpChangeHandler}
+						/>
+						<br />
 						<form onSubmit={searchSubmitHandler}>
 							<h4 style={{ margin: '1rem auto' }}>Select Starting time</h4>
-							<div style={{backgroundColor:"gray"}} >
-							<TextField
-								style={{color:"red"}}
-								id="time"
-	
-								label="Starting Time"
-								type="time"
-								color="white"
-								value={temp}
-								defaultValue="01:00"
-								className={classes.textField}
-								InputLabelProps={{
-									shrink: true,
-									style:{color:"white"}
-								}}
-								inputProps={{
-									step: 300, // 5 min
-									style:{color:"white"}
-								}}
-								style={{
-									backgroundColor: 'white',
-								}}
-								InputProps={{
-									style: {
-										color: 'white',
-									},
-								}}
-								onChange={StartTimeSubmitHandler}
-							/>
-							
-							<br />
-							<h4 style={{ margin: '1rem auto' }}>Select Ending time</h4>
-							<TextField
-								id="time"
-								label="Ending Time"
-								value={temp}
-								type="time"
-								defaultValue="02:00"
-								className={classes.textField}
-								InputLabelProps={{
-									shrink: true,
-									style:{color:"white"}
-								}}
-								inputProps={{
-									step: 300, // 5 min
-									style:{color:"white"}
-								}}
-								onChange={EndTimeSubmitHandler}
-							/>
-							<br />
-							<h4 style={{ margin: '1rem auto' }}>Select Your Experience</h4>
-							<NumericInput
-								style={{
-									input: {
-										width: '204px',
-										background:'none',
-										borderTop: '0px',
-										borderLeft: '0px',
-										borderRight: '0px',
-										borderBottom: '1px solid black',
-										paddingBottom: '3px',
-										paddingTop: '3px',
-										backgroundColor: 'black',
-										color: 'white',
-									},
-								}}
-								min={0}
-								max={100}
-								value={0}
-								onChange={ExpChangeHandler}
-							/>
-							<br />
-							<br />
-							<input
-								className="button"
-								type="button"
-								onClick={searchSubmitHandler}
-								value="Submit"
-							/>
+							<div style={{}}>
+								<CssTextField
+									style={{
+										borderBottom: '1px solid #4caf50',
+										filter: ' inverse(1)',
+									}}
+									id="time"
+									value={temp}
+									defaultValue="01:00"
+									type="time"
+									label="Starting Time"
+									className={classes.textField}
+									InputLabelProps={{
+										shrink: true,
+										style: { color: '#4caf50' },
+									}}
+									inputProps={{
+										step: 300, // 5 min
+										style: { color: 'white' },
+									}}
+									InputProps={{
+										style: {
+											color: 'white',
+											'&:hover': {
+												border: '1px solid red',
+											},
+										},
+										outlinedRoot: {
+											'&:hover': {
+												border: '1px solid red',
+											},
+										},
+									}}
+									onChange={StartTimeSubmitHandler}
+								/>
+
+								<br />
+								<h4 style={{ margin: '1rem auto' }}>Select Ending time</h4>
+								<CssTextField
+									style={{ borderBottom: '1px solid #4caf50' }}
+									id="time"
+									label="Ending Time"
+									value={temp}
+									type="time"
+									defaultValue="02:00"
+									className={classes.textField}
+									onChange={EndTimeSubmitHandler}
+									InputLabelProps={{
+										shrink: true,
+										style: { color: '#4caf50' },
+									}}
+									inputProps={{
+										step: 300, // 5 min
+										style: { color: 'white' },
+									}}
+									InputProps={{
+										style: {
+											color: 'white',
+											'&:hover': {
+												border: '1px solid red',
+											},
+										},
+										outlinedRoot: {
+											'&:hover': {
+												border: '1px solid red',
+											},
+										},
+									}}
+								/>
+
+								<br />
+
+								<br />
+								<br />
+								<input
+									className="button"
+									type="button"
+									onClick={searchSubmitHandler}
+									value="Submit"
+								/>
 							</div>
 						</form>
 					</Card>
@@ -185,3 +252,50 @@ const ApplyTrainer = () => {
 	);
 };
 export default ApplyTrainer;
+/*<TextField
+									id="time"
+									label="Starting Time"
+									type="time"
+									value={temp}
+									defaultValue="01:00"
+									InputLabelProps={{
+										shrink: true,
+										style: { color: 'white' },
+									}}
+									inputProps={{
+										step: 300, // 5 min
+										style: { color: 'white' },
+									}}
+									InputProps={{
+										style: {
+											color: 'white',
+											'&:hover': {
+												border: '1px solid red',
+											},
+										},
+										outlinedRoot: {
+											'&:hover': {
+												border: '1px solid red',
+											},
+										},
+									}}
+									onChange={StartTimeSubmitHandler}
+								/>
+								<TextField
+									id="time"
+									label="Ending Time"
+									value={temp}
+									type="time"
+									defaultValue="02:00"
+									className={classes.textField}
+									InputLabelProps={{
+										shrink: true,
+										style: { color: 'white' },
+									}}
+									inputProps={{
+										step: 300, // 5 min
+										style: { color: 'white' },
+									}}
+									onChange={EndTimeSubmitHandler}
+								/>
+*/

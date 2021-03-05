@@ -22,6 +22,7 @@ import ViewData from './trainer/viewData';
 import GetData from './getData/getData';
 import GivePlan from './trainer/GivePlan';
 import ViewPlan from './traineePlan/ViewPlan';
+import New from './new';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
@@ -156,10 +157,15 @@ const App = () => {
 				<Route path="/reset/:token">
 					<NewPassword />
 				</Route>
+				<Route path="/new">
+					<New />
+				</Route>
 				<Redirect to="/" />
 			</Switch>
 		);
 	}
+
+	//uinrcnn
 
 	return (
 		<AuthContext.Provider
