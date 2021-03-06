@@ -1,161 +1,195 @@
-@import 'https://use.fontawesome.com/releases/v5.5.0/css/all.css';
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* .carousel {
+  margin-top: 50;
+} */
+
+.paper {
+  /* position: absolute; */
+  background: none !important;
+  color: white !important;
+  z-index: 3 !important;
+}
+
+.paper h2 {
+  text-align: center;
+}
+
+.paper p {
+  text-align: center;
+}
+
+.paper button {
+  color: #4caf50;
+  border: 1px solid;
+  max-width: 100%;
+  margin: 0 auto !important;
 }
 
 .slider1 {
-	box-shadow: 3px 2px 3px solid green;
+  box-shadow: 3px 2px 3px solid green;
+  width: 100%;
+  margin: 0 0;
 }
 
 .slider1 img {
-	width: 1580px;
-	height: 550px;
-	float: left;
+  width: 100%;
+  height: 550px;
+  float: left;
 }
 
 .herotext {
-	top: 210px;
-	left: 460px;
-	color: white;
-	position: absolute;
+  top: 210px;
+  left: 460px;
+  color: red;
+  position: absolute;
 }
 
 .herotext p {
-	position: relative;
-	font-family: sans-serif;
-	text-transform: uppercase;
-	font-size: 30px;
-	letter-spacing: 4px;
-	overflow: hidden;
-	background: linear-gradient(120deg, green, #fff, green);
-	background-repeat: no-repeat;
-	background-size: 80%;
-	animation: animate 3s linear infinite;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: rgba(255, 255, 255, 0);
+  position: relative;
+  top: 30%;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 30px;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: linear-gradient(120deg, green, #fff, green);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
 @keyframes animate {
-	0% {
-		background-position: -680%;
-	}
-	100% {
-		background-position: 680%;
-	}
+  0% {
+    background-position: -680%;
+  }
+  100% {
+    background-position: 680%;
+  }
 }
 .btn {
-	border-radius: 5px;
-	padding: 8px 30px;
-	background: transparent;
-	color: white;
-	margin-left: 250px;
+  border-radius: 5px;
+  padding: 8px 30px;
+  background: transparent;
+  color: white;
+  margin-left: 250px;
 }
 
 .btn:hover {
-	background-color: green;
+  background-color: green;
 }
 
 .about img {
-	width: 1580px;
-	height: 500px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+  width: 100%;
+  height: 500px;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
 }
 
 .text1 {
-	position: absolute;
-	font-size: 50px;
-	color: white;
-	top: 680px;
-	left: 70px;
+  font-size: 30px;
+  color: white;
+  /* position: absolute;
+  bottom: 50px;
+  left: 70px; */
 }
 
 .title {
-	position: absolute;
-	margin-top: 10px;
-	color: white;
+  position: absolute;
+  margin-top: 10px;
+  color: white;
 }
 .title h3 {
-	font-size: 50px;
-	margin-left: 370px;
-	margin-top: 20px;
-	margin-bottom: 15px;
+  font-size: 50px;
+  margin-left: 370px;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .title p1 {
-	margin-left: 330px;
+  margin-left: 330px;
 }
 .title p {
-	padding-top: 10px;
-	margin-left: 390px;
+  padding-top: 10px;
+  margin-left: 390px;
 }
 
 .aboutimg {
-	width: 600px;
-	height: 350px;
-	margin-top: 200px;
-	margin-left: 390px;
+  width: 600px;
+  height: 350px;
+  margin-top: 200px;
+  margin-left: 390px;
 }
 
 table {
-	width: 1200px;
-	height: 300px;
-	margin-left: 130px;
-	margin-top: 30px;
+  width: 1200px;
+  height: 300px;
+  margin-left: 130px;
+  margin-top: 30px;
 }
 
 .list {
-	color: white;
+  color: white;
 }
 .list1 {
-	color: white;
-	font-size: 30px;
-	padding-left: 250px;
+  color: white;
+  font-size: 30px;
+  padding-left: 250px;
 }
 
 .list2 {
-	color: white;
-	padding-left: 60px;
+  color: white;
+  padding-left: 60px;
+}
+
+.list2points {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 li {
-	color: white;
-	list-style-position: inside;
+  color: white;
+  list-style-position: inside;
 }
 
 .footer {
-	display: flex;
-	background-color: #151515;
+  display: flex;
+  background-color: #151515;
 }
 
 .left {
-	width: 745px;
-	padding-left: 90px;
+  width: 745px;
+  padding-left: 90px;
 }
 .left1 {
-	margin-top: 70px;
-	margin-left: 50px;
+  margin-top: 70px;
+  margin-left: 50px;
 }
 .text5 {
-	margin-top: 50px;
-	margin-left: 50px;
-	margin-right: 425px;
-	color: white;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 425px;
+  color: white;
 }
 
 .right {
-	width: 750px;
+  width: 750px;
 }
 .right h5 {
-	padding-top: 50px;
-	padding-left: 200px;
-	padding-bottom: 50px;
-	font-size: 30px;
-	color: white;
+  padding-top: 50px;
+  padding-left: 200px;
+  padding-bottom: 50px;
+  font-size: 30px;
+  color: white;
 }
 .f1 {
-	color: white;
-	padding-left: 200px;
-	padding-bottom: 30px;
+  color: white;
+  padding-left: 200px;
+  padding-bottom: 30px;
 }

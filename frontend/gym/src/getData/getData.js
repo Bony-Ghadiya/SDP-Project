@@ -284,7 +284,7 @@ export default function ProgressMobileStepper() {
 								value="FEMALE"
 								onClick={form1FemaleSubmitHandler}
 							/>
-							<p>{form1Data}</p>
+							
 						</div>
 					)}
 					{activeStep === 1 && (
@@ -308,7 +308,7 @@ export default function ProgressMobileStepper() {
 								value="BUILD MUSCLE"
 								onClick={form2BuildSubmitHandler}
 							/>
-							{<p>{form2Data}</p>}
+						
 						</div>
 					)}
 					{activeStep === 2 && (
@@ -338,7 +338,7 @@ export default function ProgressMobileStepper() {
 								value="OVER 4 TIMES A WEEK"
 								onClick={form34SubmitHandler}
 							/>
-							<p>{form3Data}</p>
+							
 						</div>
 					)}
 					{activeStep === 3 && (
@@ -368,7 +368,7 @@ export default function ProgressMobileStepper() {
 								value="I CAN RUN UP THERE"
 								onClick={form44SubmitHandler}
 							/>
-							{<p>{form4Data}</p>}
+							
 						</div>
 					)}
 					{activeStep === 4 && (
@@ -398,7 +398,7 @@ export default function ProgressMobileStepper() {
 								value="OVER 40"
 								onClick={form54SubmitHandler}
 							/>
-							<p>{form5Data}</p>
+							
 						</div>
 					)}
 					{activeStep === 5 && (
@@ -410,7 +410,15 @@ export default function ProgressMobileStepper() {
 								value="FULL BODY WORKOUT"
 								onClick={form61SubmitHandler}
 							/>
-							<button onClick={form62SubmitHandler}>ABS WORKOUT</button>
+							{/* <button onClick={form62SubmitHandler}>ABS WORKOUT</button> */}
+							
+							<input
+								type="button"
+								className="btn1"
+								value="ABS WORKOUT"
+								onClick={form62SubmitHandler}
+							/>
+							
 							<input
 								type="button"
 								className="btn1"
@@ -423,7 +431,7 @@ export default function ProgressMobileStepper() {
 								value="LEG WORKOUT"
 								onClick={form64SubmitHandler}
 							/>
-							<p>{form6Data}</p>
+							
 						</div>
 					)}
 					{activeStep === 6 && (
@@ -447,7 +455,7 @@ export default function ProgressMobileStepper() {
 								value="HARD"
 								onClick={form73SubmitHandler}
 							/>
-							<p>{form7Data}</p>
+							
 						</div>
 					)}
 					{!isLoading && activeStep === 7 && (
