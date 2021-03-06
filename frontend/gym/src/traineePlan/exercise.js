@@ -5,7 +5,7 @@ import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../shared/context/auth-context';
 import { useHttpClient } from '../shared/hooks/http-hook';
-import { Fireworks } from 'fireworks/lib/react';
+
 import GifIcon from '@material-ui/icons/Gif';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import CheckIcon from '@material-ui/icons/Check';
@@ -35,14 +35,14 @@ const Exercise = props => {
 
 	const waiting = ({ hours, minutes, seconds, completed }) => {
 		if (completed) {
-			// Render a completed state
 			setIsWaiting(false);
 			return <div style={{ display: 'none' }}></div>;
 		} else {
-			// Render a countdown
 			return (
 				<div>
-					<h3>Ready to go...</h3>
+					<h3 style={{ margin: '5px 0px', fontSize: '40px' }}>
+						Ready to go...
+					</h3>
 				</div>
 			);
 		}
@@ -54,7 +54,9 @@ const Exercise = props => {
 			return <div style={{ display: 'none' }}></div>;
 		} else {
 			// Render a countdown
-			return <span style={{ fontSize: '32px' }}>{seconds}</span>;
+			return (
+				<span style={{ margin: '5px 0px', fontSize: '50px' }}>{seconds}</span>
+			);
 		}
 	};
 	const complated = ({ minutes, seconds, completed }) => {
@@ -64,11 +66,12 @@ const Exercise = props => {
 			return <div style={{ display: 'none' }}></div>;
 		} else {
 			// Render a countdown
-			return (
-				<span style={{ fontSize: '32px' }}>
-					Do Exercise..{minutes}:{seconds}
-				</span>
-			);
+			if (exerciseNo !== props.items.exercises.length - 1)
+				return (
+					<span style={{ margin: '5px 0px', fontSize: '40px' }}>
+						Do Exercise..
+					</span>
+				);
 		}
 	};
 	const aftercomplate = ({ minutes, seconds, completed }) => {
@@ -83,19 +86,21 @@ const Exercise = props => {
 			return <div style={{ display: 'none' }}></div>;
 		} else {
 			// Render a countdown
-			return <span style={{ fontSize: '32px' }}>COMPLETE</span>;
+			return (
+				<span style={{ margin: '5px 0px', fontSize: '40px' }}>COMPLETE</span>
+			);
 		}
 	};
-	let fxProps = {
-		count: 3,
-		interval: 200,
-		colors: ['#cc3333', '#4CAF50', '#81C784'],
-		calc: (props, i) => ({
-			...props,
-			x: 150 + i * 50,
-			y: 125,
-		}),
-	};
+	// let fxProps = {
+	// 	count: 3,
+	// 	interval: 200,
+	// 	colors: ['#cc3333', '#4CAF50', '#81C784'],
+	// 	calc: (props, i) => ({
+	// 		...props,
+	// 		x: 150 + i * 50,
+	// 		y: 125,
+	// 	}),
+	// };
 	const resting = ({ minutes, seconds, completed }) => {
 		if (completed) {
 			// Render a completed state
@@ -108,9 +113,12 @@ const Exercise = props => {
 		} else {
 			// Render a countdown
 			return (
-				<span style={{ fontSize: '32px' }}>
-					Do Exercise..{minutes}:{seconds}
-				</span>
+				<div>
+					<h1>REST</h1>
+					<span style={{ color: '#4caf50', fontSize: '32px' }}>
+						{minutes}:{seconds}
+					</span>
+				</div>
 			);
 		}
 	};
@@ -126,15 +134,33 @@ const Exercise = props => {
 				<div>
 					{!isRest && (
 						<div>
-							<h1>{props.items.exercises[exerciseNo].exerciseid.ename}</h1>
+							<h1 style={{}}>
+								{props.items.exercises[exerciseNo].exerciseid.ename}
+							</h1>
 							<div style={{ textAlign: 'right' }}>
 								{isGif && (
-									<button onClick={() => setIsGif(false)}>
+									<button
+										style={{
+											color: '#4caf50',
+											border: '1px solid #4caf50',
+											marginBottom: '5px',
+											paddingBottom: '4px',
+										}}
+										onClick={() => setIsGif(false)}
+									>
 										<VideocamIcon />
 									</button>
 								)}
 								{!isGif && (
-									<button onClick={() => setIsGif(true)}>
+									<button
+										style={{
+											color: '#4caf50',
+											border: '1px solid #4caf50',
+											marginBottom: '5px',
+											fontSize: '5px',
+										}}
+										onClick={() => setIsGif(true)}
+									>
 										<GifIcon />
 									</button>
 								)}
@@ -144,8 +170,11 @@ const Exercise = props => {
 									<Image
 										src={props.items.exercises[exerciseNo].exerciseid.gif}
 										style={{
-											width: '485px',
+											border: '1px solid #4caf50',
+											width: '475px',
 											height: '315px',
+											margin: '5px 0',
+											borderRadius: '8px',
 										}}
 										fluid
 									/>
@@ -153,9 +182,13 @@ const Exercise = props => {
 							)}
 							{!isGif && (
 								<iframe
-									style={{ borderRadius: '8px' }}
+									style={{
+										margin: '5px 0',
+										border: '1px solid #4caf50',
+										borderRadius: '8px',
+									}}
 									title={props.items.exercises[exerciseNo].exerciseid.ename}
-									width="485"
+									width="475"
 									height="315"
 									src={props.items.exercises[exerciseNo].exerciseid.vlink}
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -164,10 +197,14 @@ const Exercise = props => {
 							)}
 
 							{props.items.exercises[exerciseNo].reps !== 0 && (
-								<h3>{props.items.exercises[exerciseNo].reps}x</h3>
+								<h2 style={{ fontSize: '40px', color: '#4caf50' }}>
+									{props.items.exercises[exerciseNo].reps}x
+								</h2>
 							)}
 							{props.items.exercises[exerciseNo].time !== 0 && (
-								<h3>{props.items.exercises[exerciseNo].time}s</h3>
+								<h2 style={{ fontSize: '40px' }}>
+									{props.items.exercises[exerciseNo].time}s
+								</h2>
 							)}
 
 							{isWaiting && (
@@ -198,7 +235,11 @@ const Exercise = props => {
 							)}
 							{!isWaiting && isStarted && (
 								<div style={{ marginBottom: '10px' }}>
-									<button
+									<input
+										className="button"
+										type="button"
+										name="<"
+										value="<"
 										style={{ margin: 'auto 5px' }}
 										disabled={exerciseNo === 0}
 										onClick={() => {
@@ -207,12 +248,13 @@ const Exercise = props => {
 											setisStarted(false);
 											setIsCompleted(false);
 										}}
-									>
-										&lt;
-									</button>
+									/>
 									{!(exerciseNo === props.items.exercises.length - 1) && (
 										<button
-											style={{ margin: 'auto 5px' }}
+											className="button"
+											style={{
+												margin: 'auto 5px',
+											}}
 											onClick={() => {
 												setIsRest(true);
 											}}
@@ -220,9 +262,12 @@ const Exercise = props => {
 											<CheckIcon />
 										</button>
 									)}
-
 									{exerciseNo === props.items.exercises.length - 1 && (
-										<button
+										<input
+											className="button"
+											type="button"
+											name="COMPLETE"
+											value="COMPLETE"
 											style={{ margin: 'auto 5px' }}
 											onClick={async () => {
 												setFinished(true);
@@ -244,13 +289,14 @@ const Exercise = props => {
 													console.log(err);
 												}
 											}}
-										>
-											COMPLETE
-										</button>
+										/>
 									)}
-
-									{!(exerciseNo === props.items.exercises.length - 1) && (
-										<button
+									{/* {!(exerciseNo === props.items.exercises.length - 1) && (
+										<input
+											className="button"
+											type="button"
+											name="COMPLETE"
+											value="COMPLETE"
 											style={{ margin: 'auto 5px' }}
 											onClick={async () => {
 												setFinished(true);
@@ -272,12 +318,13 @@ const Exercise = props => {
 													console.log(err);
 												}
 											}}
-										>
-											COMPLETE
-										</button>
-									)}
-
-									<button
+										/>
+									)} */}
+									<input
+										className="button"
+										type="button"
+										name=">"
+										value=">"
 										style={{ margin: 'auto 5px' }}
 										disabled={exerciseNo === props.items.exercises.length - 1}
 										onClick={() => {
@@ -286,19 +333,20 @@ const Exercise = props => {
 											setisStarted(false);
 											setIsCompleted(false);
 										}}
-									>
-										&gt;
-									</button>
+									/>
 								</div>
 							)}
 						</div>
 					)}
 					{isRest && (
 						<div>
-							<h3>REST</h3>
 							<Countdown date={Date.now() + 30 * 1000} renderer={resting} />
-
-							<button
+							<input
+								className="button"
+								type="button"
+								name="SKIP"
+								value="SKIP"
+								style={{ margin: '10px 5px' }}
 								onClick={() => {
 									setIsRest(false);
 									if (exerciseNo === props.items.exercises.length - 1) {
@@ -310,16 +358,14 @@ const Exercise = props => {
 									setisStarted(false);
 									setIsCompleted(false);
 								}}
-							>
-								SKIP
-							</button>
+							/>
 						</div>
 					)}
 				</div>
 			)}
 			{!isLoading && finished && (
 				<div>
-					<h3>day {props.items.dayNo} Finished</h3>
+					<h3 syle={{ margin: '10px' }}>day {props.items.dayNo} Finished</h3>
 				</div>
 			)}
 		</React.Fragment>
@@ -332,4 +378,5 @@ export default Exercise;
 <div style={{ margin: '50px', padding: '50px' }}>
 						<Fireworks {...fxProps} />
 					</div>
+					import { Fireworks } from 'fireworks/lib/react';
  */

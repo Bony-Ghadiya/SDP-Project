@@ -47,7 +47,7 @@ const ViewPlan = () => {
 			{!isLoading && !trainerPlan && <h1>Please Wait....!!!!</h1>}
 			{!isLoading && trainerPlan && (
 				<div className="header1">
-					<h3> Your Fitness Plan</h3>
+					<h1> Your Fitness Plan</h1>
 				</div>
 			)}
 
@@ -55,7 +55,7 @@ const ViewPlan = () => {
 				<div className="card1">
 					{!oneexer && (
 						<Card
-							style={{ width: '495px', margin: 'auto', background: 'none' }}
+							style={{ width: '485px', margin: 'auto', background: 'none' }}
 						>
 							<div>
 								{isDays && !exer && !oneexer && (
@@ -91,7 +91,7 @@ const ViewPlan = () => {
 								)}
 								{!isDays && !exer && !oneexer && (
 									<div>
-										<div style={{ backgroundColor: 'gray', padding: '5px' }}>
+										<div style={{ padding: '5px' }}>
 											{trainerPlan.plan.map(p1 => (
 												<div>
 													{p1.dayNo === day && p1.exercises.length === 0 && (
@@ -146,9 +146,9 @@ const ViewPlan = () => {
 																			<Image
 																				src={e.exerciseid.gif}
 																				style={{
-																					border: '2px solid black',
-																					width: '170px',
-																					height: '170px',
+																					border: '2px solid #4caf50',
+																					width: '200px',
+																					height: '200px',
 																				}}
 																				fluid
 																			/>
@@ -163,6 +163,10 @@ const ViewPlan = () => {
 
 																		<button
 																			className="goto"
+																			style={{
+																				border: ' 1px solid #4caf50',
+																				color: '#4caf50',
+																			}}
 																			onClick={async event => {
 																				event.preventDefault();
 																				console.log(e.exerciseid.id);
@@ -188,23 +192,27 @@ const ViewPlan = () => {
 																	</React.Fragment>
 																))}
 															</div>
-															<button
+															<input
+																className="button"
+																type="button"
+																name="BACK"
+																value="BACK"
 																style={{ margin: 'auto 5px' }}
 																onClick={() => {
 																	setIsDays(true);
 																	setDay(0);
 																}}
-															>
-																BACK
-															</button>
-															<button
+															/>
+															<input
+																className="button"
+																type="button"
+																name="START"
+																value="START"
 																style={{ margin: 'auto 5px' }}
 																onClick={() => {
 																	setExer(true);
 																}}
-															>
-																START
-															</button>
+															/>
 														</div>
 													)}
 												</div>
@@ -214,7 +222,7 @@ const ViewPlan = () => {
 								)}
 								{!isDays && exer && !oneexer && (
 									<div>
-										<div style={{ backgroundColor: 'gray', padding: '5px' }}>
+										<div style={{ padding: '5px' }}>
 											{trainerPlan.plan.map(p1 => (
 												<div>
 													{p1.dayNo === day && p1.exercises.length !== 0 && (
@@ -224,8 +232,13 @@ const ViewPlan = () => {
 													)}
 												</div>
 											))}
-											<button
-												style={{ margin: 'auto 5px' }}
+											<hr style={{ color: 'white' }} />
+											<input
+												className="button"
+												type="button"
+												name="EXIT"
+												value="EXIT"
+												style={{ margin: '10px 5px' }}
 												onClick={async () => {
 													setExer(false);
 													setIsDays(true);
@@ -237,9 +250,7 @@ const ViewPlan = () => {
 														console.log(responseData.defaultexercise);
 													} catch (err) {}
 												}}
-											>
-												EXIT
-											</button>
+											/>
 										</div>
 									</div>
 								)}
@@ -342,14 +353,16 @@ const ViewPlan = () => {
 													allowFullScreen
 												></iframe>
 											)}
-											<button
+											<input
+												className="button"
+												type="button"
+												name="BACK"
+												value="BACK"
 												style={{ margin: 'auto 5px' }}
 												onClick={() => {
 													setOneExer(false);
 												}}
-											>
-												BACK
-											</button>
+											/>
 										</Card>
 									</Container>
 								)}
