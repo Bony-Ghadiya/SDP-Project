@@ -1,13 +1,12 @@
 .header1 {
 	text-align: center;
-	color: white;
-	margin-bottom: 5px;
+	color: aliceblue;
 }
 
 h1,
 h2,
 h3 {
-	color: white;
+	color: aliceblue;
 }
 
 .mh {
@@ -49,7 +48,7 @@ h3 {
 	display: grid !important;
 	grid-template-columns: 175px 200px 30px 30px !important;
 	grid-gap: 10px;
-	background-color: gray;
+	background-color: none;
 	padding: 5px;
 	text-align: start;
 }

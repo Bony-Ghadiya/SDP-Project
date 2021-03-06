@@ -38,7 +38,7 @@ const ViewData = () => {
 						<table className="table1" id="t01" style={{ margin: '0px' }}>
 							<caption>{traineename}'s data</caption>
 							<tr className="row">
-								<td className="data1">gender</td>
+								<td className="data1">Gender</td>
 								<td className="data2">{data.gender}</td>
 							</tr>
 							<tr className="row">

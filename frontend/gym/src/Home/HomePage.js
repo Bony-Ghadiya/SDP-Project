@@ -34,11 +34,11 @@ const Home = () => {
 
 	function Item(props) {
 		return (
-			<Paper>
+			<Paper className="paper">
 				<img
 					src={props.item.img}
 					alt="nothing"
-					style={{ width: '50%', height: '50%' }}
+					style={{ width: '100%', height: '40%' }}
 				></img>
 				<h2>{props.item.name}</h2>
 				<p>{props.item.description}</p>
@@ -52,6 +52,7 @@ const Home = () => {
 		<React.Fragment>
 			<div>
 				<div className="all">
+				<div className="carousel">
 					<Carousel
 						next={(next, active) =>
 							console.log(`we left ${active}, and are now at ${next}`)
@@ -64,6 +65,7 @@ const Home = () => {
 							<Item key={i} item={item} />
 						))}
 					</Carousel>
+					</div>
 					<div className="about">
 						<img
 							src="https://res.cloudinary.com/gymmie/image/upload/v1614924741/home%20page/slid2_igyibo.jpg"
@@ -78,13 +80,15 @@ const Home = () => {
 					<div className="title">
 						<h3>Who we Are &amp; What We Do</h3>
 						<p1>
-							CrossFit is a cutting-edge functional fitness system that can help
-							everyday men. There is a significant portion of
+							GEP is a cutting-edge functional fitness system that can help
+							everyone - everyday. There is a significant portion of
 						</p1>
 						<p>
 							{' '}
-							the population here in North America, that actually want and need
-							success to be hard!
+							the people , who actually want and need
+							gudiance and awareness for finess and
+							we help them.
+							
 						</p>
 					</div>
 					<div>
@@ -99,7 +103,7 @@ const Home = () => {
 							<tr>
 								<td className="list1">About Us</td>
 								<td className="list1" colSpan={2}>
-									Qaulities
+									Why To Choose Us?
 								</td>
 							</tr>
 							<tr>
@@ -114,9 +118,11 @@ const Home = () => {
 								</td>
 								<td />
 								<td className="list2">
-									Donec enim ipsum porta justo integer at velna vitae auctor
-									integer congue magna at risus auctor purus unt pretium ligula
-									rutrum integer sapien ultrice ligula luctus undo magna risus{' '}
+								<div className="list2header">
+									We would like to highlight few points which seperate us from others!
+									Let's take a look!
+								</div>
+								
 								</td>
 							</tr>
 							<tr>
@@ -132,24 +138,22 @@ const Home = () => {
 								</td>
 								<td />
 								<td className="list2">
+									<div className="list2points">
 									<ul>
 										<li id="li">
-											Lorem ipsum dolor sitdoni amet, consectetur dont adipis
-											elite vivamus interdum.
+											Certified Trainers
 										</li>
 										<li id="li">
-											Integer pulvinar ante nulla, ac fermentum ex congue id
-											vestibulum ensectetur.
+											Personalized Plans
 										</li>
 										<li id="li">
-											Proin blandit nibh in quam semper iaculis lorem ipsum
-											dolor salama ender.
+											Detailed Explanation Of Every Exercises
 										</li>
 										<li id="li">
-											Quis ipsum suspendisse ultrices gravida. Risus commodo
-											viverra maecenas accumsan lacus vel facilisis.{' '}
+											Fitness Related Tips & Tricks
 										</li>
 									</ul>
+									</div>
 								</td>
 							</tr>
 						</tbody>

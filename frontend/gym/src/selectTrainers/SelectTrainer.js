@@ -63,6 +63,7 @@ const Home = () => {
 								border="primary"
 								style={{ maxWidth: '18rem', padding: '0px' }}
 							>
+								<div className="cardheader">
 								<Card.Header
 									as="h3"
 									style={{
@@ -83,6 +84,7 @@ const Home = () => {
 										{t.name}
 									</Card.Link>
 								</Card.Header>
+								</div>
 								<Card.Body>
 									<Image
 										src={`http://localhost:5000/${t.image}`}
