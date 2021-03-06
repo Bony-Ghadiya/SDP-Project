@@ -5,7 +5,7 @@ import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../shared/context/auth-context';
 import { useHttpClient } from '../shared/hooks/http-hook';
-import { Fireworks } from 'fireworks/lib/react';
+
 import GifIcon from '@material-ui/icons/Gif';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import CheckIcon from '@material-ui/icons/Check';

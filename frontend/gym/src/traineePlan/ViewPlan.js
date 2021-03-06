@@ -91,14 +91,14 @@ const ViewPlan = () => {
 								)}
 								{!isDays && !exer && !oneexer && (
 									<div>
-										<div style={{ backgroundColor: 'gray', padding: '5px' }}>
+										<div style={{ backgroundColor: 'none', padding: '5px' }}>
 											{trainerPlan.plan.map(p1 => (
 												<div>
 													{p1.dayNo === day && p1.exercises.length === 0 && (
 														<div>
 															<h3>No Exercise Today...</h3>
 															<button
-																style={{ margin: 'auto 5px' }}
+																style={{ margin: 'auto 5px', color:'white' , borderColor:'white' }}
 																onClick={() => {
 																	setIsDays(true);
 																	setDay(0);
@@ -107,7 +107,7 @@ const ViewPlan = () => {
 																BACK
 															</button>
 															<button
-																style={{ margin: 'auto 5px' }}
+																style={{ margin: 'auto 5px' , color:'white' , borderColor:'white' }}
 																onClick={async () => {
 																	setIsDays(true);
 																	let responseData;
@@ -189,7 +189,7 @@ const ViewPlan = () => {
 																))}
 															</div>
 															<button
-																style={{ margin: 'auto 5px' }}
+																style={{ margin: 'auto 5px', color:'white' , borderColor:'white' }}
 																onClick={() => {
 																	setIsDays(true);
 																	setDay(0);
@@ -198,7 +198,7 @@ const ViewPlan = () => {
 																BACK
 															</button>
 															<button
-																style={{ margin: 'auto 5px' }}
+																style={{ margin: 'auto 5px' ,  color:'white' , borderColor:'white' }}
 																onClick={() => {
 																	setExer(true);
 																}}
@@ -214,7 +214,7 @@ const ViewPlan = () => {
 								)}
 								{!isDays && exer && !oneexer && (
 									<div>
-										<div style={{ backgroundColor: 'gray', padding: '5px' }}>
+										<div style={{ backgroundColor: 'none', padding: '5px' }}>
 											{trainerPlan.plan.map(p1 => (
 												<div>
 													{p1.dayNo === day && p1.exercises.length !== 0 && (
@@ -224,8 +224,9 @@ const ViewPlan = () => {
 													)}
 												</div>
 											))}
+											<br/>
 											<button
-												style={{ margin: 'auto 5px' }}
+												style={{ margin: 'auto 5px',  color:'white' , borderColor:'white' }}
 												onClick={async () => {
 													setExer(false);
 													setIsDays(true);
@@ -343,7 +344,7 @@ const ViewPlan = () => {
 												></iframe>
 											)}
 											<button
-												style={{ margin: 'auto 5px' }}
+												style={{ margin: 'auto 5px',  color:'white' , borderColor:'white' }}
 												onClick={() => {
 													setOneExer(false);
 												}}

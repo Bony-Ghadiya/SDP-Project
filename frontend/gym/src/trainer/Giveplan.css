@@ -56,7 +56,7 @@ h3 {
   display: grid !important;
   grid-template-columns: 175px 200px 30px !important;
   grid-gap: 10px;
-  background-color: yellow;
+  background-color: none;
   padding: 5px;
   text-align: start;
 }
@@ -90,6 +90,15 @@ h3 {
 .anotherData button {
   padding: 10px;
   width: 100%;
+  color: white;
+  border: 2px solid #4caf50;
+  background: #4caf50;
+  font-weight: bold;
+}
+
+.anotherData button :active,
+.anotherData button:hover {
+  background: #66ad68;
 }
 
 .MuiOutlinedInput-root {
@@ -112,12 +121,17 @@ h3 {
 .repstime input {
   background: none;
   border: 0px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
 }
 
 .repstime input :active,
 .repstime input:hover {
   margin-right: 5x;
   border: 0px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #4caf50;
+}
+
+.tbutton :active,
+.tbutton: hover {
+  background: #4caf50;
 }

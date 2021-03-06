@@ -109,12 +109,12 @@ const Home = () => {
 							<tr>
 								<td className="list" style={{ width: '600px' }}>
 									{' '}
-									Having a baby can be a nerve wracking experience for new
-									parents – not the nine months of pregnancy, I’m talking about
-									after the infant is brought home from the hospital. It’s
-									always the same thing, by the time they have their third child
-									they have it all figured out, but with number one it’s a
-									learning thing.
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutusssssss
 								</td>
 								<td />
 								<td className="list2">
@@ -127,14 +127,16 @@ const Home = () => {
 							</tr>
 							<tr>
 								<td className="list">
-									Baby monitors help you hear your baby’s needs without you
-									having to be in the room with the baby. Some baby monitors are
-									portable, or “mobile” and are small enough that you can carry
-									it in your pocket as you do your daily chores around the
-									house. Depending on your price range it’s best to have a base
-									unit that plugs into the wall. The receiving unit can be like
-									your portable phone, you can carry it around with you, and
-									plug it back into the base unit to be recharged.
+							
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+									Aboutusssssss
 								</td>
 								<td />
 								<td className="list2">
@@ -195,7 +197,7 @@ const Home = () => {
 								<span>Email:</span>
 								<a href="#" style={{ color: 'white', borderBottom: 'none' }}>
 									{' '}
-									Colorlib.info@gmail.com
+									bonytrainer@gmail.com
 								</a>
 							</div>
 							<div className="f1">
@@ -203,8 +205,8 @@ const Home = () => {
 									className="fa fa-map-marker"
 									style={{ color: 'green', marginRight: '9px' }}
 								/>
-								<span>Address</span>
-								Iris Watson, Box 283 8562, NY
+								<span>Address: </span>
+								   Surat, Gujarat , India
 							</div>
 						</ul>
 					</div>

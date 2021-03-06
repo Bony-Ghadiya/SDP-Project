@@ -341,7 +341,7 @@ const GivePlan = () => {
 										</div>
 									)}
 									{!isDays && (
-										<div style={{ backgroundColor: 'gray', padding: '5px' }}>
+										<div style={{ backgroundColor: 'none', padding: '5px' }}>
 											{trainerPlan.plan.map(p1 => (
 												<div>
 													{p1.dayNo === day && p1.exercises.length === 0 && (
@@ -469,7 +469,7 @@ const GivePlan = () => {
 																			)}
 																			{showNew && (
 																				<div className="repstime">
-																					<label for="time">time : </label>
+																					<label for="time">TIME : </label>
 																					<input
 																						type="text"
 																						name="time"
@@ -543,12 +543,13 @@ const GivePlan = () => {
 																		<h3>{e.exerciseid.ename}</h3>
 																		{e.reps !== 0 && (
 																			<div className="repstime">
-																				<label for="reps">reps : </label>
+																				<label for="reps">Reps : </label>
 																				<input
 																					type="text"
 																					name="reps"
+																					
 																					defaultValue={e.reps}
-																					style={{ width: '3ch' }}
+																					style={{ width: '3ch',color:'#4caf50',fontWeight:'bold' }}
 																					onChange={e => {
 																						e.preventDefault();
 																						console.log(e.target.value);
@@ -561,12 +562,12 @@ const GivePlan = () => {
 																		)}
 																		{e.time !== 0 && (
 																			<div className="repstime">
-																				<label for="time">time : </label>
+																				<label for="time">Time : </label>
 																				<input
 																					type="text"
 																					name="time"
 																					defaultValue={e.time}
-																					style={{ width: '3ch' }}
+																					style={{ width: '3ch',color:'#4caf50',fontWeight:'bold' }}
 																					onChange={e => {
 																						e.preventDefault();
 																						console.log(e.target.value);
@@ -718,7 +719,7 @@ const GivePlan = () => {
 																					type="text"
 																					name="reps"
 																					defaultValue={0}
-																					style={{ width: '3ch' }}
+																					style={{ width: '3ch',color:'#4caf50',fontWeight:'bold'  }}
 																					onChange={e => {
 																						e.preventDefault();
 																						setTime(0);
@@ -730,12 +731,12 @@ const GivePlan = () => {
 																		)}
 																		{showNew && (
 																			<div className="repstime">
-																				<label for="time">time : </label>
+																				<label for="time">Time : </label>
 																				<input
 																					type="text"
 																					name="time"
 																					defaultValue={0}
-																					style={{ width: '3ch' }}
+																					style={{ width: '3ch',color:'#4caf50',fontWeight:'bold' }}
 																					onChange={e => {
 																						e.preventDefault();
 																						setReps(0);
@@ -789,14 +790,15 @@ const GivePlan = () => {
 														}}
 													>
 														<AddIcon />
-														<h4>add another exercise.</h4>
+														<h4>ADD ANOTHER EXERCISE</h4>
 													</button>
 												</div>
 											)}
 											{!isDays && (
 												<div>
+													
 													<button
-														style={{ margin: 'auto 5px' }}
+														style={{ margin: 'auto 5px' , color:'white' , borderColor:'white' }}
 														onClick={() => {
 															setIsDays(true);
 															setShowNew(false);
@@ -809,7 +811,7 @@ const GivePlan = () => {
 														BACK
 													</button>
 													<button
-														style={{ margin: 'auto 5px' }}
+														style={{ margin: 'auto 5px', color:'white' , borderColor:'white' }}
 														onClick={async e => {
 															e.preventDefault();
 															try {
@@ -844,7 +846,7 @@ const GivePlan = () => {
 														RESET
 													</button>
 													<button
-														style={{ margin: 'auto 5px' }}
+														style={{ margin: 'auto 5px', color:'white' , borderColor:'white' }}
 														onClick={async e => {
 															e.preventDefault();
 															console.log(savedCount);
@@ -883,6 +885,7 @@ const GivePlan = () => {
 													>
 														SAVE
 													</button>
+													
 												</div>
 											)}
 										</div>
