@@ -276,169 +276,175 @@ const ViewPlan = () => {
 									</div>
 								)}
 								{!isDays && !exer && !oneexer && (
-									<div>
-										<div style={{ padding: '5px' }}>
-											{trainerPlan.plan.map(p1 => (
-												<div>
-													{p1.dayNo === day && p1.exercises.length === 0 && (
-														<div>
-															<h3>No Exercise Today...</h3>
-															<button
-																style={{ margin: 'auto 5px' }}
-																onClick={() => {
-																	setIsDays(true);
-																	setDay(0);
-																}}
-															>
-																BACK
-															</button>
-															<button
-																style={{ margin: 'auto 5px' }}
-																onClick={async () => {
-																	setIsDays(true);
-																	let responseData;
-																	try {
-																		responseData = await sendRequest(
-																			`http://localhost:5000/api/viewplan/zerocomplete`,
-																			'PATCH',
-																			JSON.stringify({
-																				tuid: auth.userId,
-																				day: p1.dayNo,
-																			}),
-																			{
-																				'Content-Type': 'application/json',
-																			}
-																		);
-																		console.log(responseData.defaultexercise);
-																		setTrainerPlan(
-																			responseData.defaultexercise
-																		);
-																	} catch (err) {
-																		console.log(err);
-																	}
-																}}
-															>
-																COMPLETE
-															</button>
-														</div>
-													)}
-
-													{p1.dayNo === day && p1.exercises.length !== 0 && (
-														<div>
-															<div className="data201">
-																{p1.exercises.map(e => (
-																	<React.Fragment>
-																		<div className="gif">
-																			<Image
-																				src={e.exerciseid.gif}
-																				style={{
-																					border: '2px solid #4caf50',
-																					width: '200px',
-																					height: '200px',
-																				}}
-																				fluid
-																			/>
-																		</div>
-
-																		<div className="ename">
-																			<h3>{e.exerciseid.ename}</h3>
-																			<br />
-																			{e.reps !== 0 && <h3>{e.reps}x</h3>}
-																			{e.time !== 0 && <h3>{e.time}s</h3>}
-																		</div>
-
-																		<button
-																			className="goto"
-																			style={{
-																				border: ' 1px solid #4caf50',
-																				color: '#4caf50',
-																			}}
-																			onClick={async event => {
-																				event.preventDefault();
-																				console.log(e.exerciseid.id);
-																				setOneExer(true);
-																				try {
-																					const responseData = await sendRequest(
-																						`http://localhost:5000/api/search/${e.exerciseid.id}`
-																					);
-																					//setexercise(responseData.exercise);
-																					console.log(responseData.exe);
-																					setEname(responseData.exe.ename);
-																					setVideoLink(responseData.exe.vlink);
-																					setcategory(
-																						responseData.exe.category
-																					);
-																					setDesc(responseData.exe.desc);
-																					setFlag(true);
-																				} catch (err) {}
-																			}}
-																		>
-																			&gt;
-																		</button>
-																	</React.Fragment>
-																))}
+									<Card style={{ width: '44%', margin: 'auto' }}>
+										<div>
+											<div style={{ padding: '5px' }}>
+												{trainerPlan.plan.map(p1 => (
+													<div>
+														{p1.dayNo === day && p1.exercises.length === 0 && (
+															<div>
+																<h3>No Exercise Today...</h3>
+																<button
+																	style={{ margin: 'auto 5px' }}
+																	onClick={() => {
+																		setIsDays(true);
+																		setDay(0);
+																	}}
+																>
+																	BACK
+																</button>
+																<button
+																	style={{ margin: 'auto 5px' }}
+																	onClick={async () => {
+																		setIsDays(true);
+																		let responseData;
+																		try {
+																			responseData = await sendRequest(
+																				`http://localhost:5000/api/viewplan/zerocomplete`,
+																				'PATCH',
+																				JSON.stringify({
+																					tuid: auth.userId,
+																					day: p1.dayNo,
+																				}),
+																				{
+																					'Content-Type': 'application/json',
+																				}
+																			);
+																			console.log(responseData.defaultexercise);
+																			setTrainerPlan(
+																				responseData.defaultexercise
+																			);
+																		} catch (err) {
+																			console.log(err);
+																		}
+																	}}
+																>
+																	COMPLETE
+																</button>
 															</div>
-															<input
-																className="button"
-																type="button"
-																name="BACK"
-																value="BACK"
-																style={{ margin: 'auto 5px' }}
-																onClick={() => {
-																	setIsDays(true);
-																	setDay(0);
-																}}
-															/>
-															<input
-																className="button"
-																type="button"
-																name="START"
-																value="START"
-																style={{ margin: 'auto 5px' }}
-																onClick={() => {
-																	setExer(true);
-																}}
-															/>
-														</div>
-													)}
-												</div>
-											))}
+														)}
+
+														{p1.dayNo === day && p1.exercises.length !== 0 && (
+															<div>
+																<div className="data201">
+																	{p1.exercises.map(e => (
+																		<React.Fragment>
+																			<div className="gif">
+																				<Image
+																					src={e.exerciseid.gif}
+																					style={{
+																						border: '2px solid #4caf50',
+																						width: '200px',
+																						height: '200px',
+																					}}
+																					fluid
+																				/>
+																			</div>
+
+																			<div className="ename">
+																				<h3>{e.exerciseid.ename}</h3>
+																				<br />
+																				{e.reps !== 0 && <h3>{e.reps}x</h3>}
+																				{e.time !== 0 && <h3>{e.time}s</h3>}
+																			</div>
+
+																			<button
+																				className="goto"
+																				style={{
+																					border: ' 1px solid #4caf50',
+																					color: '#4caf50',
+																				}}
+																				onClick={async event => {
+																					event.preventDefault();
+																					console.log(e.exerciseid.id);
+																					setOneExer(true);
+																					try {
+																						const responseData = await sendRequest(
+																							`http://localhost:5000/api/search/${e.exerciseid.id}`
+																						);
+																						//setexercise(responseData.exercise);
+																						console.log(responseData.exe);
+																						setEname(responseData.exe.ename);
+																						setVideoLink(
+																							responseData.exe.vlink
+																						);
+																						setcategory(
+																							responseData.exe.category
+																						);
+																						setDesc(responseData.exe.desc);
+																						setFlag(true);
+																					} catch (err) {}
+																				}}
+																			>
+																				&gt;
+																			</button>
+																		</React.Fragment>
+																	))}
+																</div>
+																<input
+																	className="button"
+																	type="button"
+																	name="BACK"
+																	value="BACK"
+																	style={{ margin: 'auto 5px' }}
+																	onClick={() => {
+																		setIsDays(true);
+																		setDay(0);
+																	}}
+																/>
+																<input
+																	className="button"
+																	type="button"
+																	name="START"
+																	value="START"
+																	style={{ margin: 'auto 5px' }}
+																	onClick={() => {
+																		setExer(true);
+																	}}
+																/>
+															</div>
+														)}
+													</div>
+												))}
+											</div>
 										</div>
-									</div>
+									</Card>
 								)}
 								{!isDays && exer && !oneexer && (
-									<div>
-										<div style={{ padding: '5px' }}>
-											{trainerPlan.plan.map(p1 => (
-												<div>
-													{p1.dayNo === day && p1.exercises.length !== 0 && (
-														<div>
-															<Exercise items={p1} />
-														</div>
-													)}
-												</div>
-											))}
-											<hr style={{ color: 'white' }} />
-											<input
-												className="button"
-												type="button"
-												name="EXIT"
-												value="EXIT"
-												style={{ margin: '10px 5px' }}
-												onClick={async () => {
-													setExer(false);
-													setIsDays(true);
-													try {
-														const responseData = await sendRequest(
-															`http://localhost:5000/api/viewplan/viewdefaultplan/${auth.userId}`
-														);
-														setTrainerPlan(responseData.defaultexercise);
-														console.log(responseData.defaultexercise);
-													} catch (err) {}
-												}}
-											/>
+									<Card style={{ width: '44%', margin: 'auto' }}>
+										<div>
+											<div style={{ padding: '5px' }}>
+												{trainerPlan.plan.map(p1 => (
+													<div>
+														{p1.dayNo === day && p1.exercises.length !== 0 && (
+															<div>
+																<Exercise items={p1} />
+															</div>
+														)}
+													</div>
+												))}
+												<hr style={{ color: 'white' }} />
+												<input
+													className="button"
+													type="button"
+													name="EXIT"
+													value="EXIT"
+													style={{ margin: '10px 5px' }}
+													onClick={async () => {
+														setExer(false);
+														setIsDays(true);
+														try {
+															const responseData = await sendRequest(
+																`http://localhost:5000/api/viewplan/viewdefaultplan/${auth.userId}`
+															);
+															setTrainerPlan(responseData.defaultexercise);
+															console.log(responseData.defaultexercise);
+														} catch (err) {}
+													}}
+												/>
+											</div>
 										</div>
-									</div>
+									</Card>
 								)}
 							</div>
 						</div>
