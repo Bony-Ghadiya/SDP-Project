@@ -8,6 +8,10 @@ const TrainerPlanSchema = new Schema({
 	traineeid: { type: mongoose.Types.ObjectId, ref: 'Trainees' },
 	traineruserid: { type: mongoose.Types.ObjectId, ref: 'User' },
 	isComplate: { type: Number, default: 0 },
+	week1Submitted: { type: Number, default: 0 },
+	week2Submitted: { type: Number, default: 0 },
+	week3Submitted: { type: Number, default: 0 },
+	week4Submitted: { type: Number, default: 0 },
 	traineeDay: { type: Number, default: 0 },
 	plan: [
 		{

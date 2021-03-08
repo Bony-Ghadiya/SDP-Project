@@ -21,9 +21,19 @@ h3 {
 }
 .grid {
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	text-align: center;
+	justify-content: center;
 	grid-gap: 1rem;
-	grid-auto-rows: minmax(50px, auto);
+	grid-template-rows: repeat(1, auto);
+	grid-auto-flow: column;
+}
+.viewgrid {
+	display: grid;
+	text-align: center;
+	justify-content: center;
+	grid-gap: 1rem;
+	grid-template-rows: repeat(1, auto);
+	grid-auto-flow: column;
 }
 .cells {
 	padding: 5px;
@@ -36,17 +46,19 @@ h3 {
 .daysButton--notsaved {
 	border: 4px double white;
 	color: white;
+	margin-bottom: 10px;
 }
 
 .daysButton--saved {
 	border: 4px double #4caf50;
 	color: #4caf50;
+	margin-bottom: 10px;
 }
 
 .data101 {
 	width: 450px;
 	display: grid !important;
-	grid-template-columns: 175px 200px 30px 30px !important;
+	grid-template-columns: 175px 185px 30px 30px !important;
 	grid-gap: 10px;
 	background-color: none;
 	padding: 5px;
@@ -120,4 +132,66 @@ h3 {
 	margin-right: 5x;
 	border: 0px;
 	border-bottom: 1px solid black;
+}
+
+.week-header {
+	margin-bottom: 5px;
+}
+
+hr {
+	margin-bottom: 15px;
+	border-color: #4caf50;
+}
+
+.dayGrid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+.dayGrid div:nth-child(7) {
+	grid-column: 1 / 3;
+	grid-row: 4;
+}
+.dayGrid div:nth-child(14) {
+	grid-column: 1 / 3;
+	grid-row: 8;
+}
+.dayGrid div:nth-child(21) {
+	grid-column: 1 / 3;
+	grid-row: 16;
+}
+.dayGrid div:nth-child(22) {
+	grid-column: 1 / 2;
+	grid-row: 13;
+}
+.dayGrid div:nth-child(23) {
+	grid-column: 2 / 3;
+	grid-row: 13;
+}
+.dayGrid div:nth-child(24) {
+	grid-column: 1 / 2;
+	grid-row: 14;
+}
+.dayGrid div:nth-child(25) {
+	grid-column: 2/ 3;
+	grid-row: 14;
+}
+.dayGrid div:nth-child(26) {
+	grid-column: 1 / 2;
+	grid-row: 15;
+}
+.dayGrid div:nth-child(27) {
+	grid-column: 2 / 3;
+	grid-row: 15;
+}
+.dayGrid div:nth-child(28) {
+	grid-column: 1 / 3;
+	grid-row: 16;
+}
+.dayGrid3 {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+.dayGrid3 div:nth-child(21) {
+	grid-column: 1 / 3;
+	grid-row: 12;
 }

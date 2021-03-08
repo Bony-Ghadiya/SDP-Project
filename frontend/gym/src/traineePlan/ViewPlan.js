@@ -54,39 +54,225 @@ const ViewPlan = () => {
 			{!isLoading && trainerPlan && (
 				<div className="card1">
 					{!oneexer && (
-						<Card
-							style={{ width: '485px', margin: 'auto', background: 'none' }}
-						>
-							<div>
+						<div className="card1">
+							<div
+								style={{
+									width: 'auto',
+									margin: 'auto',
+									background: 'none',
+									border: '0px',
+								}}
+							>
 								{isDays && !exer && !oneexer && (
-									<div className="grid">
-										{trainerPlan.plan.map(p => (
-											<div className="mh" id={p.dayNo}>
-												{p.dayComplated !== 1 && (
-													<button
-														className="daysButton--notsaved"
-														disabled={!p.previousDayComplated}
-														onClick={() => {
-															setDay(p.dayNo);
-															setIsDays(false);
-														}}
-													>
-														Day {p.dayNo}
-													</button>
-												)}
-												{p.dayComplated === 1 && (
-													<button
-														className="daysButton--saved"
-														onClick={() => {
-															setDay(p.dayNo);
-															setIsDays(false);
-														}}
-													>
-														Day {p.dayNo}
-													</button>
-												)}
-											</div>
-										))}
+									<div className="viewgrid">
+										{true && (
+											<Card style={{ maxWidth: '250px' }}>
+												<h3 className="week-header">WEEK 1 </h3>
+												<hr />
+												<div className="dayGrid">
+													{trainerPlan.plan.map(p => (
+														<div
+															className="mh"
+															id={p.dayNo}
+															style={{
+																width: 'auto',
+																padding: 'auto',
+																display: 'inline',
+															}}
+														>
+															{p.dayComplated !== 1 &&
+																p.dayNo >= 1 &&
+																p.dayNo <= 7 && (
+																	<button
+																		style={{ margin: '10px' }}
+																		className="daysButton--notsaved"
+																		disabled={!p.previousDayComplated}
+																		onClick={() => {
+																			setDay(p.dayNo);
+																			setIsDays(false);
+																		}}
+																	>
+																		Day {p.dayNo}
+																	</button>
+																)}
+															{p.dayComplated === 1 &&
+																p.dayNo >= 1 &&
+																p.dayNo <= 7 && (
+																	<button
+																		style={{ margin: '10px' }}
+																		className="daysButton--saved"
+																		onClick={() => {
+																			setDay(p.dayNo);
+																			setIsDays(false);
+																		}}
+																	>
+																		Day {p.dayNo}
+																	</button>
+																)}
+															{!(p.dayNo >= 1 && p.dayNo <= 7) && (
+																<div style={{ display: 'none' }}>hello</div>
+															)}
+														</div>
+													))}
+												</div>
+											</Card>
+										)}
+										{true && (
+											<Card style={{ maxWidth: '250px' }}>
+												<h3 className="week-header">WEEK 2 </h3>
+												<hr />
+												<div className="dayGrid">
+													{trainerPlan.plan.map(p => (
+														<div
+															className="mh"
+															id={p.dayNo}
+															style={{
+																width: 'auto',
+																padding: 'auto',
+																display: 'inline',
+															}}
+														>
+															{p.dayComplated !== 1 &&
+																p.dayNo >= 8 &&
+																p.dayNo <= 14 && (
+																	<button
+																		style={{ margin: '10px' }}
+																		className="daysButton--notsaved"
+																		disabled={!p.previousDayComplated}
+																		onClick={() => {
+																			setDay(p.dayNo);
+																			setIsDays(false);
+																		}}
+																	>
+																		Day {p.dayNo}
+																	</button>
+																)}
+															{p.dayComplated === 1 &&
+																p.dayNo >= 8 &&
+																p.dayNo <= 14 && (
+																	<button
+																		style={{ margin: '10px' }}
+																		className="daysButton--saved"
+																		onClick={() => {
+																			setDay(p.dayNo);
+																			setIsDays(false);
+																		}}
+																	>
+																		Day {p.dayNo}
+																	</button>
+																)}
+															{!(p.dayNo >= 8 && p.dayNo <= 14) && (
+																<div style={{ display: 'none' }}>hello</div>
+															)}
+														</div>
+													))}
+												</div>
+											</Card>
+										)}
+										{true && (
+											<Card style={{ maxWidth: '250px' }}>
+												<h3 className="week-header">WEEK 3 </h3>
+												<hr />
+												<div className="dayGrid">
+													{trainerPlan.plan.map(p => (
+														<div
+															className="mh"
+															id={p.dayNo}
+															style={{
+																width: 'auto',
+																padding: 'auto',
+																display: 'inline',
+															}}
+														>
+															{p.dayComplated !== 1 &&
+																p.dayNo >= 15 &&
+																p.dayNo <= 21 && (
+																	<button
+																		style={{ margin: '10px' }}
+																		className="daysButton--notsaved"
+																		disabled={!p.previousDayComplated}
+																		onClick={() => {
+																			setDay(p.dayNo);
+																			setIsDays(false);
+																		}}
+																	>
+																		Day {p.dayNo}
+																	</button>
+																)}
+															{p.dayComplated === 1 &&
+																p.dayNo >= 15 &&
+																p.dayNo <= 21 && (
+																	<button
+																		style={{ margin: '10px' }}
+																		className="daysButton--saved"
+																		onClick={() => {
+																			setDay(p.dayNo);
+																			setIsDays(false);
+																		}}
+																	>
+																		Day {p.dayNo}
+																	</button>
+																)}
+															{!(p.dayNo >= 15 && p.dayNo <= 21) && (
+																<div style={{ display: 'none' }}>hello</div>
+															)}
+														</div>
+													))}
+												</div>
+											</Card>
+										)}
+										{true && (
+											<Card style={{ maxWidth: '250px' }}>
+												<h3 className="week-header">WEEK 4 </h3>
+												<hr />
+												<div className="dayGrid">
+													{trainerPlan.plan.map(p => (
+														<div
+															className="mh"
+															id={p.dayNo}
+															style={{
+																width: 'auto',
+																padding: 'auto',
+																display: 'inline',
+															}}
+														>
+															{p.dayComplated !== 1 &&
+																p.dayNo >= 22 &&
+																p.dayNo <= 28 && (
+																	<button
+																		style={{ margin: '10px' }}
+																		className="daysButton--notsaved"
+																		disabled={!p.previousDayComplated}
+																		onClick={() => {
+																			setDay(p.dayNo);
+																			setIsDays(false);
+																		}}
+																	>
+																		Day {p.dayNo}
+																	</button>
+																)}
+															{p.dayComplated === 1 &&
+																p.dayNo >= 22 &&
+																p.dayNo <= 28 && (
+																	<button
+																		style={{ margin: '10px' }}
+																		className="daysButton--saved"
+																		onClick={() => {
+																			setDay(p.dayNo);
+																			setIsDays(false);
+																		}}
+																	>
+																		Day {p.dayNo}
+																	</button>
+																)}
+															{!(p.dayNo >= 22 && p.dayNo <= 28) && (
+																<div style={{ display: 'none' }}>hello</div>
+															)}
+														</div>
+													))}
+												</div>
+											</Card>
+										)}
 									</div>
 								)}
 								{!isDays && !exer && !oneexer && (
@@ -255,7 +441,7 @@ const ViewPlan = () => {
 									</div>
 								)}
 							</div>
-						</Card>
+						</div>
 					)}
 					{!isDays && !exer && oneexer && (
 						<div>

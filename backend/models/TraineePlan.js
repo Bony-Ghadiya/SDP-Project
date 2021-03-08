@@ -26,6 +26,10 @@ const TraineePlanSchema = new Schema({
 			],
 		},
 	],
+	week1Submitted: { type: Number, default: 0 },
+	week2Submitted: { type: Number, default: 0 },
+	week3Submitted: { type: Number, default: 0 },
+	week4Submitted: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('TraineePlan', TraineePlanSchema);

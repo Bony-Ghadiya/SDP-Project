@@ -719,6 +719,7 @@ const resetDay = async (req, res, next) => {
 
 const resetAll = async (req, res, next) => {
 	const tid = req.params.tid;
+	const { startDay, lastDay } = req.body;
 	console.log(tid);
 	let trainers, exe, plans, createdPlan, tplan, tes;
 	try {
@@ -752,13 +753,36 @@ const resetAll = async (req, res, next) => {
 		return next(error);
 	}
 	try {
-		createdPlan = new TrainerPlan({
-			traineeid: tid,
-			traineeuserid: tes.userid,
-			trainerid: tes.trainerid.id,
-			traineruserid: tes.trainerid.userid,
-			plan: plans[0].plan,
-		});
+		let abc = plans[0].plan.filter(
+			p => p.dayNo >= startDay && p.dayNo <= lastDay
+		);
+		let days = [
+			abc[0].exercises,
+			abc[1].exercises,
+			abc[2].exercises,
+			abc[3].exercises,
+			abc[4].exercises,
+			abc[5].exercises,
+			abc[6].exercises,
+		];
+
+		var i,
+			j,
+			k = 0,
+			l;
+		for (i = 0; i < tplan.plan.length; i++) {
+			l = tplan.plan[i].exercises.length;
+			k = 0;
+			if (tplan.plan[i].dayNo >= startDay && tplan.plan[i].dayNo <= lastDay) {
+				tplan.plan[i].isSaved = 0;
+				for (j = 0; j < l; j++) {
+					tplan.plan[i].exercises.pop();
+				}
+				for (j = 0; j < days[i % 7].length; j++) {
+					tplan.plan[i].exercises.push(days[i % 7][k++]);
+				}
+			}
+		}
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
@@ -771,8 +795,7 @@ const resetAll = async (req, res, next) => {
 	try {
 		const sess = await mongoose.startSession();
 		sess.startTransaction();
-		tplan.remove();
-		await createdPlan.save({ session: sess });
+		tplan.save();
 		await sess.commitTransaction();
 	} catch (err) {
 		console.log(err);
@@ -784,21 +807,22 @@ const resetAll = async (req, res, next) => {
 	}
 
 	res.json({
-		defaultexercise: createdPlan.toObject({ getters: true }),
+		message: 'okay',
 	});
 };
 
 const submit = async (req, res, next) => {
 	console.log('submit');
-	const { traineeid } = req.body;
+	const { traineeid, startDay, lastDay } = req.body;
 	console.log(traineeid);
 
-	let trainer, trainee, createdTraineePlan, obj;
+	let trainer, trainee, createdTraineePlan, obj, temp;
 	try {
 		trainer = await TrainerPlan.findOne({ traineeid: traineeid }).populate(
 			'plan.exercises.exerciseid'
 		);
 		trainee = await TraineePlan.findOne({ traineeid: traineeid });
+		temp = await TraineePlan.findOne({ traineeid: traineeid });
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
@@ -829,9 +853,8 @@ const submit = async (req, res, next) => {
 		try {
 			console.log('created', createdTraineePlan);
 			trainer.isComplate = 1;
-			var i, j, k;
+			var i;
 			for (i = 0; i < trainer.plan.length; i++) {
-				// createdTraineePlan.plan[i].dayNo = trainer.plan[i].dayNo;
 				if (i === 0) {
 					obj = {
 						dayNo: trainer.plan[i].dayNo,
@@ -849,8 +872,6 @@ const submit = async (req, res, next) => {
 				}
 				createdTraineePlan.plan.push(obj);
 			}
-
-			console.log('created', createdTraineePlan.plan);
 		} catch (err) {
 			console.log(err);
 			const error = new HttpError(
@@ -882,6 +903,19 @@ const submit = async (req, res, next) => {
 				l,
 				daylist = [];
 			l = trainee.plan.length;
+
+			if (startDay >= 1 && lastDay <= 7) {
+				trainer.week1Submitted = 1;
+			}
+			if (startDay >= 8 && lastDay <= 14) {
+				trainer.week2Submitted = 1;
+			}
+			if (startDay >= 15 && lastDay <= 21) {
+				trainer.week3Submitted = 1;
+			}
+			if (startDay >= 22 && lastDay <= 28) {
+				trainer.week4Submitted = 1;
+			}
 			for (i = 0; i < l; i++) {
 				daylist.push(trainee.plan[i].dayComplated);
 			}
@@ -889,22 +923,39 @@ const submit = async (req, res, next) => {
 				trainee.plan.pop();
 			}
 			console.log('okay');
-			console.log(daylist);
 			for (i = 0; i < trainer.plan.length; i++) {
-				if (i === 0) {
-					obj = {
-						dayNo: trainer.plan[i].dayNo,
-						dayComplated: daylist[i],
-						previousDayComplated: 1,
-						exercises: trainer.plan[i].exercises,
-					};
+				if (i + 1 >= startDay && i + 1 <= lastDay) {
+					if (i === 0) {
+						obj = {
+							dayNo: trainer.plan[i].dayNo,
+							dayComplated: daylist[i],
+							previousDayComplated: 1,
+							exercises: trainer.plan[i].exercises,
+						};
+					} else {
+						obj = {
+							dayNo: trainer.plan[i].dayNo,
+							dayComplated: daylist[i],
+							previousDayComplated: daylist[i - 1],
+							exercises: trainer.plan[i].exercises,
+						};
+					}
 				} else {
-					obj = {
-						dayNo: trainer.plan[i].dayNo,
-						dayComplated: daylist[i],
-						previousDayComplated: 0,
-						exercises: trainer.plan[i].exercises,
-					};
+					if (i == 0) {
+						obj = {
+							dayNo: temp.plan[i].dayNo,
+							dayComplated: temp.plan[i].dayComplated,
+							previousDayComplated: 1,
+							exercises: temp.plan[i].exercises,
+						};
+					} else {
+						obj = {
+							dayNo: temp.plan[i].dayNo,
+							dayComplated: temp.plan[i].dayComplated,
+							previousDayComplated: daylist[i - 1],
+							exercises: temp.plan[i].exercises,
+						};
+					}
 				}
 				trainee.plan.push(obj);
 			}
@@ -921,6 +972,7 @@ const submit = async (req, res, next) => {
 			const sess = await mongoose.startSession();
 			sess.startTransaction();
 			await trainee.save({ session: sess });
+			await trainer.save({ session: sess });
 			await sess.commitTransaction();
 		} catch (err) {
 			console.log(err);

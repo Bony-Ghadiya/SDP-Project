@@ -45,7 +45,10 @@ const useStyles = makeStyles(theme => ({
 
 const GivePlan = () => {
 	let temp;
-	const [savedCount, setSavedCount] = useState(0);
+	const [week1savedCount, setWeek1SavedCount] = useState(0);
+	const [week2savedCount, setWeek2SavedCount] = useState(0);
+	const [week3savedCount, setWeek3SavedCount] = useState(0);
+	const [week4savedCount, setWeek4SavedCount] = useState(0);
 	const classes = useStyles();
 	const [day, setDay] = useState(0);
 	const [reps, setReps] = useState(0);
@@ -59,7 +62,9 @@ const GivePlan = () => {
 	const [showNew, setShowNew] = useState(false);
 	const [searched1, setSerched1] = useState(false);
 	const [showConfirmModal, setShowConfirmModal] = useState(false);
-	const [submitted, setIsSubmitted] = useState(0);
+	const [showConfirmModal2, setShowConfirmModal2] = useState(false);
+	const [showConfirmModal3, setShowConfirmModal3] = useState(false);
+	const [showConfirmModal4, setShowConfirmModal4] = useState(false);
 	const [zero, setNotZero] = useState(true);
 	const [category, setcategory] = useState();
 	const [videoLink, setVideoLink] = useState();
@@ -75,6 +80,27 @@ const GivePlan = () => {
 
 	const cancelWarningHandler = () => {
 		setShowConfirmModal(false);
+	};
+	const showWarningHandler2 = () => {
+		setShowConfirmModal2(true);
+	};
+
+	const cancelWarningHandler2 = () => {
+		setShowConfirmModal2(false);
+	};
+	const showWarningHandler3 = () => {
+		setShowConfirmModal3(true);
+	};
+
+	const cancelWarningHandler3 = () => {
+		setShowConfirmModal3(false);
+	};
+	const showWarningHandler4 = () => {
+		setShowConfirmModal4(true);
+	};
+
+	const cancelWarningHandler4 = () => {
+		setShowConfirmModal4(false);
 	};
 
 	const deleteexercise = (p1, e) => {
@@ -137,16 +163,45 @@ const GivePlan = () => {
 					const responseData = await sendRequest(
 						`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
 					);
+					console.log(responseData.defaultexercise);
 					setTrainerPlan(responseData.defaultexercise);
 					var i,
-						t = 0;
+						t1 = 0,
+						t2 = 0,
+						t3 = 0,
+						t4 = 0;
 					for (i = 0; i < responseData.defaultexercise.plan.length; i++) {
 						if (responseData.defaultexercise.plan[i].isSaved === 1) {
-							t = t + 1;
+							if (
+								responseData.defaultexercise.plan[i].dayNo >= 1 &&
+								responseData.defaultexercise.plan[i].dayNo <= 7
+							) {
+								t1 += 1;
+							}
+							if (
+								responseData.defaultexercise.plan[i].dayNo >= 8 &&
+								responseData.defaultexercise.plan[i].dayNo <= 14
+							) {
+								t2 += 1;
+							}
+							if (
+								responseData.defaultexercise.plan[i].dayNo >= 15 &&
+								responseData.defaultexercise.plan[i].dayNo <= 21
+							) {
+								t3 += 1;
+							}
+							if (
+								responseData.defaultexercise.plan[i].dayNo >= 22 &&
+								responseData.defaultexercise.plan[i].dayNo <= 28
+							) {
+								t4 += 1;
+							}
 						}
 					}
-					setSavedCount(t);
-					setIsSubmitted(responseData.defaultexercise.isComplate);
+					setWeek1SavedCount(t1);
+					setWeek2SavedCount(t2);
+					setWeek3SavedCount(t3);
+					setWeek4SavedCount(t4);
 				} catch (err) {}
 			} catch (err) {
 			} finally {
@@ -211,16 +266,42 @@ const GivePlan = () => {
 				);
 				setTrainerPlan(responseData.defaultexercise);
 				var i,
-					t = 0;
+					t1 = 0,
+					t2 = 0,
+					t3 = 0,
+					t4 = 0;
 				for (i = 0; i < responseData.defaultexercise.plan.length; i++) {
 					if (responseData.defaultexercise.plan[i].isSaved === 1) {
-						console.log(responseData.defaultexercise.plan[i].dayNo);
-						t = t + 1;
+						if (
+							responseData.defaultexercise.plan[i].dayNo >= 1 &&
+							responseData.defaultexercise.plan[i].dayNo <= 7
+						) {
+							t1 += 1;
+						}
+						if (
+							responseData.defaultexercise.plan[i].dayNo >= 8 &&
+							responseData.defaultexercise.plan[i].dayNo <= 14
+						) {
+							t2 += 1;
+						}
+						if (
+							responseData.defaultexercise.plan[i].dayNo >= 15 &&
+							responseData.defaultexercise.plan[i].dayNo <= 21
+						) {
+							t3 += 1;
+						}
+						if (
+							responseData.defaultexercise.plan[i].dayNo >= 22 &&
+							responseData.defaultexercise.plan[i].dayNo <= 28
+						) {
+							t4 += 1;
+						}
 					}
 				}
-				setSavedCount(t);
-				console.log('t', responseData.defaultexercise.isComplate);
-				setIsSubmitted(responseData.defaultexercise.isComplate);
+				setWeek1SavedCount(t1);
+				setWeek2SavedCount(t2);
+				setWeek3SavedCount(t3);
+				setWeek4SavedCount(t4);
 			} catch (err) {}
 		};
 		fetchRequests();
@@ -275,95 +356,1079 @@ const GivePlan = () => {
 				)}
 				{!isLoading && trainerPlan && !oneexer && (
 					<div className="card1">
-						<Card
-							style={{ width: '495px', margin: 'auto', background: 'none' }}
+						<div
+							style={{
+								width: 'auto',
+								margin: 'auto',
+								background: 'none',
+								border: '0px',
+							}}
 						>
 							{trainerPlan && (
-								<div>
+								<div style={{ margin: 'auto', textAlign: 'center' }}>
 									{isDays && (
 										<div className="grid">
-											{trainerPlan.plan.map(p => (
-												<div className="mh" id={p.dayNo}>
-													{trainerPlan.traineeDay === p.dayNo &&
-														p.isSaved !== 1 && (
-															<button
-																className="daysButton--notsaved"
-																onClick={() => {
-																	setDay(p.dayNo);
-																	setIsDays(false);
-																	setexer(p.exercises);
+											{true && (
+												<Card
+													style={{
+														maxWidth: '250px',
+													}}
+												>
+													<h3 className="week-header">WEEK 1 </h3>
+													<hr />
+													<div className="dayGrid">
+														{trainerPlan.plan.map(p => (
+															<div className="mh" id={p.dayNo}>
+																{trainerPlan.traineeDay === p.dayNo &&
+																	p.isSaved !== 1 &&
+																	p.dayNo >= 1 &&
+																	p.dayNo <= 7 && (
+																		<button
+																			className="daysButton--notsaved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}*
+																		</button>
+																	)}
+																{!(trainerPlan.traineeDay === p.dayNo) &&
+																	p.isSaved !== 1 &&
+																	p.dayNo >= 1 &&
+																	p.dayNo <= 7 && (
+																		<button
+																			className="daysButton--notsaved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}
+																		</button>
+																	)}
+																{trainerPlan.traineeDay === p.dayNo &&
+																	p.isSaved === 1 &&
+																	p.dayNo >= 1 &&
+																	p.dayNo <= 7 && (
+																		<button
+																			className="daysButton--saved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}*
+																		</button>
+																	)}
+																{!(trainerPlan.traineeDay === p.dayNo) &&
+																	p.isSaved === 1 &&
+																	p.dayNo >= 1 &&
+																	p.dayNo <= 7 && (
+																		<button
+																			className="daysButton--saved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}
+																		</button>
+																	)}
+																{!(p.dayNo >= 1 && p.dayNo <= 7) && (
+																	<div style={{ display: 'none' }}>hello</div>
+																)}
+															</div>
+														))}
+													</div>
+													{!isLoading && trainerPlan && isDays && (
+														<Card
+															style={{
+																margin: 'auto',
+																background: 'none',
+															}}
+														>
+															<input
+																class="button"
+																type="button"
+																value="RESET"
+																style={{ margin: '5px' }}
+																onClick={showWarningHandler}
+															></input>
+															<input
+																class="button"
+																type="button"
+																value={
+																	trainerPlan.week1Submitted
+																		? 'UPDATE'
+																		: 'SUBMIT'
+																}
+																style={{ margin: '5px' }}
+																disabled={week1savedCount === 0}
+																onClick={async e => {
+																	e.preventDefault();
+																	handleClick(TransitionDown);
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/submit`,
+																			'PATCH',
+																			JSON.stringify({
+																				traineeid: traineeid,
+																				startDay: 1,
+																				lastDay: 7,
+																			}),
+																			{
+																				'Content-Type': 'application/json',
+																			}
+																		);
+																		console.log(responseData);
+																	} catch (err) {}
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+																		);
+																		setTrainerPlan(
+																			responseData.defaultexercise
+																		);
+																		var i,
+																			t1 = 0,
+																			t2 = 0,
+																			t3 = 0,
+																			t4 = 0;
+																		for (
+																			i = 0;
+																			i <
+																			responseData.defaultexercise.plan.length;
+																			i++
+																		) {
+																			if (
+																				responseData.defaultexercise.plan[i]
+																					.isSaved === 1
+																			) {
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 1 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 7
+																				) {
+																					t1 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 8 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 14
+																				) {
+																					t2 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 15 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 21
+																				) {
+																					t3 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 22 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 28
+																				) {
+																					t4 += 1;
+																				}
+																			}
+																		}
+																		setWeek1SavedCount(t1);
+																		setWeek2SavedCount(t2);
+																		setWeek3SavedCount(t3);
+																		setWeek4SavedCount(t4);
+																	} catch (err) {}
 																}}
-															>
-																Day {p.dayNo}*
-															</button>
-														)}
-													{!(trainerPlan.traineeDay === p.dayNo) &&
-														p.isSaved !== 1 && (
-															<button
-																className="daysButton--notsaved"
-																onClick={() => {
-																	setDay(p.dayNo);
-																	setIsDays(false);
-																	setexer(p.exercises);
+															></input>
+															<Snackbar
+																open={open}
+																onClose={handleClose}
+																TransitionComponent={transition}
+																message="Send Successfully."
+																key={transition ? transition.name : ''}
+															/>
+														</Card>
+													)}
+												</Card>
+											)}
+											{trainerPlan.week1Submitted === 1 && (
+												<Card style={{ maxWidth: '250px' }}>
+													<h3 className="week-header">WEEK 2 </h3>
+													<hr />
+													<div className="dayGrid">
+														{trainerPlan.plan.map(p => (
+															<div className="mh" id={p.dayNo}>
+																{trainerPlan.traineeDay === p.dayNo &&
+																	p.isSaved !== 1 &&
+																	p.dayNo >= 8 &&
+																	p.dayNo <= 14 && (
+																		<button
+																			className="daysButton--notsaved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}*
+																		</button>
+																	)}
+																{!(trainerPlan.traineeDay === p.dayNo) &&
+																	p.isSaved !== 1 &&
+																	p.dayNo >= 8 &&
+																	p.dayNo <= 14 && (
+																		<button
+																			className="daysButton--notsaved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}
+																		</button>
+																	)}
+																{trainerPlan.traineeDay === p.dayNo &&
+																	p.isSaved === 1 &&
+																	p.dayNo >= 8 &&
+																	p.dayNo <= 14 && (
+																		<button
+																			className="daysButton--saved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}*
+																		</button>
+																	)}
+																{!(trainerPlan.traineeDay === p.dayNo) &&
+																	p.isSaved === 1 &&
+																	p.dayNo >= 8 &&
+																	p.dayNo <= 14 && (
+																		<button
+																			className="daysButton--saved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}
+																		</button>
+																	)}
+																{!(p.dayNo >= 8 && p.dayNo <= 14) && (
+																	<div style={{ display: 'none' }}>hello</div>
+																)}
+															</div>
+														))}
+													</div>
+													{!isLoading && trainerPlan && isDays && (
+														<Card
+															style={{
+																margin: 'auto',
+																background: 'none',
+															}}
+														>
+															<input
+																class="button"
+																type="button"
+																value="RESET"
+																style={{ margin: '5px' }}
+																onClick={showWarningHandler2}
+															></input>
+															<input
+																class="button"
+																type="button"
+																value={
+																	trainerPlan.week2Submitted
+																		? 'UPDATE'
+																		: 'SUBMIT'
+																}
+																style={{ margin: '5px' }}
+																disabled={week2savedCount === 0}
+																onClick={async e => {
+																	e.preventDefault();
+																	handleClick(TransitionDown);
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/submit`,
+																			'PATCH',
+																			JSON.stringify({
+																				traineeid: traineeid,
+																				startDay: 8,
+																				lastDay: 14,
+																			}),
+																			{
+																				'Content-Type': 'application/json',
+																			}
+																		);
+																		console.log(responseData);
+																	} catch (err) {}
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+																		);
+																		setTrainerPlan(
+																			responseData.defaultexercise
+																		);
+																		var i,
+																			t1 = 0,
+																			t2 = 0,
+																			t3 = 0,
+																			t4 = 0;
+																		for (
+																			i = 0;
+																			i <
+																			responseData.defaultexercise.plan.length;
+																			i++
+																		) {
+																			if (
+																				responseData.defaultexercise.plan[i]
+																					.isSaved === 1
+																			) {
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 1 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 7
+																				) {
+																					t1 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 8 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 14
+																				) {
+																					t2 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 15 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 21
+																				) {
+																					t3 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 22 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 28
+																				) {
+																					t4 += 1;
+																				}
+																			}
+																		}
+																		setWeek1SavedCount(t1);
+																		setWeek2SavedCount(t2);
+																		setWeek3SavedCount(t3);
+																		setWeek4SavedCount(t4);
+																	} catch (err) {}
 																}}
-															>
-																Day {p.dayNo}
-															</button>
-														)}
-													{trainerPlan.traineeDay === p.dayNo &&
-														p.isSaved === 1 && (
-															<button
-																className="daysButton--saved"
-																onClick={() => {
-																	setDay(p.dayNo);
-																	setIsDays(false);
-																	setexer(p.exercises);
+															></input>
+															<Snackbar
+																open={open}
+																onClose={handleClose}
+																TransitionComponent={transition}
+																message="Send Successfully."
+																key={transition ? transition.name : ''}
+															/>
+														</Card>
+													)}
+												</Card>
+											)}
+											{trainerPlan.week2Submitted === 1 && (
+												<Card style={{ maxWidth: '250px' }}>
+													<h3 className="week-header">WEEK 3 </h3>
+													<hr />
+													<div className="dayGrid3">
+														{trainerPlan.plan.map(p => (
+															<div className="mh" id={p.dayNo}>
+																{trainerPlan.traineeDay === p.dayNo &&
+																	p.isSaved !== 1 &&
+																	p.dayNo >= 15 &&
+																	p.dayNo <= 21 && (
+																		<button
+																			className="daysButton--notsaved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}*
+																		</button>
+																	)}
+																{!(trainerPlan.traineeDay === p.dayNo) &&
+																	p.isSaved !== 1 &&
+																	p.dayNo >= 15 &&
+																	p.dayNo <= 21 && (
+																		<button
+																			className="daysButton--notsaved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}
+																		</button>
+																	)}
+																{trainerPlan.traineeDay === p.dayNo &&
+																	p.isSaved === 1 &&
+																	p.dayNo >= 15 &&
+																	p.dayNo <= 21 && (
+																		<button
+																			className="daysButton--saved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}*
+																		</button>
+																	)}
+																{!(trainerPlan.traineeDay === p.dayNo) &&
+																	p.isSaved === 1 &&
+																	p.dayNo >= 15 &&
+																	p.dayNo <= 21 && (
+																		<button
+																			className="daysButton--saved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}
+																		</button>
+																	)}
+																{!(p.dayNo >= 15 && p.dayNo <= 21) && (
+																	<div style={{ display: 'none' }}>hello</div>
+																)}
+															</div>
+														))}
+													</div>
+													{!isLoading && trainerPlan && isDays && (
+														<Card
+															style={{
+																margin: 'auto',
+																background: 'none',
+															}}
+														>
+															<input
+																className="button"
+																type="button"
+																value="RESET"
+																style={{ margin: '5px' }}
+																onClick={showWarningHandler3}
+															></input>
+															<input
+																class="button"
+																type="button"
+																value={
+																	trainerPlan.week3Submitted
+																		? 'UPDATE'
+																		: 'SUBMIT'
+																}
+																style={{ margin: '5px' }}
+																disabled={week3savedCount === 0}
+																onClick={async e => {
+																	e.preventDefault();
+																	handleClick(TransitionDown);
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/submit`,
+																			'PATCH',
+																			JSON.stringify({
+																				traineeid: traineeid,
+																				startDay: 15,
+																				lastDay: 21,
+																			}),
+																			{
+																				'Content-Type': 'application/json',
+																			}
+																		);
+																		console.log(responseData);
+																	} catch (err) {}
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+																		);
+																		setTrainerPlan(
+																			responseData.defaultexercise
+																		);
+																		var i,
+																			t1 = 0,
+																			t2 = 0,
+																			t3 = 0,
+																			t4 = 0;
+																		for (
+																			i = 0;
+																			i <
+																			responseData.defaultexercise.plan.length;
+																			i++
+																		) {
+																			if (
+																				responseData.defaultexercise.plan[i]
+																					.isSaved === 1
+																			) {
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 1 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 7
+																				) {
+																					t1 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 8 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 14
+																				) {
+																					t2 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 15 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 21
+																				) {
+																					t3 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 22 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 28
+																				) {
+																					t4 += 1;
+																				}
+																			}
+																		}
+																		setWeek1SavedCount(t1);
+																		setWeek2SavedCount(t2);
+																		setWeek3SavedCount(t3);
+																		setWeek4SavedCount(t4);
+																	} catch (err) {}
 																}}
-															>
-																Day {p.dayNo}*
-															</button>
-														)}
-													{!(trainerPlan.traineeDay === p.dayNo) &&
-														p.isSaved === 1 && (
-															<button
-																className="daysButton--saved"
-																onClick={() => {
-																	setDay(p.dayNo);
-																	setIsDays(false);
-																	setexer(p.exercises);
+															></input>
+															<Snackbar
+																open={open}
+																onClose={handleClose}
+																TransitionComponent={transition}
+																message="Send Successfully."
+																key={transition ? transition.name : ''}
+															/>
+														</Card>
+													)}
+												</Card>
+											)}
+											{trainerPlan.week3Submitted === 1 && (
+												<Card style={{ maxWidth: '250px' }}>
+													<h3 className="week-header">WEEK 4 </h3>
+													<hr />
+													<div className="dayGrid">
+														{trainerPlan.plan.map(p => (
+															<div className="mh" id={p.dayNo}>
+																{trainerPlan.traineeDay === p.dayNo &&
+																	p.isSaved !== 1 &&
+																	p.dayNo >= 22 &&
+																	p.dayNo <= 28 && (
+																		<button
+																			className="daysButton--notsaved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}*
+																		</button>
+																	)}
+																{!(trainerPlan.traineeDay === p.dayNo) &&
+																	p.isSaved !== 1 &&
+																	p.dayNo >= 22 &&
+																	p.dayNo <= 28 && (
+																		<button
+																			className="daysButton--notsaved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}
+																		</button>
+																	)}
+																{trainerPlan.traineeDay === p.dayNo &&
+																	p.isSaved === 1 &&
+																	p.dayNo >= 22 &&
+																	p.dayNo <= 28 && (
+																		<button
+																			className="daysButton--saved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}*
+																		</button>
+																	)}
+																{!(trainerPlan.traineeDay === p.dayNo) &&
+																	p.isSaved === 1 &&
+																	p.dayNo >= 22 &&
+																	p.dayNo <= 28 && (
+																		<button
+																			className="daysButton--saved"
+																			onClick={() => {
+																				setDay(p.dayNo);
+																				setIsDays(false);
+																				setexer(p.exercises);
+																			}}
+																		>
+																			Day {p.dayNo}
+																		</button>
+																	)}
+																{!(p.dayNo >= 22 && p.dayNo <= 28) && (
+																	<div style={{ display: 'none' }}>hello</div>
+																)}
+															</div>
+														))}
+													</div>
+													{!isLoading && trainerPlan && isDays && (
+														<Card
+															style={{
+																margin: 'auto',
+																background: 'none',
+															}}
+														>
+															<input
+																class="button"
+																type="button"
+																value="RESET"
+																style={{ margin: '5px' }}
+																onClick={showWarningHandler4}
+															></input>
+															<input
+																class="button"
+																type="button"
+																value={
+																	trainerPlan.week4Submitted
+																		? 'UPDATE'
+																		: 'SUBMIT'
+																}
+																style={{ margin: '5px' }}
+																disabled={week4savedCount === 0}
+																onClick={async e => {
+																	e.preventDefault();
+																	handleClick(TransitionDown);
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/submit`,
+																			'PATCH',
+																			JSON.stringify({
+																				traineeid: traineeid,
+																				startDay: 22,
+																				lastDay: 28,
+																			}),
+																			{
+																				'Content-Type': 'application/json',
+																			}
+																		);
+																		console.log(responseData);
+																	} catch (err) {}
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+																		);
+																		setTrainerPlan(
+																			responseData.defaultexercise
+																		);
+																		var i,
+																			t1 = 0,
+																			t2 = 0,
+																			t3 = 0,
+																			t4 = 0;
+																		for (
+																			i = 0;
+																			i <
+																			responseData.defaultexercise.plan.length;
+																			i++
+																		) {
+																			if (
+																				responseData.defaultexercise.plan[i]
+																					.isSaved === 1
+																			) {
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 1 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 7
+																				) {
+																					t1 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 8 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 14
+																				) {
+																					t2 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 15 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 21
+																				) {
+																					t3 += 1;
+																				}
+																				if (
+																					responseData.defaultexercise.plan[i]
+																						.dayNo >= 22 &&
+																					responseData.defaultexercise.plan[i]
+																						.dayNo <= 28
+																				) {
+																					t4 += 1;
+																				}
+																			}
+																		}
+																		setWeek1SavedCount(t1);
+																		setWeek2SavedCount(t2);
+																		setWeek3SavedCount(t3);
+																		setWeek4SavedCount(t4);
+																	} catch (err) {}
 																}}
-															>
-																Day {p.dayNo}
-															</button>
-														)}
-												</div>
-											))}
+															></input>
+															<Snackbar
+																open={open}
+																onClose={handleClose}
+																TransitionComponent={transition}
+																message="Send Successfully."
+																key={transition ? transition.name : ''}
+															/>
+														</Card>
+													)}
+												</Card>
+											)}
 										</div>
 									)}
 									{!isDays && (
-										<div style={{ backgroundColor: 'gray', padding: '5px' }}>
-											{trainerPlan.plan.map(p1 => (
-												<div>
-													{p1.dayNo === day && p1.exercises.length === 0 && (
-														<h3>No Exercise Today...</h3>
-													)}
-													{p1.dayNo === day && (
-														<div className="data101">
-															{zero &&
-																p1.dayNo === day &&
-																p1.exercises.length === 0 &&
-																showNew &&
-																!searched1 && (
+										<Card style={{ width: '43%', margin: 'auto' }}>
+											<div style={{ backgroundColor: 'gray', padding: '5px' }}>
+												{trainerPlan.plan.map(p1 => (
+													<div>
+														{p1.dayNo === day && p1.exercises.length === 0 && (
+															<h3>No Exercise Today...</h3>
+														)}
+														{p1.dayNo === day && (
+															<div className="data101">
+																{zero &&
+																	p1.dayNo === day &&
+																	p1.exercises.length === 0 &&
+																	showNew &&
+																	!searched1 && (
+																		<div className="gif__preview">
+																			<p>Please pick an exercise.</p>
+																		</div>
+																	)}
+																{zero &&
+																	p1.dayNo === day &&
+																	p1.exercises.length === 0 &&
+																	showNew &&
+																	loadedExercises &&
+																	searched1 && (
+																		<Image
+																			src={loadedExercises[0].gif}
+																			style={{
+																				width: '170px',
+																				height: '170px',
+																			}}
+																			fluid
+																		/>
+																	)}
+																{zero &&
+																	p1.dayNo === day &&
+																	p1.exercises.length === 0 &&
+																	showNew &&
+																	!loadedExercises &&
+																	searched1 && (
+																		<Image
+																			src={loadedExercises}
+																			alt="GIF"
+																			style={{
+																				width: '170px',
+																				height: '170px',
+																			}}
+																			fluid
+																		/>
+																	)}
+																{zero &&
+																	p1.dayNo === day &&
+																	p1.exercises.length === 0 &&
+																	showNew && (
+																		<form
+																			style={{
+																				display: 'block',
+																			}}
+																			onSubmit={searchSubmitHandler}
+																		>
+																			<div className="outerDiv">
+																				<div
+																					style={{
+																						display: 'inline-block',
+																						textAlign: 'center',
+																						backgroundColor: 'none',
+																					}}
+																				>
+																					<Autocomplete
+																						width={300}
+																						style={{ width: 200 }}
+																						classes={classes}
+																						value={temp}
+																						id="grouped-demo"
+																						options={options.sort(
+																							(a, b) =>
+																								-b.firstLetter.localeCompare(
+																									a.firstLetter
+																								)
+																						)}
+																						groupBy={option =>
+																							option.firstLetter
+																						}
+																						getOptionLabel={option =>
+																							option.ename
+																						}
+																						onChange={(event, value) =>
+																							setSearched(value)
+																						}
+																						renderInput={params => (
+																							<div className="SearchExercises">
+																								<CssTextField
+																									{...params}
+																									label="Add Exercises"
+																									variant="outlined"
+																								/>
+																							</div>
+																						)}
+																						getOptionSelected={option =>
+																							option.ename
+																						}
+																					/>
+																				</div>
+																				<br></br>
+																				<br />
+																				<button
+																					className="daysbutton"
+																					onClick={e => {
+																						searchSubmitHandler(e);
+																					}}
+																				>
+																					ADD
+																				</button>
+																				{showNew && (
+																					<div className="repstime">
+																						<label for="reps">reps : </label>
+																						<input
+																							type="text"
+																							name="reps"
+																							defaultValue={0}
+																							style={{ width: '3ch' }}
+																							onChange={e => {
+																								e.preventDefault();
+																								setTime(0);
+																								setReps(e.target.value);
+																							}}
+																						></input>
+																						x
+																					</div>
+																				)}
+																				{showNew && (
+																					<div className="repstime">
+																						<label for="time">time : </label>
+																						<input
+																							type="text"
+																							name="time"
+																							defaultValue={0}
+																							style={{ width: '3ch' }}
+																							onChange={e => {
+																								e.preventDefault();
+																								setReps(0);
+																								setTime(e.target.value);
+																							}}
+																						></input>
+																						s
+																					</div>
+																				)}
+																			</div>
+																		</form>
+																	)}
+																{zero &&
+																	p1.dayNo === day &&
+																	p1.exercises.length === 0 &&
+																	showNew && (
+																		<div
+																			style={{
+																				textAlign: 'center',
+																			}}
+																		>
+																			<button
+																				className="close"
+																				onClick={async e => {
+																					setNotZero(false);
+																					checkSubmitHandler(e);
+																				}}
+																			>
+																				<CheckIcon style={{ padding: '0' }} />
+																			</button>
+																		</div>
+																	)}
+																{zero &&
+																	p1.dayNo === day &&
+																	p1.exercises.length === 0 &&
+																	showNew && (
+																		<button
+																			className="close"
+																			onClick={() => {
+																				setloadedExercises(null);
+																				setShowNew(false);
+																				setSerched1(false);
+																			}}
+																		>
+																			X
+																		</button>
+																	)}
+															</div>
+														)}
+														{p1.dayNo === day && exer.length !== 0 && (
+															<div className="data101">
+																{exer.map(e => (
+																	<React.Fragment>
+																		<div className="gif">
+																			<Image
+																				src={e.exerciseid.gif}
+																				style={{
+																					width: '170px',
+																					height: '170px',
+																				}}
+																				fluid
+																			/>
+																		</div>
+
+																		<div className="ename">
+																			<h3>{e.exerciseid.ename}</h3>
+																			{e.reps !== 0 && (
+																				<div className="repstime">
+																					<label for="reps">reps : </label>
+																					<input
+																						type="text"
+																						name="reps"
+																						defaultValue={e.reps}
+																						style={{ width: '3ch' }}
+																						onChange={e => {
+																							e.preventDefault();
+																							console.log(e.target.value);
+																							setTime(0);
+																							setReps(e.target.value);
+																						}}
+																					></input>
+																					x
+																				</div>
+																			)}
+																			{e.time !== 0 && (
+																				<div className="repstime">
+																					<label for="time">time : </label>
+																					<input
+																						type="text"
+																						name="time"
+																						defaultValue={e.time}
+																						style={{ width: '3ch' }}
+																						onChange={e => {
+																							e.preventDefault();
+																							console.log(e.target.value);
+																							setReps(0);
+																							setTime(e.target.value);
+																						}}
+																					></input>
+																					s
+																				</div>
+																			)}
+																		</div>
+
+																		<div
+																			style={{
+																				textAlign: 'center',
+																				display: 'block',
+																			}}
+																		>
+																			<button
+																				className="close"
+																				onClick={event => {
+																					event.preventDefault();
+																					checkrepsSubmitHandler(p1, e);
+																				}}
+																			>
+																				<CheckIcon style={{ padding: '0' }} />
+																			</button>
+																			<button
+																				className="close"
+																				onClick={() => {
+																					deleteexercise(p1, e);
+																				}}
+																			>
+																				X
+																			</button>
+																		</div>
+
+																		<button
+																			className="goto"
+																			onClick={async event => {
+																				event.preventDefault();
+																				console.log(e.exerciseid.id);
+																				setOneExer(true);
+																				try {
+																					const responseData = await sendRequest(
+																						`http://localhost:5000/api/search/${e.exerciseid.id}`
+																					);
+																					//setexercise(responseData.exercise);
+																					console.log(responseData.exe);
+																					setEname(responseData.exe.ename);
+																					setVideoLink(responseData.exe.vlink);
+																					setcategory(
+																						responseData.exe.category
+																					);
+																					setDesc(responseData.exe.desc);
+																					setFlag(true);
+																				} catch (err) {}
+																			}}
+																		>
+																			&gt;
+																		</button>
+																	</React.Fragment>
+																))}
+																{showNew && !searched1 && (
 																	<div className="gif__preview">
 																		<p>Please pick an exercise.</p>
 																	</div>
 																)}
-															{zero &&
-																p1.dayNo === day &&
-																p1.exercises.length === 0 &&
-																showNew &&
-																loadedExercises &&
-																searched1 && (
+																{showNew && loadedExercises && searched1 && (
 																	<Image
 																		src={loadedExercises[0].gif}
 																		style={{
@@ -373,12 +1438,7 @@ const GivePlan = () => {
 																		fluid
 																	/>
 																)}
-															{zero &&
-																p1.dayNo === day &&
-																p1.exercises.length === 0 &&
-																showNew &&
-																!loadedExercises &&
-																searched1 && (
+																{showNew && !loadedExercises && searched1 && (
 																	<Image
 																		src={loadedExercises}
 																		alt="GIF"
@@ -389,10 +1449,7 @@ const GivePlan = () => {
 																		fluid
 																	/>
 																)}
-															{zero &&
-																p1.dayNo === day &&
-																p1.exercises.length === 0 &&
-																showNew && (
+																{showNew && (
 																	<form
 																		style={{
 																			display: 'block',
@@ -440,6 +1497,7 @@ const GivePlan = () => {
 																					}
 																				/>
 																			</div>
+
 																			<br></br>
 																			<br />
 																			<button
@@ -487,10 +1545,7 @@ const GivePlan = () => {
 																		</div>
 																	</form>
 																)}
-															{zero &&
-																p1.dayNo === day &&
-																p1.exercises.length === 0 &&
-																showNew && (
+																{showNew && (
 																	<div
 																		style={{
 																			textAlign: 'center',
@@ -499,7 +1554,6 @@ const GivePlan = () => {
 																		<button
 																			className="close"
 																			onClick={async e => {
-																				setNotZero(false);
 																				checkSubmitHandler(e);
 																			}}
 																		>
@@ -507,10 +1561,7 @@ const GivePlan = () => {
 																		</button>
 																	</div>
 																)}
-															{zero &&
-																p1.dayNo === day &&
-																p1.exercises.length === 0 &&
-																showNew && (
+																{showNew && (
 																	<button
 																		className="close"
 																		onClick={() => {
@@ -522,374 +1573,133 @@ const GivePlan = () => {
 																		X
 																	</button>
 																)}
-														</div>
-													)}
-													{p1.dayNo === day && exer.length !== 0 && (
-														<div className="data101">
-															{exer.map(e => (
-																<React.Fragment>
-																	<div className="gif">
-																		<Image
-																			src={e.exerciseid.gif}
-																			style={{
-																				width: '170px',
-																				height: '170px',
-																			}}
-																			fluid
-																		/>
-																	</div>
-
-																	<div className="ename">
-																		<h3>{e.exerciseid.ename}</h3>
-																		{e.reps !== 0 && (
-																			<div className="repstime">
-																				<label for="reps">reps : </label>
-																				<input
-																					type="text"
-																					name="reps"
-																					defaultValue={e.reps}
-																					style={{ width: '3ch' }}
-																					onChange={e => {
-																						e.preventDefault();
-																						console.log(e.target.value);
-																						setTime(0);
-																						setReps(e.target.value);
-																					}}
-																				></input>
-																				x
-																			</div>
-																		)}
-																		{e.time !== 0 && (
-																			<div className="repstime">
-																				<label for="time">time : </label>
-																				<input
-																					type="text"
-																					name="time"
-																					defaultValue={e.time}
-																					style={{ width: '3ch' }}
-																					onChange={e => {
-																						e.preventDefault();
-																						console.log(e.target.value);
-																						setReps(0);
-																						setTime(e.target.value);
-																					}}
-																				></input>
-																				s
-																			</div>
-																		)}
-																	</div>
-
-																	<div
-																		style={{
-																			textAlign: 'center',
-																			display: 'block',
-																		}}
-																	>
-																		<button
-																			className="close"
-																			onClick={event => {
-																				event.preventDefault();
-																				checkrepsSubmitHandler(p1, e);
-																			}}
-																		>
-																			<CheckIcon style={{ padding: '0' }} />
-																		</button>
-																		<button
-																			className="close"
-																			onClick={() => {
-																				deleteexercise(p1, e);
-																			}}
-																		>
-																			X
-																		</button>
-																	</div>
-
-																	<button
-																		className="goto"
-																		onClick={async event => {
-																			event.preventDefault();
-																			console.log(e.exerciseid.id);
-																			setOneExer(true);
-																			try {
-																				const responseData = await sendRequest(
-																					`http://localhost:5000/api/search/${e.exerciseid.id}`
-																				);
-																				//setexercise(responseData.exercise);
-																				console.log(responseData.exe);
-																				setEname(responseData.exe.ename);
-																				setVideoLink(responseData.exe.vlink);
-																				setcategory(responseData.exe.category);
-																				setDesc(responseData.exe.desc);
-																				setFlag(true);
-																			} catch (err) {}
-																		}}
-																	>
-																		&gt;
-																	</button>
-																</React.Fragment>
-															))}
-															{showNew && !searched1 && (
-																<div className="gif__preview">
-																	<p>Please pick an exercise.</p>
-																</div>
-															)}
-															{showNew && loadedExercises && searched1 && (
-																<Image
-																	src={loadedExercises[0].gif}
-																	style={{
-																		width: '170px',
-																		height: '170px',
-																	}}
-																	fluid
-																/>
-															)}
-															{showNew && !loadedExercises && searched1 && (
-																<Image
-																	src={loadedExercises}
-																	alt="GIF"
-																	style={{
-																		width: '170px',
-																		height: '170px',
-																	}}
-																	fluid
-																/>
-															)}
-															{showNew && (
-																<form
-																	style={{
-																		display: 'block',
-																	}}
-																	onSubmit={searchSubmitHandler}
-																>
-																	<div className="outerDiv">
-																		<div
-																			style={{
-																				display: 'inline-block',
-																				textAlign: 'center',
-																				backgroundColor: 'none',
-																			}}
-																		>
-																			<Autocomplete
-																				width={300}
-																				style={{ width: 200 }}
-																				classes={classes}
-																				value={temp}
-																				id="grouped-demo"
-																				options={options.sort(
-																					(a, b) =>
-																						-b.firstLetter.localeCompare(
-																							a.firstLetter
-																						)
-																				)}
-																				groupBy={option => option.firstLetter}
-																				getOptionLabel={option => option.ename}
-																				onChange={(event, value) =>
-																					setSearched(value)
-																				}
-																				renderInput={params => (
-																					<div className="SearchExercises">
-																						<CssTextField
-																							{...params}
-																							label="Add Exercises"
-																							variant="outlined"
-																						/>
-																					</div>
-																				)}
-																				getOptionSelected={option =>
-																					option.ename
-																				}
-																			/>
-																		</div>
-
-																		<br></br>
-																		<br />
-																		<button
-																			className="daysbutton"
-																			onClick={e => {
-																				searchSubmitHandler(e);
-																			}}
-																		>
-																			ADD
-																		</button>
-																		{showNew && (
-																			<div className="repstime">
-																				<label for="reps">reps : </label>
-																				<input
-																					type="text"
-																					name="reps"
-																					defaultValue={0}
-																					style={{ width: '3ch' }}
-																					onChange={e => {
-																						e.preventDefault();
-																						setTime(0);
-																						setReps(e.target.value);
-																					}}
-																				></input>
-																				x
-																			</div>
-																		)}
-																		{showNew && (
-																			<div className="repstime">
-																				<label for="time">time : </label>
-																				<input
-																					type="text"
-																					name="time"
-																					defaultValue={0}
-																					style={{ width: '3ch' }}
-																					onChange={e => {
-																						e.preventDefault();
-																						setReps(0);
-																						setTime(e.target.value);
-																					}}
-																				></input>
-																				s
-																			</div>
-																		)}
-																	</div>
-																</form>
-															)}
-															{showNew && (
-																<div
-																	style={{
-																		textAlign: 'center',
-																	}}
-																>
-																	<button
-																		className="close"
-																		onClick={async e => {
-																			checkSubmitHandler(e);
-																		}}
-																	>
-																		<CheckIcon style={{ padding: '0' }} />
-																	</button>
-																</div>
-															)}
-															{showNew && (
-																<button
-																	className="close"
-																	onClick={() => {
-																		setloadedExercises(null);
-																		setShowNew(false);
-																		setSerched1(false);
-																	}}
-																>
-																	X
-																</button>
-															)}
-														</div>
-													)}
-												</div>
-											))}
-											{!isDays && !showNew && (
-												<div className="anotherData">
-													<button
-														onClick={e => {
-															e.preventDefault();
-															setShowNew(true);
-														}}
-													>
-														<AddIcon />
-														<h4>add another exercise.</h4>
-													</button>
-												</div>
-											)}
-											{!isDays && (
-												<div>
-													<button
-														style={{ margin: 'auto 5px' }}
-														onClick={() => {
-															setIsDays(true);
-															setShowNew(false);
-															setDay(0);
-															setReps(0);
-															setTime(0);
-															setNotZero(true);
-														}}
-													>
-														BACK
-													</button>
-													<button
-														style={{ margin: 'auto 5px' }}
-														onClick={async e => {
-															e.preventDefault();
-															try {
-																const responseData = await sendRequest(
-																	`http://localhost:5000/api/getplan/resetday/${traineeid}`,
-																	'PATCH',
-																	JSON.stringify({
-																		day: day,
-																		traineeid: traineeid,
-																		exercise: exer,
-																		reps: reps,
-																		time: time,
-																	}),
-																	{
-																		'Content-Type': 'application/json',
-																	}
-																);
-																try {
-																	const responseData = await sendRequest(
-																		`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
-																	);
-																	setTrainerPlan(responseData.defaultexercise);
-																} catch (err) {
-																} finally {
-																	setShowNew(false);
-																}
+															</div>
+														)}
+													</div>
+												))}
+												{!isDays && !showNew && (
+													<div className="anotherData">
+														<button
+															onClick={e => {
+																e.preventDefault();
+																setShowNew(true);
+															}}
+														>
+															<AddIcon />
+															<h4>add another exercise.</h4>
+														</button>
+													</div>
+												)}
+												{!isDays && (
+													<div>
+														<button
+															style={{ margin: 'auto 5px' }}
+															onClick={() => {
 																setIsDays(true);
-																console.log(responseData);
-															} catch (err) {}
-														}}
-													>
-														RESET
-													</button>
-													<button
-														style={{ margin: 'auto 5px' }}
-														onClick={async e => {
-															e.preventDefault();
-															console.log(savedCount);
-															try {
-																const responseData = await sendRequest(
-																	`http://localhost:5000/api/getplan/saveday`,
-																	'PATCH',
-																	JSON.stringify({
-																		day: day,
-																		traineeid: traineeid,
-																		exercise: exer,
-																		reps: reps,
-																		time: time,
-																	}),
-																	{
-																		'Content-Type': 'application/json',
-																	}
-																);
-																console.log(responseData);
-															} catch (err) {
-															} finally {
+																setShowNew(false);
+																setDay(0);
+																setReps(0);
+																setTime(0);
+																setNotZero(true);
+															}}
+														>
+															BACK
+														</button>
+														<button
+															style={{ margin: 'auto 5px' }}
+															onClick={async e => {
+																e.preventDefault();
 																try {
 																	const responseData = await sendRequest(
-																		`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+																		`http://localhost:5000/api/getplan/resetday/${traineeid}`,
+																		'PATCH',
+																		JSON.stringify({
+																			day: day,
+																			traineeid: traineeid,
+																			exercise: exer,
+																			reps: reps,
+																			time: time,
+																		}),
+																		{
+																			'Content-Type': 'application/json',
+																		}
 																	);
-																	setTrainerPlan(responseData.defaultexercise);
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+																		);
+																		setTrainerPlan(
+																			responseData.defaultexercise
+																		);
+																	} catch (err) {
+																	} finally {
+																		setShowNew(false);
+																	}
+																	setIsDays(true);
+																	console.log(responseData);
+																} catch (err) {}
+															}}
+														>
+															RESET
+														</button>
+														<button
+															style={{ margin: 'auto 5px' }}
+															onClick={async e => {
+																e.preventDefault();
+																try {
+																	const responseData = await sendRequest(
+																		`http://localhost:5000/api/getplan/saveday`,
+																		'PATCH',
+																		JSON.stringify({
+																			day: day,
+																			traineeid: traineeid,
+																			exercise: exer,
+																			reps: reps,
+																			time: time,
+																		}),
+																		{
+																			'Content-Type': 'application/json',
+																		}
+																	);
+																	console.log(responseData);
 																} catch (err) {
 																} finally {
-																	setSavedCount(savedCount + 1);
-																	setIsDays(true);
-																	setShowNew(false);
-																	setNotZero(true);
+																	try {
+																		const responseData = await sendRequest(
+																			`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+																		);
+																		setTrainerPlan(
+																			responseData.defaultexercise
+																		);
+																	} catch (err) {
+																	} finally {
+																		if (day >= 1 && day <= 7) {
+																			setWeek1SavedCount(week1savedCount + 1);
+																		} else if (day >= 8 && day <= 14) {
+																			setWeek2SavedCount(week2savedCount + 1);
+																		} else if (day >= 15 && day <= 21) {
+																			setWeek3SavedCount(week3savedCount + 1);
+																		} else if (day >= 22 && day <= 28) {
+																			setWeek4SavedCount(week4savedCount + 1);
+																		}
+
+																		setIsDays(true);
+																		setShowNew(false);
+																		setNotZero(true);
+																	}
 																}
-															}
-														}}
-													>
-														SAVE
-													</button>
-												</div>
-											)}
-										</div>
+															}}
+														>
+															SAVE
+														</button>
+													</div>
+												)}
+											</div>
+										</Card>
 									)}
 								</div>
 							)}
-						</Card>
+						</div>
 					</div>
 				)}
 				{oneexer && (
@@ -1022,7 +1832,187 @@ const GivePlan = () => {
 									setDay(0);
 									try {
 										await sendRequest(
-											`http://localhost:5000/api/getplan/resetall/${traineeid}`
+											`http://localhost:5000/api/getplan/resetall/${traineeid}`,
+											'PATCH',
+											JSON.stringify({
+												startDay: 1,
+												lastDay: 7,
+											}),
+											{
+												'Content-Type': 'application/json',
+											}
+										);
+
+										const responseData = await sendRequest(
+											`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+										);
+										setTrainerPlan(responseData.defaultexercise);
+										var i,
+											t1 = 0,
+											t2 = 0,
+											t3 = 0,
+											t4 = 0;
+										for (
+											i = 0;
+											i < responseData.defaultexercise.plan.length;
+											i++
+										) {
+											if (responseData.defaultexercise.plan[i].isSaved === 1) {
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 1 &&
+													responseData.defaultexercise.plan[i].dayNo <= 7
+												) {
+													t1 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 8 &&
+													responseData.defaultexercise.plan[i].dayNo <= 14
+												) {
+													t2 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 15 &&
+													responseData.defaultexercise.plan[i].dayNo <= 21
+												) {
+													t3 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 22 &&
+													responseData.defaultexercise.plan[i].dayNo <= 28
+												) {
+													t4 += 1;
+												}
+											}
+										}
+										setWeek1SavedCount(t1);
+										setWeek2SavedCount(t2);
+										setWeek3SavedCount(t3);
+										setWeek4SavedCount(t4);
+									} catch (err) {}
+								}}
+							>
+								DELETE
+							</Button>
+						</React.Fragment>
+					}
+				>
+					<p>You want to reset week 1?</p>
+				</Modal>
+				<Modal
+					show={showConfirmModal2}
+					onCancel={cancelWarningHandler2}
+					header="Are you sure?"
+					footerClass="place-item__modal-actions"
+					footer={
+						<React.Fragment>
+							<div style={{ marginRight: '10px', display: 'inline' }}>
+								<Button inverse onClick={cancelWarningHandler2}>
+									CANCEL
+								</Button>
+							</div>
+							<Button
+								danger
+								onClick={async e => {
+									e.preventDefault();
+									cancelWarningHandler2();
+									setDay(0);
+									try {
+										await sendRequest(
+											`http://localhost:5000/api/getplan/resetall/${traineeid}`,
+											'PATCH',
+											JSON.stringify({
+												startDay: 8,
+												lastDay: 14,
+											}),
+											{
+												'Content-Type': 'application/json',
+											}
+										);
+
+										const responseData = await sendRequest(
+											`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+										);
+										setTrainerPlan(responseData.defaultexercise);
+										var i,
+											t1 = 0,
+											t2 = 0,
+											t3 = 0,
+											t4 = 0;
+										for (
+											i = 0;
+											i < responseData.defaultexercise.plan.length;
+											i++
+										) {
+											if (responseData.defaultexercise.plan[i].isSaved === 1) {
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 1 &&
+													responseData.defaultexercise.plan[i].dayNo <= 7
+												) {
+													t1 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 8 &&
+													responseData.defaultexercise.plan[i].dayNo <= 14
+												) {
+													t2 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 15 &&
+													responseData.defaultexercise.plan[i].dayNo <= 21
+												) {
+													t3 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 22 &&
+													responseData.defaultexercise.plan[i].dayNo <= 28
+												) {
+													t4 += 1;
+												}
+											}
+										}
+										setWeek1SavedCount(t1);
+										setWeek2SavedCount(t2);
+										setWeek3SavedCount(t3);
+										setWeek4SavedCount(t4);
+									} catch (err) {}
+								}}
+							>
+								DELETE
+							</Button>
+						</React.Fragment>
+					}
+				>
+					<p>You want to reset week 2?</p>
+				</Modal>
+				<Modal
+					show={showConfirmModal3}
+					onCancel={cancelWarningHandler3}
+					header="Are you sure?"
+					footerClass="place-item__modal-actions"
+					footer={
+						<React.Fragment>
+							<div style={{ marginRight: '10px', display: 'inline' }}>
+								<Button inverse onClick={cancelWarningHandler3}>
+									CANCEL
+								</Button>
+							</div>
+							<Button
+								danger
+								onClick={async e => {
+									e.preventDefault();
+									cancelWarningHandler3();
+									setDay(0);
+									try {
+										await sendRequest(
+											`http://localhost:5000/api/getplan/resetall/${traineeid}`,
+											'PATCH',
+											JSON.stringify({
+												startDay: 15,
+												lastDay: 21,
+											}),
+											{
+												'Content-Type': 'application/json',
+											}
 										);
 
 										const responseData = await sendRequest(
@@ -1041,7 +2031,47 @@ const GivePlan = () => {
 												t = t + 1;
 											}
 										}
-										setSavedCount(t);
+										var i,
+											t1 = 0,
+											t2 = 0,
+											t3 = 0,
+											t4 = 0;
+										for (
+											i = 0;
+											i < responseData.defaultexercise.plan.length;
+											i++
+										) {
+											if (responseData.defaultexercise.plan[i].isSaved === 1) {
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 1 &&
+													responseData.defaultexercise.plan[i].dayNo <= 7
+												) {
+													t1 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 8 &&
+													responseData.defaultexercise.plan[i].dayNo <= 14
+												) {
+													t2 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 15 &&
+													responseData.defaultexercise.plan[i].dayNo <= 21
+												) {
+													t3 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 22 &&
+													responseData.defaultexercise.plan[i].dayNo <= 28
+												) {
+													t4 += 1;
+												}
+											}
+										}
+										setWeek1SavedCount(t1);
+										setWeek2SavedCount(t2);
+										setWeek3SavedCount(t3);
+										setWeek4SavedCount(t4);
 									} catch (err) {}
 								}}
 							>
@@ -1050,52 +2080,106 @@ const GivePlan = () => {
 						</React.Fragment>
 					}
 				>
-					<p>You want to reset ?</p>
+					<p>You want to reset week 3?</p>
 				</Modal>
-				{!isLoading && trainerPlan && isDays && (
-					<Card style={{ width: '495px', margin: 'auto', background: 'none' }}>
-						<input
-							class="button"
-							type="button"
-							value="RESET"
-							style={{ margin: '5px' }}
-							onClick={showWarningHandler}
-						></input>
-						<input
-							class="button"
-							type="button"
-							value={submitted ? 'UPDATE' : 'SUBMIT'}
-							style={{ margin: '5px' }}
-							disabled={savedCount === 0}
-							onClick={async e => {
-								e.preventDefault();
-								setIsSubmitted(1);
-								handleClick(TransitionDown);
-								console.log(savedCount);
-								try {
-									const responseData = await sendRequest(
-										`http://localhost:5000/api/getplan/submit`,
-										'PATCH',
-										JSON.stringify({
-											traineeid: traineeid,
-										}),
-										{
-											'Content-Type': 'application/json',
+				<Modal
+					show={showConfirmModal4}
+					onCancel={cancelWarningHandler}
+					header="Are you sure?"
+					footerClass="place-item__modal-actions"
+					footer={
+						<React.Fragment>
+							<div style={{ marginRight: '10px', display: 'inline' }}>
+								<Button inverse onClick={cancelWarningHandler4}>
+									CANCEL
+								</Button>
+							</div>
+							<Button
+								danger
+								onClick={async e => {
+									e.preventDefault();
+									cancelWarningHandler4();
+									setDay(0);
+									try {
+										await sendRequest(
+											`http://localhost:5000/api/getplan/resetall/${traineeid}`,
+											'PATCH',
+											JSON.stringify({
+												startDay: 22,
+												lastDay: 28,
+											}),
+											{
+												'Content-Type': 'application/json',
+											}
+										);
+
+										const responseData = await sendRequest(
+											`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
+										);
+										setTrainerPlan(responseData.defaultexercise);
+										var i,
+											t = 0;
+										for (
+											i = 0;
+											i < responseData.defaultexercise.plan.length;
+											i++
+										) {
+											if (responseData.defaultexercise.plan[i].isSaved === 1) {
+												console.log(responseData.defaultexercise.plan[i].dayNo);
+												t = t + 1;
+											}
 										}
-									);
-									console.log(responseData);
-								} catch (err) {}
-							}}
-						></input>
-						<Snackbar
-							open={open}
-							onClose={handleClose}
-							TransitionComponent={transition}
-							message="Send Successfully."
-							key={transition ? transition.name : ''}
-						/>
-					</Card>
-				)}
+										var i,
+											t1 = 0,
+											t2 = 0,
+											t3 = 0,
+											t4 = 0;
+										for (
+											i = 0;
+											i < responseData.defaultexercise.plan.length;
+											i++
+										) {
+											if (responseData.defaultexercise.plan[i].isSaved === 1) {
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 1 &&
+													responseData.defaultexercise.plan[i].dayNo <= 7
+												) {
+													t1 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 8 &&
+													responseData.defaultexercise.plan[i].dayNo <= 14
+												) {
+													t2 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 15 &&
+													responseData.defaultexercise.plan[i].dayNo <= 21
+												) {
+													t3 += 1;
+												}
+												if (
+													responseData.defaultexercise.plan[i].dayNo >= 22 &&
+													responseData.defaultexercise.plan[i].dayNo <= 28
+												) {
+													t4 += 1;
+												}
+											}
+										}
+										setWeek1SavedCount(t1);
+										setWeek2SavedCount(t2);
+										setWeek3SavedCount(t3);
+										setWeek4SavedCount(t4);
+									} catch (err) {}
+								}}
+							>
+								DELETE
+							</Button>
+						</React.Fragment>
+					}
+				>
+					<p>You want to reset week 4?</p>
+				</Modal>
 			</React.Fragment>
 		);
 	}

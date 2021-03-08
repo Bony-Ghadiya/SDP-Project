@@ -72,6 +72,9 @@ const Exercise = props => {
 						Do Exercise..
 					</span>
 				);
+			else {
+				return <div style={{ display: 'none' }}></div>;
+			}
 		}
 	};
 	const aftercomplate = ({ minutes, seconds, completed }) => {
@@ -224,9 +227,15 @@ const Exercise = props => {
 										renderer={complated}
 									/>
 								)}
-							{!isWaiting && isStarted && !isCompleted && (
-								<Countdown date={Date.now() + 5 * 1000} renderer={complated} />
-							)}
+							{!isWaiting &&
+								isStarted &&
+								!isCompleted &&
+								props.items.exercises[exerciseNo].reps !== 0 && (
+									<Countdown
+										date={Date.now() + 5 * 1000}
+										renderer={complated}
+									/>
+								)}
 							{!isWaiting && isStarted && isCompleted && (
 								<Countdown
 									date={Date.now() + 60 * 1000}
