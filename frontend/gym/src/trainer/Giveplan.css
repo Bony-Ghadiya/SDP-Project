@@ -195,3 +195,23 @@ hr {
 	grid-column: 1 / 3;
 	grid-row: 12;
 }
+
+st-modal {
+	border: 5px solid black;
+	background-color: #4caf50;
+}
+
+:root {
+	--st-modal-backgroundColor: #4caf50 !important;
+	--st-dialog-maxWidth: 100px;
+}
+
+[data-reach-dialog-overlay] {
+	background: hsla(0, 0%, 0%, 0.33);
+	top: 9% !important;
+}
+
+[data-reach-dialog-content] {
+	border: 5px solid #4caf50;
+	border-radius: 8px;
+}

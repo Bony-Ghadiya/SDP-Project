@@ -4,16 +4,20 @@ import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
+import { StaticDialog, useDialog } from 'react-st-modal';
 import Exercise from './exercise';
+import { Dialog, DialogOverlay, DialogContent } from '@reach/dialog';
+import '@reach/dialog/styles.css';
 // ani CSS :- giveplan.css
 const ViewPlan = () => {
 	const auth = useContext(AuthContext);
+	const [feedback, setFeedback] = useState('');
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [trainerPlan, setTrainerPlan] = useState();
 	const [isDays, setIsDays] = useState(true);
 	const [exer, setExer] = useState(false);
 	const [oneexer, setOneExer] = useState(false);
-
+	const [selectedDay, setSelectedDay] = useState(0);
 	const [category, setcategory] = useState();
 	const [videoLink, setVideoLink] = useState();
 	const [desc, setDesc] = useState();
@@ -21,7 +25,31 @@ const ViewPlan = () => {
 	const [flag, setFlag] = useState(false);
 	const [day, setDay] = useState(0);
 
-	const [exerciseNo, setExerciseNo] = useState(0);
+	const completeHandler = async (dayNo, feedback) => {
+		setIsDays(true);
+		let responseData;
+		try {
+			console.log(dayNo, feedback);
+			responseData = await sendRequest(
+				`http://localhost:5000/api/viewplan/zerocomplete`,
+				'PATCH',
+				JSON.stringify({
+					tuid: auth.userId,
+					day: dayNo,
+				}),
+				{
+					'Content-Type': 'application/json',
+				}
+			);
+			console.log(responseData.defaultexercise);
+			setTrainerPlan(responseData.defaultexercise);
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setFeedback(feedback);
+			setShowDialog(false);
+		}
+	};
 
 	useEffect(() => {
 		const fetchRequests = async () => {
@@ -30,11 +58,19 @@ const ViewPlan = () => {
 					`http://localhost:5000/api/viewplan/viewdefaultplan/${auth.userId}`
 				);
 				setTrainerPlan(responseData.defaultexercise);
-				console.log(responseData.defaultexercise);
 			} catch (err) {}
 		};
 		fetchRequests();
 	}, [sendRequest, auth.userId]);
+
+	const [showDialog, setShowDialog] = React.useState(false);
+	const [showWarning, setShowWarning] = React.useState(false);
+	const open = () => {
+		setShowDialog(true);
+		setShowWarning(false);
+	};
+	const close = () => setShowDialog(false);
+	const dismiss = () => setShowWarning(true);
 
 	return (
 		<React.Fragment>
@@ -276,7 +312,7 @@ const ViewPlan = () => {
 									</div>
 								)}
 								{!isDays && !exer && !oneexer && (
-									<Card style={{ width: '44%', margin: 'auto' }}>
+									<Card style={{ width: '40%', margin: 'auto' }}>
 										<div>
 											<div style={{ padding: '5px' }}>
 												{trainerPlan.plan.map(p1 => (
@@ -408,27 +444,8 @@ const ViewPlan = () => {
 																	className="button"
 																	style={{ margin: 'auto 5px' }}
 																	onClick={async () => {
-																		setIsDays(true);
-																		let responseData;
-																		try {
-																			responseData = await sendRequest(
-																				`http://localhost:5000/api/viewplan/zerocomplete`,
-																				'PATCH',
-																				JSON.stringify({
-																					tuid: auth.userId,
-																					day: p1.dayNo,
-																				}),
-																				{
-																					'Content-Type': 'application/json',
-																				}
-																			);
-																			console.log(responseData.defaultexercise);
-																			setTrainerPlan(
-																				responseData.defaultexercise
-																			);
-																		} catch (err) {
-																			console.log(err);
-																		}
+																		setSelectedDay(p1.dayNo);
+																		open();
 																	}}
 																>
 																	COMPLETE
@@ -591,7 +608,57 @@ const ViewPlan = () => {
 								)}
 							</div>
 						</div>
-					)}
+					)}{' '}
+					<div style={{ marginTop: '50px' }}>
+						<DialogOverlay
+							style={{ background: '' }}
+							isOpen={showDialog}
+							onDismiss={close}
+						>
+							<Dialog
+								isOpen={showDialog}
+								onDismiss={dismiss}
+								style={{
+									marginTop: '50px !important',
+									background: 'black',
+								}}
+							>
+								{showWarning && (
+									<p style={{ color: 'red' }}>
+										You must make a choice, sorry :(
+									</p>
+								)}
+								<h4 style={{ color: 'white' }}>HOW DO YOU FEEL</h4>
+								<hr />
+								<button
+									className="button"
+									style={{ margin: 'auto 5px' }}
+									onClick={() => {
+										completeHandler(selectedDay, 'EASY');
+									}}
+								>
+									EASY
+								</button>
+								<button
+									className="button"
+									onClick={() => {
+										completeHandler(selectedDay, 'JUST RIGHT');
+									}}
+								>
+									JUST RIGHT
+								</button>
+								<button
+									className="button"
+									onClick={() => {
+										completeHandler(selectedDay, 'TOO HARD');
+									}}
+									style={{ margin: 'auto 5px' }}
+								>
+									TOO HARD
+								</button>
+							</Dialog>
+						</DialogOverlay>
+					</div>
 				</div>
 			)}
 		</React.Fragment>
