@@ -69,6 +69,15 @@ const completeZero = async (req, res, next) => {
 				}
 			}
 		}
+		if (day === 7) {
+			trainers.week1Submitted = 1;
+		} else if (day === 14) {
+			trainers.week2Submitted = 1;
+		} else if (day === 21) {
+			trainers.week3Submitted = 1;
+		} else if (day === 28) {
+			trainers.week4Submitted = 1;
+		}
 		plans.traineeDay = day;
 	} catch (err) {
 		console.log(err);

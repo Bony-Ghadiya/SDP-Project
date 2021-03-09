@@ -839,6 +839,10 @@ const submit = async (req, res, next) => {
 				traineeuserid: trainer.traineeuserid,
 				trainerid: trainer.trainerid,
 				traineruserid: trainer.traineruserid,
+				week1Submitted: 0,
+				week2Submitted: 0,
+				week3Submitted: 0,
+				week4Submitted: 0,
 				plan: [],
 			});
 		} catch (err) {

@@ -117,7 +117,7 @@ const ViewPlan = () => {
 												</div>
 											</Card>
 										)}
-										{true && (
+										{trainerPlan.week1Submitted === 1 && (
 											<Card style={{ maxWidth: '250px' }}>
 												<h3 className="week-header">WEEK 2 </h3>
 												<hr />
@@ -169,7 +169,7 @@ const ViewPlan = () => {
 												</div>
 											</Card>
 										)}
-										{true && (
+										{trainerPlan.week2Submitted === 1 && (
 											<Card style={{ maxWidth: '250px' }}>
 												<h3 className="week-header">WEEK 3 </h3>
 												<hr />
@@ -221,7 +221,7 @@ const ViewPlan = () => {
 												</div>
 											</Card>
 										)}
-										{true && (
+										{trainerPlan.week3Submitted === 1 && (
 											<Card style={{ maxWidth: '250px' }}>
 												<h3 className="week-header">WEEK 4 </h3>
 												<hr />
@@ -285,6 +285,7 @@ const ViewPlan = () => {
 															<div>
 																<h3>No Exercise Today...</h3>
 																<button
+																	className="button"
 																	style={{ margin: 'auto 5px' }}
 																	onClick={() => {
 																		setIsDays(true);
@@ -294,6 +295,7 @@ const ViewPlan = () => {
 																	BACK
 																</button>
 																<button
+																	className="button"
 																	style={{ margin: 'auto 5px' }}
 																	onClick={async () => {
 																		setIsDays(true);
@@ -402,6 +404,35 @@ const ViewPlan = () => {
 																		setExer(true);
 																	}}
 																/>
+																<button
+																	className="button"
+																	style={{ margin: 'auto 5px' }}
+																	onClick={async () => {
+																		setIsDays(true);
+																		let responseData;
+																		try {
+																			responseData = await sendRequest(
+																				`http://localhost:5000/api/viewplan/zerocomplete`,
+																				'PATCH',
+																				JSON.stringify({
+																					tuid: auth.userId,
+																					day: p1.dayNo,
+																				}),
+																				{
+																					'Content-Type': 'application/json',
+																				}
+																			);
+																			console.log(responseData.defaultexercise);
+																			setTrainerPlan(
+																				responseData.defaultexercise
+																			);
+																		} catch (err) {
+																			console.log(err);
+																		}
+																	}}
+																>
+																	COMPLETE
+																</button>
 															</div>
 														)}
 													</div>
