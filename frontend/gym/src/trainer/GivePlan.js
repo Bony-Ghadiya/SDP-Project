@@ -471,7 +471,6 @@ const GivePlan = () => {
 																disabled={week1savedCount === 0}
 																onClick={async e => {
 																	e.preventDefault();
-																	handleClick(TransitionDown);
 																	try {
 																		const responseData = await sendRequest(
 																			`http://localhost:5000/api/getplan/submit`,
@@ -491,6 +490,7 @@ const GivePlan = () => {
 																		const responseData = await sendRequest(
 																			`http://localhost:5000/api/getplan/getdefaultplan1/${traineeid}`
 																		);
+																		console.log('2nd');
 																		setTrainerPlan(
 																			responseData.defaultexercise
 																		);
@@ -547,7 +547,10 @@ const GivePlan = () => {
 																		setWeek2SavedCount(t2);
 																		setWeek3SavedCount(t3);
 																		setWeek4SavedCount(t4);
-																	} catch (err) {}
+																	} catch (err) {
+																	} finally {
+																		handleClick(TransitionDown);
+																	}
 																}}
 															></input>
 															<Snackbar

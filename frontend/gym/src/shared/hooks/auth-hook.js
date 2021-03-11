@@ -74,10 +74,10 @@ export const useAuth = () => {
 				userId: userId,
 				token: token,
 				userType: userType,
+				given: dataG,
 				requested: req,
 				approved: app,
 				selected: 1,
-				given: dataG,
 			})
 		);
 	}, [userId, token, userType, req, app, dataG]);

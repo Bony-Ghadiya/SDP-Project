@@ -40,10 +40,45 @@ button:active {
 	background: #4caf50;
 }
 .MuiMobileStepper-root {
-	display: flex;
-	padding: 8px;
-	background: transparent;
-	align-items: center;
-	flex-direction: row;
-	justify-content: space-between;
+	display: flex !important;
+	padding: 8px !important;
+	background: transparent !important;
+	align-items: center !important;
+	flex-direction: row !important;
+	justify-content: space-between !important;
+}
+
+.MuiTypography-colorTextSecondary {
+	/* color: rgba(0, 0, 0, 0.54); */
+	color: #4caf50 !important;
+}
+
+.MuiInputBase-input {
+	color: #4caf50 !important;
+	border: #4caf50 !important;
+}
+
+.MuiInput-underline:before {
+	border-bottom: 1px solid white !important;
+}
+.MuiFormHelperText-root {
+	color: #4caf50 !important;
+}
+.MuiOutlinedInput-root {
+	border: #4caf50;
+}
+.MuiInput-underline:after {
+	border-bottom: 2px solid #4caf50 !important;
+}
+.MuiButton-root.Mui-disabled {
+	color: rgba(160, 158, 158, 0.26) !important;
+}
+.MuiButton-root {
+	color: #4caf50 !important;
+}
+.MuiMobileStepper-dot {
+	background-color: rgba(194, 190, 190, 0.26) !important;
+}
+.MuiMobileStepper-dotActive {
+	background-color: #4caf4c !important;
 }
