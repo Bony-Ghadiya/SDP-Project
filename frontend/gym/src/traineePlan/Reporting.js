@@ -101,6 +101,9 @@ export default function ProgressMobileStepper() {
 			console.log(responseData);
 		} catch (err) {
 		} finally {
+			if (weekNo === 4) {
+				auth.setPlanComplated();
+			}
 			if (responseData.success === 1) {
 				history.push('/viewplan');
 			}

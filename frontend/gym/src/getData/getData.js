@@ -19,7 +19,7 @@ import './getData.css';
 
 const useStyles = makeStyles({
 	root: {
-		width: 516,
+		width: 'auto',
 		flexGrow: 1,
 		margin: 'auto',
 		'& .MuiInput-underline:after': {
@@ -250,360 +250,362 @@ export default function ProgressMobileStepper() {
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
 			{isLoading && <LoadingSpinner asOverlay />}
-			<Card
-				style={{
-					maxWidth: '500px',
-					margin: 'auto',
-					textAlign: 'center',
-					color: 'white',
-				}}
-			>
-				{activeStep === 0 && (
-					<div>
-						<p>
-							Please let us know you better to help boost your workout results
-						</p>
-						<hr/>
-						
-						<input
-							type="button"
-							className="btn1"
-							value="MALE"
-							onClick={form1MaleSubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="FEMALE"
-							onClick={form1FemaleSubmitHandler}
-						/>
-					</div>
-				)}
-				{activeStep === 1 && (
-					<div>
-						<p>Achieve your goal with our personalized plan</p>
-						<hr/>
-					
-						<input
-							type="button"
-							className="btn1"
-							value="WEIGHT LOSE"
-							onClick={form2LoseSubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="GET TONED"
-							onClick={form2GainSubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="BUILD MUSCLE"
-							onClick={form2BuildSubmitHandler}
-						/>
-					</div>
-				)}
-				{activeStep === 2 && (
-					<div>
-						<h3>How often do you Exercise?</h3>
-						<hr/>
-						
-						<input
-							type="button"
-							className="btn1"
-							value="HARDLY"
-							onClick={form31SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="SOMETIMES"
-							onClick={form32SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="2-3 TIMES A WEEK"
-							onClick={form33SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="OVER 4 TIMES A WEEK"
-							onClick={form34SubmitHandler}
-						/>
-					</div>
-				)}
-				{activeStep === 3 && (
-					<div>
-						<h4>HOW DO YOU FEEL AFTER CLIMBING 5 FLOORS?</h4>
-						<hr/>
-						
-						<input
-							type="button"
-							className="btn1"
-							value="SHORTNESS OF BREATH"
-							onClick={form41SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="A LITTLE TIRED"
-							onClick={form42SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="EASY"
-							onClick={form43SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="I CAN RUN UP THERE"
-							onClick={form44SubmitHandler}
-						/>
-					</div>
-				)}
-				{activeStep === 4 && (
-					<div>
-						<h3>HOW MANY PUSH-UPS CAN YOU DO AT ONE TIME??</h3>
-						<hr/>
-						
-						<input
-							type="button"
-							className="btn1"
-							value="LESS THAN 10"
-							onClick={form51SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="10-20"
-							onClick={form52SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="21-40"
-							onClick={form53SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="OVER 40"
-							onClick={form54SubmitHandler}
-						/>
-					</div>
-				)}
-				{activeStep === 5 && (
-					<div>
-						<h3>PLEASE SELECT YOUR WORKOUT PLAN</h3>
-						<hr/>
-						
-						<input
-							type="button"
-							className="btn1"
-							value="FULL BODY WORKOUT"
-							onClick={form61SubmitHandler}
-						/>
-						{/* <button onClick={form62SubmitHandler}>ABS WORKOUT</button> */}
-
-						<input
-							type="button"
-							className="btn1"
-							value="ABS WORKOUT"
-							onClick={form62SubmitHandler}
-						/>
-
-						<input
-							type="button"
-							className="btn1"
-							value="ARM WORKOUT"
-							onClick={form63SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="LEG WORKOUT"
-							onClick={form64SubmitHandler}
-						/>
-					</div>
-				)}
-				{activeStep === 6 && (
-					<div>
-						<h3>PLEASE SELECT DIFFICULTY</h3>
-						<hr/>
-						
-						<input
-							type="button"
-							className="btn1"
-							value="EASY"
-							onClick={form71SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="MEDIUM"
-							onClick={form72SubmitHandler}
-						/>
-						<input
-							type="button"
-							className="btn1"
-							value="HARD"
-							onClick={form73SubmitHandler}
-						/>
-					</div>
-				)}
-				{!isLoading && activeStep === 7 && (
-					<form>
-						<div style={{ backgroundColor: '' }}>
-							<FormControl
-								className={clsx(
-									classes1.margin,
-									classes1.withoutLabel,
-									classes1.textField
-								)}
-							>
-								<Input
-									id="standard-adornment-age"
-									value={values.age}
-									onChange={handleChange('age')}
-									endAdornment={
-										<InputAdornment position="end">years</InputAdornment>
-									}
-									aria-describedby="standard-age-helper-text"
-									inputProps={{
-										'aria-label': 'age',
-									}}
-								/>
-								<FormHelperText id="standard-age-helper-text">
-									Age
-								</FormHelperText>
-							</FormControl>
-							<FormControl
-								className={clsx(
-									classes1.margin,
-									classes1.withoutLabel,
-									classes1.textField
-								)}
-							>
-								<FormHelperText id="standard-weight-helper-text">
-									Weight
-								</FormHelperText>
-								<Input
-									id="standard-adornment-weight"
-									value={values.weight}
-									onChange={handleChange('weight')}
-									endAdornment={
-										<InputAdornment position="end">Kg</InputAdornment>
-									}
-									aria-describedby="standard-weight-helper-text"
-									inputProps={{
-										'aria-label': 'weight',
-									}}
-									InputLabelProps={{
-										shrink: true,
-										style: { color: '#4caf50' },
-									}}
-									InputProps={{
-										style: {
-											color: 'white',
-											'&:hover': {
-												border: '1px solid red',
-											},
-										},
-										outlinedRoot: {
-											'&:hover': {
-												border: '1px solid red',
-											},
-										},
-									}}
-								/>
-								<FormHelperText id="standard-weight-helper-text">
-									Weight
-								</FormHelperText>
-							</FormControl>
-							<FormControl
-								className={clsx(
-									classes1.margin,
-									classes1.withoutLabel,
-									classes1.textField
-								)}
-							>
-								<Input
-									id="standard-adornment-height"
-									value={values.height}
-									onChange={handleChange('height')}
-									endAdornment={
-										<InputAdornment position="end">cm</InputAdornment>
-									}
-									aria-describedby="standard-height-helper-text"
-									inputProps={{
-										'aria-label': 'height',
-									}}
-								/>
-								<FormHelperText id="standard-weight-helper-text">
-									Height
-								</FormHelperText>
-							</FormControl>
-						</div>
-						<input
-							className="btn1"
-							type="submit"
-							onClick={e => {
-								e.preventDefault();
-								formSubmitHandler();
-							}}
-						/>
-					</form>
-				)}
-				<div
+			{!isLoading && (
+				<Card
 					style={{
-						background: 'none',
-						textAlign: 'center',
+						maxWidth: '500px',
 						margin: 'auto',
-						marginBottom: '50px',
+						textAlign: 'center',
+						color: 'white',
 					}}
 				>
-					<MobileStepper
-						variant="dots"
-						steps={8}
-						position="static"
-						activeStep={activeStep}
-						className={classes.root}
-						nextButton={
-							<Button
-								size="small"
-								onClick={handleNext}
-								disabled={!nextActive || activeStep === 7}
-							>
-								Next
-								{theme.direction === 'rtl' ? (
-									<KeyboardArrowLeft />
-								) : (
-									<KeyboardArrowRight />
-								)}
-							</Button>
-						}
-						backButton={
-							<Button
-								size="small"
-								onClick={handleBack}
-								disabled={activeStep === 0}
-							>
-								{theme.direction === 'rtl' ? (
-									<KeyboardArrowRight />
-								) : (
-									<KeyboardArrowLeft />
-								)}
-								Back
-							</Button>
-						}
-					/>
-				</div>
-			</Card>
+					{activeStep === 0 && (
+						<div>
+							<p>
+								Please let us know you better to help boost your workout results
+							</p>
+							<hr />
+
+							<input
+								type="button"
+								className="btn1"
+								value="MALE"
+								onClick={form1MaleSubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="FEMALE"
+								onClick={form1FemaleSubmitHandler}
+							/>
+						</div>
+					)}
+					{activeStep === 1 && (
+						<div>
+							<p>Achieve your goal with our personalized plan</p>
+							<hr />
+
+							<input
+								type="button"
+								className="btn1"
+								value="WEIGHT LOSE"
+								onClick={form2LoseSubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="GET TONED"
+								onClick={form2GainSubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="BUILD MUSCLE"
+								onClick={form2BuildSubmitHandler}
+							/>
+						</div>
+					)}
+					{activeStep === 2 && (
+						<div>
+							<h3>How often do you Exercise?</h3>
+							<hr />
+
+							<input
+								type="button"
+								className="btn1"
+								value="HARDLY"
+								onClick={form31SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="SOMETIMES"
+								onClick={form32SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="2-3 TIMES A WEEK"
+								onClick={form33SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="OVER 4 TIMES A WEEK"
+								onClick={form34SubmitHandler}
+							/>
+						</div>
+					)}
+					{activeStep === 3 && (
+						<div>
+							<h4>HOW DO YOU FEEL AFTER CLIMBING 5 FLOORS?</h4>
+							<hr />
+
+							<input
+								type="button"
+								className="btn1"
+								value="SHORTNESS OF BREATH"
+								onClick={form41SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="A LITTLE TIRED"
+								onClick={form42SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="EASY"
+								onClick={form43SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="I CAN RUN UP THERE"
+								onClick={form44SubmitHandler}
+							/>
+						</div>
+					)}
+					{activeStep === 4 && (
+						<div>
+							<h3>HOW MANY PUSH-UPS CAN YOU DO AT ONE TIME??</h3>
+							<hr />
+
+							<input
+								type="button"
+								className="btn1"
+								value="LESS THAN 10"
+								onClick={form51SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="10-20"
+								onClick={form52SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="21-40"
+								onClick={form53SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="OVER 40"
+								onClick={form54SubmitHandler}
+							/>
+						</div>
+					)}
+					{activeStep === 5 && (
+						<div>
+							<h3>PLEASE SELECT YOUR WORKOUT PLAN</h3>
+							<hr />
+
+							<input
+								type="button"
+								className="btn1"
+								value="FULL BODY WORKOUT"
+								onClick={form61SubmitHandler}
+							/>
+							{/* <button onClick={form62SubmitHandler}>ABS WORKOUT</button> */}
+
+							<input
+								type="button"
+								className="btn1"
+								value="ABS WORKOUT"
+								onClick={form62SubmitHandler}
+							/>
+
+							<input
+								type="button"
+								className="btn1"
+								value="ARM WORKOUT"
+								onClick={form63SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="LEG WORKOUT"
+								onClick={form64SubmitHandler}
+							/>
+						</div>
+					)}
+					{activeStep === 6 && (
+						<div>
+							<h3>PLEASE SELECT DIFFICULTY</h3>
+							<hr />
+
+							<input
+								type="button"
+								className="btn1"
+								value="EASY"
+								onClick={form71SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="MEDIUM"
+								onClick={form72SubmitHandler}
+							/>
+							<input
+								type="button"
+								className="btn1"
+								value="HARD"
+								onClick={form73SubmitHandler}
+							/>
+						</div>
+					)}
+					{!isLoading && activeStep === 7 && (
+						<form>
+							<div style={{ backgroundColor: '' }}>
+								<FormControl
+									className={clsx(
+										classes1.margin,
+										classes1.withoutLabel,
+										classes1.textField
+									)}
+								>
+									<Input
+										id="standard-adornment-age"
+										value={values.age}
+										onChange={handleChange('age')}
+										endAdornment={
+											<InputAdornment position="end">years</InputAdornment>
+										}
+										aria-describedby="standard-age-helper-text"
+										inputProps={{
+											'aria-label': 'age',
+										}}
+									/>
+									<FormHelperText id="standard-age-helper-text">
+										Age
+									</FormHelperText>
+								</FormControl>
+								<FormControl
+									className={clsx(
+										classes1.margin,
+										classes1.withoutLabel,
+										classes1.textField
+									)}
+								>
+									<FormHelperText id="standard-weight-helper-text">
+										Weight
+									</FormHelperText>
+									<Input
+										id="standard-adornment-weight"
+										value={values.weight}
+										onChange={handleChange('weight')}
+										endAdornment={
+											<InputAdornment position="end">Kg</InputAdornment>
+										}
+										aria-describedby="standard-weight-helper-text"
+										inputProps={{
+											'aria-label': 'weight',
+										}}
+										InputLabelProps={{
+											shrink: true,
+											style: { color: '#4caf50' },
+										}}
+										InputProps={{
+											style: {
+												color: 'white',
+												'&:hover': {
+													border: '1px solid red',
+												},
+											},
+											outlinedRoot: {
+												'&:hover': {
+													border: '1px solid red',
+												},
+											},
+										}}
+									/>
+									<FormHelperText id="standard-weight-helper-text">
+										Weight
+									</FormHelperText>
+								</FormControl>
+								<FormControl
+									className={clsx(
+										classes1.margin,
+										classes1.withoutLabel,
+										classes1.textField
+									)}
+								>
+									<Input
+										id="standard-adornment-height"
+										value={values.height}
+										onChange={handleChange('height')}
+										endAdornment={
+											<InputAdornment position="end">cm</InputAdornment>
+										}
+										aria-describedby="standard-height-helper-text"
+										inputProps={{
+											'aria-label': 'height',
+										}}
+									/>
+									<FormHelperText id="standard-weight-helper-text">
+										Height
+									</FormHelperText>
+								</FormControl>
+							</div>
+							<input
+								className="btn1"
+								type="submit"
+								onClick={e => {
+									e.preventDefault();
+									formSubmitHandler();
+								}}
+							/>
+						</form>
+					)}
+					<div
+						style={{
+							background: 'none',
+							textAlign: 'center',
+							margin: 'auto',
+							marginBottom: '50px',
+						}}
+					>
+						<MobileStepper
+							variant="dots"
+							steps={8}
+							position="static"
+							activeStep={activeStep}
+							className={classes.root}
+							nextButton={
+								<Button
+									size="small"
+									onClick={handleNext}
+									disabled={!nextActive || activeStep === 7}
+								>
+									Next
+									{theme.direction === 'rtl' ? (
+										<KeyboardArrowLeft />
+									) : (
+										<KeyboardArrowRight />
+									)}
+								</Button>
+							}
+							backButton={
+								<Button
+									size="small"
+									onClick={handleBack}
+									disabled={activeStep === 0}
+								>
+									{theme.direction === 'rtl' ? (
+										<KeyboardArrowRight />
+									) : (
+										<KeyboardArrowLeft />
+									)}
+									Back
+								</Button>
+							}
+						/>
+					</div>
+				</Card>
+			)}
 		</React.Fragment>
 	);
 }

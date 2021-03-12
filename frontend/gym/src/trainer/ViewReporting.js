@@ -129,6 +129,7 @@ const ViewReporting = () => {
 										)}
 									</table>
 								)}
+								{!data.week1Report && <h3>Please Wait.....</h3>}
 							</div>
 						</TabPanel>
 						<TabPanel value={value} index={1}>
@@ -156,6 +157,7 @@ const ViewReporting = () => {
 										)}
 									</table>
 								)}
+								{!data.week2Report && <h3>Please Wait.....</h3>}
 							</div>
 						</TabPanel>
 						<TabPanel value={value} index={2}>
@@ -183,6 +185,7 @@ const ViewReporting = () => {
 										)}
 									</table>
 								)}
+								{!data.week3Report && <h3>Please Wait.....</h3>}
 							</div>
 						</TabPanel>
 						<TabPanel value={value} index={3}>
@@ -210,6 +213,7 @@ const ViewReporting = () => {
 										)}
 									</table>
 								)}
+								{!data.week4Report && <h3>Please Wait.....</h3>}
 							</div>
 						</TabPanel>
 					</div>

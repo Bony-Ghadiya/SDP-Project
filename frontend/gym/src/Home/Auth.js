@@ -102,9 +102,9 @@ const Auth = () => {
 					responseData.requested,
 					responseData.approved,
 					responseData.selected,
-					responseData.given
+					responseData.given,
+					responseData.complated
 				);
-				// localStorage.setItem('auth', JSON.stringify(responseData));
 				tec.setSelection();
 				trc.setApproval();
 				if (userType === 'user') {
@@ -127,7 +127,7 @@ const Auth = () => {
 					'POST',
 					formData
 				);
-				console.log('signup');
+				console.log(responseData);
 				auth.login(
 					responseData.userId,
 					responseData.token,
@@ -135,7 +135,8 @@ const Auth = () => {
 					responseData.requested,
 					responseData.approved,
 					responseData.selected,
-					responseData.given
+					responseData.given,
+					responseData.complated
 				);
 
 				tec.setSelection();

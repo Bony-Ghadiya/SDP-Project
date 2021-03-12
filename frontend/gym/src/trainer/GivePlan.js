@@ -311,7 +311,6 @@ const GivePlan = () => {
 		return (
 			<React.Fragment>
 				<ErrorModal error={error} onClear={clearError} />
-				{console.log('!all')}
 				{isLoading && (
 					<div className="center">
 						<LoadingSpinner />
@@ -1020,7 +1019,7 @@ const GivePlan = () => {
 															style={{
 																margin: 'auto',
 																background: 'none',
-																color:'white'
+																color: 'white',
 															}}
 														>
 															<input
@@ -1135,7 +1134,7 @@ const GivePlan = () => {
 										</div>
 									)}
 									{!isDays && (
-										<Card style={{ width: '43%', margin: 'auto' }}>
+										<Card style={{ width: '35%', margin: 'auto' }}>
 											<div style={{ backgroundColor: 'none', padding: '5px' }}>
 												{trainerPlan.plan.map(p1 => (
 													<div>
@@ -1204,7 +1203,10 @@ const GivePlan = () => {
 																				>
 																					<Autocomplete
 																						width={300}
-																						style={{ width: 200 , color: 'white'}}
+																						style={{
+																							width: 200,
+																							color: 'white',
+																						}}
 																						classes={classes}
 																						value={temp}
 																						id="grouped-demo"
@@ -1241,7 +1243,6 @@ const GivePlan = () => {
 																				<br />
 																				<button
 																					className="daysbutton"
-																					
 																					onClick={e => {
 																						searchSubmitHandler(e);
 																					}}
@@ -1255,7 +1256,10 @@ const GivePlan = () => {
 																							type="text"
 																							name="reps"
 																							defaultValue={0}
-																							style={{ width: '3ch' ,color : '#4caf50'}}
+																							style={{
+																								width: '3ch',
+																								color: '#4caf50',
+																							}}
 																							onChange={e => {
 																								e.preventDefault();
 																								setTime(0);
@@ -1272,7 +1276,10 @@ const GivePlan = () => {
 																							type="text"
 																							name="time"
 																							defaultValue={0}
-																							style={{ width: '3ch',  color : '#4caf50'}}
+																							style={{
+																								width: '3ch',
+																								color: '#4caf50',
+																							}}
 																							onChange={e => {
 																								e.preventDefault();
 																								setReps(0);
@@ -1346,7 +1353,10 @@ const GivePlan = () => {
 																						type="text"
 																						name="reps"
 																						defaultValue={e.reps}
-																						style={{ width: '3ch', color : '#4caf50'}}
+																						style={{
+																							width: '3ch',
+																							color: '#4caf50',
+																						}}
 																						onChange={e => {
 																							e.preventDefault();
 																							console.log(e.target.value);
@@ -1364,7 +1374,10 @@ const GivePlan = () => {
 																						type="text"
 																						name="time"
 																						defaultValue={e.time}
-																						style={{ width: '3ch', color:'#4caf50' }}
+																						style={{
+																							width: '3ch',
+																							color: '#4caf50',
+																						}}
 																						onChange={e => {
 																							e.preventDefault();
 																							console.log(e.target.value);
@@ -1381,7 +1394,7 @@ const GivePlan = () => {
 																			style={{
 																				textAlign: 'center',
 																				display: 'block',
-																				color:'white' , 
+																				color: 'white',
 																				border: 'white',
 																			}}
 																		>
@@ -1496,7 +1509,6 @@ const GivePlan = () => {
 																								{...params}
 																								label="Add Exercises"
 																								variant="outlined"
-																								
 																							/>
 																						</div>
 																					)}
@@ -1510,7 +1522,11 @@ const GivePlan = () => {
 																			<br />
 																			<button
 																				className="daysbutton"
-																				style={{ margin: '10px 5px', color:'white' , borderColor: 'white' }}
+																				style={{
+																					margin: '10px 5px',
+																					color: 'white',
+																					borderColor: 'white',
+																				}}
 																				onClick={e => {
 																					searchSubmitHandler(e);
 																				}}
@@ -1524,7 +1540,10 @@ const GivePlan = () => {
 																						type="text"
 																						name="reps"
 																						defaultValue={0}
-																						style={{ width: '3ch',  color : '#4caf50' }}
+																						style={{
+																							width: '3ch',
+																							color: '#4caf50',
+																						}}
 																						onChange={e => {
 																							e.preventDefault();
 																							setTime(0);
@@ -1541,7 +1560,10 @@ const GivePlan = () => {
 																						type="text"
 																						name="time"
 																						defaultValue={0}
-																						style={{ width: '3ch' ,  color : '#4caf50'}}
+																						style={{
+																							width: '3ch',
+																							color: '#4caf50',
+																						}}
 																						onChange={e => {
 																							e.preventDefault();
 																							setReps(0);
@@ -1602,7 +1624,11 @@ const GivePlan = () => {
 												{!isDays && (
 													<div>
 														<button
-															style={{ margin: 'auto 5px', color:'white' , borderColor: 'white' }}
+															style={{
+																margin: 'auto 5px',
+																color: 'white',
+																borderColor: 'white',
+															}}
 															onClick={() => {
 																setIsDays(true);
 																setShowNew(false);
@@ -1615,7 +1641,11 @@ const GivePlan = () => {
 															BACK
 														</button>
 														<button
-															style={{ margin: 'auto 5px'  , color:'white' , borderColor: 'white'  }}
+															style={{
+																margin: 'auto 5px',
+																color: 'white',
+																borderColor: 'white',
+															}}
 															onClick={async e => {
 																e.preventDefault();
 																try {
@@ -1652,7 +1682,11 @@ const GivePlan = () => {
 															RESET
 														</button>
 														<button
-															style={{ margin: 'auto 5px' , color:'white' , borderColor: 'white' }}
+															style={{
+																margin: 'auto 5px',
+																color: 'white',
+																borderColor: 'white',
+															}}
 															onClick={async e => {
 																e.preventDefault();
 																try {
@@ -1808,7 +1842,11 @@ const GivePlan = () => {
 											></iframe>
 										)}
 										<button
-											style={{ margin: 'auto 5px', color:'white' , border: 'white' }}
+											style={{
+												margin: 'auto 5px',
+												color: 'white',
+												border: 'white',
+											}}
 											onClick={() => {
 												setOneExer(false);
 											}}
@@ -1828,7 +1866,14 @@ const GivePlan = () => {
 					footerClass="place-item__modal-actions"
 					footer={
 						<React.Fragment>
-							<div style={{ marginRight: '10px', display: 'inline'  , color:'white' , border: 'white' }}>
+							<div
+								style={{
+									marginRight: '10px',
+									display: 'inline',
+									color: 'white',
+									border: 'white',
+								}}
+							>
 								<Button inverse onClick={cancelWarningHandler}>
 									CANCEL
 								</Button>

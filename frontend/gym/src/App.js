@@ -46,6 +46,8 @@ const App = () => {
 		setSelection,
 		dataG,
 		setDataGiven,
+		pCom,
+		setPlanComplated,
 	} = useAuth();
 
 	const removeSelection = () => {};
@@ -126,7 +128,9 @@ const App = () => {
 				<Route path="/showtrainees" exact>
 					<ShowTrainee />
 				</Route>
-
+				<Route path="/feedback" exact>
+					<ShowTrainee />
+				</Route>
 				<Redirect to="/" />
 			</Switch>
 		);
@@ -200,6 +204,8 @@ const App = () => {
 				removeSelection: removeSelection,
 				setRequested: setRequested,
 				setDataGiven: setDataGiven,
+				planComplated: pCom,
+				setPlanComplated: setPlanComplated,
 			}}
 		>
 			<Router>

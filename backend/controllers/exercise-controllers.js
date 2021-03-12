@@ -175,6 +175,7 @@ const giveReporting = async (req, res, next) => {
 			trainers.week4Report.pushups = pushups;
 			trainers.week4Report.weight = weight;
 			trainers.week4Report.other = other;
+			trainers.isComplate = 1;
 		}
 	} catch (err) {
 		console.log(err);

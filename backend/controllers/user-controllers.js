@@ -9,6 +9,7 @@ const User = require('../models/user');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Trainer = require('../models/trainers');
 const Trainees = require('../models/trainee');
+const TraineePlan = require('../models/TraineePlan');
 
 const transporter = nodemailer.createTransport(
 	sendgridTransport({
@@ -141,6 +142,8 @@ const signup = async (req, res, next) => {
 		approved: 0,
 		selected: 0,
 		given: 0,
+		complated: 0,
+		fbgiven: 0,
 	});
 };
 
@@ -151,7 +154,8 @@ const login = async (req, res, next) => {
 		trainer,
 		trainee,
 		flag = 0,
-		isTrainer = 0;
+		isTrainer = 0,
+		trainers;
 
 	try {
 		existingUser = await User.findOne({ email: email });
@@ -175,7 +179,8 @@ const login = async (req, res, next) => {
 			trainer = await Trainer.findOne({ userid: existingUser.id });
 		} else if (existingUser.userType === 'user') {
 			trainee = await Trainees.findOne({ userid: existingUser.id });
-
+			trainers = await TraineePlan.findOne({ traineeuserid: existingUser.id });
+			console.log(trainers);
 			flag = 1;
 			if (trainee) {
 				isTrainer = 1;
@@ -232,9 +237,16 @@ const login = async (req, res, next) => {
 			approved: trainer.approved,
 			selected: 0,
 			given: 0,
+			complated: 0,
+			fbgiven: 0,
 			token: token,
 		});
-	} else if (existingUser.userType === 'user' && flag && isTrainer) {
+	} else if (
+		existingUser.userType === 'user' &&
+		flag &&
+		isTrainer &&
+		!trainers
+	) {
 		console.log(trainee.trainerid ? '1' : '0');
 		res.json({
 			userId: existingUser.id,
@@ -243,6 +255,27 @@ const login = async (req, res, next) => {
 			requested: 0,
 			approved: 0,
 			selected: trainee.trainerid ? 1 : 0,
+			complated: 0,
+			// fbgiven: 0,
+			given: trainee.isDataGiven,
+			token: token,
+		});
+	} else if (
+		existingUser.userType === 'user' &&
+		flag &&
+		isTrainer &&
+		trainers
+	) {
+		console.log(trainee.trainerid ? '1' : '0');
+		res.json({
+			userId: existingUser.id,
+			email: existingUser.email,
+			userType: existingUser.userType,
+			requested: 0,
+			approved: 0,
+			selected: trainee.trainerid ? 1 : 0,
+			complated: trainers.isComplate,
+			// fbgiven: 0,
 			given: trainee.isDataGiven,
 			token: token,
 		});
@@ -254,6 +287,8 @@ const login = async (req, res, next) => {
 			requested: 0,
 			approved: 0,
 			selected: 0,
+			complated: 0,
+			fbgiven: 0,
 			token: token,
 		});
 	}

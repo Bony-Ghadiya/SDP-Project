@@ -35,6 +35,9 @@ const useStyles = makeStyles(theme => ({
 		'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
 			borderColor: '#4caf50',
 		},
+		'&.MuiAutocomplete-groupUl': {
+			color: 'black',
+		},
 	},
 }));
 
@@ -208,7 +211,7 @@ const Exercises = () => {
 										groupBy={option => option.firstLetter}
 										getOptionLabel={option => option.ename}
 										onChange={(event, value) => setSearched(value)}
-										style={{ width: 600 }}
+										style={{ width: 600, color: 'black' }}
 										renderInput={params => (
 											<div className="SearchExercises">
 												<CssTextField

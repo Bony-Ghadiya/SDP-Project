@@ -11,6 +11,13 @@
 	height: 40px;
 	font-size: medium;
 	background-color: inherit;
-	background:none;
+	background: none;
 }
 
+.MuiIconButton-root {
+	color: #4caf50 !important;
+}
+
+.MuiAutocomplete-groupUl {
+	color: #4caf50 !important;
+}

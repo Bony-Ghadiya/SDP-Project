@@ -66,9 +66,19 @@ const NavLinks = props => {
 			{auth.isLoggedIn &&
 				auth.userType === 'user' &&
 				auth.isTrainerSelected === 1 &&
-				auth.isDataGiven === 1 && (
+				auth.isDataGiven === 1 &&
+				auth.planComplated === 0 && (
 					<li>
 						<NavLink to="/viewplan">VIEW PLAN</NavLink>
+					</li>
+				)}
+			{auth.isLoggedIn &&
+				auth.userType === 'user' &&
+				auth.isTrainerSelected === 1 &&
+				auth.isDataGiven === 1 &&
+				auth.planComplated === 1 && (
+					<li>
+						<NavLink to="/feedback">FEEDBACK</NavLink>
 					</li>
 				)}
 			{auth.isLoggedIn && (

@@ -8,9 +8,10 @@ export const useAuth = () => {
 	const [app, setApp] = useState(0);
 	const [sel, setSel] = useState(0);
 	const [dataG, setDataG] = useState(0);
+	const [pCom, setPCom] = useState(0);
 
 	const login = useCallback(
-		(uid, token, type, requested, approved, selected, given) => {
+		(uid, token, type, requested, approved, selected, given, complated) => {
 			setToken(token);
 			setUserId(uid);
 			setUserType(type);
@@ -18,6 +19,7 @@ export const useAuth = () => {
 			setApp(approved);
 			setSel(selected);
 			setDataG(given);
+			setPCom(complated);
 			localStorage.setItem(
 				'auth',
 				JSON.stringify({
@@ -28,6 +30,7 @@ export const useAuth = () => {
 					approved: approved,
 					selected: selected,
 					given: given,
+					complated: complated,
 				})
 			);
 		},
@@ -46,9 +49,10 @@ export const useAuth = () => {
 				approved: app,
 				selected: sel,
 				given: dataG,
+				complated: pCom,
 			})
 		);
-	}, [userId, token, userType, app, sel, dataG]);
+	}, [userId, token, userType, app, sel, dataG, pCom]);
 
 	const setApproval = useCallback(() => {
 		setApp(1);
@@ -62,9 +66,10 @@ export const useAuth = () => {
 				approved: 1,
 				selected: sel,
 				given: dataG,
+				complated: pCom,
 			})
 		);
-	}, [userId, token, userType, req, sel, dataG]);
+	}, [userId, token, userType, req, sel, dataG, pCom]);
 
 	const setSelection = useCallback(() => {
 		setSel(1);
@@ -73,14 +78,15 @@ export const useAuth = () => {
 			JSON.stringify({
 				userId: userId,
 				token: token,
-				userType: userType,
 				given: dataG,
+				userType: userType,
 				requested: req,
 				approved: app,
 				selected: 1,
+				complated: pCom,
 			})
 		);
-	}, [userId, token, userType, req, app, dataG]);
+	}, [userId, token, userType, req, app, dataG, pCom]);
 
 	const setDataGiven = useCallback(() => {
 		setDataG(1);
@@ -94,9 +100,27 @@ export const useAuth = () => {
 				approved: app,
 				selected: sel,
 				given: 1,
+				complated: pCom,
 			})
 		);
-	}, [userId, token, userType, req, app, sel]);
+	}, [userId, token, userType, req, app, sel, pCom]);
+
+	const setPlanComplated = useCallback(() => {
+		setPCom(1);
+		localStorage.setItem(
+			'auth',
+			JSON.stringify({
+				userId: userId,
+				token: token,
+				userType: userType,
+				requested: req,
+				approved: app,
+				selected: sel,
+				given: dataG,
+				complated: 1,
+			})
+		);
+	}, [userId, token, userType, req, app, sel, dataG]);
 
 	const logout = useCallback(() => {
 		setToken(null);
@@ -106,6 +130,7 @@ export const useAuth = () => {
 		setApp(0);
 		setSel(0);
 		setDataG(0);
+		setPCom(0);
 		localStorage.removeItem('auth');
 	}, []);
 
@@ -113,7 +138,6 @@ export const useAuth = () => {
 		async function func() {
 			const storedData = await JSON.parse(localStorage.getItem('auth'));
 			if (storedData) {
-				setReq(storedData.requested);
 				login(
 					storedData.userId,
 					storedData.token,
@@ -121,7 +145,8 @@ export const useAuth = () => {
 					storedData.requested,
 					storedData.approved,
 					storedData.selected,
-					storedData.given
+					storedData.given,
+					storedData.complated
 				);
 				setToken(storedData.token);
 				setUserId(storedData.userId);
@@ -130,6 +155,7 @@ export const useAuth = () => {
 				setApp(storedData.approved);
 				setSel(storedData.selected);
 				setDataG(storedData.given);
+				setPCom(storedData.complated);
 			}
 		}
 		func();
@@ -149,5 +175,7 @@ export const useAuth = () => {
 		setSelection,
 		dataG,
 		setDataGiven,
+		pCom,
+		setPlanComplated,
 	};
 };

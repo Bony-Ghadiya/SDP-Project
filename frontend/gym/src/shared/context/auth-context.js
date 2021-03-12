@@ -16,4 +16,8 @@ export const AuthContext = createContext({
 	setRequested: () => {},
 	isDataGiven: false,
 	setDataGiven: () => {},
+	planComplated: false,
+	setPlanComplated: () => {},
+	feedbackGiven: false,
+	setFeedbackGiven: () => {},
 });
