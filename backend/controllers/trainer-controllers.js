@@ -24,8 +24,8 @@ const postTrainer = async (req, res, next) => {
 		createdTrainers = new Trainer({
 			userid: userid,
 			name: existingUser.name,
-			rating: 4.5,
-			feedback: ['nice'],
+			rating: 0,
+			feedback: [],
 			startTime,
 			endTime,
 			experience,

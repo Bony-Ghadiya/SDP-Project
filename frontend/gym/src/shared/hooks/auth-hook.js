@@ -122,6 +122,28 @@ export const useAuth = () => {
 		);
 	}, [userId, token, userType, req, app, sel, dataG]);
 
+	const endThis = useCallback(() => {
+		setReq(0);
+		setApp(0);
+		setSel(0);
+		setDataG(0);
+		setPCom(0);
+		localStorage.setItem(
+			'auth',
+			JSON.stringify({
+				userId: userId,
+				token: token,
+				userType: userType,
+				requested: 0,
+				approved: 0,
+				selected: 0,
+				given: 0,
+				complated: 0,
+			})
+		);
+		login(userId, token, userType, 0, 0, 0, 0, 0);
+	}, [userId, token, userType, login]);
+
 	const logout = useCallback(() => {
 		setToken(null);
 		setUserId(null);
@@ -177,5 +199,6 @@ export const useAuth = () => {
 		setDataGiven,
 		pCom,
 		setPlanComplated,
+		endThis,
 	};
 };

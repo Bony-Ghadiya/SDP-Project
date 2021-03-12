@@ -20,4 +20,5 @@ export const AuthContext = createContext({
 	setPlanComplated: () => {},
 	feedbackGiven: false,
 	setFeedbackGiven: () => {},
+	endThis: () => {},
 });

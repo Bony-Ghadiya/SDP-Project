@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const HttpError = require('../models/http-error');
+const UserData = require('../models/userdata');
 const User = require('../models/User');
 const Trainer = require('../models/trainers');
 const Trainee = require('../models/trainee');
@@ -231,9 +232,71 @@ const showReporting = async (req, res, next) => {
 		});
 	}
 };
+const TrainerFeedback = async (req, res, next) => {
+	console.log(' trainer feedback');
+	const { userid, rating, feedback } = req.body;
+	console.log(userid, rating, feedback);
+	let trainee, trainer, trainerplan, traineeplan, userdata;
+	try {
+		trainee = await Trainee.findOne({ userid: userid });
+		if (trainee) {
+			trainer = await Trainer.findById(trainee.trainerid);
+			traineeplan = await TraineePlan.findOne({ traineeuserid: userid });
+			trainerplan = await TrainerPlan.findOne({ traineeuserid: userid });
+			userdata = await UserData.findOne({ traineeuserid: userid });
+			console.log(traineeplan, trainerplan);
+		}
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Fetching trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
 
+	try {
+		trainer.rating =
+			(trainer.rating * trainer.feedback.length + rating) /
+			(trainer.feedback.length + 1);
+		trainer.feedback = [...trainer.feedback, feedback];
+		trainer.trainees.pull(trainee.id);
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'updating trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+
+	try {
+		const sess = await mongoose.startSession();
+		sess.startTransaction();
+		await trainee.remove({ session: sess });
+		await trainer.save({ session: sess });
+		await trainerplan.remove({ session: sess });
+		await traineeplan.remove({ session: sess });
+		await userdata.remove({ session: sess });
+
+		await sess.commitTransaction();
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Something went wrong, could not update trainee in db.',
+			500
+		);
+		return next(error);
+	}
+
+	res.json({
+		message: ' mast.',
+		success: 1,
+	});
+};
 exports.viewPlan = viewPlan;
 exports.completeZero = completeZero;
 exports.getFeedback = getFeedback;
 exports.giveReporting = giveReporting;
 exports.showReporting = showReporting;
+exports.TrainerFeedback = TrainerFeedback;

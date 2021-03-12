@@ -35,4 +35,6 @@ router.patch('/givereporting', ExerciseController.giveReporting);
 
 router.get('/showreporting/:tuid', ExerciseController.showReporting);
 
+router.patch('/finalfeedback', ExerciseController.TrainerFeedback);
+
 module.exports = router;

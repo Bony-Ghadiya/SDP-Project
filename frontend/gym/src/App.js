@@ -25,6 +25,7 @@ import GivePlan from './trainer/GivePlan';
 import ViewReporting from './trainer/ViewReporting';
 import ViewPlan from './traineePlan/ViewPlan';
 import Reporting from './traineePlan/Reporting';
+import Feedback from './traineePlan/Feedback';
 import New from './new';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
@@ -48,6 +49,7 @@ const App = () => {
 		setDataGiven,
 		pCom,
 		setPlanComplated,
+		endThis,
 	} = useAuth();
 
 	const removeSelection = () => {};
@@ -91,6 +93,9 @@ const App = () => {
 				<Route path="/reporting" exact>
 					<Reporting />
 				</Route>
+				<Route path="/feedback" exact>
+					<Feedback />
+				</Route>
 				<Route path="/" exact>
 					<Home />
 				</Route>
@@ -126,9 +131,6 @@ const App = () => {
 					<GivePlan />
 				</Route>
 				<Route path="/showtrainees" exact>
-					<ShowTrainee />
-				</Route>
-				<Route path="/feedback" exact>
 					<ShowTrainee />
 				</Route>
 				<Redirect to="/" />
@@ -206,6 +208,7 @@ const App = () => {
 				setDataGiven: setDataGiven,
 				planComplated: pCom,
 				setPlanComplated: setPlanComplated,
+				endThis: endThis,
 			}}
 		>
 			<Router>

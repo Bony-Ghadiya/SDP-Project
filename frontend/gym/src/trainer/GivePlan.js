@@ -2182,8 +2182,7 @@ const GivePlan = () => {
 												t = t + 1;
 											}
 										}
-										var i,
-											t1 = 0,
+										var t1 = 0,
 											t2 = 0,
 											t3 = 0,
 											t4 = 0;
