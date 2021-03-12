@@ -1,84 +1,108 @@
 button {
-	cursor: pointer;
-	border: 1px solid #292929;
-	color: #292929;
-	background: transparent;
-	padding: 0.5rem;
-	font: inherit;
+  cursor: pointer;
+  border: 1px solid #292929;
+  color: #292929;
+  background: transparent;
+  padding: 0.5rem;
+  font: inherit;
 }
 
 button:focus {
-	outline: none;
+  outline: none;
 }
 
 button:hover,
 button:active {
-	background: #292929;
-	color: white;
+  background: #292929;
+  color: white;
 }
 
 .btn1 {
-	cursor: pointer;
-
-	border: 1px solid;
-	color: #66ad68;
-	background: transparent;
-	padding: 0.5rem;
-	font: inherit;
-	border-radius: 4px;
-	margin: 5px auto;
-	display: block;
+  cursor: pointer;
+  border: 1px solid;
+  color: #66ad68;
+  background: transparent;
+  padding: 0.5rem;
+  font: inherit;
+  border-radius: 4px;
+  margin: 5px auto;
+  display: block;
+  width: 50%;
 }
 
 .btn1:focus {
-	outline: none;
+  outline: none;
 }
 
 .btn1:hover,
 .btn1:active {
-	color: white;
-	background: #4caf50;
+  color: white;
+  background: #4caf50;
 }
 .MuiMobileStepper-root {
-	display: flex !important;
-	padding: 8px !important;
-	background: transparent !important;
-	align-items: center !important;
-	flex-direction: row !important;
-	justify-content: space-between !important;
+  display: flex !important;
+  padding: 8px !important;
+  background: transparent !important;
+  align-items: center !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
 }
 
 .MuiTypography-colorTextSecondary {
-	/* color: rgba(0, 0, 0, 0.54); */
-	color: #4caf50 !important;
+  /* color: rgba(0, 0, 0, 0.54); */
+  color: #4caf50 !important;
 }
 
 .MuiInputBase-input {
-	color: #4caf50 !important;
-	border: #4caf50 !important;
+  color: white !important;
+  border: #4caf50 !important;
 }
 
 .MuiInput-underline:before {
-	border-bottom: 1px solid white !important;
+  border-bottom: 1px solid white !important;
 }
 .MuiFormHelperText-root {
-	color: #4caf50 !important;
+  color: #4caf50 !important;
 }
 .MuiOutlinedInput-root {
-	border: #4caf50;
+  border: #4caf50;
 }
 .MuiInput-underline:after {
-	border-bottom: 2px solid #4caf50 !important;
+  border-bottom: 2px solid #4caf50 !important;
 }
 .MuiButton-root.Mui-disabled {
-	color: rgba(160, 158, 158, 0.26) !important;
+  color: rgba(160, 158, 158, 0.26) !important;
 }
 .MuiButton-root {
-	color: #4caf50 !important;
+  color: #4caf50 !important;
 }
 .MuiMobileStepper-dot {
-	background-color: rgba(194, 190, 190, 0.26) !important;
+  background-color: rgba(194, 190, 190, 0.26) !important;
 }
 .MuiMobileStepper-dotActive {
-	background-color: #4caf4c !important;
+  background-color: #4caf4c !important;
+}
+
+hr {
+  color: #4caf50;
+  margin-top: 10px;
+}
+
+hr {
+  overflow: visible !important;
+  height: 30px !important;
+  border-style: solid !important;
+  border-color: #4caf50 !important;
+  border-width: 3px 0 0 0 !important;
+  border-radius: 20px !important;
+}
+hr:before {
+  display: block;
+  content: "";
+  height: 30px;
+  margin-top: -31px;
+  border-style: solid;
+  border-color: #4caf50;
+  border-width: 0 0 3px 0;
+  border-radius: 20px;
 }
