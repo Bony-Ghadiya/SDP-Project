@@ -1,217 +1,236 @@
 .header1 {
-	text-align: center;
-	color: aliceblue;
+  text-align: center;
+  color: aliceblue;
 }
 
 h1,
 h2,
 h3 {
-	color: aliceblue;
+  color: aliceblue;
 }
 
 .mh {
-	width: auto;
-	padding: auto;
-	display: inline;
+  width: auto;
+  padding: auto;
+  display: inline;
 }
 
 .card1 {
-	text-align: center;
-	margin: auto;
+  text-align: center;
+  margin: auto;
 }
+
 .grid {
-	display: grid;
-	text-align: center;
-	justify-content: center;
-	grid-gap: 1rem;
-	grid-template-rows: repeat(1, auto);
-	grid-auto-flow: column;
+  display: grid;
+  text-align: center;
+  justify-content: center;
+  grid-gap: 1rem;
+  grid-template-rows: repeat(1, auto);
+  grid-auto-flow: column;
 }
 .viewgrid {
-	display: grid;
-	text-align: center;
-	justify-content: center;
-	grid-gap: 1rem;
-	grid-template-rows: repeat(1, auto);
-	grid-auto-flow: column;
+  display: grid;
+  text-align: center;
+  justify-content: center;
+  grid-gap: 1rem;
+  grid-template-rows: repeat(1, auto);
+  grid-auto-flow: column;
 }
 .cells {
-	padding: 5px;
-	border: 1px solid black;
-	vertical-align: middle;
+  padding: 5px;
+  border: 1px solid black;
+  vertical-align: middle;
 }
 .cells p {
-	text-align: center;
+  text-align: center;
 }
 .daysButton--notsaved {
-	border: 4px double white;
-	color: white;
-	margin-bottom: 10px;
+  border: 4px double white;
+  color: white;
+  margin-bottom: 10px;
 }
 
 .daysButton--saved {
-	border: 4px double #4caf50;
-	color: #4caf50;
-	margin-bottom: 10px;
+  border: 4px double #4caf50;
+  color: #4caf50;
+  margin-bottom: 10px;
 }
 
 .data101 {
-	width: 450px;
-	display: grid !important;
-	grid-template-columns: 175px 185px 30px 30px !important;
-	grid-gap: 10px;
-	background-color: none;
-	padding: 5px;
-	text-align: start;
+  width: 450px;
+  display: grid !important;
+  grid-template-columns: 175px 185px 30px 30px !important;
+  grid-gap: 10px;
+  background-color: none;
+  padding: 5px;
+  text-align: start;
 }
 .data201 {
-	width: 400px;
-	display: grid !important;
-	grid-template-columns: 200px 230px 30px !important;
-	grid-gap: 10px;
-	padding: 5px;
-	text-align: start;
+  width: 400px;
+  display: grid !important;
+  grid-template-columns: 200px 230px 30px !important;
+  grid-gap: 10px;
+  padding: 5px;
+  text-align: start;
 }
 .goto {
-	padding: 0;
-	border: none;
-	font-weight: bold;
+  padding: 0;
+  border: none;
+  font-weight: bold;
+  color: white;
+  border: 1px solid #4caf50 !important;
 }
 
 .close {
-	width: 100%;
-	height: 28px;
-	align-items: center;
-	padding: 0px;
-	color: white;
-	font-weight: bold;
-	cursor: pointer;
+  width: 100%;
+  height: 28px;
+  align-items: center;
+  padding: 0px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-color: white;
 }
 
 .anotherData h4 {
-	display: inline;
-	text-align: left;
+  display: inline;
+  text-align: left;
 }
 
 .anotherData {
-	margin: 5px;
-	border: 2px dotted white;
-	text-align: left;
-	padding: 10px;
+  margin: 5px;
+  border: 2px dotted white;
+  text-align: left;
+  padding: 10px;
 }
 .anotherData button {
-	padding: 10px;
-	width: 100%;
+  padding: 10px;
+  width: 100%;
+  color: white;
+  background: #4caf50;
+  border: white !important;
 }
 
 .MuiOutlinedInput-root {
-	position: relative;
-	border-radius: 4px;
-	width: 200px;
+  position: relative;
+  border-radius: 4px;
+  width: 200px;
+  color: white !important;
+  border: white;
 }
 
 .gif__preview {
-	width: 170px;
-	height: 170px;
-	border: 1px solid #ccc;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	margin-bottom: 1rem;
+  width: 170px;
+  height: 170px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .repstime input {
-	background: none;
-	border: 0px;
-	border-bottom: 1px solid black;
+  background: none;
+  border: 0px;
+  border-bottom: 1px solid white !important;
 }
 
 .repstime input :active,
 .repstime input:hover {
-	margin-right: 5x;
-	border: 0px;
-	border-bottom: 1px solid black;
+  margin-right: 5x;
+  border: 0px;
+  border-bottom: 1px solid white;
 }
 
 .week-header {
-	margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 hr {
-	margin-bottom: 15px;
-	border-color: #4caf50;
+  margin-bottom: 15px;
+  border-color: #4caf50;
 }
 
 .dayGrid {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 .dayGrid div:nth-child(7) {
-	grid-column: 1 / 3;
-	grid-row: 4;
+  grid-column: 1 / 3;
+  grid-row: 4;
 }
 .dayGrid div:nth-child(14) {
-	grid-column: 1 / 3;
-	grid-row: 8;
+  grid-column: 1 / 3;
+  grid-row: 8;
 }
 .dayGrid div:nth-child(21) {
-	grid-column: 1 / 3;
-	grid-row: 16;
+  grid-column: 1 / 3;
+  grid-row: 16;
 }
 .dayGrid div:nth-child(22) {
-	grid-column: 1 / 2;
-	grid-row: 13;
+  grid-column: 1 / 2;
+  grid-row: 13;
 }
 .dayGrid div:nth-child(23) {
-	grid-column: 2 / 3;
-	grid-row: 13;
+  grid-column: 2 / 3;
+  grid-row: 13;
 }
 .dayGrid div:nth-child(24) {
-	grid-column: 1 / 2;
-	grid-row: 14;
+  grid-column: 1 / 2;
+  grid-row: 14;
 }
 .dayGrid div:nth-child(25) {
-	grid-column: 2/ 3;
-	grid-row: 14;
+  grid-column: 2/ 3;
+  grid-row: 14;
 }
 .dayGrid div:nth-child(26) {
-	grid-column: 1 / 2;
-	grid-row: 15;
+  grid-column: 1 / 2;
+  grid-row: 15;
 }
 .dayGrid div:nth-child(27) {
-	grid-column: 2 / 3;
-	grid-row: 15;
+  grid-column: 2 / 3;
+  grid-row: 15;
 }
 .dayGrid div:nth-child(28) {
-	grid-column: 1 / 3;
-	grid-row: 16;
+  grid-column: 1 / 3;
+  grid-row: 16;
 }
 .dayGrid3 {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 .dayGrid3 div:nth-child(21) {
-	grid-column: 1 / 3;
-	grid-row: 12;
+  grid-column: 1 / 3;
+  grid-row: 12;
 }
 
 st-modal {
-	border: 5px solid black;
-	background-color: #4caf50;
+  border: 5px solid black;
+  background-color: #4caf50;
 }
 
 :root {
-	--st-modal-backgroundColor: #4caf50 !important;
-	--st-dialog-maxWidth: 100px;
+  --st-modal-backgroundColor: #4caf50 !important;
+  --st-dialog-maxWidth: 100px;
 }
 
 [data-reach-dialog-overlay] {
-	background: hsla(0, 0%, 0%, 0.33);
-	top: 9% !important;
+  background: hsla(0, 0%, 0%, 0.33);
+  top: 9% !important;
 }
 
 [data-reach-dialog-content] {
-	border: 5px solid #4caf50;
-	border-radius: 8px;
+  border: 5px solid #4caf50;
+  border-radius: 8px;
+}
+
+.SearchExercises {
+  color: white !important;
+  margin-right: 30px;
+}
+
+.daysbutton {
+  color: white !important;
+  border-color: white !important;
 }

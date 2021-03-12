@@ -263,6 +263,8 @@ export default function ProgressMobileStepper() {
 						<p>
 							Please let us know you better to help boost your workout results
 						</p>
+						<hr/>
+						
 						<input
 							type="button"
 							className="btn1"
@@ -280,6 +282,8 @@ export default function ProgressMobileStepper() {
 				{activeStep === 1 && (
 					<div>
 						<p>Achieve your goal with our personalized plan</p>
+						<hr/>
+					
 						<input
 							type="button"
 							className="btn1"
@@ -303,6 +307,8 @@ export default function ProgressMobileStepper() {
 				{activeStep === 2 && (
 					<div>
 						<h3>How often do you Exercise?</h3>
+						<hr/>
+						
 						<input
 							type="button"
 							className="btn1"
@@ -332,6 +338,8 @@ export default function ProgressMobileStepper() {
 				{activeStep === 3 && (
 					<div>
 						<h4>HOW DO YOU FEEL AFTER CLIMBING 5 FLOORS?</h4>
+						<hr/>
+						
 						<input
 							type="button"
 							className="btn1"
@@ -361,6 +369,8 @@ export default function ProgressMobileStepper() {
 				{activeStep === 4 && (
 					<div>
 						<h3>HOW MANY PUSH-UPS CAN YOU DO AT ONE TIME??</h3>
+						<hr/>
+						
 						<input
 							type="button"
 							className="btn1"
@@ -390,6 +400,8 @@ export default function ProgressMobileStepper() {
 				{activeStep === 5 && (
 					<div>
 						<h3>PLEASE SELECT YOUR WORKOUT PLAN</h3>
+						<hr/>
+						
 						<input
 							type="button"
 							className="btn1"
@@ -422,6 +434,8 @@ export default function ProgressMobileStepper() {
 				{activeStep === 6 && (
 					<div>
 						<h3>PLEASE SELECT DIFFICULTY</h3>
+						<hr/>
+						
 						<input
 							type="button"
 							className="btn1"
