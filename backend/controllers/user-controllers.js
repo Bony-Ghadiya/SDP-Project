@@ -155,17 +155,6 @@ const login = async (req, res, next) => {
 
 	try {
 		existingUser = await User.findOne({ email: email });
-
-		if (existingUser.userType === 'trainer') {
-			trainer = await Trainer.findOne({ userid: existingUser.id });
-		} else if (existingUser.userType === 'user') {
-			trainee = await Trainees.findOne({ userid: existingUser.id });
-
-			flag = 1;
-			if (trainee) {
-				isTrainer = 1;
-			}
-		}
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
@@ -181,6 +170,17 @@ const login = async (req, res, next) => {
 			403
 		);
 		return next(error);
+	} else {
+		if (existingUser.userType === 'trainer') {
+			trainer = await Trainer.findOne({ userid: existingUser.id });
+		} else if (existingUser.userType === 'user') {
+			trainee = await Trainees.findOne({ userid: existingUser.id });
+
+			flag = 1;
+			if (trainee) {
+				isTrainer = 1;
+			}
+		}
 	}
 
 	let isValidPassword = false;

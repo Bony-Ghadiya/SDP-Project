@@ -1,58 +1,58 @@
 .table1,
 .data1,
 .data2 {
-  border: 1px solid white;
-  border-collapse: collapse;
-  background: none;
-  padding: 10px;
+	border: 1px solid white;
+	border-collapse: collapse;
+	background: none;
+	padding: 10px;
 }
 .table1 {
-  margin: 0px;
-  width: 100%;
+	margin: 0px;
+	width: 100%;
 }
 #t01 tr:nth-child(even) {
-  background-color: #eee;
+	background-color: #eee;
 }
 #t01 tr:nth-child(odd) {
-  background-color: #fff;
+	background-color: #fff;
 }
 
 .data1 {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 caption {
-  color: #4caf50;
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 2px;
+	color: #4caf50;
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 2px;
 }
 .btn2 {
-  cursor: pointer;
+	cursor: pointer;
 
-  border: 1px solid;
-  color: white;
-  background: #4caf50;
-  padding: 0.5rem;
-  font: inherit;
-  border-radius: 4px;
-  margin: 5px;
+	border: 1px solid;
+	color: white;
+	background: #4caf50;
+	padding: 0.5rem;
+	font: inherit;
+	border-radius: 4px;
+	margin: 5px;
 }
 
 .btn2:focus {
-  outline: none;
-  background: #4caf50 !important;
-  color: white !important;
+	outline: none;
+	background: #4caf50 !important;
+	color: white !important;
 }
 
 .btn2:hover,
 .btn2:active {
-  background: #66ad68;
-  border-color: #66ad68;
-  color: black;
+	background: #66ad68;
+	border-color: #66ad68;
+	color: black;
 }
 
 .row {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: white;
+	background: rgba(255, 255, 255, 0.2) !important;
+	color: white;
 }

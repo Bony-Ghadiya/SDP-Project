@@ -29,6 +29,10 @@ router.get('/viewdefaultplan/:tuid', ExerciseController.viewPlan);
 
 router.patch('/zerocomplete', ExerciseController.completeZero);
 
-router.patch('/setfeedback', ExerciseController.setFeedback);
+router.get('/getfeedback/:tid', ExerciseController.getFeedback);
+
+router.patch('/givereporting', ExerciseController.giveReporting);
+
+router.get('/showreporting/:tuid', ExerciseController.showReporting);
 
 module.exports = router;

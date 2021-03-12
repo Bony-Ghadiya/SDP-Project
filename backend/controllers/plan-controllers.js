@@ -108,9 +108,14 @@ const getPlans1 = async (req, res, next) => {
 
 const getDetails = async (req, res, next) => {
 	const tid = req.params.tid;
-	let exe;
+	console.log('tid', tid);
+	let exe, trainers;
 	try {
 		exe = await UserData.findOne({ traineeid: tid });
+		trainers = await TraineePlan.find({ traineeid: tid }).populate(
+			'plan.exercises.exerciseid'
+		);
+		console.log(trainers);
 	} catch (err) {
 		const error = new HttpError(
 			'Something went wrong, could not find data.',
@@ -127,7 +132,17 @@ const getDetails = async (req, res, next) => {
 		return next(error);
 	}
 
-	res.json({ exe: exe.toObject({ getters: true }) });
+	if (trainers.length !== 0) {
+		res.json({
+			showfeedback: trainers[0].plan[0].dayComplated,
+			exe: exe.toObject({ getters: true }),
+		});
+	} else {
+		res.json({
+			showfeedback: 0,
+			exe: exe.toObject({ getters: true }),
+		});
+	}
 };
 
 const getExercise = async (req, res, next) => {

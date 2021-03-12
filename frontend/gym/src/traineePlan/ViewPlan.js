@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Card, Image, Container } from 'react-bootstrap';
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
 import Exercise from './exercise';
-import { Dialog, DialogOverlay, DialogContent } from '@reach/dialog';
+import { Dialog, DialogOverlay } from '@reach/dialog';
 import '@reach/dialog/styles.css';
 // ani CSS :- giveplan.css
+
+export var weekNo = 0;
 const ViewPlan = () => {
+	const history = useHistory();
 	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [trainerPlan, setTrainerPlan] = useState();
@@ -149,6 +153,25 @@ const ViewPlan = () => {
 														</div>
 													))}
 												</div>
+												{isDays && !exer && !oneexer && (
+													<Card>
+														<input
+															class="button"
+															type="button"
+															value="REPORTING"
+															disabled={
+																trainerPlan.week1Submitted === 1 ||
+																trainerPlan.plan[0].dayComplated === 0
+															}
+															onClick={e => {
+																e.preventDefault();
+																weekNo = 1;
+																history.push('/reporting');
+															}}
+															style={{ margin: '5px' }}
+														></input>
+													</Card>
+												)}
 											</Card>
 										)}
 										{trainerPlan.week1Submitted === 1 && (
@@ -201,6 +224,25 @@ const ViewPlan = () => {
 														</div>
 													))}
 												</div>
+												{isDays && !exer && !oneexer && (
+													<Card>
+														<input
+															class="button"
+															type="button"
+															value="REPORTING"
+															disabled={
+																trainerPlan.week2Submitted === 1 ||
+																trainerPlan.plan[7].dayComplated === 0
+															}
+															onClick={e => {
+																e.preventDefault();
+																weekNo = 2;
+																history.push('/reporting');
+															}}
+															style={{ margin: '5px' }}
+														></input>
+													</Card>
+												)}
 											</Card>
 										)}
 										{trainerPlan.week2Submitted === 1 && (
@@ -253,6 +295,25 @@ const ViewPlan = () => {
 														</div>
 													))}
 												</div>
+												{isDays && !exer && !oneexer && (
+													<Card>
+														<input
+															class="button"
+															type="button"
+															value="REPORTING"
+															disabled={
+																trainerPlan.week3Submitted === 1 ||
+																trainerPlan.plan[14].dayComplated === 0
+															}
+															onClick={e => {
+																e.preventDefault();
+																weekNo = 3;
+																history.push('/reporting');
+															}}
+															style={{ margin: '5px' }}
+														></input>
+													</Card>
+												)}
 											</Card>
 										)}
 										{trainerPlan.week3Submitted === 1 && (
@@ -305,10 +366,30 @@ const ViewPlan = () => {
 														</div>
 													))}
 												</div>
+												{isDays && !exer && !oneexer && (
+													<Card>
+														<input
+															class="button"
+															type="button"
+															value="REPORTING"
+															disabled={
+																trainerPlan.week4Submitted === 1 ||
+																trainerPlan.plan[21].dayComplated === 0
+															}
+															onClick={e => {
+																e.preventDefault();
+																weekNo = 4;
+																history.push('/reporting');
+															}}
+															style={{ margin: '5px' }}
+														></input>
+													</Card>
+												)}
 											</Card>
 										)}
 									</div>
 								)}
+
 								{!isDays && !exer && !oneexer && (
 									<Card style={{ width: '40%', margin: 'auto' }}>
 										<div>
@@ -620,6 +701,7 @@ const ViewPlan = () => {
 									width: '40%',
 									marginTop: '50px !important',
 									background: 'black',
+									textAlign: 'center',
 								}}
 							>
 								{showWarning && (

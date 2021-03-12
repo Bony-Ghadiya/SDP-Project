@@ -19,9 +19,12 @@ import ApplyTrainer from './ApplyTrainers/ApplyTrainer';
 import ApproveTrainer from './admin/approvetrainer';
 import ShowTrainee from './trainer/showtrainee';
 import ViewData from './trainer/viewData';
+import ViewDailyFeedback from './trainer/ViewDailyFeedback';
 import GetData from './getData/getData';
 import GivePlan from './trainer/GivePlan';
+import ViewReporting from './trainer/ViewReporting';
 import ViewPlan from './traineePlan/ViewPlan';
+import Reporting from './traineePlan/Reporting';
 import New from './new';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
@@ -83,6 +86,9 @@ const App = () => {
 				<Route path="/viewplan" exact>
 					<ViewPlan />
 				</Route>
+				<Route path="/reporting" exact>
+					<Reporting />
+				</Route>
 				<Route path="/" exact>
 					<Home />
 				</Route>
@@ -107,6 +113,12 @@ const App = () => {
 				</Route>
 				<Route path="/showtrainees/viewdata" exact>
 					<ViewData />
+				</Route>
+				<Route path="/showtrainees/viewfeedback" exact>
+					<ViewDailyFeedback />
+				</Route>
+				<Route path="/showtrainees/viewreporting" exact>
+					<ViewReporting />
 				</Route>
 				<Route path="/showtrainees/giveplan" exact>
 					<GivePlan />

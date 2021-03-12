@@ -12,7 +12,7 @@ const TrainerPlanSchema = new Schema({
 	week2Submitted: { type: Number, default: 0 },
 	week3Submitted: { type: Number, default: 0 },
 	week4Submitted: { type: Number, default: 0 },
-	traineeDay: { type: Number, default: 0 },
+	traineeDay: { type: Number, default: 1 },
 	plan: [
 		{
 			dayNo: { type: Number, required: true },

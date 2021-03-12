@@ -31,6 +31,30 @@ const TraineePlanSchema = new Schema({
 	week2Submitted: { type: Number, default: 0 },
 	week3Submitted: { type: Number, default: 0 },
 	week4Submitted: { type: Number, default: 0 },
+	week1Report: {
+		strength: { type: String },
+		pushups: { type: String },
+		weight: { type: Number },
+		other: { type: String },
+	},
+	week2Report: {
+		strength: { type: String },
+		pushups: { type: String },
+		weight: { type: Number },
+		other: { type: String },
+	},
+	week3Report: {
+		strength: { type: String },
+		pushups: { type: String },
+		weight: { type: Number },
+		other: { type: String },
+	},
+	week4Report: {
+		strength: { type: String },
+		pushups: { type: String },
+		weight: { type: Number },
+		other: { type: String },
+	},
 });
 
 module.exports = mongoose.model('TraineePlan', TraineePlanSchema);

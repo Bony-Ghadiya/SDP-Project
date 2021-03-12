@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const HttpError = require('../models/http-error');
 const User = require('../models/User');
 const Trainer = require('../models/trainers');
-const Trainees = require('../models/trainee');
+const Trainee = require('../models/trainee');
 const TraineePlan = require('../models/TraineePlan');
 const TrainerPlan = require('../models/TrainerPlan');
 
@@ -75,16 +75,7 @@ const completeZero = async (req, res, next) => {
 				}
 			}
 		}
-		if (day === 7) {
-			trainers.week1Submitted = 1;
-		} else if (day === 14) {
-			trainers.week2Submitted = 1;
-		} else if (day === 21) {
-			trainers.week3Submitted = 1;
-		} else if (day === 28) {
-			trainers.week4Submitted = 1;
-		}
-		plans.traineeDay = day;
+		plans.traineeDay = day + 1;
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
@@ -112,19 +103,43 @@ const completeZero = async (req, res, next) => {
 	res.json({ defaultexercise: trainers.toObject({ getters: true }) });
 };
 
-const setFeedback = async (req, res, next) => {
-	console.log('set feedback');
-	const { tuid, day } = req.body;
-	console.log(tuid);
-
-	let trainers, plans;
+const getFeedback = async (req, res, next) => {
+	console.log('feedback');
+	const tid = req.params.tid;
+	console.log(tid);
+	let trainers;
 	try {
-		trainers = await TraineePlan.findOne({ traineeuserid: tuid }).populate(
+		trainers = await TraineePlan.find({ traineeid: tid }).populate(
 			'plan.exercises.exerciseid'
 		);
-		plans = await TrainerPlan.findOne({ traineeuserid: tuid }).populate(
-			'plan.exercises.exerciseid'
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Fetching trainers failed, please try again later.',
+			500
 		);
+		return next(error);
+	}
+	if (trainers) {
+		res.json({
+			defaultexercise: trainers[0].toObject({ getters: true }),
+		});
+	} else {
+		res.json({
+			message: ' please provide the plan first.',
+		});
+	}
+};
+const giveReporting = async (req, res, next) => {
+	console.log('giveReporting');
+	const { userid, week, strength, pushups, weight, other } = req.body;
+	console.log(userid);
+
+	let trainers;
+	try {
+		trainers = await TraineePlan.findOne({
+			traineeuserid: userid,
+		}).populate('plan.exercises.exerciseid');
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
@@ -135,22 +150,32 @@ const setFeedback = async (req, res, next) => {
 	}
 
 	try {
-		var i;
-		for (i = 0; i < trainers.plan.length; i++) {
-			if (trainers.plan[i].dayNo === day) {
-				trainers.plan[i].dayComplated = 1;
-			}
-		}
-		if (day === 7) {
+		if (week === 1) {
+			console.log('week1');
 			trainers.week1Submitted = 1;
-		} else if (day === 14) {
+			trainers.week1Report.strength = strength;
+			trainers.week1Report.pushups = pushups;
+			trainers.week1Report.weight = weight;
+			trainers.week1Report.other = other;
+		} else if (week === 2) {
 			trainers.week2Submitted = 1;
-		} else if (day === 21) {
+			trainers.week2Report.strength = strength;
+			trainers.week2Report.pushups = pushups;
+			trainers.week2Report.weight = weight;
+			trainers.week2Report.other = other;
+		} else if (week === 3) {
 			trainers.week3Submitted = 1;
-		} else if (day === 28) {
+			trainers.week3Report.strength = strength;
+			trainers.week3Report.pushups = pushups;
+			trainers.week3Report.weight = weight;
+			trainers.week3Report.other = other;
+		} else if (week === 4) {
 			trainers.week4Submitted = 1;
+			trainers.week4Report.strength = strength;
+			trainers.week4Report.pushups = pushups;
+			trainers.week4Report.weight = weight;
+			trainers.week4Report.other = other;
 		}
-		plans.traineeDay = day;
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
@@ -164,7 +189,6 @@ const setFeedback = async (req, res, next) => {
 		const sess = await mongoose.startSession();
 		sess.startTransaction();
 		await trainers.save({ session: sess });
-		await plans.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (err) {
 		console.log(err);
@@ -174,9 +198,41 @@ const setFeedback = async (req, res, next) => {
 		);
 		return next(error);
 	}
-
-	res.json({ defaultexercise: trainers.toObject({ getters: true }) });
+	res.json({ message: ' okay', success: 1 });
+	// res.json({ defaultexercise: trainers.toObject({ getters: true }) });
 };
+
+const showReporting = async (req, res, next) => {
+	console.log('showReporting');
+	const tid = req.params.tuid;
+	console.log(tid);
+	let trainers;
+	try {
+		trainers = await TraineePlan.find({ traineeid: tid }).populate(
+			'plan.exercises.exerciseid'
+		);
+		console.log(trainers);
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Fetching trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+	if (trainers.length !== 0) {
+		res.json({
+			defaultexercise: trainers[0].toObject({ getters: true }),
+		});
+	} else {
+		res.json({
+			message: ' please provide the plan first.',
+		});
+	}
+};
+
 exports.viewPlan = viewPlan;
 exports.completeZero = completeZero;
-exports.setFeedback = setFeedback;
+exports.getFeedback = getFeedback;
+exports.giveReporting = giveReporting;
+exports.showReporting = showReporting;

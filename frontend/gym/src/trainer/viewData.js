@@ -11,6 +11,7 @@ const ViewData = () => {
 	const history = useHistory();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [data, setData] = useState();
+	const [day0flag, setDay0Flag] = useState(0);
 
 	useEffect(() => {
 		const fetchRequests = async () => {
@@ -19,6 +20,7 @@ const ViewData = () => {
 					`http://localhost:5000/api/getplan/getdetails/${traineeid}`
 				);
 				setData(responseData.exe);
+				setDay0Flag(responseData.showfeedback);
 			} catch (err) {}
 		};
 		fetchRequests();
@@ -35,7 +37,7 @@ const ViewData = () => {
 			{!isLoading && data && (
 				<div style={{ textAlign: 'center', color: 'black' }}>
 					<Card style={{ width: '35%', textAlign: 'center', margin: 'auto' }}>
-						<table className="table1" id="t01" style={{ margin: '0px'}}>
+						<table className="table1" id="t01" style={{ margin: '0px' }}>
 							<caption>{traineename}'s Data</caption>
 							<tr className="row">
 								<td className="data1">Gender</td>
@@ -78,15 +80,28 @@ const ViewData = () => {
 								<td className="data2">{data.values.age}</td>
 							</tr>
 						</table>
-						<input
-							type="button"
-							className="btn2"
-							value="View Plan"
-							onClick={e => {
-								e.preventDefault();
-								history.push('/showtrainees/giveplan');
-							}}
-						/>
+						{day0flag === 0 && (
+							<input
+								type="button"
+								className="btn2"
+								value="View Plan"
+								onClick={e => {
+									e.preventDefault();
+									history.push('/showtrainees/giveplan');
+								}}
+							/>
+						)}
+						{day0flag === 1 && (
+							<input
+								type="button"
+								className="btn2"
+								value="Daily Feedback"
+								onClick={e => {
+									e.preventDefault();
+									history.push('/showtrainees/viewfeedback');
+								}}
+							/>
+						)}
 					</Card>
 				</div>
 			)}

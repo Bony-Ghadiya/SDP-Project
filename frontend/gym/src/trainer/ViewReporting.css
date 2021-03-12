@@ -1,0 +1,29 @@
+.MuiAppBar-colorPrimary {
+	color: white !important;
+	background-color: #4caf50 !important;
+}
+
+.PrivateTabIndicator {
+	background-color: black !important;
+}
+
+.PrivateTabIndicator-colorSecondary-16 {
+	background-color: #143b16 !important;
+	height: 5px !important;
+}
+.simple-tabpanel-0 {
+	background-color: red !important;
+}
+.MuiTypography-body1 {
+	background: transparent !important;
+}
+.makeStyles-root {
+	background: transparent !important;
+}
+.MuiTab-root {
+	min-width: 25% !important;
+}
+.MuiTabs-indicator {
+	background-color: #143b16 !important;
+	height: 5px !important;
+}
