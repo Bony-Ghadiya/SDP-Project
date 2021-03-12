@@ -19,6 +19,7 @@ h3 {
   text-align: center;
   margin: auto;
 }
+
 .grid {
   display: grid;
   text-align: center;
@@ -76,6 +77,8 @@ h3 {
   padding: 0;
   border: none;
   font-weight: bold;
+  color: white;
+  border: 1px solid #4caf50 !important;
 }
 
 .close {
@@ -86,6 +89,7 @@ h3 {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  border-color: white;
 }
 
 .anotherData h4 {
@@ -223,4 +227,10 @@ st-modal {
 
 .SearchExercises {
   color: white !important;
+  margin-right: 30px;
+}
+
+.daysbutton {
+  color: white !important;
+  border-color: white !important;
 }

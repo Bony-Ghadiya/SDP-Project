@@ -18,12 +18,12 @@ import './Giveplan.css';
 
 const CssTextField = withStyles({
 	root: {
-		color: 'black',
+		color: 'white',
 		'& label': {
-			color: 'black',
+			color: 'white',
 		},
 		'& label.Mui-focused': {
-			color: 'black',
+			color: 'white',
 		},
 	},
 })(TextField);
@@ -32,13 +32,13 @@ const useStyles = makeStyles(theme => ({
 	inputRoot: {
 		color: 'black',
 		'& .MuiOutlinedInput-notchedOutline': {
-			borderColor: 'black',
+			borderColor: 'white',
 		},
 		'&:hover .MuiOutlinedInput-notchedOutline': {
-			borderColor: 'black',
+			borderColor: 'white',
 		},
 		'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-			borderColor: 'black',
+			borderColor: 'white',
 		},
 	},
 }));
@@ -1201,7 +1201,7 @@ const GivePlan = () => {
 																				>
 																					<Autocomplete
 																						width={300}
-																						style={{ width: 200 }}
+																						style={{ width: 200 , color: 'white'}}
 																						classes={classes}
 																						value={temp}
 																						id="grouped-demo"
@@ -1238,6 +1238,7 @@ const GivePlan = () => {
 																				<br />
 																				<button
 																					className="daysbutton"
+																					
 																					onClick={e => {
 																						searchSubmitHandler(e);
 																					}}
@@ -1492,6 +1493,7 @@ const GivePlan = () => {
 																								{...params}
 																								label="Add Exercises"
 																								variant="outlined"
+																								
 																							/>
 																						</div>
 																					)}
@@ -1505,6 +1507,7 @@ const GivePlan = () => {
 																			<br />
 																			<button
 																				className="daysbutton"
+																				style={{ margin: '10px 5px', color:'white' , borderColor: 'white' }}
 																				onClick={e => {
 																					searchSubmitHandler(e);
 																				}}
@@ -1596,7 +1599,7 @@ const GivePlan = () => {
 												{!isDays && (
 													<div>
 														<button
-															style={{ margin: 'auto 5px', color:'white' , border: 'white' }}
+															style={{ margin: 'auto 5px', color:'white' , borderColor: 'white' }}
 															onClick={() => {
 																setIsDays(true);
 																setShowNew(false);
@@ -1609,7 +1612,7 @@ const GivePlan = () => {
 															BACK
 														</button>
 														<button
-															style={{ margin: 'auto 5px'  , color:'white' , border: 'white'  }}
+															style={{ margin: 'auto 5px'  , color:'white' , borderColor: 'white'  }}
 															onClick={async e => {
 																e.preventDefault();
 																try {
@@ -1646,7 +1649,7 @@ const GivePlan = () => {
 															RESET
 														</button>
 														<button
-															style={{ margin: 'auto 5px' , color:'white' , border: 'white' }}
+															style={{ margin: 'auto 5px' , color:'white' , borderColor: 'white' }}
 															onClick={async e => {
 																e.preventDefault();
 																try {
