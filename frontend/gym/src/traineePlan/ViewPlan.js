@@ -4,14 +4,12 @@ import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
-import { StaticDialog, useDialog } from 'react-st-modal';
 import Exercise from './exercise';
 import { Dialog, DialogOverlay, DialogContent } from '@reach/dialog';
 import '@reach/dialog/styles.css';
 // ani CSS :- giveplan.css
 const ViewPlan = () => {
 	const auth = useContext(AuthContext);
-	const [feedback, setFeedback] = useState('');
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [trainerPlan, setTrainerPlan] = useState();
 	const [isDays, setIsDays] = useState(true);
@@ -35,6 +33,7 @@ const ViewPlan = () => {
 				'PATCH',
 				JSON.stringify({
 					tuid: auth.userId,
+					fb: feedback,
 					day: dayNo,
 				}),
 				{
@@ -46,7 +45,6 @@ const ViewPlan = () => {
 		} catch (err) {
 			console.log(err);
 		} finally {
-			setFeedback(feedback);
 			setShowDialog(false);
 		}
 	};
@@ -619,6 +617,7 @@ const ViewPlan = () => {
 								isOpen={showDialog}
 								onDismiss={dismiss}
 								style={{
+									width: '40%',
 									marginTop: '50px !important',
 									background: 'black',
 								}}
@@ -632,27 +631,32 @@ const ViewPlan = () => {
 								<hr />
 								<button
 									className="button"
-									style={{ margin: 'auto 5px' }}
+									style={{ margin: 'auto 5px', width: '150px' }}
 									onClick={() => {
-										completeHandler(selectedDay, 'EASY');
+										completeHandler(selectedDay, 1);
 									}}
 								>
 									EASY
 								</button>
+								<br />
+								<br />
 								<button
 									className="button"
 									onClick={() => {
-										completeHandler(selectedDay, 'JUST RIGHT');
+										completeHandler(selectedDay, 5);
 									}}
+									style={{ margin: 'auto 5px', width: '150px' }}
 								>
 									JUST RIGHT
 								</button>
+								<br />
+								<br />
 								<button
 									className="button"
 									onClick={() => {
-										completeHandler(selectedDay, 'TOO HARD');
+										completeHandler(selectedDay, 10);
 									}}
-									style={{ margin: 'auto 5px' }}
+									style={{ margin: 'auto 5px', width: '150px' }}
 								>
 									TOO HARD
 								</button>

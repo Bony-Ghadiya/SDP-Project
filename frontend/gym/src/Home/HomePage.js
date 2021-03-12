@@ -52,19 +52,19 @@ const Home = () => {
 		<React.Fragment>
 			<div>
 				<div className="all">
-				<div className="carousel">
-					<Carousel
-						next={(next, active) =>
-							console.log(`we left ${active}, and are now at ${next}`)
-						}
-						prev={(prev, active) =>
-							console.log(`we left ${active}, and are now at ${prev}`)
-						}
-					>
-						{items.map((item, i) => (
-							<Item key={i} item={item} />
-						))}
-					</Carousel>
+					<div className="carousel">
+						<Carousel
+							next={(next, active) =>
+								console.log(`we left ${active}, and are now at ${next}`)
+							}
+							prev={(prev, active) =>
+								console.log(`we left ${active}, and are now at ${prev}`)
+							}
+						>
+							{items.map((item, i) => (
+								<Item key={i} item={item} />
+							))}
+						</Carousel>
 					</div>
 					<div className="about">
 						<img
@@ -79,16 +79,14 @@ const Home = () => {
 					</div>
 					<div className="title">
 						<h3>Who we Are &amp; What We Do</h3>
-						<p1>
+						<p>
 							GEP is a cutting-edge functional fitness system that can help
 							everyone - everyday. There is a significant portion of
-						</p1>
+						</p>
 						<p>
 							{' '}
-							the people , who actually want and need
-							gudiance and awareness for finess and
-							we help them.
-							
+							the people , who actually want and need gudiance and awareness for
+							finess and we help them.
 						</p>
 					</div>
 					<div>
@@ -118,16 +116,14 @@ const Home = () => {
 								</td>
 								<td />
 								<td className="list2">
-								<div className="list2header">
-									We would like to highlight few points which seperate us from others!
-									Let's take a look!
-								</div>
-								
+									<div className="list2header">
+										We would like to highlight few points which seperate us from
+										others! Let's take a look!
+									</div>
 								</td>
 							</tr>
 							<tr>
 								<td className="list">
-							
 									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
@@ -141,20 +137,12 @@ const Home = () => {
 								<td />
 								<td className="list2">
 									<div className="list2points">
-									<ul>
-										<li id="li">
-											Certified Trainers
-										</li>
-										<li id="li">
-											Personalized Plans
-										</li>
-										<li id="li">
-											Detailed Explanation Of Every Exercises
-										</li>
-										<li id="li">
-											Fitness Related Tips & Tricks
-										</li>
-									</ul>
+										<ul>
+											<li id="li">Certified Trainers</li>
+											<li id="li">Personalized Plans</li>
+											<li id="li">Detailed Explanation Of Every Exercises</li>
+											<li id="li">Fitness Related Tips & Tricks</li>
+										</ul>
 									</div>
 								</td>
 							</tr>
@@ -206,7 +194,7 @@ const Home = () => {
 									style={{ color: 'green', marginRight: '9px' }}
 								/>
 								<span>Address: </span>
-								   Surat, Gujarat , India
+								Surat, Gujarat , India
 							</div>
 						</ul>
 					</div>

@@ -858,6 +858,18 @@ const submit = async (req, res, next) => {
 			console.log('created', createdTraineePlan);
 			trainer.isComplate = 1;
 			var i;
+			if (startDay >= 1 && lastDay <= 7) {
+				trainer.week1Submitted = 1;
+			}
+			if (startDay >= 8 && lastDay <= 14) {
+				trainer.week2Submitted = 1;
+			}
+			if (startDay >= 15 && lastDay <= 21) {
+				trainer.week3Submitted = 1;
+			}
+			if (startDay >= 22 && lastDay <= 28) {
+				trainer.week4Submitted = 1;
+			}
 			for (i = 0; i < trainer.plan.length; i++) {
 				if (i === 0) {
 					obj = {

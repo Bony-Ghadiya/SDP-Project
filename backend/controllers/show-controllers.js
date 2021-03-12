@@ -12,7 +12,6 @@ const getTrainees = async (req, res, next) => {
 
 	try {
 		trainers = await Trainer.findOne({ userid: userid }).populate('trainees');
-		console.log('trainers : ', trainers);
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(

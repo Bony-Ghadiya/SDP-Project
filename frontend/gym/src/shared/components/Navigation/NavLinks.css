@@ -27,7 +27,7 @@
 .nav-links a.active {
 	background: white;
 	border-color: #292929;
-	color: #292929;
+	color: #292929 !important;
 }
 
 .nav-links button {

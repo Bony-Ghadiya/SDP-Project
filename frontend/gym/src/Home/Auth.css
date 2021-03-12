@@ -8,12 +8,12 @@ hr {
 }
 
 hr.style-line {
-	overflow: visible;
-	height: 30px;
-	border-style: solid;
-	border-color: #4caf50;
-	border-width: 3px 0 0 0;
-	border-radius: 20px;
+	overflow: visible !important;
+	height: 30px !important;
+	border-style: solid !important;
+	border-color: #4caf50 !important;
+	border-width: 3px 0 0 0 !important;
+	border-radius: 20px !important;
 }
 hr.style-line:before {
 	display: block;
@@ -36,33 +36,33 @@ hr.style-line:before {
 	width: 90%;
 	max-width: 25rem;
 	margin: auto;
-	background: none;
-	color: white;
-	border: solid #4caf50;
+	background: none !important;
+	color: white !important;
+	border: solid #4caf50 !important;
 }
 
 .authentication form {
-	margin-bottom: 1rem;
-	margin-bottom: 1rem;
+	margin-bottom: 1rem !important;
+	margin-bottom: 1rem !important;
 }
 
 a:visited,
 a:link {
-	color: white;
+	color: white !important;
 }
 
 a:hover,
 a:active {
-	color: #4caf50;
+	color: #4caf50 !important;
 }
 
 /* The Radio Button Style - Bony Ghadiya */
 .RadioBu {
-	display: block;
-	position: relative;
-	margin-bottom: 12px;
-	cursor: pointer;
-	font-size: 16px;
+	display: block !important;
+	position: relative !important;
+	margin-bottom: 12px !important;
+	cursor: pointer !important;
+	font-size: 16px !important;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -94,7 +94,7 @@ a:active {
 
 /* When the radio button is checked, add a blue background */
 .RadioBu input:checked ~ .checkmark {
-	background-color: #4caf50;
+	background-color: #4caf50 !important;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */

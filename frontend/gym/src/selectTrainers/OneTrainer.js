@@ -188,7 +188,12 @@ const OneTrainer = props => {
 										</li>
 									))}
 								{!isLoading && trainer && (
-									<Card.Footer style={{ borderTop: '1px solid black',marginBottom:'13px' }}>
+									<Card.Footer
+										style={{
+											borderTop: '1px solid black',
+											marginBottom: '13px',
+										}}
+									>
 										<input
 											type="button"
 											className="button"
@@ -231,7 +236,6 @@ const OneTrainer = props => {
 															setAcceptModal(false);
 															auth.setSelection();
 															history.push('/');
-															window.location.reload();
 														}
 													}}
 												>

@@ -156,7 +156,6 @@ const ApplyTrainer = () => {
 							}}
 							min={0}
 							max={100}
-							value={0}
 							onChange={ExpChangeHandler}
 						/>
 						<br />
