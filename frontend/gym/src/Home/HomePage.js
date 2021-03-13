@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
-import { Paper, Button } from '@material-ui/core';
+import { AuthContext } from '../shared/context/auth-context';
 import './style.css';
 
 // jo ama me components muki didha 6e have tu ane sarkha arrenge karje n carousal ma jya image 6ene ema text mukvai try karje
@@ -11,6 +12,8 @@ import './style.css';
 // n aj sanj sudhi ma kari ne apaje
 
 const Home = () => {
+	const history = useHistory();
+	const auth = useContext(AuthContext);
 	var items = [
 		{
 			name: 'Join Us Now',
@@ -34,17 +37,29 @@ const Home = () => {
 
 	function Item(props) {
 		return (
-			<Paper className="paper">
+			<div className="container">
 				<img
 					src={props.item.img}
 					alt="nothing"
 					style={{ width: '100%', height: '40%' }}
 				></img>
-				<h2>{props.item.name}</h2>
-				<p>{props.item.description}</p>
+				<div className="bottom-left">
+					<h1 style={{ fontSize: '40px' }}>{props.item.name}</h1>
+					<h2 style={{ fontSize: '36px' }}>{props.item.description}</h2>
 
-				<Button className="CheckButton">Check it out!</Button>
-			</Paper>
+					{!auth.isLoggedIn && (
+						<button
+							style={{ fontSize: '30px' }}
+							className="button"
+							onClick={() => {
+								history.push('/auth');
+							}}
+						>
+							JOIN US
+						</button>
+					)}
+				</div>
+			</div>
 		);
 	}
 
@@ -53,14 +68,7 @@ const Home = () => {
 			<div>
 				<div className="all">
 					<div className="carousel">
-						<Carousel
-							next={(next, active) =>
-								console.log(`we left ${active}, and are now at ${next}`)
-							}
-							prev={(prev, active) =>
-								console.log(`we left ${active}, and are now at ${prev}`)
-							}
-						>
+						<Carousel>
 							{items.map((item, i) => (
 								<Item key={i} item={item} />
 							))}
@@ -79,15 +87,14 @@ const Home = () => {
 					</div>
 					<div className="title">
 						<h3>Who we Are &amp; What We Do</h3>
-						<p>
-							HEP is a cutting-edge functional fitness system that can help
-							everyone - everyday. There is a significant portion of
-						</p>
-						<p>
-							{' '}
-							the people , who actually want and need gudiance and awareness for
-							finess and we help them.
-						</p>
+						<div style={{ textAlign: 'justify', width: '990px' }}>
+							<p>
+								HEP is a cutting-edge functional fitness system that can help
+								everyone - everyday. There is a significant portion of the
+								people , who actually want and need gudiance and awareness for
+								finess and we help them.
+							</p>
+						</div>
 					</div>
 					<div>
 						<img
@@ -107,9 +114,10 @@ const Home = () => {
 							<tr>
 								<td className="list" style={{ width: '600px' }}>
 									{' '}
-									If you want to exercise and get healthy or get in shape without 
-									going to actual gym due to global pendamic or for anyother reason,
-									then HEP is perfect for what you are looking for!  
+									If you want to exercise and get healthy or get in shape
+									without going to actual gym due to global pendamic or for
+									anyother reason, then HEP is perfect for what you are looking
+									for!
 								</td>
 								<td />
 								<td className="list2">
@@ -121,12 +129,11 @@ const Home = () => {
 							</tr>
 							<tr>
 								<td className="list">
-									
-									Here at HEP , every fitness enthusiastic get personlized fitness
-									plans , sounds cool right? Not just that , but also exercises with 
-									description , video and animated gif! To make sure trainers and 
-									users are always on the same page , users can leave feedback and share 
-									their experienece. 
+									Here at HEP , every fitness enthusiastic get personlized
+									fitness plans , sounds cool right? Not just that , but also
+									exercises with description , video and animated gif! To make
+									sure trainers and users are always on the same page , users
+									can leave feedback and share their experienece.
 								</td>
 								<td />
 								<td className="list2">
@@ -155,7 +162,7 @@ const Home = () => {
 							{' '}
 							<p>
 								Feel free to contact us if you have any questions! We would Be
-								more than happy to guiade you. 
+								more than happy to guiade you.
 							</p>
 						</div>
 					</div>
