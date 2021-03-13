@@ -13,20 +13,20 @@ import './style.css';
 const Home = () => {
 	var items = [
 		{
-			name: 'Random Name #1',
-			description: 'Probably the most random thing you have ever seen!',
+			name: 'Join Us Now',
+			description: 'Get In Shape!',
 			img:
 				'https://res.cloudinary.com/gymmie/image/upload/v1614924713/home%20page/slide1_xhkvma.jpg',
 		},
 		{
-			name: 'Random Name #2',
-			description: 'Hello World!',
+			name: 'Customized Plans',
+			description: 'Certified Trainers',
 			img:
 				'https://res.cloudinary.com/gymmie/image/upload/v1614924713/home%20page/slide2_yus4jz.jpg',
 		},
 		{
-			name: 'Random Name #3',
-			description: 'Hello World!',
+			name: 'Best Exercises At Home',
+			description: ' Explained In Details Exercises ',
 			img:
 				'https://res.cloudinary.com/gymmie/image/upload/v1614924723/home%20page/slide3_z38jpb.jpg',
 		},
@@ -80,7 +80,7 @@ const Home = () => {
 					<div className="title">
 						<h3>Who we Are &amp; What We Do</h3>
 						<p>
-							GEP is a cutting-edge functional fitness system that can help
+							HEP is a cutting-edge functional fitness system that can help
 							everyone - everyday. There is a significant portion of
 						</p>
 						<p>
@@ -107,12 +107,9 @@ const Home = () => {
 							<tr>
 								<td className="list" style={{ width: '600px' }}>
 									{' '}
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutusssssss
+									If you want to exercise and get healthy or get in shape without 
+									going to actual gym due to global pendamic or for anyother reason,
+									then HEP is perfect for what you are looking for!  
 								</td>
 								<td />
 								<td className="list2">
@@ -124,15 +121,12 @@ const Home = () => {
 							</tr>
 							<tr>
 								<td className="list">
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-									Aboutusssssss
+									
+									Here at HEP , every fitness enthusiastic get personlized fitness
+									plans , sounds cool right? Not just that , but also exercises with 
+									description , video and animated gif! To make sure trainers and 
+									users are always on the same page , users can leave feedback and share 
+									their experienece. 
 								</td>
 								<td />
 								<td className="list2">

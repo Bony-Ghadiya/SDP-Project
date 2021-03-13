@@ -193,3 +193,7 @@ li {
   padding-left: 200px;
   padding-bottom: 30px;
 }
+
+.checkButton {
+  color: white !important;
+}
