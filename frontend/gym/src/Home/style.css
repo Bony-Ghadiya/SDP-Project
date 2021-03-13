@@ -27,7 +27,8 @@
   color: #4caf50;
   border: 1px solid;
   max-width: 100%;
-  margin: 0 auto !important;
+  margin: 15px 45% !important;
+  /* margin: 20px !important; */
 }
 
 .slider1 {
@@ -92,12 +93,17 @@
   margin-bottom: 20px;
 }
 
+.about {
+  position: relative;
+}
+
 .text1 {
-  font-size: 30px;
+  font-size: 25px;
   color: white;
-  /* position: absolute;
-  bottom: 50px;
-  left: 70px; */
+  position: absolute;
+  top: 20%;
+  left: 20px;
+  z-index: 1;
 }
 
 .title {

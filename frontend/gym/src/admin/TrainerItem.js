@@ -34,7 +34,7 @@ const ExerciseItem = props => {
 	return (
 		<Container>
 			<Card border="primary" style={{ maxWidth: '18rem', padding: '0px' }}>
-				<Card.Header as="h3" style={{ borderBottom: '1px solid black' }}>
+				<Card.Header as="h3" style={{ borderBottom: '1px solid black' , background: 'none' }}>
 					{props.name}
 				</Card.Header>
 				<Card.Body>

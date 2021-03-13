@@ -87,7 +87,7 @@ const Home = () => {
 											marginTop: '0px',
 											borderBottom: '1px solid black',
 											padding: '5px 0',
-											backgroundColor: '#F5F5F5',
+											background: 'none',
 										}}
 									>
 										{t.name}
@@ -160,7 +160,7 @@ const Home = () => {
 
 										<br />
 									</Card.Body>
-									<Card.Footer style={{ padding: '5px 0' }}>
+									<Card.Footer style={{ padding: '5px 0', margin:'10px' }}>
 										<Modal
 											show={acceptModal}
 											onCancel={cancelAccepthandler}

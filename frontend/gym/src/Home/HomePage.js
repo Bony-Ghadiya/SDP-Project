@@ -74,7 +74,7 @@ const Home = () => {
 							alt=""
 						/>
 						<div className="text1">
-							<h1>About Us</h1>
+							<h1>Get Fit Today!</h1>
 						</div>
 					</div>
 					<div className="title">
@@ -147,16 +147,15 @@ const Home = () => {
 					<div className="left">
 						<div className="left1">
 							<img
-								src="https://res.cloudinary.com/gymmie/image/upload/v1614924665/home%20page/logo1_c1srzw.png"
+								src="https://res.cloudinary.com/gymmie/image/upload/v1615601921/home%20page/logo1new_emjduo.png"
 								alt=""
 							/>
 						</div>
 						<div className="text5">
 							{' '}
 							<p>
-								Despite growth of the Internet over the past seven years, the
-								use of toll-free phone numbers in television advertising
-								continues.
+								Feel free to contact us if you have any questions! We would Be
+								more than happy to guiade you. 
 							</p>
 						</div>
 					</div>
