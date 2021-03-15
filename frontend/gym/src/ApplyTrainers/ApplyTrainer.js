@@ -2,6 +2,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import React, { useContext, useState } from 'react';
 import { Card } from 'react-bootstrap';
+import Card1 from '../shared/components/UIElements/Card';
 import NumericInput from 'react-numeric-input';
 import { useHistory } from 'react-router-dom';
 import ErrorModal from '../shared/components/UIElements/ErrorModal';
@@ -245,7 +246,9 @@ const ApplyTrainer = () => {
 					</Card>
 				</div>
 			)}
-			{auth.isRequested && 'Please wait your status will be updated soon.'}
+			{auth.isRequested && (
+				<Card1>'Please wait your status will be updated soon.'</Card1>
+			)}
 		</React.Fragment>
 	);
 };

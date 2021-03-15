@@ -14,6 +14,7 @@ const trainerSchema = new Schema({
 	approved: { type: Number, default: 0 },
 	requested: { type: Number, default: 0 },
 	trainees: [{ type: mongoose.Types.ObjectId, ref: 'Trainees' }],
+	traineeCount: { type: Number, default: 0 },
 });
 
 // module.exports = mongoose.model('User', userSchema);

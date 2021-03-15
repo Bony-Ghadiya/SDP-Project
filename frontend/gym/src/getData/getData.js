@@ -93,6 +93,9 @@ export default function ProgressMobileStepper() {
 	const [form5Data, setForm5Data] = useState(null);
 	const [form6Data, setForm6Data] = useState(null);
 	const [form7Data, setForm7Data] = useState(null);
+	const [weightError, setWeightError] = useState(0);
+	const [heightError, setHeightError] = useState(0);
+	const [ageError, setAgeError] = useState(0);
 	const [values, setValues] = useState({ weight: '', height: '', age: '' });
 
 	const formSubmitHandler = async () => {
@@ -108,30 +111,41 @@ export default function ProgressMobileStepper() {
 			form7Data,
 			values
 		);
-		try {
-			responseData = await sendRequest(
-				'http://localhost:5000/api/getplan/plan',
-				'POST',
-				JSON.stringify({
-					userid: auth.userId,
-					gender: form1Data,
-					goal: form2Data,
-					time: form3Data,
-					strength: form4Data,
-					pushups: form5Data,
-					workout: form6Data,
-					difficulty: form7Data,
-					values: values,
-				}),
-				{
-					'Content-Type': 'application/json',
-				}
-			);
-			console.log(responseData);
-		} catch (err) {
-		} finally {
-			auth.setDataGiven();
-			history.push('/');
+		if (values.weight <= 40 && values.weight >= 130) {
+			setWeightError(1);
+		} else if (values.height <= 70 && values.height >= 200) {
+			setHeightError(1);
+		} else if (values.age <= 15 && values.height >= 50) {
+			setAgeError(1);
+		} else {
+			setWeightError(0);
+			setHeightError(0);
+			setAgeError(0);
+			try {
+				responseData = await sendRequest(
+					'http://localhost:5000/api/getplan/plan',
+					'POST',
+					JSON.stringify({
+						userid: auth.userId,
+						gender: form1Data,
+						goal: form2Data,
+						time: form3Data,
+						strength: form4Data,
+						pushups: form5Data,
+						workout: form6Data,
+						difficulty: form7Data,
+						values: values,
+					}),
+					{
+						'Content-Type': 'application/json',
+					}
+				);
+				console.log(responseData);
+			} catch (err) {
+			} finally {
+				auth.setDataGiven();
+				history.push('/');
+			}
 		}
 	};
 
@@ -470,7 +484,9 @@ export default function ProgressMobileStepper() {
 									<Input
 										id="standard-adornment-age"
 										value={values.age}
-										onChange={handleChange('age')}
+										onChange={e => {
+											handleChange('age');
+										}}
 										endAdornment={
 											<InputAdornment position="end">years</InputAdornment>
 										}
@@ -483,6 +499,9 @@ export default function ProgressMobileStepper() {
 										Age
 									</FormHelperText>
 								</FormControl>
+								{ageError === 1 && (
+									<p style={{ color: 'red' }}>age must be between 15 and 50.</p>
+								)}
 								<FormControl
 									className={clsx(
 										classes1.margin,
@@ -503,12 +522,14 @@ export default function ProgressMobileStepper() {
 										aria-describedby="standard-weight-helper-text"
 										inputProps={{
 											'aria-label': 'weight',
+											inputProps: { min: 5, max: 10 },
 										}}
 										InputLabelProps={{
 											shrink: true,
 											style: { color: '#4caf50' },
 										}}
 										InputProps={{
+											inputProps: { min: 5, max: 10 },
 											style: {
 												color: 'white',
 												'&:hover': {
@@ -526,6 +547,11 @@ export default function ProgressMobileStepper() {
 										Weight
 									</FormHelperText>
 								</FormControl>
+								{weightError === 1 && (
+									<p style={{ color: 'red' }}>
+										weight must be between 40 and 130.
+									</p>
+								)}
 								<FormControl
 									className={clsx(
 										classes1.margin,
@@ -549,6 +575,11 @@ export default function ProgressMobileStepper() {
 										Height
 									</FormHelperText>
 								</FormControl>
+								{heightError === 1 && (
+									<p style={{ color: 'red' }}>
+										height must be between 70 and 200.
+									</p>
+								)}
 							</div>
 							<input
 								className="btn1"
