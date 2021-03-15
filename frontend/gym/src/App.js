@@ -26,6 +26,7 @@ import ViewReporting from './trainer/ViewReporting';
 import ViewPlan from './traineePlan/ViewPlan';
 import Reporting from './traineePlan/Reporting';
 import Feedback from './traineePlan/Feedback';
+import UpdateProfile from './Home/UpdateProfile';
 import New from './new';
 import './App.css';
 import { AuthContext } from './shared/context/auth-context';
@@ -96,6 +97,9 @@ const App = () => {
 				<Route path="/feedback" exact>
 					<Feedback />
 				</Route>
+				<Route path="/updateprofile" exact>
+					<UpdateProfile />
+				</Route>
 				<Route path="/" exact>
 					<Home />
 				</Route>
@@ -133,6 +137,9 @@ const App = () => {
 				<Route path="/showtrainees" exact>
 					<ShowTrainee />
 				</Route>
+				<Route path="/updateprofile" exact>
+					<UpdateProfile />
+				</Route>
 				<Redirect to="/" />
 			</Switch>
 		);
@@ -150,6 +157,9 @@ const App = () => {
 				</Route>
 				<Route path="/approvetrainer" exact>
 					<ApproveTrainer />
+				</Route>
+				<Route path="/updateprofile" exact>
+					<UpdateProfile />
 				</Route>
 				<Redirect to="/" />
 			</Switch>

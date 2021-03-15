@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 import Card from '../shared/components/UIElements/Card';
@@ -14,20 +14,16 @@ import {
 import { useForm } from '../shared/hooks/form-hook';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
-import { TraineeContext } from '../shared/context/trainee-context';
-import { TrainerContext } from '../shared/context/trainer-context';
+import ImageUpload from '../shared/components/FormElements/ImageUpload';
 import './Auth.css';
 
 const Auth = () => {
 	const auth = useContext(AuthContext);
-	const tec = useContext(TraineeContext);
-	const trc = useContext(TrainerContext);
 	const [isLoginMode, setIsLoginMode] = useState(true);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [userType, setUserType] = useState('user');
-	const [url, setUrl] = useState('a');
 	const history = useHistory();
-	const filePickerRef = useRef();
+
 	const [formState, inputHandler, setFormData] = useForm(
 		{
 			email: {
@@ -42,27 +38,6 @@ const Auth = () => {
 		false
 	);
 
-	const postDetails = async e => {
-		const data = new FormData();
-		data.append('file', e.target.files[0]);
-		data.append('upload_preset', 'home-exercise-planner');
-		data.append('cloud_name', 'gymmie');
-
-		let responseData;
-		try {
-			responseData = await sendRequest(
-				'https://api.cloudinary.com/v1_1/gymmie/image/upload',
-				'POST',
-				data
-			);
-			console.log(responseData);
-		} catch (err) {
-		} finally {
-			console.log(responseData.url);
-			setUrl(responseData.url);
-		}
-	};
-
 	const switchModeHandler = () => {
 		if (!isLoginMode) {
 			setFormData(
@@ -73,8 +48,6 @@ const Auth = () => {
 				},
 				formState.inputs.email.isValid && formState.inputs.password.isValid
 			);
-
-			setUrl('a');
 		} else {
 			setFormData(
 				{
@@ -83,10 +56,13 @@ const Auth = () => {
 						value: '',
 						isValid: false,
 					},
+					image: {
+						value: null,
+						isValid: false,
+					},
 				},
 				false
 			);
-			setUrl('');
 		}
 		setIsLoginMode(prevMode => !prevMode);
 	};
@@ -125,8 +101,6 @@ const Auth = () => {
 					responseData.given,
 					responseData.complated
 				);
-				tec.setSelection();
-				trc.setApproval();
 				if (userType === 'user') {
 					history.push('/homeuser');
 				} else {
@@ -139,8 +113,9 @@ const Auth = () => {
 				formData.append('email', formState.inputs.email.value);
 				formData.append('name', formState.inputs.name.value);
 				formData.append('password', formState.inputs.password.value);
-				formData.append('image', url);
+				formData.append('image', formState.inputs.image.value);
 				formData.append('userType', userType);
+				console.log(formState.inputs);
 				const responseData = await sendRequest(
 					'http://localhost:5000/api/users/signup',
 					'POST',
@@ -157,9 +132,6 @@ const Auth = () => {
 					responseData.given,
 					responseData.complated
 				);
-
-				tec.setSelection();
-				trc.setApproval();
 				if (userType === 'user') {
 					history.push('/homeuser');
 				} else {
@@ -174,10 +146,10 @@ const Auth = () => {
 			<ErrorModal error={error} onClear={clearError} />
 			<Card className="authentication">
 				{isLoading && <LoadingSpinner asOverlay />}
-				<h2>{!isLoginMode ? 'SIGNUP' : 'LOGIN'}</h2>
+				<h2>UPDATE PROFILE </h2>
 				<hr className="style-line" />
 				<form onSubmit={authSubmitHandler}>
-					{!isLoginMode && (
+					{
 						<Input
 							element="input"
 							id="name"
@@ -186,8 +158,9 @@ const Auth = () => {
 							validators={[VALIDATOR_REQUIRE()]}
 							errorText="Please enter a name."
 							onInput={inputHandler}
+							initialValue="mihir"
 						/>
-					)}
+					}
 					<Input
 						element="input"
 						id="email"
@@ -196,94 +169,21 @@ const Auth = () => {
 						validators={[VALIDATOR_EMAIL()]}
 						errorText="Please enter a valid email address."
 						onInput={inputHandler}
+						initialValue="gediya"
 					/>
-					<Input
-						element="input"
-						id="password"
-						type="password"
-						label="Password"
-						validators={[VALIDATOR_MINLENGTH(6)]}
-						errorText="Please enter a valid password, at least 6 characters."
+					<ImageUpload
+						center
+						id="image"
 						onInput={inputHandler}
+						errorText="Please provide an image."
 					/>
-					{!isLoginMode && (
-						<div style={{ margin: '0' }}>
-							<div style={{ margin: '0' }}>
-								<input
-									ref={filePickerRef}
-									style={{ display: 'none' }}
-									type="file"
-									accept=".jpg,.png,.jpeg"
-									onChange={e => {
-										postDetails(e);
-									}}
-								/>
-							</div>
-							<div className="image-upload center">
-								<div className="image-upload__preview1">
-									{!url && <p>Please pick an image.</p>}
-									{url && <img src={url} alt="Preview" />}
-								</div>
-							</div>
-							<button
-								className="button"
-								style={{ margin: '0' }}
-								onClick={e => {
-									e.preventDefault();
-									filePickerRef.current.click();
-								}}
-							>
-								PICK IMAGE
-							</button>
-							{!url && <p>Please provide an image.</p>}
-						</div>
-					)}
-					{!isLoginMode && (
-						<div className="RadioButton">
-							<label className="RadioBu">
-								Register as a TRAINEE
-								<input
-									type="radio"
-									name="type"
-									value="user"
-									onChange={userChangeHandler}
-									checked={userType === 'user'}
-								/>
-								<span className="checkmark"></span>
-							</label>
-
-							<label className="RadioBu">
-								{' '}
-								Register as a TRAINER
-								<input
-									type="radio"
-									name="type"
-									value="trainer"
-									onChange={trainerChangeHandler}
-								/>
-								<span className="checkmark"></span>
-							</label>
-						</div>
-					)}
 
 					<br />
-					<Button type="submit" disabled={!formState.isValid || !url}>
-						{isLoginMode ? 'LOGIN' : 'SIGNUP'}
+
+					<Button type="submit" disabled={!formState.isValid}>
+						UPDATE
 					</Button>
 				</form>
-
-				<Button inverse onClick={switchModeHandler}>
-					SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
-				</Button>
-				<br />
-				<br />
-				{isLoginMode && (
-					<h4>
-						<Link style={{ textDecoration: 'none' }} to="/reset">
-							Forgot password ?
-						</Link>
-					</h4>
-				)}
 			</Card>
 		</React.Fragment>
 	);

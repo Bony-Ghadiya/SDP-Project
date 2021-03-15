@@ -56,10 +56,10 @@ const useStyles = makeStyles(theme => ({
 const ApplyTrainer = () => {
 	const history = useHistory();
 	const auth = useContext(AuthContext);
-	let Exp = 0;
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [startTime, setStartTime] = useState('01:00');
 	const [endTime, setEndTime] = useState('02:00');
+	const [exp, setExp] = useState(0);
 	const classes = useStyles();
 	let temp;
 
@@ -74,14 +74,14 @@ const ApplyTrainer = () => {
 	const searchSubmitHandler = async () => {
 		console.log(startTime);
 		console.log(endTime);
-		console.log(Exp);
+		console.log(exp);
 		let responseData;
 		try {
 			const formData = new FormData();
 			formData.append('userid', auth.userId);
 			formData.append('startTime', startTime);
 			formData.append('endTime', endTime);
-			formData.append('experience', Exp);
+			formData.append('experience', exp);
 			responseData = await sendRequest(
 				'http://localhost:5000/api/trainers/approve',
 				'POST',
@@ -89,7 +89,7 @@ const ApplyTrainer = () => {
 					userid: auth.userId,
 					startTime: startTime,
 					endTime: endTime,
-					experience: Exp,
+					experience: exp,
 				}),
 				{
 					'Content-Type': 'application/json',
@@ -108,8 +108,7 @@ const ApplyTrainer = () => {
 	};
 
 	const ExpChangeHandler = valueAsNumber => {
-		Exp = valueAsNumber;
-		console.log(Exp);
+		setExp(valueAsNumber);
 	};
 	return (
 		<React.Fragment>

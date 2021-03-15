@@ -64,30 +64,30 @@ const Home = () => {
 								style={{ maxWidth: '18rem', padding: '0px' }}
 							>
 								<div className="cardheader">
-								<Card.Header
-									as="h3"
-									style={{
-										marginTop: '0px',
-										borderBottom: '1px solid black',
-										padding: '5px 0',
-										background:'none',
-									}}
-								>
-									<Card.Link
-										href={`/selecttrainer/${t.id}`}
-										style={{ marginBottom: '30px', textDecoration: 'none' }}
-										onClick={e => {
-											e.preventDefault();
-											history.push(`/selecttrainer/${t.id}`);
+									<Card.Header
+										as="h3"
+										style={{
+											marginTop: '0px',
+											borderBottom: '1px solid black',
+											padding: '5px 0',
+											background: 'none',
 										}}
 									>
-										{t.name}
-									</Card.Link>
-								</Card.Header>
+										<Card.Link
+											href={`/selecttrainer/${t.id}`}
+											style={{ marginBottom: '30px', textDecoration: 'none' }}
+											onClick={e => {
+												e.preventDefault();
+												history.push(`/selecttrainer/${t.id}`);
+											}}
+										>
+											{t.name}
+										</Card.Link>
+									</Card.Header>
 								</div>
 								<Card.Body>
 									<Image
-										src={`http://localhost:5000/${t.image}`}
+										src={t.image}
 										alt={t.name}
 										style={{ width: '200px', height: '200px' }}
 										fluid
@@ -97,7 +97,6 @@ const Home = () => {
 											dispaly: 'inline',
 											width: '150px',
 											margin: 'auto',
-											
 										}}
 									>
 										<ReactStars

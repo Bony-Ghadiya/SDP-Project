@@ -94,7 +94,7 @@ const Home = () => {
 									</Card.Header>
 									<Card.Body style={{ padding: '10px 0' }}>
 										<Image
-											src={`http://localhost:5000/${t.image}`}
+											src={t.image}
 											alt={t.name}
 											style={{
 												width: '200px',
@@ -160,7 +160,7 @@ const Home = () => {
 
 										<br />
 									</Card.Body>
-									<Card.Footer style={{ padding: '5px 0', margin:'10px' }}>
+									<Card.Footer style={{ padding: '5px 0', margin: '10px' }}>
 										<Modal
 											show={acceptModal}
 											onCancel={cancelAccepthandler}

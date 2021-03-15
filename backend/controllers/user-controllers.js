@@ -43,7 +43,7 @@ const signup = async (req, res, next) => {
 		);
 	}
 
-	const { name, email, password, userType } = req.body;
+	const { name, email, image, password, userType } = req.body;
 
 	let existingUser, trainer;
 	try {
@@ -77,23 +77,19 @@ const signup = async (req, res, next) => {
 
 	let createdUser;
 	try {
-		if (req.file) {
-			createdUser = new User({
-				name,
-				email,
-				image: req.file.path,
-				password: hashedPassword,
-				userType,
-			});
-		}
+		createdUser = new User({
+			name,
+			email,
+			image: image,
+			password: hashedPassword,
+			userType,
+		});
 	} catch (err) {
 		console.log(err);
 	}
 
 	try {
-		if (req.file) {
-			await createdUser.save();
-		}
+		await createdUser.save();
 	} catch (err) {
 		const error = new HttpError(
 			'Signing up failed, please try again later.',
@@ -105,18 +101,16 @@ const signup = async (req, res, next) => {
 
 	let token;
 	try {
-		if (req.file) {
-			token = jwt.sign(
-				{
-					userId: createdUser.id,
-					email: createdUser.email,
-					userType: createdUser.userType,
-					image: createdUser.image,
-				},
-				'supersecret_dont_share',
-				{ expiresIn: '1h' }
-			);
-		}
+		token = jwt.sign(
+			{
+				userId: createdUser.id,
+				email: createdUser.email,
+				userType: createdUser.userType,
+				image: createdUser.image,
+			},
+			'supersecret_dont_share',
+			{ expiresIn: '1h' }
+		);
 	} catch (err) {
 		const error = new HttpError(
 			'Signing up failed, please try again later.',

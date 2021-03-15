@@ -85,7 +85,7 @@ const OneTrainer = props => {
 								)}
 								{!isLoading && trainer && (
 									<Image
-										src={`http://localhost:5000/${trainer.image}`}
+										src={trainer.image}
 										alt={trainer.name}
 										style={{
 											width: '200px',
@@ -190,7 +190,6 @@ const OneTrainer = props => {
 								{!isLoading && trainer && (
 									<Card.Footer
 										style={{
-											borderTop: '1px solid black',
 											marginBottom: '13px',
 										}}
 									>

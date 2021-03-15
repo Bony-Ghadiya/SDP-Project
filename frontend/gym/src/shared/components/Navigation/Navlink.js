@@ -24,6 +24,11 @@ const NavLinks = props => {
 					<NavLink to="/auth">JOIN US</NavLink>
 				</li>
 			)}
+			{auth.isLoggedIn && (
+				<li>
+					<NavLink to="/updateprofile">UPDATE PROFILE</NavLink>
+				</li>
+			)}
 			{auth.isLoggedIn && auth.userType === 'admin' && (
 				<li>
 					<NavLink to="/approvetrainer">APPROVE TRAINER</NavLink>
