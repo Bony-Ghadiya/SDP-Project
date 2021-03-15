@@ -14,14 +14,20 @@ import {
 import { useForm } from '../shared/hooks/form-hook';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
-import { TraineeContext } from '../shared/context/trainee-context';
-import { TrainerContext } from '../shared/context/trainer-context';
 import './Auth.css';
+import { Dialog, DialogOverlay } from '@reach/dialog';
+import '@reach/dialog/styles.css';
 
 const Auth = () => {
 	const auth = useContext(AuthContext);
-	const tec = useContext(TraineeContext);
-	const trc = useContext(TrainerContext);
+	const [showDialog, setShowDialog] = React.useState(false);
+	const [showWarning, setShowWarning] = React.useState(false);
+	const open = () => {
+		setShowDialog(true);
+		setShowWarning(false);
+	};
+	const close = () => setShowDialog(false);
+	const dismiss = () => setShowWarning(true);
 	const [isLoginMode, setIsLoginMode] = useState(true);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [userType, setUserType] = useState('user');
@@ -60,6 +66,7 @@ const Auth = () => {
 		} finally {
 			console.log(responseData.url);
 			setUrl(responseData.url);
+			setShowDialog(false);
 		}
 	};
 
@@ -125,8 +132,6 @@ const Auth = () => {
 					responseData.given,
 					responseData.complated
 				);
-				tec.setSelection();
-				trc.setApproval();
 				if (userType === 'user') {
 					history.push('/homeuser');
 				} else {
@@ -157,9 +162,6 @@ const Auth = () => {
 					responseData.given,
 					responseData.complated
 				);
-
-				tec.setSelection();
-				trc.setApproval();
 				if (userType === 'user') {
 					history.push('/homeuser');
 				} else {
@@ -230,7 +232,7 @@ const Auth = () => {
 								style={{ margin: '0' }}
 								onClick={e => {
 									e.preventDefault();
-									filePickerRef.current.click();
+									open();
 								}}
 							>
 								PICK IMAGE
@@ -285,6 +287,57 @@ const Auth = () => {
 					</h4>
 				)}
 			</Card>
+			<div style={{ marginTop: '50px' }}>
+				<DialogOverlay
+					style={{ background: '' }}
+					isOpen={showDialog}
+					onDismiss={close}
+				>
+					<Dialog
+						isOpen={showDialog}
+						onDismiss={dismiss}
+						style={{
+							width: '40%',
+							marginTop: '50px !important',
+							background: 'black',
+							textAlign: 'center',
+						}}
+					>
+						{showWarning && (
+							<p style={{ color: 'red' }}>You must make a choice, sorry :(</p>
+						)}
+						<h4 style={{ color: 'white' }}>Please choose profile pic</h4>
+						<hr />
+						<button
+							className="default-pic"
+							style={{ margin: 'auto 5px', width: '150px' }}
+							onClick={() => {
+								setUrl(
+									'https://res.cloudinary.com/gymmie/image/upload/v1615744408/users/ikiszyrh3gk8dcxunh2y.png'
+								);
+								setShowDialog(false);
+							}}
+						>
+							<img
+								src="https://res.cloudinary.com/gymmie/image/upload/v1615744408/users/ikiszyrh3gk8dcxunh2y.png"
+								alt="profile  pic"
+							/>
+						</button>
+
+						<br />
+						<br />
+						<button
+							className="default-pic-addanother"
+							onClick={() => {
+								filePickerRef.current.click();
+							}}
+							style={{ margin: 'auto 5px', width: '150px' }}
+						>
+							+ choose another
+						</button>
+					</Dialog>
+				</DialogOverlay>
+			</div>
 		</React.Fragment>
 	);
 };

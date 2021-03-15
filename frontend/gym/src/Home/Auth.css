@@ -144,3 +144,7 @@ a:active {
 	border-radius: 50%;
 	background: white;
 }
+
+.default-pic {
+	width:auto !important
+}
