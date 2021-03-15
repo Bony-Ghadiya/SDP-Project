@@ -327,11 +327,11 @@ const Auth = () => {
 						<br />
 						<br />
 						<button
-							className="default-pic-addanother"
+							className="button"
 							onClick={() => {
 								filePickerRef.current.click();
 							}}
-							style={{ margin: 'auto 5px', width: '150px' }}
+							style={{ margin: 'auto 5px', width: '241px' }}
 						>
 							+ choose another
 						</button>
