@@ -44,12 +44,14 @@ const Home = () => {
 					style={{ width: '100%', height: '40%' }}
 				></img>
 				<div className="bottom-left">
-					<h1 style={{ fontSize: '35px' , color:'#4caf50' }}>{props.item.name}</h1>
+					<h1 style={{ fontSize: '35px', color: '#4caf50' }}>
+						{props.item.name}
+					</h1>
 					<h2 style={{ fontSize: '25px' }}>{props.item.description}</h2>
 
 					{!auth.isLoggedIn && (
 						<button
-							style={{ fontSize: '30px' , padding:'0px 30px', margin:'12px 0px'}}
+							style={{ padding: '10px 30px', margin: '12px 0px' }}
 							className="button"
 							onClick={() => {
 								history.push('/auth');
@@ -86,15 +88,73 @@ const Home = () => {
 						</div>
 					</div>
 					<div className="title">
-						<h3>Who we Are &amp; What We Do</h3>
-						<div style={{ textAlign: 'justify', width: '990px' }}>
-							<p>
-								HEP is a cutting-edge functional fitness system that can help
-								everyone - everyday. There is a significant portion of the
-								people , who actually want and need gudiance and awareness for
-								finess and we help them.
-							</p>
-						</div>
+						{!auth.isLoggedIn && <h3>Who we Are &amp; What We Do</h3>}
+						{auth.userType === 'user' && <h3>Guidelines for Trainers</h3>}
+						{auth.userType === 'trainer' && <h3>Guidelines for Trainees</h3>}
+						{!auth.isLoggedIn && (
+							<div style={{ textAlign: 'justify', width: '990px' }}>
+								<p>
+									HEP is a cutting-edge functional fitness system that can help
+									everyone - everyday. There is a significant portion of the
+									people , who actually want and need gudiance and awareness for
+									finess and we help them.
+								</p>
+							</div>
+						)}
+						{auth.userType === 'user' && (
+							<div style={{ textAlign: 'justify', width: '990px' }}>
+								<ul>
+									<li id="li">Login into your account.</li>
+									<li id="li">
+										select your trainer and give your imformation to your
+										selected trainer, so your trainer can give suitable plan to
+										you.
+									</li>
+									<li id="li">
+										After providing your information wait until your trainer
+										create suitable plan for you.
+									</li>
+									<li id="li">
+										Once, you get plan, start workout as given. You will find
+										out detailed explanation video and GIF for every exercise.
+									</li>
+									<li id="li">
+										You have to report your trainer every week so your trainer
+										can have the idea whether he need to change yor plan or not.
+									</li>
+									<li id="li">
+										After completing all the exercise provide the appropriate
+										feedback to your trainer.
+									</li>
+								</ul>
+							</div>
+						)}
+						{auth.userType === 'trainer' && (
+							<div style={{ textAlign: 'justify', width: '990px' }}>
+								<ul>
+									<li id="li">Login into your account.</li>
+									<li id="li">
+										Now, you have to submit your application to become trainer
+										on our website.
+									</li>
+									<li id="li">
+										After submit relevent application, wait until your
+										application is approved by an admin.
+									</li>
+									<li id="li">
+										Once, you have been approved, users will be able to see your
+										profile and might select you as his trainer.
+									</li>
+									<li id="li">
+										Now you can create plans for them daily or weekly.
+									</li>
+									<li id="li">
+										Check the feedbacks regularly to improve plans and customer
+										experience.
+									</li>
+								</ul>
+							</div>
+						)}
 					</div>
 					<div>
 						<img
