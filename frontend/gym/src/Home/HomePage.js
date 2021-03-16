@@ -90,7 +90,7 @@ const Home = () => {
 					<div className="title">
 						{!auth.isLoggedIn && <h3>Who we Are &amp; What We Do</h3>}
 						{auth.userType === 'user' && <h3>Guidelines for Trainers</h3>}
-						{auth.userType === 'trainer' && <h3>Guidelines for Trainees</h3>}
+						{auth.userType === 'trainer' && <h3>Guidelines for Trainers</h3>}
 						{!auth.isLoggedIn && (
 							<div style={{ textAlign: 'justify', width: '990px' }}>
 								<p>
