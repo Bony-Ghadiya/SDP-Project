@@ -44,12 +44,12 @@ const Home = () => {
 					style={{ width: '100%', height: '40%' }}
 				></img>
 				<div className="bottom-left">
-					<h1 style={{ fontSize: '40px' }}>{props.item.name}</h1>
-					<h2 style={{ fontSize: '36px' }}>{props.item.description}</h2>
+					<h1 style={{ fontSize: '35px' , color:'#4caf50' }}>{props.item.name}</h1>
+					<h2 style={{ fontSize: '25px' }}>{props.item.description}</h2>
 
 					{!auth.isLoggedIn && (
 						<button
-							style={{ fontSize: '30px' }}
+							style={{ fontSize: '30px' , padding:'0px 30px', margin:'12px 0px'}}
 							className="button"
 							onClick={() => {
 								history.push('/auth');

@@ -164,7 +164,7 @@ export default function ProgressMobileStepper() {
 			{!isLoading && (
 				<Card
 					style={{
-						maxWidth: '500px',
+						maxWidth: '620px',
 						margin: 'auto',
 						textAlign: 'center',
 						color: 'white',
@@ -173,6 +173,7 @@ export default function ProgressMobileStepper() {
 					{activeStep === 0 && (
 						<div>
 							<h4>HOW DO YOU FEEL AFTER CLIMBING 5 FLOORS?</h4>
+							<hr></hr>
 							<input
 								type="button"
 								className="btn1"
@@ -202,6 +203,7 @@ export default function ProgressMobileStepper() {
 					{activeStep === 1 && (
 						<div>
 							<h3>HOW MANY PUSH-UPS CAN YOU DO AT ONE TIME??</h3>
+							<hr></hr>
 							<input
 								type="button"
 								className="btn1"

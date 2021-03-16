@@ -170,12 +170,17 @@ const Home = () => {
 													<div
 														style={{ marginRight: '10px', display: 'inline' }}
 													>
-														<Button inverse onClick={cancelAccepthandler}>
+														<Button
+															className="btn1"
+															danger
+															onClick={cancelAccepthandler}
+														>
 															CANCEL
 														</Button>
 													</div>
 													<Button
-														danger
+														className="btn1"
+														inverse
 														onClick={async e => {
 															e.preventDefault();
 															try {
@@ -217,11 +222,16 @@ const Home = () => {
 													<div
 														style={{ marginRight: '10px', display: 'inline' }}
 													>
-														<Button danger onClick={cancelDeleteHandler}>
+														<Button
+															className="btn1"
+															danger
+															onClick={cancelDeleteHandler}
+														>
 															CANCEL
 														</Button>
 													</div>
 													<Button
+														className="btn1"
 														inverse
 														onClick={async e => {
 															e.preventDefault();
