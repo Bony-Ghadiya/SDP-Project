@@ -122,7 +122,7 @@ const Exercises = () => {
 				<div
 					style={{
 						marginTop: '0',
-						width: '20%',
+						width: '20vw',
 						height: '100%',
 						zIndex: '1',
 						backgroundColor: 'none',
@@ -145,7 +145,7 @@ const Exercises = () => {
 							textAlign: 'left',
 						}}
 					>
-						<h3>Search By Category</h3>
+						<h3 size={{ fontSize: '2vw' }}>Search By Category</h3>
 						<ul
 							style={{
 								textAlign: 'left',
@@ -211,7 +211,7 @@ const Exercises = () => {
 										groupBy={option => option.firstLetter}
 										getOptionLabel={option => option.ename}
 										onChange={(event, value) => setSearched(value)}
-										style={{ width: 600, color: 'black' }}
+										style={{ width: '60vw', color: 'black' }}
 										renderInput={params => (
 											<div className="SearchExercises">
 												<CssTextField

@@ -24,21 +24,13 @@ const NavLinks = props => {
 					<NavLink to="/auth">JOIN US</NavLink>
 				</li>
 			)}
-			{auth.isLoggedIn && (
-				<li>
-					<NavLink to="/updateprofile">PROFILE</NavLink>
-				</li>
-			)}
+
 			{auth.isLoggedIn && auth.userType === 'admin' && (
 				<li>
 					<NavLink to="/approvetrainer">APPROVE TRAINER</NavLink>
 				</li>
 			)}
-			{auth.isLoggedIn && auth.userType === 'admin' && (
-				<li>
-					<NavLink to="/">ADD NEW ADMIN</NavLink>
-				</li>
-			)}
+
 			{auth.isLoggedIn &&
 				auth.userType === 'trainer' &&
 				auth.isTrainerApproved === 0 && (
@@ -86,6 +78,11 @@ const NavLinks = props => {
 						<NavLink to="/feedback">FEEDBACK</NavLink>
 					</li>
 				)}
+			{auth.isLoggedIn && (
+				<li>
+					<NavLink to="/updateprofile">PROFILE</NavLink>
+				</li>
+			)}
 			{auth.isLoggedIn && (
 				<li>
 					<button onClick={logoutSubmitHandler}>LOGOUT</button>

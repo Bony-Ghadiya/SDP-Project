@@ -247,56 +247,11 @@ const ApplyTrainer = () => {
 				</div>
 			)}
 			{auth.isRequested && (
-				<Card1>'Please wait your status will be updated soon.'</Card1>
+				<Card1 style={{ margin: 'auto', maxWidth: '33%' }}>
+					Please wait your status will be updated soon.
+				</Card1>
 			)}
 		</React.Fragment>
 	);
 };
 export default ApplyTrainer;
-/*<TextField
-									id="time"
-									label="Starting Time"
-									type="time"
-									value={temp}
-									defaultValue="01:00"
-									InputLabelProps={{
-										shrink: true,
-										style: { color: 'white' },
-									}}
-									inputProps={{
-										step: 300, // 5 min
-										style: { color: 'white' },
-									}}
-									InputProps={{
-										style: {
-											color: 'white',
-											'&:hover': {
-												border: '1px solid red',
-											},
-										},
-										outlinedRoot: {
-											'&:hover': {
-												border: '1px solid red',
-											},
-										},
-									}}
-									onChange={StartTimeSubmitHandler}
-								/>
-								<TextField
-									id="time"
-									label="Ending Time"
-									value={temp}
-									type="time"
-									defaultValue="02:00"
-									className={classes.textField}
-									InputLabelProps={{
-										shrink: true,
-										style: { color: 'white' },
-									}}
-									inputProps={{
-										step: 300, // 5 min
-										style: { color: 'white' },
-									}}
-									onChange={EndTimeSubmitHandler}
-								/>
-*/

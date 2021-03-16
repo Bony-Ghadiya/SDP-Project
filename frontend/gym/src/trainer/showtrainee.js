@@ -77,7 +77,7 @@ const Home = () => {
 									</Card.Header>
 									<Card.Body>
 										<Image
-											src={`http://localhost:5000/${t.image}`}
+											src={t.image}
 											alt={t.name}
 											style={{ width: '200px', height: '200px' }}
 											fluid

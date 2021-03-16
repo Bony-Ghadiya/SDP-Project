@@ -68,28 +68,25 @@ const Home = () => {
 										as="h3"
 										style={{
 											marginTop: '0px',
-											borderBottom: '1px solid black',
 											padding: '5px 0',
 											background: 'none',
+											marginBottom: '10px',
+											textDecoration: 'none',
 										}}
 									>
-										<Card.Link
-											href={`/selecttrainer/${t.id}`}
-											style={{ marginBottom: '30px', textDecoration: 'none' }}
-											onClick={e => {
-												e.preventDefault();
-												history.push(`/selecttrainer/${t.id}`);
-											}}
-										>
-											{t.name}
-										</Card.Link>
+										{t.name}
 									</Card.Header>
 								</div>
 								<Card.Body>
 									<Image
 										src={t.image}
 										alt={t.name}
-										style={{ width: '200px', height: '200px' }}
+										style={{
+											width: '200px',
+											height: '200px',
+											border: '1px solid #4caf50',
+											borderRadius: '50%',
+										}}
 										fluid
 									/>
 									<div
@@ -110,6 +107,19 @@ const Home = () => {
 										/>
 									</div>
 								</Card.Body>
+								<Card.Footer>
+									<button
+										className="button"
+										style={{ marginBottom: '5px' }}
+										onClick={e => {
+											e.preventDefault();
+											history.push(`/selecttrainer/${t.id}`);
+										}}
+									>
+										{' '}
+										VIEW PROFILE
+									</button>
+								</Card.Footer>
 							</Card>
 						</Container>
 					))}

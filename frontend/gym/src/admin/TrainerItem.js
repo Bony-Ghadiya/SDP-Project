@@ -6,27 +6,27 @@ import { Container, Card, Image } from 'react-bootstrap';
 import { useHttpClient } from '../shared/hooks/http-hook';
 
 const ExerciseItem = props => {
-	const {sendRequest} = useHttpClient();
+	const { sendRequest } = useHttpClient();
 	const acceptHandler = async event => {
-        console.log('accept');
-				const fetchPlace = async () => {
-					try {
-						const responseData = await sendRequest(
-							`http://localhost:5000/api/admin/approvetrainers`,
-							'PATCH',
-							JSON.stringify({
-								userid: props.id,
-								approved: '0',
-							}),
-							{
-								'Content-Type': 'application/json',
-							}
-						);
-						console.log(responseData);
-					} catch (err) {}
-				};
-				fetchPlace();
-    };
+		console.log('accept');
+		const fetchPlace = async () => {
+			try {
+				const responseData = await sendRequest(
+					`http://localhost:5000/api/admin/approvetrainers`,
+					'PATCH',
+					JSON.stringify({
+						userid: props.id,
+						approved: '0',
+					}),
+					{
+						'Content-Type': 'application/json',
+					}
+				);
+				console.log(responseData);
+			} catch (err) {}
+		};
+		fetchPlace();
+	};
 
 	const deleteHandler = () => {
 		console.log('delete');
@@ -34,7 +34,7 @@ const ExerciseItem = props => {
 	return (
 		<Container>
 			<Card border="primary" style={{ maxWidth: '18rem', padding: '0px' }}>
-				<Card.Header as="h3" style={{ borderBottom: '1px solid black' , background: 'none' }}>
+				<Card.Header as="h3" style={{ background: 'none' }}>
 					{props.name}
 				</Card.Header>
 				<Card.Body>
@@ -47,11 +47,16 @@ const ExerciseItem = props => {
 					<Image
 						src={`http://localhost:5000/${props.image}`}
 						alt={props.name}
-						style={{ width: '200px', height: '200px' }}
+						style={{
+							width: '200px',
+							height: '200px',
+							border: '1px solid #4caf50',
+							borderRadius: '50%',
+						}}
 						fluid
 					/>
 				</Card.Body>
-				<Card.Footer style={{ borderTop: '1px solid black' }}>
+				<Card.Footer style={{}}>
 					<input
 						type="button"
 						className="button"
@@ -71,4 +76,3 @@ const ExerciseItem = props => {
 };
 
 export default ExerciseItem;
-

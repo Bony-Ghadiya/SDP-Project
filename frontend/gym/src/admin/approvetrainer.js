@@ -48,7 +48,7 @@ const Home = () => {
 		setShowConfirmModal(false);
 	};
 
-	if (!trainer && !isLoading) {
+	if (trainer && trainer.length === 0 && !isLoading) {
 		return (
 			<div className="center">
 				<Card1>
@@ -85,7 +85,6 @@ const Home = () => {
 										as="h3"
 										style={{
 											marginTop: '0px',
-											borderBottom: '1px solid black',
 											padding: '5px 0',
 											background: 'none',
 										}}
@@ -100,7 +99,7 @@ const Home = () => {
 												width: '200px',
 												height: '200px',
 												borderRadius: '50%',
-												border: '2px solid black',
+												border: '1px solid #4caf50',
 											}}
 											fluid
 										/>
@@ -161,7 +160,6 @@ const Home = () => {
 										<br />
 									</Card.Body>
 									<Card.Footer style={{ padding: '5px 0', margin: '10px' }}>
-									
 										<Modal
 											show={acceptModal}
 											onCancel={cancelAccepthandler}
@@ -169,15 +167,19 @@ const Home = () => {
 											footerClass="place-item__modal-actions"
 											footer={
 												<React.Fragment>
-													
 													<div
 														style={{ marginRight: '10px', display: 'inline' }}
 													>
-														<Button className='btn1' danger onClick={cancelAccepthandler} >
+														<Button
+															className="btn1"
+															danger
+															onClick={cancelAccepthandler}
+														>
 															CANCEL
 														</Button>
 													</div>
-													<Button className='btn1'
+													<Button
+														className="btn1"
 														inverse
 														onClick={async e => {
 															e.preventDefault();
@@ -220,11 +222,16 @@ const Home = () => {
 													<div
 														style={{ marginRight: '10px', display: 'inline' }}
 													>
-														<Button className='btn1' danger onClick={cancelDeleteHandler}>
+														<Button
+															className="btn1"
+															danger
+															onClick={cancelDeleteHandler}
+														>
 															CANCEL
 														</Button>
 													</div>
-													<Button className='btn1'
+													<Button
+														className="btn1"
 														inverse
 														onClick={async e => {
 															e.preventDefault();
@@ -295,7 +302,6 @@ const Home = () => {
 												onClick={showDeleteWarningHandler}
 											/>
 										</div>
-										
 									</Card.Footer>
 								</Card>
 							</Container>
