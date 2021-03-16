@@ -19,6 +19,13 @@ router.post(
 	usersController.signup
 );
 
+router.get('/getprofile/:uid', usersController.getProfile);
+
+router.patch(
+	'/updateprofile',
+	[check('name').not().isEmpty(), check('email').normalizeEmail().isEmail()],
+	usersController.updateProfile
+);
 router.post('/login', usersController.login);
 
 router.post('/reset-password', usersController.resetPassword);

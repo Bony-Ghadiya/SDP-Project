@@ -6,6 +6,17 @@ const Trainer = require('../models/trainers');
 const Trainee = require('../models/trainee');
 const TraineePlan = require('../models/TraineePlan');
 const TrainerPlan = require('../models/TrainerPlan');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport(
+	sendgridTransport({
+		auth: {
+			api_key:
+				'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',
+		},
+	})
+);
 
 const viewPlan = async (req, res, next) => {
 	const tuid = req.params.tuid;
@@ -236,15 +247,32 @@ const TrainerFeedback = async (req, res, next) => {
 	console.log(' trainer feedback');
 	const { userid, rating, feedback } = req.body;
 	console.log(userid, rating, feedback);
-	let trainee, trainer, trainerplan, traineeplan, userdata;
+	let user, trainee, trainer, trainerplan, traineeplan, userdata;
+	let traineeplanflag = 0,
+		trainerplanflag = 0,
+		userdataflag = 0,
+		trainerremoved = 0,
+		email;
 	try {
 		trainee = await Trainee.findOne({ userid: userid });
 		if (trainee) {
 			trainer = await Trainer.findById(trainee.trainerid);
+			user = await User.findById(trainer.userid);
 			traineeplan = await TraineePlan.findOne({ traineeuserid: userid });
 			trainerplan = await TrainerPlan.findOne({ traineeuserid: userid });
 			userdata = await UserData.findOne({ traineeuserid: userid });
-			console.log(traineeplan, trainerplan);
+			if (traineeplan) {
+				console.log('it worked');
+				traineeplanflag = 1;
+			}
+			if (trainerplan) {
+				trainerplanflag = 1;
+			}
+
+			if (userdata) {
+				email = user.email;
+				userdataflag = 1;
+			}
 		}
 	} catch (err) {
 		console.log(err);
@@ -256,6 +284,7 @@ const TrainerFeedback = async (req, res, next) => {
 	}
 
 	try {
+		trainer.traineeCount = trainer.traineeCount + 1;
 		trainer.rating =
 			(trainer.rating * trainer.feedback.length + rating) /
 			(trainer.feedback.length + 1);
@@ -275,10 +304,20 @@ const TrainerFeedback = async (req, res, next) => {
 		sess.startTransaction();
 		await trainee.remove({ session: sess });
 		await trainer.save({ session: sess });
-		await trainerplan.remove({ session: sess });
-		await traineeplan.remove({ session: sess });
-		await userdata.remove({ session: sess });
-
+		if (traineeplanflag === 1) {
+			await traineeplan.remove({ session: sess });
+		}
+		if (trainerplanflag === 1) {
+			await trainerplan.remove({ session: sess });
+		}
+		if (userdataflag === 1) {
+			await userdata.remove({ session: sess });
+		}
+		if (trainer.traineeCount >= 2 && trainer.rating <= 1.5) {
+			trainerremoved = 1;
+			await user.remove({ session: sess });
+			await trainer.remove({ session: sess });
+		}
 		await sess.commitTransaction();
 	} catch (err) {
 		console.log(err);
@@ -289,11 +328,21 @@ const TrainerFeedback = async (req, res, next) => {
 		return next(error);
 	}
 
+	if (trainerremoved === 1) {
+		transporter.sendMail({
+			to: user.email,
+			from: 'mgediya00@gmail.com',
+			subject: 'Your rating is too low, so you have been removed.',
+			html: `<h1>removed</h1>`,
+		});
+	}
+
 	res.json({
 		message: ' mast.',
 		success: 1,
 	});
 };
+
 exports.viewPlan = viewPlan;
 exports.completeZero = completeZero;
 exports.getFeedback = getFeedback;

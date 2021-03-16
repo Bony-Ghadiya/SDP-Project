@@ -26,7 +26,7 @@ const NavLinks = props => {
 			)}
 			{auth.isLoggedIn && (
 				<li>
-					<NavLink to="/updateprofile">UPDATE PROFILE</NavLink>
+					<NavLink to="/updateprofile">PROFILE</NavLink>
 				</li>
 			)}
 			{auth.isLoggedIn && auth.userType === 'admin' && (

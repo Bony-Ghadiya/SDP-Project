@@ -258,19 +258,40 @@ const Home = () => {
 												You want to delete request of <b> {t.name} </b>
 											</p>
 										</Modal>
-										<div style={{ padding: '0 7px', display: 'inline' }}>
+										<div
+											style={{
+												padding: '0 7px',
+												display: 'inline',
+												width: '100px',
+												margin: '0px !important',
+											}}
+										>
 											<input
 												type="button"
 												className="button"
 												value="ACCEPT"
+												style={{
+													margin: '0px !important',
+													width: '100px !important',
+												}}
 												onClick={showAcceptWarningHandler}
 											/>
 										</div>
-										<div style={{ padding: '0 7px', display: 'inline' }}>
+										<div
+											style={{
+												padding: '0 7px',
+												display: 'inline',
+												width: '100px !important',
+											}}
+										>
 											<input
 												type="button"
 												className="button"
 												value="REJECT"
+												style={{
+													margin: '0px !important',
+													width: '100px !important',
+												}}
 												onClick={showDeleteWarningHandler}
 											/>
 										</div>

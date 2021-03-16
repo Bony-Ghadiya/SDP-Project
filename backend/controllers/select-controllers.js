@@ -59,8 +59,6 @@ const acceptRequest = async (req, res, next) => {
 	try {
 		trainer = await Trainer.findById(trainerid).populate('userid');
 		user = await User.findById(userid);
-		console.log(trainer);
-		console.log(user);
 	} catch (err) {
 		console.log(err);
 		const error = new HttpError(
@@ -117,6 +115,38 @@ const acceptRequest = async (req, res, next) => {
 	});
 };
 
+const showTrainerById = async (req, res, next) => {
+	console.log('trainer');
+	const uid = req.params.uid;
+	console.log(uid);
+
+	let exe, trainee;
+	try {
+		trainee = await Trainees.findOne({ userid: uid });
+
+		if (trainee) {
+			exe = await Trainer.findById(trainee.trainerid);
+		}
+	} catch (err) {
+		const error = new HttpError(
+			'Something went wrong, could not find the trainer.',
+			500
+		);
+		return next(error);
+	}
+
+	if (!exe) {
+		const error = new HttpError(
+			'Could not find trainer for the provided id.',
+			404
+		);
+		return next(error);
+	}
+
+	res.json({ trainer: exe.toObject({ getters: true }) });
+};
+
 exports.getTrainers = getTrainers;
 exports.getTrainerById = getTrainerById;
 exports.acceptRequest = acceptRequest;
+exports.showTrainerById = showTrainerById;

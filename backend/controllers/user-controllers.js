@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
 const crypto = require('crypto');
 
 const HttpError = require('../models/http-error');
@@ -359,8 +360,129 @@ const newPassword = (req, res, next) => {
 		});
 };
 
+const getProfile = async (req, res, next) => {
+	console.log('getProfile');
+	const uid = req.params.uid;
+	console.log(uid);
+	let user;
+	try {
+		user = await User.findById(uid);
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Fetching users failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+
+	if (!user) {
+		const error = new HttpError(
+			'no user found with provided id, Please check yout id',
+			403
+		);
+		return next(error);
+	}
+
+	res.json({
+		email: user.email,
+		name: user.name,
+		image: user.image,
+		UserType: user.usertype,
+	});
+};
+
+const updateProfile = async (req, res, next) => {
+	console.log('updateProfile');
+	let user, trainer, trainee, existingUser;
+	const { email, name, uid, image } = req.body;
+	console.log(email, name, uid);
+	try {
+		user = await User.findById(uid);
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Fetching users failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+
+	if (!user) {
+		const error = new HttpError(
+			'no user found with provided id, Please check yout id',
+			403
+		);
+		return next(error);
+	} else {
+		try {
+			existingUser = await User.findOne({ email: email });
+		} catch (err) {
+			const error = new HttpError(
+				'Signing up failed, please try again later.',
+				500
+			);
+			return next(error);
+		}
+
+		if (existingUser && existingUser.id !== user.id) {
+			const error = new HttpError(
+				'User exists already, please choose another id.',
+				422
+			);
+			return next(error);
+		} else {
+			user.email = email;
+		}
+		user.name = name;
+		user.image = image;
+		console.log(user);
+		if (user.userType === 'user') {
+			trainee = await Trainees.findOne({ userid: uid });
+			if (trainee) {
+				trainee.name = name;
+				trainee.image = image;
+			}
+		} else if (user.userType === 'trainer') {
+			trainer = await Trainer.findOne({ userid: uid });
+			if (trainer) {
+				trainer.name = name;
+				trainer.image = image;
+			}
+		}
+	}
+
+	try {
+		const sess = await mongoose.startSession();
+		sess.startTransaction();
+		await user.save({ session: sess });
+		if (trainee) {
+			await trainee.save({ session: sess });
+		} else if (trainer) {
+			await trainer.save({ session: sess });
+		}
+		await sess.commitTransaction();
+	} catch (err) {
+		console.log(err);
+		const error = new HttpError(
+			'Something went wrong, could not update trainee in db.',
+			500
+		);
+		return next(error);
+	}
+
+	res.json({
+		email: user.email,
+		name: user.name,
+		image: user.image,
+		UserType: user.usertype,
+	});
+};
+
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
 exports.resetPassword = resetPassword;
 exports.newPassword = newPassword;
+exports.getProfile = getProfile;
+exports.updateProfile = updateProfile;
