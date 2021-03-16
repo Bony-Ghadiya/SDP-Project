@@ -8,22 +8,23 @@
 	justify-content: space-around;
 	margin-right: 2rem;
 	cursor: pointer;
+	color:white;
 }
 
 .main-navigation__menu-btn span {
 	display: block;
 	width: 3rem;
 	height: 2.5px;
-	background: white;
+	background: white !important;
 }
 
 .main-navigation__title {
-	color: white;
+	color: white !important;
 }
 
 .main-navigation__title a {
 	text-decoration: none;
-	color: white;
+	color: white ;
 }
 
 .main-navigation__header-nav {
@@ -33,6 +34,15 @@
 .main-navigation__drawer-nav {
 	height: 100%;
 }
+
+a.mtitle:hover,
+a.mtitle:active {
+	color:#4caf50;
+	background: white;
+	padding:2px 5px;
+
+}
+
 
 @media (min-width: 768px) {
 	.main-navigation__menu-btn {

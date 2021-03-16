@@ -285,6 +285,7 @@ export default function ProgressMobileStepper() {
 									onChange={handleChange('other')}
 								/>
 							</div>
+							<br></br>
 							<input
 								className="btn1"
 								type="submit"

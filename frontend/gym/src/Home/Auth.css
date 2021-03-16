@@ -70,12 +70,14 @@ hr.style-line:before {
 
 a:visited,
 a:link {
-	color: white !important;
+	color: white ;
 }
 
 a:hover,
 a:active {
-	color: #4caf50 !important;
+	color: #4caf50 ;
+	
+	
 }
 
 .RadioButton {
