@@ -21,7 +21,7 @@ import './Reporting.css';
 
 const useStyles = makeStyles({
 	root: {
-		width: 516,
+		width: 'auto',
 		flexGrow: 1,
 		margin: 'auto',
 		'& .MuiInput-underline:after': {
@@ -243,6 +243,7 @@ export default function ProgressMobileStepper() {
 									</FormHelperText>
 									<Input
 										id="standard-adornment-weight"
+										type="number"
 										value={values.weight}
 										onChange={handleChange('weight')}
 										endAdornment={
@@ -251,6 +252,8 @@ export default function ProgressMobileStepper() {
 										aria-describedby="standard-weight-helper-text"
 										inputProps={{
 											'aria-label': 'weight',
+											min: 40,
+											max: 130,
 										}}
 										InputLabelProps={{
 											shrink: true,

@@ -48,7 +48,7 @@ const Home = () => {
 		setShowConfirmModal(false);
 	};
 
-	if (!trainer && !isLoading) {
+	if (trainer && trainer.length === 0 && !isLoading) {
 		return (
 			<div className="center">
 				<Card1>
@@ -85,7 +85,6 @@ const Home = () => {
 										as="h3"
 										style={{
 											marginTop: '0px',
-											borderBottom: '1px solid black',
 											padding: '5px 0',
 											background: 'none',
 										}}
@@ -100,7 +99,7 @@ const Home = () => {
 												width: '200px',
 												height: '200px',
 												borderRadius: '50%',
-												border: '2px solid black',
+												border: '1px solid #4caf50',
 											}}
 											fluid
 										/>
@@ -218,12 +217,12 @@ const Home = () => {
 													<div
 														style={{ marginRight: '10px', display: 'inline' }}
 													>
-														<Button inverse onClick={cancelDeleteHandler}>
+														<Button danger onClick={cancelDeleteHandler}>
 															CANCEL
 														</Button>
 													</div>
 													<Button
-														danger
+														inverse
 														onClick={async e => {
 															e.preventDefault();
 															try {

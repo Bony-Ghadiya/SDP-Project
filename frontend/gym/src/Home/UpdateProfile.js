@@ -79,7 +79,7 @@ const Auth = () => {
 
 	useEffect(() => {
 		const fetchPlaces = async () => {
-			if (auth.userType === 'user') {
+			if (auth.userType === 'user' && auth.isTrainerSelected === 1) {
 				try {
 					const responseData = await sendRequest(
 						`http://localhost:5000/api/selectTrainer/showtrainer/${auth.userId}`

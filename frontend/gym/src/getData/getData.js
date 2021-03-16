@@ -115,7 +115,7 @@ export default function ProgressMobileStepper() {
 			setWeightError(1);
 		} else if (values.height <= 70 && values.height >= 200) {
 			setHeightError(1);
-		} else if (values.age <= 15 && values.height >= 50) {
+		} else if (values.age <= 15 && values.age >= 50) {
 			setAgeError(1);
 		} else {
 			setWeightError(0);
@@ -271,13 +271,14 @@ export default function ProgressMobileStepper() {
 						margin: 'auto',
 						textAlign: 'center',
 						color: 'white',
+						height: '100%',
 					}}
 				>
 					{activeStep === 0 && (
 						<div>
-							<p>
+							<h3>
 								Please let us know you better to help boost your workout results
-							</p>
+							</h3>
 							<hr />
 
 							<input
@@ -296,7 +297,7 @@ export default function ProgressMobileStepper() {
 					)}
 					{activeStep === 1 && (
 						<div>
-							<p>Achieve your goal with our personalized plan</p>
+							<h3>Achieve your goal with our personalized plan</h3>
 							<hr />
 
 							<input
@@ -352,7 +353,7 @@ export default function ProgressMobileStepper() {
 					)}
 					{activeStep === 3 && (
 						<div>
-							<h4>HOW DO YOU FEEL AFTER CLIMBING 5 FLOORS?</h4>
+							<h3>HOW DO YOU FEEL AFTER CLIMBING 5 FLOORS?</h3>
 							<hr />
 
 							<input
@@ -482,17 +483,18 @@ export default function ProgressMobileStepper() {
 									)}
 								>
 									<Input
+										type="number"
 										id="standard-adornment-age"
 										value={values.age}
-										onChange={e => {
-											handleChange('age');
-										}}
+										onChange={handleChange('age')}
 										endAdornment={
 											<InputAdornment position="end">years</InputAdornment>
 										}
 										aria-describedby="standard-age-helper-text"
 										inputProps={{
 											'aria-label': 'age',
+											min: 15,
+											max: 50,
 										}}
 									/>
 									<FormHelperText id="standard-age-helper-text">
@@ -513,6 +515,7 @@ export default function ProgressMobileStepper() {
 										Weight
 									</FormHelperText>
 									<Input
+										type="number"
 										id="standard-adornment-weight"
 										value={values.weight}
 										onChange={handleChange('weight')}
@@ -522,14 +525,14 @@ export default function ProgressMobileStepper() {
 										aria-describedby="standard-weight-helper-text"
 										inputProps={{
 											'aria-label': 'weight',
-											inputProps: { min: 5, max: 10 },
+											min: 40,
+											max: 130,
 										}}
 										InputLabelProps={{
 											shrink: true,
 											style: { color: '#4caf50' },
 										}}
 										InputProps={{
-											inputProps: { min: 5, max: 10 },
 											style: {
 												color: 'white',
 												'&:hover': {
@@ -560,6 +563,7 @@ export default function ProgressMobileStepper() {
 									)}
 								>
 									<Input
+										type="number"
 										id="standard-adornment-height"
 										value={values.height}
 										onChange={handleChange('height')}
@@ -569,6 +573,8 @@ export default function ProgressMobileStepper() {
 										aria-describedby="standard-height-helper-text"
 										inputProps={{
 											'aria-label': 'height',
+											min: 70,
+											max: 200,
 										}}
 									/>
 									<FormHelperText id="standard-weight-helper-text">

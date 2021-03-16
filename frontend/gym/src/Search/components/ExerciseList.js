@@ -2,6 +2,7 @@ import React from 'react';
 
 import ExerciseItem from './ExerciseItem';
 import Card from '../../shared/components/UIElements/Card';
+import { Container } from 'react-bootstrap';
 import './ExerciseList.css';
 
 const ExerciseList = props => {
@@ -15,20 +16,19 @@ const ExerciseList = props => {
 		);
 	}
 	return (
-		<ul
-			className="users-list"
-			style={{ paddingLeft: '15%', paddingRight: ' 30px' }}
-		>
-			{props.items.map(exe => (
-				<ExerciseItem
-					key={exe.id}
-					id={exe.id}
-					ename={exe.ename}
-					vlink={exe.vlink}
-					gif={exe.gif}
-				/>
-			))}
-		</ul>
+		<Container style={{ paddingLeft: '23vw' }}>
+			<ul className="users-list" style={{ paddingRight: ' 30px' }}>
+				{props.items.map(exe => (
+					<ExerciseItem
+						key={exe.id}
+						id={exe.id}
+						ename={exe.ename}
+						vlink={exe.vlink}
+						gif={exe.gif}
+					/>
+				))}
+			</ul>
+		</Container>
 	);
 };
 

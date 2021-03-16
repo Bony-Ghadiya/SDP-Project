@@ -82,7 +82,11 @@ const ViewPlan = () => {
 					<LoadingSpinner />
 				</div>
 			)}
-			{!isLoading && !trainerPlan && <h1>Please Wait....!!!!</h1>}
+			{!isLoading && !trainerPlan && (
+				<Card style={{ margin: 'auto', maxWidth: '34vw' }}>
+					<h1>Please Wait....!!!!</h1>
+				</Card>
+			)}
 			{!isLoading && trainerPlan && (
 				<div className="header1">
 					<h1> Your Fitness Plan</h1>
