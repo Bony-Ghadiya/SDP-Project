@@ -321,6 +321,7 @@ const Auth = () => {
 						>
 							{trainer.name}
 						</Card.Header>
+						<hr></hr>
 						<Image
 							src={trainer.image}
 							alt={trainer.name}
@@ -342,6 +343,7 @@ const Auth = () => {
 									paddingLeft: '10px',
 									fontSize: '16px',
 									paddingBotton: '10px',
+									color:'#4caf50',
 								}}
 							>
 								{' '}
@@ -371,6 +373,7 @@ const Auth = () => {
 									paddingLeft: '10px',
 									fontSize: '16px',
 									paddingBotton: '10px',
+									color:'#4caf50',
 								}}
 							>
 								{'Exprience: '}
@@ -404,12 +407,12 @@ const Auth = () => {
 								size={36}
 								edit={false}
 								value={trainer.rating}
-								activeColor="#fbcd0a"
+								activeColor="#fbd0a"
 							/>
 						</div>
 						{trainer.feedback.length !== 0 && (
 							<div>
-								<h3>Feedback : </h3>
+								<h3 style={{color:'#4caf50'}}>Feedback : </h3>
 							</div>
 						)}
 						{trainer.feedback.map(feed => (
@@ -426,6 +429,8 @@ const Auth = () => {
 								value="BACK"
 								onClick={() => setTrainerMode(0)}
 							/>
+								<br></br>
+
 							<button
 								style={{ margin: '15px 5px' }}
 								onClick={event => {
@@ -447,11 +452,11 @@ const Auth = () => {
 					footerClass="place-item__modal-actions"
 					footer={
 						<React.Fragment>
-							<Button inverse onClick={cancelAccepthandler}>
+							<Button danger onClick={cancelAccepthandler}>
 								CANCEL
 							</Button>
 							<Button
-								danger
+								inverse
 								onClick={async e => {
 									e.preventDefault();
 									history.push('/feedback');

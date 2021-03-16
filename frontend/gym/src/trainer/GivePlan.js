@@ -1874,12 +1874,12 @@ const GivePlan = () => {
 									border: 'white',
 								}}
 							>
-								<Button inverse onClick={cancelWarningHandler}>
+								<Button danger onClick={cancelWarningHandler}>
 									CANCEL
 								</Button>
 							</div>
 							<Button
-								danger
+								inverse
 								onClick={async e => {
 									e.preventDefault();
 									cancelWarningHandler();
@@ -1960,12 +1960,12 @@ const GivePlan = () => {
 					footer={
 						<React.Fragment>
 							<div style={{ marginRight: '10px', display: 'inline' }}>
-								<Button inverse onClick={cancelWarningHandler2}>
+								<Button danger onClick={cancelWarningHandler2}>
 									CANCEL
 								</Button>
 							</div>
 							<Button
-								danger
+								inverse
 								onClick={async e => {
 									e.preventDefault();
 									cancelWarningHandler2();
@@ -2046,12 +2046,12 @@ const GivePlan = () => {
 					footer={
 						<React.Fragment>
 							<div style={{ marginRight: '10px', display: 'inline' }}>
-								<Button inverse onClick={cancelWarningHandler3}>
+								<Button danger onClick={cancelWarningHandler3}>
 									CANCEL
 								</Button>
 							</div>
 							<Button
-								danger
+								inverse
 								onClick={async e => {
 									e.preventDefault();
 									cancelWarningHandler3();
@@ -2143,12 +2143,12 @@ const GivePlan = () => {
 					footer={
 						<React.Fragment>
 							<div style={{ marginRight: '10px', display: 'inline' }}>
-								<Button inverse onClick={cancelWarningHandler4}>
+								<Button danger onClick={cancelWarningHandler4}>
 									CANCEL
 								</Button>
 							</div>
 							<Button
-								danger
+								inverse
 								onClick={async e => {
 									e.preventDefault();
 									cancelWarningHandler4();

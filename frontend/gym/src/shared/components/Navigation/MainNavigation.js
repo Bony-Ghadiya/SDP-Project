@@ -35,7 +35,7 @@ const MainNavigation = props => {
 					<span />
 				</button>
 				<h1 className="main-navigation__title">
-					<Link to="/">Home Exercise Planner</Link>
+					<Link to="/" className="mtitle" > Home Exercise Planner</Link>
 				</h1>
 				<nav className="main-navigation__header-nav">
 					<NavLinks />

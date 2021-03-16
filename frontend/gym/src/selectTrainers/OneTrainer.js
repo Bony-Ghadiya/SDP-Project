@@ -188,6 +188,7 @@ const OneTrainer = props => {
 								{!isLoading && trainer && trainer.feedback.length !== 0 && (
 									<div>
 										<h3>Feedback : </h3>
+										
 									</div>
 								)}
 								{!isLoading &&
@@ -196,7 +197,9 @@ const OneTrainer = props => {
 										<li style={{ display: 'list-item', margin: '5px' }}>
 											{feed}
 										</li>
+										
 									))}
+									<br></br>
 								{!isLoading && trainer && (
 									<Card.Footer
 										style={{
@@ -209,6 +212,7 @@ const OneTrainer = props => {
 											value="SELECT"
 											onClick={showAcceptWarningHandler}
 										/>
+										
 									</Card.Footer>
 								)}
 								{!isLoading && trainer && (
@@ -219,11 +223,11 @@ const OneTrainer = props => {
 										footerClass="place-item__modal-actions"
 										footer={
 											<React.Fragment>
-												<Button inverse onClick={cancelAccepthandler}>
+												<Button danger onClick={cancelAccepthandler}>
 													CANCEL
 												</Button>
 												<Button
-													danger
+													inverse
 													onClick={async e => {
 														e.preventDefault();
 														try {
