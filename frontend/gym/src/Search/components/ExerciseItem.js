@@ -47,7 +47,7 @@ const ExerciseItem = props => {
 						e.preventDefault();
 						history.push(`/search/${props.id}`);
 					}}
-					style={{ marginBottom: '5px' }}
+					style={{ width: '200px', marginBottom: '5px' }}
 				>
 					{' '}
 					VIEW MORE
