@@ -1,10 +1,14 @@
-.users-list {
+
+@media (min-width: 768px){
+  .users-list1 {
   margin: auto;
   color: black;
   display: grid;
   grid-template-columns: auto auto auto;
   list-style-type: none;
   grid-gap: 10px;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 .react-stars-wrapper-0010644723422983171 {
@@ -13,4 +17,27 @@
 
 .cardheader {
   background-color: none;
+}}
+
+@media (max-width: 768px) {
+	.users-list1 {
+  margin: auto;
+  color: black;
+  display: grid;
+  grid-template-columns: auto auto;
+  list-style-type: none;
+  grid-gap: 10px;
+}
+}
+
+
+@media (max-width: 420px) {
+	.users-list1 {
+  margin: auto;
+  color: black;
+  display: grid;
+  grid-template-columns: auto;
+  list-style-type: none;
+  grid-gap: 10px;
+}
 }

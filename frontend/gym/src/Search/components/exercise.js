@@ -119,7 +119,7 @@ const Exercise = () => {
 										<p
 											style={{
 												display: 'inline-block',
-												width: '330px',
+												width: 'auto',
 												height: '100px',
 												margin: '16px 10px 10px 175px',
 												textAlign: 'justify',
@@ -136,9 +136,8 @@ const Exercise = () => {
 								)}
 								{!isLoading && flag && (
 									<iframe
-										style={{ borderRadius: '8px' }}
+										style={{ borderRadius: '8px', width: '100%' }}
 										title={ename}
-										width="500"
 										height="315"
 										src={videoLink}
 										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

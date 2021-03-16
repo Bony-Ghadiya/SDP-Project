@@ -17,8 +17,17 @@ main {
 	margin-top: 5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 840px) {
 	.main-header {
 		justify-content: space-between;
+	}
+}
+
+
+
+
+@media (max-width: 424px) {
+	.main-header {
+		font-size:x-small
 	}
 }

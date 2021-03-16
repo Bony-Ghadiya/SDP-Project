@@ -50,10 +50,8 @@ const Home = () => {
 			)}
 			{!isLoading && trainer && (
 				<ul
-					className="users-list"
+					className="users-list1"
 					style={{
-						paddingLeft: ' 30px',
-						paddingRight: ' 30px',
 						color: 'black',
 					}}
 				>
@@ -61,7 +59,7 @@ const Home = () => {
 						<Container>
 							<Card
 								border="primary"
-								style={{ maxWidth: '18rem', padding: '0px' }}
+								style={{ maxWidth: '100%', padding: '0px' }}
 							>
 								<div className="cardheader">
 									<Card.Header
