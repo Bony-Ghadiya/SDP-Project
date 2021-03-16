@@ -11,6 +11,7 @@ import { AuthContext } from '../shared/context/auth-context';
 import { VALIDATOR_MINLENGTH } from '../shared/util/validators';
 import { useForm } from '../shared/hooks/form-hook';
 import ReactStars from 'react-rating-stars-component';
+import './feedback.css';
 
 const Auth = () => {
 	const auth = useContext(AuthContext);
@@ -65,6 +66,7 @@ const Auth = () => {
 							dispaly: 'inline',
 							width: '150px',
 							margin: 'auto',
+							
 						}}
 					>
 						<ReactStars
@@ -81,12 +83,14 @@ const Auth = () => {
 						/>
 					</div>
 					<Input
+						className="feedback"
 						id="feedback"
 						element="textarea"
 						label="Feedback"
 						validators={[VALIDATOR_MINLENGTH(5)]}
 						errorText="Please enter a valid feedback (at least 5 characters)."
 						onInput={inputHandler}
+						// style={{ marginLeft:"-10%" }}
 					/>
 					<Button type="submit" disabled={!formState.isValid}>
 						SUBMIT
