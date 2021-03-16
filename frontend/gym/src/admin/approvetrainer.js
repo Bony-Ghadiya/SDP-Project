@@ -161,6 +161,7 @@ const Home = () => {
 										<br />
 									</Card.Body>
 									<Card.Footer style={{ padding: '5px 0', margin: '10px' }}>
+									
 										<Modal
 											show={acceptModal}
 											onCancel={cancelAccepthandler}
@@ -168,15 +169,16 @@ const Home = () => {
 											footerClass="place-item__modal-actions"
 											footer={
 												<React.Fragment>
+													
 													<div
 														style={{ marginRight: '10px', display: 'inline' }}
 													>
-														<Button inverse onClick={cancelAccepthandler}>
+														<Button className='btn1' danger onClick={cancelAccepthandler} >
 															CANCEL
 														</Button>
 													</div>
-													<Button
-														danger
+													<Button className='btn1'
+														inverse
 														onClick={async e => {
 															e.preventDefault();
 															try {
@@ -218,12 +220,12 @@ const Home = () => {
 													<div
 														style={{ marginRight: '10px', display: 'inline' }}
 													>
-														<Button inverse onClick={cancelDeleteHandler}>
+														<Button className='btn1' danger onClick={cancelDeleteHandler}>
 															CANCEL
 														</Button>
 													</div>
-													<Button
-														danger
+													<Button className='btn1'
+														inverse
 														onClick={async e => {
 															e.preventDefault();
 															try {
@@ -272,6 +274,7 @@ const Home = () => {
 												onClick={showDeleteWarningHandler}
 											/>
 										</div>
+										
 									</Card.Footer>
 								</Card>
 							</Container>

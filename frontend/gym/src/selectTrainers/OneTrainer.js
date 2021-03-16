@@ -10,6 +10,7 @@ import Button from '../shared/components/FormElements/Button';
 import { Container, Card, Image } from 'react-bootstrap';
 import ReactStars from 'react-rating-stars-component';
 
+
 const OneTrainer = props => {
 	const auth = useContext(AuthContext);
 	const history = useHistory();
@@ -83,6 +84,10 @@ const OneTrainer = props => {
 										{trainer.name}
 									</Card.Header>
 								)}
+
+							<hr></hr>
+
+
 								{!isLoading && trainer && (
 									<Image
 										src={trainer.image}
@@ -107,6 +112,8 @@ const OneTrainer = props => {
 												paddingLeft: '10px',
 												fontSize: '16px',
 												paddingBotton: '10px',
+												color:'#4caf50' ,
+												width: '30%' ,
 											}}
 										>
 											{' '}
@@ -119,6 +126,7 @@ const OneTrainer = props => {
 												display: 'inline',
 												fontSize: '16px',
 												paddingBotton: '10px',
+												
 											}}
 										>
 											{trainer.startTime}
@@ -138,6 +146,8 @@ const OneTrainer = props => {
 												paddingLeft: '10px',
 												fontSize: '16px',
 												paddingBotton: '10px',
+												color:'#4caf50' ,
+												width: '30%' ,
 											}}
 										>
 											{'Exprience: '}
