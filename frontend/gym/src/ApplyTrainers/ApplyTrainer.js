@@ -9,6 +9,7 @@ import ErrorModal from '../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../shared/context/auth-context';
 import { useHttpClient } from '../shared/hooks/http-hook';
+import Countdown from 'react-countdown';
 
 const CssTextField = withStyles({
 	root: {
@@ -61,8 +62,49 @@ const ApplyTrainer = () => {
 	const [startTime, setStartTime] = useState('01:00');
 	const [endTime, setEndTime] = useState('02:00');
 	const [exp, setExp] = useState(0);
+	const [ctime, setCtime] = useState(10000);
 	const classes = useStyles();
 	let temp;
+
+	const waiting = ({ hours, minutes, seconds, completed }) => {
+		if (completed) {
+			return <div style={{ display: 'none' }}></div>;
+		} else {
+			if (seconds % 10 === 0) {
+				fetch('http://localhost:5000/api/counter/trainers', {
+					method: 'PATCH',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						userid: auth.userId,
+					}),
+				})
+					.then(res => res.json())
+					.then(data => {
+						if (data.approved === 0) {
+							setCtime(ctime + 1000);
+						} else if (data.approved === 1) {
+							auth.setApproval();
+							history.push('/');
+						} else if (data.approved === 999) {
+							auth.logout();
+							history.push('/');
+						}
+					})
+					.catch(err => {
+						console.log(err);
+					});
+			}
+			return (
+				<div>
+					<h3 style={{ margin: '5px 0px', fontSize: '40px', display: 'none' }}>
+						{seconds}...
+					</h3>
+				</div>
+			);
+		}
+	};
 
 	const StartTimeSubmitHandler = event => {
 		setStartTime(event.target.value);
@@ -115,9 +157,12 @@ const ApplyTrainer = () => {
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
 			{isLoading && <LoadingSpinner asOverlay />}
-			{!auth.isRequested && (
-				<div style={{ textAlign: 'center', width: '500px', margin: 'auto' }}>
-					<Card>
+			{auth.isRequested === 0 && (
+				<div style={{ textAlign: 'center', margin: 'auto' }}>
+					<Card
+						className="authentication"
+						style={{ maxWidth: '400px', margin: 'auto' }}
+					>
 						<h2 style={{}}>Select Data</h2>
 						<hr />
 						<h4 style={{ margin: '1rem auto' }}>Select Your Experience</h4>
@@ -129,7 +174,6 @@ const ApplyTrainer = () => {
 									border: '2px solid #4caf50',
 								},
 								input: {
-									border: '1px solid #4caf50',
 									width: '204px',
 									background: 'transparent',
 									color: 'white',
@@ -246,9 +290,13 @@ const ApplyTrainer = () => {
 					</Card>
 				</div>
 			)}
-			{auth.isRequested && (
-				<Card1 style={{ margin: 'auto', maxWidth: '33%' }}>
+			{auth.isRequested === 1 && (
+				<Card1
+					className="authentication"
+					style={{ margin: 'auto', maxWidth: '33%' }}
+				>
 					Please wait your status will be updated soon.
+					<Countdown date={Date.now() + ctime + 1000} renderer={waiting} />
 				</Card1>
 			)}
 		</React.Fragment>

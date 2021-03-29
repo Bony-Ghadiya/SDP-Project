@@ -55,6 +55,7 @@ const Exercise = () => {
 					{!isLoading && flag && (
 						<Container>
 							<Card
+								className="authentication"
 								style={{
 									maxWidth: '500px',
 									margin: 'auto',

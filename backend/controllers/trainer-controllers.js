@@ -57,4 +57,49 @@ const postTrainer = async (req, res, next) => {
 	});
 };
 
+const updateTrainer = async (req, res, next) => {
+	const { userid, startTime, endTime } = req.body;
+	let existingUser, createdTrainers;
+
+	try {
+		existingUser = await Trainer.findOne({ userid: userid });
+		console.log('app');
+		console.log(userid, startTime, endTime);
+	} catch (err) {
+		const error = new HttpError(
+			'Fetching trainers failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+
+	try {
+		existingUser.startTime = startTime;
+		existingUser.endTime = endTime;
+	} catch (err) {
+		const error = new HttpError(
+			'creating data failed, please try again later.',
+			500
+		);
+		console.log(err);
+		return next(error);
+	}
+
+	try {
+		await existingUser.save();
+		console.log('saved');
+	} catch (err) {
+		const error = new HttpError(
+			'Saving data failed, please try again later.',
+			500
+		);
+		console.log(err);
+		return next(error);
+	}
+	res.json({
+		existingUser: existingUser.toObject({ getters: true }),
+	});
+};
+
 exports.postTrainer = postTrainer;
+exports.updateTrainer = updateTrainer;

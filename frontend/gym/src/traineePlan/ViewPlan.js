@@ -8,6 +8,7 @@ import { AuthContext } from '../shared/context/auth-context';
 import Exercise from './exercise';
 import { Dialog, DialogOverlay } from '@reach/dialog';
 import '@reach/dialog/styles.css';
+import Countdown from 'react-countdown';
 // ani CSS :- giveplan.css
 
 export var weekNo = 0;
@@ -18,6 +19,7 @@ const ViewPlan = () => {
 	const [trainerPlan, setTrainerPlan] = useState();
 	const [isDays, setIsDays] = useState(true);
 	const [exer, setExer] = useState(false);
+	const [ctime, setCtime] = useState(15000);
 	const [oneexer, setOneExer] = useState(false);
 	const [selectedDay, setSelectedDay] = useState(0);
 	const [category, setcategory] = useState();
@@ -44,12 +46,44 @@ const ViewPlan = () => {
 					'Content-Type': 'application/json',
 				}
 			);
-			console.log(responseData.defaultexercise);
 			setTrainerPlan(responseData.defaultexercise);
 		} catch (err) {
 			console.log(err);
 		} finally {
 			setShowDialog(false);
+		}
+	};
+	const waiting = ({ hours, minutes, seconds, completed }) => {
+		if (completed) {
+			return <div style={{ display: 'none' }}></div>;
+		} else {
+			if (seconds === 10) {
+				fetch(
+					`http://localhost:5000/api/viewplan/viewdefaultplan/${auth.userId}`,
+					{
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					}
+				)
+					.then(res => res.json())
+					.then(data => {
+						setCtime(ctime + 2000);
+						setTrainerPlan(data.defaultexercise);
+					})
+					.catch(err => {
+						setCtime(15000);
+						console.log(err);
+					});
+			}
+			return (
+				<div>
+					<h3 style={{ margin: '5px 0px', fontSize: '40px', display: 'none' }}>
+						{seconds}...
+					</h3>
+				</div>
+			);
 		}
 	};
 
@@ -84,7 +118,8 @@ const ViewPlan = () => {
 			)}
 			{!isLoading && !trainerPlan && (
 				<Card style={{ margin: 'auto', maxWidth: '34vw' }}>
-					<h1>Please Wait....!!!!</h1>
+					<h1>Please Wait.</h1>
+					<Countdown date={Date.now() + ctime + 2000} renderer={waiting} />
 				</Card>
 			)}
 			{!isLoading && trainerPlan && (
@@ -160,7 +195,7 @@ const ViewPlan = () => {
 												{isDays && !exer && !oneexer && (
 													<Card>
 														<input
-															class="button"
+															className="button"
 															type="button"
 															value="REPORTING"
 															disabled={
@@ -172,7 +207,7 @@ const ViewPlan = () => {
 																weekNo = 1;
 																history.push('/reporting');
 															}}
-															style={{ margin: '5px' }}
+															style={{ margin: '5px', width: 'auto' }}
 														></input>
 													</Card>
 												)}
@@ -321,7 +356,7 @@ const ViewPlan = () => {
 											</Card>
 										)}
 										{trainerPlan.week3Submitted === 1 && (
-											<Card style={{ maxWidth: '250px' }}>
+											<Card style={{ maxWidth: '250px', margin: 'auto' }}>
 												<h3 className="week-header">WEEK 4 </h3>
 												<hr />
 												<div className="dayGrid">
@@ -395,7 +430,10 @@ const ViewPlan = () => {
 								)}
 
 								{!isDays && !exer && !oneexer && (
-									<Card style={{ width: '40%', margin: 'auto' }}>
+									<Card
+										className="bc"
+										style={{ maxWidth: '500px', margin: 'auto ' }}
+									>
 										<div>
 											<div style={{ padding: '5px' }}>
 												{trainerPlan.plan.map(p1 => (
@@ -455,7 +493,7 @@ const ViewPlan = () => {
 																					src={e.exerciseid.gif}
 																					style={{
 																						border: '2px solid #4caf50',
-																						width: '200px',
+																						width: '100%',
 																						height: '200px',
 																					}}
 																					fluid
@@ -542,14 +580,21 @@ const ViewPlan = () => {
 									</Card>
 								)}
 								{!isDays && exer && !oneexer && (
-									<Card style={{ width: '44%', margin: 'auto' }}>
+									<Card
+										className="authentication"
+										style={{
+											maxWidth: '500px',
+											width: 'auto',
+											margin: 'auto ',
+										}}
+									>
 										<div>
 											<div style={{ padding: '5px' }}>
 												{trainerPlan.plan.map(p1 => (
 													<div>
 														{p1.dayNo === day && p1.exercises.length !== 0 && (
 															<div>
-																<Exercise items={p1} />
+																<Exercise items={p1} dayNumber={p1.dayNo} />
 															</div>
 														)}
 													</div>
@@ -586,9 +631,10 @@ const ViewPlan = () => {
 								{!isLoading && flag && (
 									<Container>
 										<Card
+											className="authentication"
 											style={{
 												maxWidth: '500px',
-												margin: 'auto',
+												margin: 'auto ',
 												color: 'black',
 												marginBottom: '50px',
 												padding: '0 10px',
@@ -599,7 +645,6 @@ const ViewPlan = () => {
 													as="h2"
 													style={{
 														marginTop: '0px',
-														borderBottom: '1px solid black',
 														padding: '10px 0',
 														backgroundColor: 'none',
 													}}
@@ -630,7 +675,7 @@ const ViewPlan = () => {
 														display: 'inline',
 														textALign: 'justify',
 														paddingRight: '10px',
-														width: '500px',
+														width: 'auto',
 													}}
 												>
 													<h4
@@ -650,7 +695,7 @@ const ViewPlan = () => {
 													<p
 														style={{
 															display: 'inline-block',
-															width: '330px',
+															width: 'auto',
 															height: '100px',
 															margin: '16px 10px 10px 175px',
 															textAlign: 'justify',
@@ -667,9 +712,8 @@ const ViewPlan = () => {
 											)}
 											{!isLoading && flag && (
 												<iframe
-													style={{ borderRadius: '8px' }}
+													style={{ borderRadius: '8px', width: '100%' }}
 													title={ename}
-													width="500"
 													height="315"
 													src={videoLink}
 													allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -701,8 +745,9 @@ const ViewPlan = () => {
 							<Dialog
 								isOpen={showDialog}
 								onDismiss={dismiss}
+								className="dialog"
 								style={{
-									width: '40%',
+									maxWidth: '400px',
 									marginTop: '50px !important',
 									background: 'black',
 									textAlign: 'center',

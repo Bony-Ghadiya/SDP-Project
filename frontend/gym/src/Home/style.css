@@ -1,12 +1,4 @@
 @import 'https://use.fontawesome.com/releases/v5.5.0/css/all.css';
-* {
-	margin: 0;
-	padding: 0;
-}
-
-/* .carousel {
-  margin-top: 50;
-} */
 
 .paper {
 	/* position: absolute; */
@@ -24,7 +16,7 @@
 }
 
 .paper button {
-	color: #4caf50;
+	color: red;
 	border: 1px solid;
 	max-width: 100%;
 	margin: 15px 45% !important;
@@ -58,11 +50,10 @@
 	font-size: 30px;
 	letter-spacing: 4px;
 	overflow: hidden;
-	background: linear-gradient(120deg, green, #fff, green);
+	background: linear-gradient(120deg, red, #fff, red);
 	background-repeat: no-repeat;
 	background-size: 80%;
 	animation: animate 3s linear infinite;
-	-webkit-background-clip: text;
 	-webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
@@ -82,10 +73,6 @@
 	margin-left: 250px;
 }
 
-.btn:hover {
-	background-color: green;
-}
-
 .about img {
 	width: 100%;
 	height: 500px;
@@ -101,103 +88,104 @@
 	font-size: 25px;
 	color: white;
 	position: absolute;
-	top: 20%;
+	top: 40%;
 	left: 20px;
 	z-index: 1;
 }
 
 .title {
-	position: absolute;
 	margin-top: 10px;
 	color: white;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+	display: inline;
+	background-color: black;
 }
 .title h3 {
 	font-size: 50px;
-	margin-left: 370px;
-	margin-top: 20px;
-	margin-bottom: 15px;
+	margin: auto;
 }
 
-.title p1 {
-	margin-left: 330px;
-}
 .title p {
 	padding-top: 10px;
-	margin-left: 390px;
+	margin: auto;
 }
 
 .aboutimg {
-	width: 600px;
-	height: 350px;
-	margin-top: 200px;
-	margin-left: 390px;
+	width: 100%;
+	height: 300px;
+	margin: 15px auto;
 }
 
 table {
-	width: 1200px;
+	width: 100%;
 	height: 300px;
-	margin-left: 130px;
-	margin-top: 30px;
+	text-align: center;
+	background-color: black;
 }
 
 .list {
 	color: white;
+	text-align: justify;
+	margin-bottom: 10px;
 }
 .list1 {
 	color: white;
-	font-size: 30px;
-	padding-left: 250px;
+	width: 50%;
 }
 
 .list2 {
 	color: white;
-	padding-left: 60px;
+	width: 50%;
 }
 
 .list2points {
 	font-weight: bold;
-	font-size: 1.2em;
 }
 
 li {
 	color: white;
-	list-style-position: inside;
+	list-style-type: none;
 }
 
 .footer {
+	width: 100%;
+	height: 400px;
 	display: flex;
 	background-color: #151515;
 }
 
 .left {
-	width: 745px;
-	padding-left: 90px;
+	width: 50%;
+	text-align: center;
+	align-items: center;
+	margin: auto;
+	margin-right: 0;
 }
 .left1 {
-	margin-top: 70px;
-	margin-left: 50px;
+	width: 50%;
+	margin: auto;
 }
 .text5 {
+	text-align: justify;
 	margin-top: 50px;
-	margin-left: 50px;
-	margin-right: 425px;
+	width: 70%;
 	color: white;
 }
 
 .right {
-	width: 750px;
+	margin: auto;
+	text-align: center;
 }
-.right h5 {
-	padding-top: 50px;
-	padding-left: 200px;
-	padding-bottom: 50px;
+.right h4 {
+	margin: 0;
 	font-size: 30px;
 	color: white;
 }
 .f1 {
+	margin-top: 30px;
 	color: white;
-	padding-left: 200px;
-	padding-bottom: 30px;
 }
 
 .checkButton {
@@ -213,4 +201,16 @@ li {
 	position: absolute;
 	bottom: 8px;
 	left: 16px;
+}
+@media (max-width: 500px) {
+	.text1 {
+		font-size: xx-small;
+		top: 40%;
+	}
+	.footer {
+		background-color: #151515;
+	}
+	.left1 {
+		margin-left: 30px;
+	}
 }

@@ -16,8 +16,14 @@ const ExerciseList = props => {
 		);
 	}
 	return (
-		<Container style={{ paddingLeft: '23vw' }}>
-			<ul className="users-list" style={{ paddingRight: ' 30px' }}>
+		<Container
+			className="nanucontainer"
+			style={{ paddingLeft: '23vw', textAlign: 'center' }}
+		>
+			<ul
+				className="users-list"
+				style={{ paddingRight: ' 30px', textAlign: 'center' }}
+			>
 				{props.items.map(exe => (
 					<ExerciseItem
 						key={exe.id}

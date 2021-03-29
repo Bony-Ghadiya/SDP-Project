@@ -1,17 +1,20 @@
 .outerDiv {
-	text-align: center;
+	text-align: center !important;
+	margin-left: 15% !important;
 }
-
+.dabu-button {
+	margin-left: 15% !important;
+}
 .form {
-	margin: 500px;
+	margin: 500px !important;
 }
 
 .input {
-	border: none;
-	height: 40px;
-	font-size: medium;
-	background-color: inherit;
-	background: none;
+	border: none !important;
+	height: 40px !important;
+	font-size: medium !important;
+	background-color: inherit !important;
+	background: none !important;
 }
 
 .MuiIconButton-root {
@@ -20,4 +23,40 @@
 
 .MuiAutocomplete-groupUl {
 	color: #4caf50 !important;
+}
+
+@media (max-width: 890px) {
+	.motu {
+		display: none !important;
+	}
+	.outerDiv1,
+	.nanuform,
+	.nanucontainer,
+	.users-list {
+		margin: 0px !important;
+	}
+	.users-list,
+	.nanucontainer {
+		padding: 0% !important;
+		grid-template-columns: auto auto !important;
+	}
+	.outerDiv {
+		margin-left: 0% !important;
+	}
+	.dabu-button {
+		margin-left: 0% !important;
+	}
+}
+
+@media (max-width: 434px) {
+	.users-list {
+		padding: 0% !important;
+		grid-template-columns: auto !important;
+	}
+}
+
+@media (min-width: 890px) {
+	.outerDiv1 {
+		display: none !important;
+	}
 }

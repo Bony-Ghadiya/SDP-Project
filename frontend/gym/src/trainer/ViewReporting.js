@@ -90,7 +90,10 @@ const ViewReporting = () => {
 				</div>
 			)}
 			{!isLoading && data && (
-				<Card style={{ width: '35%', margin: 'auto' }}>
+				<Card
+					className="authentication"
+					style={{ maxWidth: '400px', margin: 'auto ' }}
+				>
 					<div className={classes.root}>
 						<AppBar position="static">
 							<Tabs

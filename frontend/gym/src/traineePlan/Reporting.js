@@ -103,6 +103,7 @@ export default function ProgressMobileStepper() {
 		} finally {
 			if (weekNo === 4) {
 				auth.setPlanComplated();
+				history.push('/feedback');
 			}
 			if (responseData.success === 1) {
 				history.push('/viewplan');
@@ -163,8 +164,9 @@ export default function ProgressMobileStepper() {
 			{isLoading && <LoadingSpinner asOverlay />}
 			{!isLoading && (
 				<Card
+					className="authentication"
 					style={{
-						maxWidth: '620px',
+						maxWidth: '500px',
 						margin: 'auto',
 						textAlign: 'center',
 						color: 'white',
@@ -175,24 +177,28 @@ export default function ProgressMobileStepper() {
 							<h4>HOW DO YOU FEEL AFTER CLIMBING 5 FLOORS?</h4>
 							<hr></hr>
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="SHORTNESS OF BREATH"
 								onClick={form41SubmitHandler}
 							/>
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="A LITTLE TIRED"
 								onClick={form42SubmitHandler}
 							/>
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="EASY"
 								onClick={form43SubmitHandler}
 							/>
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="I CAN RUN UP THERE"
@@ -205,24 +211,28 @@ export default function ProgressMobileStepper() {
 							<h3>HOW MANY PUSH-UPS CAN YOU DO AT ONE TIME??</h3>
 							<hr></hr>
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="LESS THAN 10"
 								onClick={form51SubmitHandler}
 							/>
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="10-20"
 								onClick={form52SubmitHandler}
 							/>
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="21-40"
 								onClick={form53SubmitHandler}
 							/>
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="OVER 40"

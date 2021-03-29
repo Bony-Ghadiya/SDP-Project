@@ -11,9 +11,11 @@ const ExerciseItem = props => {
 		<Card
 			border="primary"
 			style={{
-				padding: '0px',
+				maxWidth: '240px',
+				padding: '10px',
 				color: 'black',
 				maxheight: '40rem',
+				margin: 'auto',
 			}}
 		>
 			<Card.Header

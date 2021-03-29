@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.post('/approve', trainerController.postTrainer);
 
+router.patch('/update', trainerController.updateTrainer);
+
 module.exports = router;

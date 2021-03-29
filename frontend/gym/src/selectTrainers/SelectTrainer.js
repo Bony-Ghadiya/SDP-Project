@@ -59,7 +59,7 @@ const Home = () => {
 						<Container>
 							<Card
 								border="primary"
-								style={{ maxWidth: '100%', padding: '0px' }}
+								style={{ maxWidth: '100%', padding: '0px', margin: 'auto ' }}
 							>
 								<div className="cardheader">
 									<Card.Header

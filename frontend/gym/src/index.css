@@ -9,9 +9,20 @@ body {
 	background-image: url('bg.jpg');
 	color: white;
 	background-attachment: fixed;
+	height: 100%;
+
+	/* Center and scale the image nicely */
+	background-position: center;
 	background-repeat: no-repeat;
+	background-size: cover;
 }
 
+@media (max-width: 500px) {
+	body {
+		background-image: none;
+		background-color: black !important;
+	}
+}
 .slide-in-left-enter {
 	transform: translateX(-100%);
 }

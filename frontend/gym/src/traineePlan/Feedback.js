@@ -56,7 +56,10 @@ const Auth = () => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-			<Card className="authentication" style={{ textAlign: 'center' }}>
+			<Card
+				className="authentication"
+				style={{ textAlign: 'center', maxWidth: '450px', margin: 'auto' }}
+			>
 				{isLoading && <LoadingSpinner asOverlay />}
 				<h2>Please Provide Feedback.</h2>
 				<hr className="style-line" />
@@ -66,7 +69,6 @@ const Auth = () => {
 							dispaly: 'inline',
 							width: '150px',
 							margin: 'auto',
-							
 						}}
 					>
 						<ReactStars

@@ -17,15 +17,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import './Giveplan.css';
 
 const CssTextField = withStyles({
-	root: {
-		color: 'white',
-		'& label': {
-			color: 'white',
-		},
-		'& label.Mui-focused': {
-			color: 'white',
-		},
-	},
+	root: {},
 })(TextField);
 
 const useStyles = makeStyles(theme => ({
@@ -40,6 +32,9 @@ const useStyles = makeStyles(theme => ({
 		'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
 			borderColor: 'white',
 		},
+	},
+	option: {
+		color: 'black',
 	},
 }));
 
@@ -358,7 +353,7 @@ const GivePlan = () => {
 						<div
 							style={{
 								width: 'auto',
-								margin: 'auto',
+								margin: 'auto ',
 								background: 'none',
 								border: '0px',
 							}}
@@ -371,6 +366,7 @@ const GivePlan = () => {
 												<Card
 													style={{
 														maxWidth: '250px',
+														margin: 'auto ',
 													}}
 												>
 													<h3 className="week-header">WEEK 1 </h3>
@@ -447,7 +443,7 @@ const GivePlan = () => {
 													{!isLoading && trainerPlan && isDays && (
 														<Card
 															style={{
-																margin: 'auto',
+																margin: 'auto ',
 																background: 'none',
 															}}
 														>
@@ -564,7 +560,7 @@ const GivePlan = () => {
 												</Card>
 											)}
 											{trainerPlan.week1Submitted === 1 && (
-												<Card style={{ maxWidth: '250px' }}>
+												<Card style={{ maxWidth: '250px', margin: 'auto ' }}>
 													<h3 className="week-header">WEEK 2 </h3>
 													<hr />
 													<div className="dayGrid">
@@ -639,7 +635,7 @@ const GivePlan = () => {
 													{!isLoading && trainerPlan && isDays && (
 														<Card
 															style={{
-																margin: 'auto',
+																margin: 'auto ',
 																background: 'none',
 															}}
 														>
@@ -753,7 +749,7 @@ const GivePlan = () => {
 												</Card>
 											)}
 											{trainerPlan.week2Submitted === 1 && (
-												<Card style={{ maxWidth: '250px' }}>
+												<Card style={{ maxWidth: '250px', margin: 'auto ' }}>
 													<h3 className="week-header">WEEK 3 </h3>
 													<hr />
 													<div className="dayGrid3">
@@ -828,7 +824,7 @@ const GivePlan = () => {
 													{!isLoading && trainerPlan && isDays && (
 														<Card
 															style={{
-																margin: 'auto',
+																margin: 'auto ',
 																background: 'none',
 															}}
 														>
@@ -942,7 +938,7 @@ const GivePlan = () => {
 												</Card>
 											)}
 											{trainerPlan.week3Submitted === 1 && (
-												<Card style={{ maxWidth: '250px' }}>
+												<Card style={{ maxWidth: '250px', margin: 'auto ' }}>
 													<h3 className="week-header">WEEK 4 </h3>
 													<hr />
 													<div className="dayGrid">
@@ -1017,7 +1013,7 @@ const GivePlan = () => {
 													{!isLoading && trainerPlan && isDays && (
 														<Card
 															style={{
-																margin: 'auto',
+																margin: 'auto ',
 																background: 'none',
 																color: 'white',
 															}}
@@ -1134,59 +1130,373 @@ const GivePlan = () => {
 										</div>
 									)}
 									{!isDays && (
-										<Card style={{ width: '35%', margin: 'auto' }}>
-											<div style={{ backgroundColor: 'none', padding: '5px' }}>
-												{trainerPlan.plan.map(p1 => (
-													<div>
-														{p1.dayNo === day && p1.exercises.length === 0 && (
-															<h3>No Exercise Today...</h3>
-														)}
-														{p1.dayNo === day && (
-															<div className="data101">
-																{zero &&
-																	p1.dayNo === day &&
-																	p1.exercises.length === 0 &&
-																	showNew &&
-																	!searched1 && (
-																		<div className="gif__preview">
+										<div
+											className="bc"
+											style={{
+												margin: 'auto',
+											}}
+										>
+											<Card
+												className="authentication"
+												style={{
+													width: 'auto',
+													margin: 'auto ',
+												}}
+											>
+												<div
+													style={{ backgroundColor: 'none', padding: '5px' }}
+												>
+													{trainerPlan.plan.map(p1 => (
+														<div>
+															{p1.dayNo === day &&
+																p1.exercises.length === 0 && (
+																	<h3>No Exercise Today...</h3>
+																)}
+															{p1.dayNo === day && (
+																<div className="data101">
+																	{zero &&
+																		p1.dayNo === day &&
+																		p1.exercises.length === 0 &&
+																		showNew &&
+																		!searched1 && (
+																			<div
+																				className="gif__preview"
+																				style={{
+																					width: '100%',
+																					height: '170px',
+																				}}
+																			>
+																				<p>Please pick an exercise.</p>
+																			</div>
+																		)}
+																	{zero &&
+																		p1.dayNo === day &&
+																		p1.exercises.length === 0 &&
+																		showNew &&
+																		loadedExercises &&
+																		searched1 && (
+																			<Image
+																				src={loadedExercises[0].gif}
+																				style={{
+																					width: '100%',
+																					height: '170px',
+																				}}
+																				fluid
+																			/>
+																		)}
+																	{zero &&
+																		p1.dayNo === day &&
+																		p1.exercises.length === 0 &&
+																		showNew &&
+																		!loadedExercises &&
+																		searched1 && (
+																			<Image
+																				src={loadedExercises}
+																				alt="GIF"
+																				style={{
+																					width: '100%',
+																					height: '170px',
+																				}}
+																				fluid
+																			/>
+																		)}
+																	{zero &&
+																		p1.dayNo === day &&
+																		p1.exercises.length === 0 &&
+																		showNew && (
+																			<form
+																				style={{
+																					display: 'block',
+																				}}
+																				onSubmit={searchSubmitHandler}
+																			>
+																				<div
+																					className="outerDiv"
+																					style={{ margin: '0px' }}
+																				>
+																					<div
+																						style={{
+																							display: 'inline-block',
+																							textAlign: 'center',
+																							backgroundColor: 'none',
+																						}}
+																					>
+																						<Autocomplete
+																							style={{
+																								width: 200,
+																								color: 'black',
+																							}}
+																							classes={classes}
+																							value={temp}
+																							id="grouped-demo"
+																							options={options.sort(
+																								(a, b) =>
+																									-b.firstLetter.localeCompare(
+																										a.firstLetter
+																									)
+																							)}
+																							groupBy={option =>
+																								option.firstLetter
+																							}
+																							getOptionLabel={option =>
+																								option.ename
+																							}
+																							onChange={(event, value) =>
+																								setSearched(value)
+																							}
+																							renderInput={params => (
+																								<div className="SearchExercises">
+																									<CssTextField
+																										{...params}
+																										label="Add Exercises"
+																										variant="outlined"
+																									/>
+																								</div>
+																							)}
+																							getOptionSelected={option =>
+																								option.ename
+																							}
+																						/>
+																					</div>
+																					<br></br>
+																					<br />
+																					<button
+																						className="daysbutton"
+																						onClick={e => {
+																							searchSubmitHandler(e);
+																						}}
+																					>
+																						ADD
+																					</button>
+																					{showNew && (
+																						<div className="repstime">
+																							<label for="reps">Reps : </label>
+																							<input
+																								type="text"
+																								name="reps"
+																								defaultValue={0}
+																								style={{
+																									width: '3ch',
+																									color: '#4caf50',
+																								}}
+																								onChange={e => {
+																									e.preventDefault();
+																									setTime(0);
+																									setReps(e.target.value);
+																								}}
+																							></input>
+																							x
+																						</div>
+																					)}
+																					{showNew && (
+																						<div className="repstime">
+																							<label for="time">Time : </label>
+																							<input
+																								type="text"
+																								name="time"
+																								defaultValue={0}
+																								style={{
+																									width: '3ch',
+																									color: '#4caf50',
+																								}}
+																								onChange={e => {
+																									e.preventDefault();
+																									setReps(0);
+																									setTime(e.target.value);
+																								}}
+																							></input>
+																							s
+																						</div>
+																					)}
+																				</div>
+																			</form>
+																		)}
+																	{zero &&
+																		p1.dayNo === day &&
+																		p1.exercises.length === 0 &&
+																		showNew && (
+																			<div
+																				style={{
+																					textAlign: 'center',
+																				}}
+																			>
+																				<button
+																					className="close"
+																					onClick={async e => {
+																						setNotZero(false);
+																						checkSubmitHandler(e);
+																					}}
+																				>
+																					<CheckIcon />
+																				</button>
+																			</div>
+																		)}
+																	{zero &&
+																		p1.dayNo === day &&
+																		p1.exercises.length === 0 &&
+																		showNew && (
+																			<button
+																				className="close"
+																				onClick={() => {
+																					setloadedExercises(null);
+																					setShowNew(false);
+																					setSerched1(false);
+																				}}
+																			>
+																				X
+																			</button>
+																		)}
+																</div>
+															)}
+															{p1.dayNo === day && exer.length !== 0 && (
+																<div className="data101">
+																	{exer.map(e => (
+																		<React.Fragment>
+																			<div className="gif">
+																				<Image
+																					src={e.exerciseid.gif}
+																					style={{
+																						width: '100%',
+																						height: '170px',
+																					}}
+																					fluid
+																				/>
+																			</div>
+
+																			<div className="ename">
+																				<h3>{e.exerciseid.ename}</h3>
+																				{e.reps !== 0 && (
+																					<div className="repstime">
+																						<label for="reps">Reps : </label>
+																						<input
+																							type="text"
+																							name="reps"
+																							defaultValue={e.reps}
+																							style={{
+																								width: '3ch',
+																								color: '#4caf50',
+																							}}
+																							onChange={e => {
+																								e.preventDefault();
+																								console.log(e.target.value);
+																								setTime(0);
+																								setReps(e.target.value);
+																							}}
+																						></input>
+																						x
+																					</div>
+																				)}
+																				{e.time !== 0 && (
+																					<div className="repstime">
+																						<label for="time">Time : </label>
+																						<input
+																							type="text"
+																							name="time"
+																							defaultValue={e.time}
+																							style={{
+																								width: '3ch',
+																								color: '#4caf50',
+																							}}
+																							onChange={e => {
+																								e.preventDefault();
+																								console.log(e.target.value);
+																								setReps(0);
+																								setTime(e.target.value);
+																							}}
+																						></input>
+																						s
+																					</div>
+																				)}
+																			</div>
+
+																			<div
+																				style={{
+																					textAlign: 'center',
+																					display: 'block',
+																					color: 'white',
+																					border: 'white',
+																				}}
+																			>
+																				<button
+																					className="close"
+																					onClick={event => {
+																						event.preventDefault();
+																						checkrepsSubmitHandler(p1, e);
+																					}}
+																				>
+																					<CheckIcon style={{ padding: '0' }} />
+																				</button>
+																				<button
+																					className="close"
+																					onClick={() => {
+																						deleteexercise(p1, e);
+																					}}
+																				>
+																					X
+																				</button>
+																			</div>
+
+																			<button
+																				className="goto"
+																				onClick={async event => {
+																					event.preventDefault();
+																					console.log(e.exerciseid.id);
+																					setOneExer(true);
+																					try {
+																						const responseData = await sendRequest(
+																							`http://localhost:5000/api/search/${e.exerciseid.id}`
+																						);
+																						//setexercise(responseData.exercise);
+																						console.log(responseData.exe);
+																						setEname(responseData.exe.ename);
+																						setVideoLink(
+																							responseData.exe.vlink
+																						);
+																						setcategory(
+																							responseData.exe.category
+																						);
+																						setDesc(responseData.exe.desc);
+																						setFlag(true);
+																					} catch (err) {}
+																				}}
+																			>
+																				&gt;
+																			</button>
+																		</React.Fragment>
+																	))}
+																	{showNew && !searched1 && (
+																		<div
+																			className="gif__preview"
+																			style={{
+																				width: '100%',
+																				height: '170px',
+																			}}
+																		>
 																			<p>Please pick an exercise.</p>
 																		</div>
 																	)}
-																{zero &&
-																	p1.dayNo === day &&
-																	p1.exercises.length === 0 &&
-																	showNew &&
-																	loadedExercises &&
-																	searched1 && (
+																	{showNew && loadedExercises && searched1 && (
 																		<Image
 																			src={loadedExercises[0].gif}
 																			style={{
-																				width: '170px',
+																				width: '100%',
 																				height: '170px',
 																			}}
 																			fluid
 																		/>
 																	)}
-																{zero &&
-																	p1.dayNo === day &&
-																	p1.exercises.length === 0 &&
-																	showNew &&
-																	!loadedExercises &&
-																	searched1 && (
+																	{showNew && !loadedExercises && searched1 && (
 																		<Image
 																			src={loadedExercises}
 																			alt="GIF"
 																			style={{
-																				width: '170px',
+																				width: '100%',
 																				height: '170px',
 																			}}
 																			fluid
 																		/>
 																	)}
-																{zero &&
-																	p1.dayNo === day &&
-																	p1.exercises.length === 0 &&
-																	showNew && (
+																	{showNew && (
 																		<form
 																			style={{
 																				display: 'block',
@@ -1203,10 +1513,7 @@ const GivePlan = () => {
 																				>
 																					<Autocomplete
 																						width={300}
-																						style={{
-																							width: 200,
-																							color: 'white',
-																						}}
+																						style={{ width: 200 }}
 																						classes={classes}
 																						value={temp}
 																						id="grouped-demo"
@@ -1239,10 +1546,16 @@ const GivePlan = () => {
 																						}
 																					/>
 																				</div>
+
 																				<br></br>
 																				<br />
 																				<button
 																					className="daysbutton"
+																					style={{
+																						margin: '10px 5px',
+																						color: 'white',
+																						borderColor: 'white',
+																					}}
 																					onClick={e => {
 																						searchSubmitHandler(e);
 																					}}
@@ -1271,7 +1584,7 @@ const GivePlan = () => {
 																				)}
 																				{showNew && (
 																					<div className="repstime">
-																						<label for="time">Time : </label>
+																						<label for="time">TIME : </label>
 																						<input
 																							type="text"
 																							name="time"
@@ -1292,10 +1605,7 @@ const GivePlan = () => {
 																			</div>
 																		</form>
 																	)}
-																{zero &&
-																	p1.dayNo === day &&
-																	p1.exercises.length === 0 &&
-																	showNew && (
+																	{showNew && (
 																		<div
 																			style={{
 																				textAlign: 'center',
@@ -1304,7 +1614,6 @@ const GivePlan = () => {
 																			<button
 																				className="close"
 																				onClick={async e => {
-																					setNotZero(false);
 																					checkSubmitHandler(e);
 																				}}
 																			>
@@ -1312,10 +1621,7 @@ const GivePlan = () => {
 																			</button>
 																		</div>
 																	)}
-																{zero &&
-																	p1.dayNo === day &&
-																	p1.exercises.length === 0 &&
-																	showNew && (
+																	{showNew && (
 																		<button
 																			className="close"
 																			onClick={() => {
@@ -1327,302 +1633,26 @@ const GivePlan = () => {
 																			X
 																		</button>
 																	)}
-															</div>
-														)}
-														{p1.dayNo === day && exer.length !== 0 && (
-															<div className="data101">
-																{exer.map(e => (
-																	<React.Fragment>
-																		<div className="gif">
-																			<Image
-																				src={e.exerciseid.gif}
-																				style={{
-																					width: '170px',
-																					height: '170px',
-																				}}
-																				fluid
-																			/>
-																		</div>
-
-																		<div className="ename">
-																			<h3>{e.exerciseid.ename}</h3>
-																			{e.reps !== 0 && (
-																				<div className="repstime">
-																					<label for="reps">Reps : </label>
-																					<input
-																						type="text"
-																						name="reps"
-																						defaultValue={e.reps}
-																						style={{
-																							width: '3ch',
-																							color: '#4caf50',
-																						}}
-																						onChange={e => {
-																							e.preventDefault();
-																							console.log(e.target.value);
-																							setTime(0);
-																							setReps(e.target.value);
-																						}}
-																					></input>
-																					x
-																				</div>
-																			)}
-																			{e.time !== 0 && (
-																				<div className="repstime">
-																					<label for="time">Time : </label>
-																					<input
-																						type="text"
-																						name="time"
-																						defaultValue={e.time}
-																						style={{
-																							width: '3ch',
-																							color: '#4caf50',
-																						}}
-																						onChange={e => {
-																							e.preventDefault();
-																							console.log(e.target.value);
-																							setReps(0);
-																							setTime(e.target.value);
-																						}}
-																					></input>
-																					s
-																				</div>
-																			)}
-																		</div>
-
-																		<div
-																			style={{
-																				textAlign: 'center',
-																				display: 'block',
-																				color: 'white',
-																				border: 'white',
-																			}}
-																		>
-																			<button
-																				className="close"
-																				onClick={event => {
-																					event.preventDefault();
-																					checkrepsSubmitHandler(p1, e);
-																				}}
-																			>
-																				<CheckIcon style={{ padding: '0' }} />
-																			</button>
-																			<button
-																				className="close"
-																				onClick={() => {
-																					deleteexercise(p1, e);
-																				}}
-																			>
-																				X
-																			</button>
-																		</div>
-
-																		<button
-																			className="goto"
-																			onClick={async event => {
-																				event.preventDefault();
-																				console.log(e.exerciseid.id);
-																				setOneExer(true);
-																				try {
-																					const responseData = await sendRequest(
-																						`http://localhost:5000/api/search/${e.exerciseid.id}`
-																					);
-																					//setexercise(responseData.exercise);
-																					console.log(responseData.exe);
-																					setEname(responseData.exe.ename);
-																					setVideoLink(responseData.exe.vlink);
-																					setcategory(
-																						responseData.exe.category
-																					);
-																					setDesc(responseData.exe.desc);
-																					setFlag(true);
-																				} catch (err) {}
-																			}}
-																		>
-																			&gt;
-																		</button>
-																	</React.Fragment>
-																))}
-																{showNew && !searched1 && (
-																	<div className="gif__preview">
-																		<p>Please pick an exercise.</p>
-																	</div>
-																)}
-																{showNew && loadedExercises && searched1 && (
-																	<Image
-																		src={loadedExercises[0].gif}
-																		style={{
-																			width: '170px',
-																			height: '170px',
-																		}}
-																		fluid
-																	/>
-																)}
-																{showNew && !loadedExercises && searched1 && (
-																	<Image
-																		src={loadedExercises}
-																		alt="GIF"
-																		style={{
-																			width: '170px',
-																			height: '170px',
-																		}}
-																		fluid
-																	/>
-																)}
-																{showNew && (
-																	<form
-																		style={{
-																			display: 'block',
-																		}}
-																		onSubmit={searchSubmitHandler}
-																	>
-																		<div className="outerDiv">
-																			<div
-																				style={{
-																					display: 'inline-block',
-																					textAlign: 'center',
-																					backgroundColor: 'none',
-																				}}
-																			>
-																				<Autocomplete
-																					width={300}
-																					style={{ width: 200 }}
-																					classes={classes}
-																					value={temp}
-																					id="grouped-demo"
-																					options={options.sort(
-																						(a, b) =>
-																							-b.firstLetter.localeCompare(
-																								a.firstLetter
-																							)
-																					)}
-																					groupBy={option => option.firstLetter}
-																					getOptionLabel={option =>
-																						option.ename
-																					}
-																					onChange={(event, value) =>
-																						setSearched(value)
-																					}
-																					renderInput={params => (
-																						<div className="SearchExercises">
-																							<CssTextField
-																								{...params}
-																								label="Add Exercises"
-																								variant="outlined"
-																							/>
-																						</div>
-																					)}
-																					getOptionSelected={option =>
-																						option.ename
-																					}
-																				/>
-																			</div>
-
-																			<br></br>
-																			<br />
-																			<button
-																				className="daysbutton"
-																				style={{
-																					margin: '10px 5px',
-																					color: 'white',
-																					borderColor: 'white',
-																				}}
-																				onClick={e => {
-																					searchSubmitHandler(e);
-																				}}
-																			>
-																				ADD
-																			</button>
-																			{showNew && (
-																				<div className="repstime">
-																					<label for="reps">Reps : </label>
-																					<input
-																						type="text"
-																						name="reps"
-																						defaultValue={0}
-																						style={{
-																							width: '3ch',
-																							color: '#4caf50',
-																						}}
-																						onChange={e => {
-																							e.preventDefault();
-																							setTime(0);
-																							setReps(e.target.value);
-																						}}
-																					></input>
-																					x
-																				</div>
-																			)}
-																			{showNew && (
-																				<div className="repstime">
-																					<label for="time">TIME : </label>
-																					<input
-																						type="text"
-																						name="time"
-																						defaultValue={0}
-																						style={{
-																							width: '3ch',
-																							color: '#4caf50',
-																						}}
-																						onChange={e => {
-																							e.preventDefault();
-																							setReps(0);
-																							setTime(e.target.value);
-																						}}
-																					></input>
-																					s
-																				</div>
-																			)}
-																		</div>
-																	</form>
-																)}
-																{showNew && (
-																	<div
-																		style={{
-																			textAlign: 'center',
-																		}}
-																	>
-																		<button
-																			className="close"
-																			onClick={async e => {
-																				checkSubmitHandler(e);
-																			}}
-																		>
-																			<CheckIcon style={{ padding: '0' }} />
-																		</button>
-																	</div>
-																)}
-																{showNew && (
-																	<button
-																		className="close"
-																		onClick={() => {
-																			setloadedExercises(null);
-																			setShowNew(false);
-																			setSerched1(false);
-																		}}
-																	>
-																		X
-																	</button>
-																)}
-															</div>
-														)}
-													</div>
-												))}
-												{!isDays && !showNew && (
-													<div className="anotherData">
-														<button
-															onClick={e => {
-																e.preventDefault();
-																setShowNew(true);
-															}}
-														>
-															<AddIcon />
-															<h4>ADD ANOTHER EXERCISE</h4>
-														</button>
-													</div>
-												)}
+																</div>
+															)}
+														</div>
+													))}
+													{!isDays && !showNew && (
+														<div className="anotherData">
+															<button
+																onClick={e => {
+																	e.preventDefault();
+																	setShowNew(true);
+																}}
+															>
+																<AddIcon />
+																<h4>ADD ANOTHER EXERCISE</h4>
+															</button>
+														</div>
+													)}
+												</div>
 												{!isDays && (
-													<div>
+													<div className="buttonnn">
 														<button
 															style={{
 																margin: 'auto 5px',
@@ -1737,8 +1767,8 @@ const GivePlan = () => {
 														</button>
 													</div>
 												)}
-											</div>
-										</Card>
+											</Card>
+										</div>
 									)}
 								</div>
 							)}
@@ -1751,9 +1781,10 @@ const GivePlan = () => {
 							{!isLoading && flag && (
 								<Container>
 									<Card
+										className="authentication"
 										style={{
 											maxWidth: '500px',
-											margin: 'auto',
+											margin: 'auto ',
 											color: 'black',
 											marginBottom: '50px',
 											padding: '0 10px',
@@ -1801,7 +1832,7 @@ const GivePlan = () => {
 												<h4
 													style={{
 														display: 'inline',
-														height: '100%',
+														height: '60%',
 														position: 'absolute',
 														paddingTop: '10px',
 														marginTop: '16px',
@@ -1815,7 +1846,7 @@ const GivePlan = () => {
 												<p
 													style={{
 														display: 'inline-block',
-														width: '330px',
+														width: 'auto',
 														height: '100px',
 														margin: '16px 10px 10px 175px',
 														textAlign: 'justify',
@@ -1832,9 +1863,8 @@ const GivePlan = () => {
 										)}
 										{!isLoading && flag && (
 											<iframe
-												style={{ borderRadius: '8px' }}
+												style={{ borderRadius: '8px', width: '100%' }}
 												title={ename}
-												width="500"
 												height="315"
 												src={videoLink}
 												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

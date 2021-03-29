@@ -6,6 +6,7 @@ import { useHttpClient } from '../shared/hooks/http-hook';
 import Card1 from '../shared/components/UIElements/Card';
 import { AuthContext } from '../shared/context/auth-context';
 import { Container, Card, Image } from 'react-bootstrap';
+import Countdown from 'react-countdown';
 
 export let traineeid;
 export let traineename;
@@ -13,6 +14,8 @@ const Home = () => {
 	const history = useHistory();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
+
+	const [ctime, setCtime] = useState(15000);
 	const [trainer, setTrainer] = useState();
 
 	useEffect(() => {
@@ -22,16 +25,46 @@ const Home = () => {
 					`http://localhost:5000/api/show/showtrainees/${auth.userId}`
 				);
 				setTrainer(responseData.trainees);
-				console.log(responseData.trainees);
 			} catch (err) {}
 		};
 		fetchRequests();
 	}, [sendRequest, auth.userId]);
 
+	const waiting = ({ hours, minutes, seconds, completed }) => {
+		if (completed) {
+			return <div style={{ display: 'none' }}></div>;
+		} else {
+			if (seconds === 10) {
+				fetch(`http://localhost:5000/api/show/showtrainees/${auth.userId}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				})
+					.then(res => res.json())
+					.then(data => {
+						setTrainer(data.trainees);
+					})
+					.catch(err => {
+						setCtime(15000);
+						console.log(err);
+					});
+			}
+			return (
+				<div>
+					<h3 style={{ margin: '5px 0px', fontSize: '40px', display: 'none' }}>
+						{seconds}...
+					</h3>
+				</div>
+			);
+		}
+	};
+
 	if (trainer && trainer.length === 0 && !isLoading) {
 		return (
 			<div className="center">
 				<Card1>
+					<Countdown date={Date.now() + ctime + 2000} renderer={waiting} />
 					<h2>No Trainees Found.</h2>
 				</Card1>
 			</div>
@@ -59,6 +92,7 @@ const Home = () => {
 								<Card
 									border="primary"
 									style={{
+										margin: 'auto',
 										maxWidth: '18rem',
 										padding: '0px',
 										color: 'black',
@@ -68,7 +102,6 @@ const Home = () => {
 										as="h3"
 										style={{
 											marginTop: '0px',
-											borderBottom: '1px solid black',
 											padding: '5px 0',
 											backgroundColor: 'none',
 										}}
@@ -79,13 +112,16 @@ const Home = () => {
 										<Image
 											src={t.image}
 											alt={t.name}
-											style={{ width: '200px', height: '200px' }}
+											style={{
+												width: '200px',
+												height: '200px',
+												borderRadius: '50%',
+												border: '1px solid #4caf50',
+											}}
 											fluid
 										/>
 									</Card.Body>
-									<Card.Footer
-										style={{ borderTop: '1px solid black', padding: '5px 0' }}
-									>
+									<Card.Footer style={{ padding: '5px 0' }}>
 										<div style={{ padding: '0 7px', display: 'inline' }}>
 											<input
 												type="button"
@@ -94,7 +130,6 @@ const Home = () => {
 												onClick={() => {
 													traineeid = t.id;
 													traineename = t.name;
-													console.log(t.id, traineeid);
 													history.push('/showtrainees/viewdata');
 												}}
 											/>

@@ -6,6 +6,7 @@ import Button from '../shared/components/FormElements/Button';
 import Card1 from '../shared/components/UIElements/Card';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
+import Countdown from 'react-countdown';
 
 import { Container, Card, Image } from 'react-bootstrap';
 
@@ -14,7 +15,7 @@ import './TrainerList.css';
 const Home = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
-
+	const [ctime, setCtime] = useState(15000);
 	const [acceptModal, setAcceptModal] = useState(false);
 	const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -32,6 +33,35 @@ const Home = () => {
 		fetchRequests();
 	}, [sendRequest]);
 
+	const waiting = ({ hours, minutes, seconds, completed }) => {
+		if (completed) {
+			return <div style={{ display: 'none' }}></div>;
+		} else {
+			if (seconds === 10) {
+				fetch('http://localhost:5000/api/admin/approvetrainers', {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				})
+					.then(res => res.json())
+					.then(data => {
+						setTrainer(data.trainers);
+					})
+					.catch(err => {
+						setCtime(15000);
+						console.log(err);
+					});
+			}
+			return (
+				<div>
+					<h3 style={{ margin: '5px 0px', fontSize: '40px', display: 'none' }}>
+						{seconds}...
+					</h3>
+				</div>
+			);
+		}
+	};
 	const showAcceptWarningHandler = () => {
 		setAcceptModal(true);
 	};
@@ -72,11 +102,16 @@ const Home = () => {
 					>
 						{trainer.map(t => (
 							<Container>
+								<Countdown
+									date={Date.now() + ctime + 2000}
+									renderer={waiting}
+								/>
 								<Card
 									border="primary"
 									style={{
 										maxWidth: '18rem',
 										padding: '0px',
+										margin: 'auto ',
 										color: 'white',
 										maxheight: '40rem',
 									}}
@@ -168,7 +203,10 @@ const Home = () => {
 											footer={
 												<React.Fragment>
 													<div
-														style={{ marginRight: '10px', display: 'inline' }}
+														style={{
+															marginRight: '10px',
+															display: 'inline',
+														}}
 													>
 														<Button
 															className="btn1"
@@ -274,13 +312,14 @@ const Home = () => {
 											}}
 										>
 											<input
+												style={{
+													margin: '10px',
+													width: '100px',
+													fontSize: '14px',
+												}}
 												type="button"
 												className="button"
 												value="ACCEPT"
-												style={{
-													margin: '0px !important',
-													width: '100px !important',
-												}}
 												onClick={showAcceptWarningHandler}
 											/>
 										</div>
@@ -292,13 +331,14 @@ const Home = () => {
 											}}
 										>
 											<input
+												style={{
+													margin: '10px',
+													width: '100px',
+													fontSize: '14px',
+												}}
 												type="button"
 												className="button"
 												value="REJECT"
-												style={{
-													margin: '0px !important',
-													width: '100px !important',
-												}}
 												onClick={showDeleteWarningHandler}
 											/>
 										</div>

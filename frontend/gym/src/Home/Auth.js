@@ -175,7 +175,10 @@ const Auth = () => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-			<Card className="authentication">
+			<Card
+				className="authentication"
+				style={{ maxWidth: '400px', margin: 'auto' }}
+			>
 				{isLoading && <LoadingSpinner asOverlay />}
 				<h2>{!isLoginMode ? 'SIGNUP' : 'LOGIN'}</h2>
 				<hr className="style-line" />
@@ -297,10 +300,10 @@ const Auth = () => {
 					<Dialog
 						isOpen={showDialog}
 						onDismiss={dismiss}
+						className="dialog"
 						style={{
-							width: '40%',
+							maxWidth: '400px',
 							marginTop: '50px !important',
-							background: 'black',
 							textAlign: 'center',
 						}}
 					>
@@ -311,7 +314,7 @@ const Auth = () => {
 						<hr />
 						<button
 							className="default-pic"
-							style={{ margin: 'auto 5px', width: '150px' }}
+							style={{ margin: 'auto 5px', width: '100%', maxWidth: '250px' }}
 							onClick={() => {
 								setUrl(
 									'https://res.cloudinary.com/gymmie/image/upload/v1615744408/users/ikiszyrh3gk8dcxunh2y.png'
@@ -320,6 +323,7 @@ const Auth = () => {
 							}}
 						>
 							<img
+								style={{ width: '100%', maxWidth: '250px' }}
 								src="https://res.cloudinary.com/gymmie/image/upload/v1615744408/users/ikiszyrh3gk8dcxunh2y.png"
 								alt="profile  pic"
 							/>
@@ -332,7 +336,7 @@ const Auth = () => {
 							onClick={() => {
 								filePickerRef.current.click();
 							}}
-							style={{ margin: 'auto 5px', width: '241px' }}
+							style={{ margin: 'auto 5px', width: '100%', maxWidth: '250px' }}
 						>
 							+ choose another
 						</button>

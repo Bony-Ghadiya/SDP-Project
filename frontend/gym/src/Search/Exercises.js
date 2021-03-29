@@ -6,26 +6,27 @@ import LoadingSpinner from '../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../shared/hooks/http-hook';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { Card } from 'react-bootstrap';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import './Search.css';
 
 const CssTextField = withStyles({
 	root: {
-		color: 'white',
+		color: 'black',
 
 		'& label': {
-			color: 'white',
+			color: 'black',
 		},
 		'& label.Mui-focused': {
-			color: 'white',
+			color: 'black',
 		},
 	},
 })(TextField);
 
 const useStyles = makeStyles(theme => ({
 	inputRoot: {
-		color: 'white',
+		color: 'black',
 		'& .MuiOutlinedInput-notchedOutline': {
 			borderColor: '#4caf50',
 		},
@@ -35,9 +36,12 @@ const useStyles = makeStyles(theme => ({
 		'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
 			borderColor: '#4caf50',
 		},
-		'&.MuiAutocomplete-groupUl': {
+		'&.MuiAutocomplete-option': {
 			color: 'black',
 		},
+	},
+	option: {
+		color: 'black',
 	},
 }));
 
@@ -119,7 +123,9 @@ const Exercises = () => {
 						<LoadingSpinner />
 					</div>
 				)}
+
 				<div
+					className="motu"
 					style={{
 						marginTop: '0',
 						width: '20vw',
@@ -186,9 +192,10 @@ const Exercises = () => {
 				{!isLoading && allExercises && (
 					<React.Fragment>
 						<form
+							className="nanuform"
 							style={{
 								marginLeft: '15%',
-								paddingLeft: '20px',
+								marginRight: '15%',
 								display: 'block',
 							}}
 							onSubmit={searchSubmitHandler}
@@ -196,9 +203,11 @@ const Exercises = () => {
 							<div className="outerDiv">
 								<div
 									style={{
-										display: 'inline-block',
+										width: 'auto',
+										marginLeft: '15%',
+										marginRight: '15%',
+										display: 'block',
 										textAlign: 'center',
-										backgroundColor: 'none',
 									}}
 								>
 									<Autocomplete
@@ -211,7 +220,7 @@ const Exercises = () => {
 										groupBy={option => option.firstLetter}
 										getOptionLabel={option => option.ename}
 										onChange={(event, value) => setSearched(value)}
-										style={{ width: '60vw', color: 'black' }}
+										style={{ maxWidth: '700px', width: '75vw', color: 'black' }}
 										renderInput={params => (
 											<div className="SearchExercises">
 												<CssTextField
@@ -224,19 +233,59 @@ const Exercises = () => {
 										getOptionSelected={option => option.ename}
 									/>
 								</div>
-
-								<br></br>
-								<br />
-								<input
-									className="button"
-									type="button"
-									onClick={searchSubmitHandler}
-									value="SEARCH"
-								/>
+								<div className="dabu-button">
+									<br />
+									<input
+										className="button"
+										type="button"
+										onClick={searchSubmitHandler}
+										value="SEARCH"
+									/>
+								</div>
 							</div>
 						</form>
+						<div className="outerDiv1">
+							<Card
+								style={{
+									marginTop: '15px',
+									display: 'block',
+									width: '50%',
+									margin: '15px auto auto auto',
+								}}
+							>
+								<h3>Please select Category</h3>
+								<br />
+								<button
+									className="button"
+									style={{ width: '150px' }}
+									onClick={LagcategorySubmitHandler}
+								>
+									Legs
+								</button>
+								<br />
+								<br />
+								<button
+									className="button"
+									style={{ width: '150px' }}
+									onClick={ArmcategorySubmitHandler}
+								>
+									Arms
+								</button>
+								<br />
+								<br />
+								<button
+									className="button"
+									style={{ width: '150px' }}
+									onClick={AbscategorySubmitHandler}
+								>
+									Abs
+								</button>
+								<br />
+							</Card>
+						</div>
 					</React.Fragment>
 				)}
+
 				<br />
 				{!isLoading && loadedExercises && (
 					<ExerciseList items={loadedExercises} />

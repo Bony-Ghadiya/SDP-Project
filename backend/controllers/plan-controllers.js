@@ -124,21 +124,19 @@ const getDetails = async (req, res, next) => {
 		return next(error);
 	}
 
-	if (!exe) {
-		const error = new HttpError(
-			'Could not find data for the provided id.',
-			404
-		);
-		return next(error);
-	}
-
-	if (trainers.length !== 0) {
+	if (!exe || exe.length === 0) {
 		res.json({
+			temp: 0,
+		});
+	} else if (trainers.length !== 0) {
+		res.json({
+			temp: 1,
 			showfeedback: trainers[0].plan[0].dayComplated,
 			exe: exe.toObject({ getters: true }),
 		});
 	} else {
 		res.json({
+			temp: 1,
 			showfeedback: 0,
 			exe: exe.toObject({ getters: true }),
 		});

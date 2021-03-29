@@ -266,6 +266,7 @@ export default function ProgressMobileStepper() {
 			{isLoading && <LoadingSpinner asOverlay />}
 			{!isLoading && (
 				<Card
+					className="authentication"
 					style={{
 						maxWidth: '500px',
 						margin: 'auto',
@@ -283,12 +284,14 @@ export default function ProgressMobileStepper() {
 
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="MALE"
 								onClick={form1MaleSubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="FEMALE"
 								onClick={form1FemaleSubmitHandler}
@@ -302,18 +305,21 @@ export default function ProgressMobileStepper() {
 
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="WEIGHT LOSE"
 								onClick={form2LoseSubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="GET TONED"
 								onClick={form2GainSubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="BUILD MUSCLE"
 								onClick={form2BuildSubmitHandler}
@@ -327,24 +333,28 @@ export default function ProgressMobileStepper() {
 
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="HARDLY"
 								onClick={form31SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="SOMETIMES"
 								onClick={form32SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="2-3 TIMES A WEEK"
 								onClick={form33SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="OVER 4 TIMES A WEEK"
 								onClick={form34SubmitHandler}
@@ -357,6 +367,7 @@ export default function ProgressMobileStepper() {
 							<hr />
 
 							<input
+								style={{ fontSize: 'smaller' }}
 								type="button"
 								className="btn1"
 								value="SHORTNESS OF BREATH"
@@ -364,6 +375,7 @@ export default function ProgressMobileStepper() {
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="A LITTLE TIRED"
 								onClick={form42SubmitHandler}
@@ -371,11 +383,13 @@ export default function ProgressMobileStepper() {
 							<input
 								type="button"
 								className="btn1"
+								style={{ fontSize: 'smaller' }}
 								value="EASY"
 								onClick={form43SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="I CAN RUN UP THERE"
 								onClick={form44SubmitHandler}
@@ -389,24 +403,28 @@ export default function ProgressMobileStepper() {
 
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="LESS THAN 10"
 								onClick={form51SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="10-20"
 								onClick={form52SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="21-40"
 								onClick={form53SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="OVER 40"
 								onClick={form54SubmitHandler}
@@ -420,6 +438,7 @@ export default function ProgressMobileStepper() {
 
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="FULL BODY WORKOUT"
 								onClick={form61SubmitHandler}
@@ -428,6 +447,7 @@ export default function ProgressMobileStepper() {
 
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="ABS WORKOUT"
 								onClick={form62SubmitHandler}
@@ -435,12 +455,14 @@ export default function ProgressMobileStepper() {
 
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="ARM WORKOUT"
 								onClick={form63SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="LEG WORKOUT"
 								onClick={form64SubmitHandler}
@@ -454,18 +476,21 @@ export default function ProgressMobileStepper() {
 
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="EASY"
 								onClick={form71SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="MEDIUM"
 								onClick={form72SubmitHandler}
 							/>
 							<input
 								type="button"
+								style={{ fontSize: 'smaller' }}
 								className="btn1"
 								value="HARD"
 								onClick={form73SubmitHandler}

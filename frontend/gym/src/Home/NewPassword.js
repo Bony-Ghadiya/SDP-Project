@@ -54,7 +54,10 @@ const NewPassword = () => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-			<Card className="authentication">
+			<Card
+				className="authentication"
+				style={{ maxWidth: '400px', margin: 'auto' }}
+			>
 				{isLoading && <LoadingSpinner asOverlay />}
 				<form onSubmit={newPasswordSubmitHandler}>
 					<h2>Reset password</h2>

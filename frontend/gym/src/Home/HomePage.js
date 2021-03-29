@@ -4,13 +4,6 @@ import Carousel from 'react-material-ui-carousel';
 import { AuthContext } from '../shared/context/auth-context';
 import './style.css';
 
-// jo ama me components muki didha 6e have tu ane sarkha arrenge karje n carousal ma jya image 6ene ema text mukvai try karje
-// thay jashe m to ae
-// w3school ma search karje etle emathi thay jashe
-// n tari rite content change kari nakhje
-//evu lage to red  pictures 6e ae change karvi hoy to ae y kari nakhje
-// n aj sanj sudhi ma kari ne apaje
-
 const Home = () => {
 	const history = useHistory();
 	const auth = useContext(AuthContext);
@@ -44,14 +37,20 @@ const Home = () => {
 					style={{ width: '100%', height: '40%' }}
 				></img>
 				<div className="bottom-left">
-					<h1 style={{ fontSize: '35px', color: '#4caf50' }}>
-						{props.item.name}
-					</h1>
-					<h2 style={{ fontSize: '25px' }}>{props.item.description}</h2>
+					{!auth.isLoggedIn && (
+						<h1 style={{ fontSize: '2vw', color: '#4caf50' }}>
+							{props.item.name}
+						</h1>
+					)}
+					<h2 style={{ fontSize: '2vw' }}>{props.item.description}</h2>
 
 					{!auth.isLoggedIn && (
 						<button
-							style={{ padding: '10px 30px', margin: '12px 0px' }}
+							style={{
+								padding: '10px 30px',
+								margin: '12px 0px',
+								backgroundColor: '#4caf50',
+							}}
 							className="button"
 							onClick={() => {
 								history.push('/auth');
@@ -70,7 +69,7 @@ const Home = () => {
 			<div>
 				<div className="all">
 					<div className="carousel">
-						<Carousel>
+						<Carousel style={{ color: 'red' }}>
 							{items.map((item, i) => (
 								<Item key={i} item={item} />
 							))}
@@ -79,20 +78,22 @@ const Home = () => {
 					<div className="about">
 						<img
 							src="https://res.cloudinary.com/gymmie/image/upload/v1614924741/home%20page/slid2_igyibo.jpg"
-							width="1400px"
-							height="250px"
+							width="100%"
+							height="25%"
 							alt=""
 						/>
 						<div className="text1">
 							<h1>Get Fit Today!</h1>
 						</div>
 					</div>
-					<div className="title">
+					<div className="title" style={{ display: 'inline-block' }}>
 						{!auth.isLoggedIn && <h3>Who we Are &amp; What We Do</h3>}
-						{auth.userType === 'user' && <h3>Guidelines for Trainers</h3>}
+						{auth.userType === 'user' && <h3>Guidelines for Trainees</h3>}
 						{auth.userType === 'trainer' && <h3>Guidelines for Trainers</h3>}
 						{!auth.isLoggedIn && (
-							<div style={{ textAlign: 'justify', width: '990px' }}>
+							<div
+								style={{ textAlign: 'justify', width: '40%', margin: 'auto' }}
+							>
 								<p>
 									HEP is a cutting-edge functional fitness system that can help
 									everyone - everyday. There is a significant portion of the
@@ -102,7 +103,9 @@ const Home = () => {
 							</div>
 						)}
 						{auth.userType === 'user' && (
-							<div style={{ textAlign: 'justify', width: '990px' }}>
+							<div
+								style={{ textAlign: 'justify', width: '40%', margin: 'auto' }}
+							>
 								<ul>
 									<li id="li">Login into your account.</li>
 									<li id="li">
@@ -130,7 +133,9 @@ const Home = () => {
 							</div>
 						)}
 						{auth.userType === 'trainer' && (
-							<div style={{ textAlign: 'justify', width: '990px' }}>
+							<div
+								style={{ textAlign: 'justify', width: '40%', margin: 'auto' }}
+							>
 								<ul>
 									<li id="li">Login into your account.</li>
 									<li id="li">
@@ -156,7 +161,7 @@ const Home = () => {
 							</div>
 						)}
 					</div>
-					<div>
+					<div style={{ display: 'block', textAlign: 'center' }}>
 						<img
 							className="aboutimg"
 							src="https://res.cloudinary.com/gymmie/image/upload/v1614924771/home%20page/slide6_dsanya.jpg"
@@ -166,9 +171,11 @@ const Home = () => {
 					<table className="t1">
 						<tbody>
 							<tr>
-								<td className="list1">About Us</td>
+								<td className="list1">
+									<h4>About Us</h4>
+								</td>
 								<td className="list1" colSpan={2}>
-									Why To Choose Us?
+									<h4>Why To Choose Us?</h4>
 								</td>
 							</tr>
 							<tr>
@@ -213,29 +220,27 @@ const Home = () => {
 				<div className="footer">
 					<div className="left">
 						<div className="left1">
-							<img
-								src="https://res.cloudinary.com/gymmie/image/upload/v1615601921/home%20page/logo1new_emjduo.png"
-								alt=""
-							/>
+							<h1 style={{ color: '#4caf50' }}>HEP</h1>
 						</div>
 						<div className="text5">
 							{' '}
 							<p>
 								Feel free to contact us if you have any questions! We would Be
-								more than happy to guiade you.
+								more than happy to guide you.
 							</p>
 						</div>
 					</div>
 					<div className="right">
-						<h5>Get Info</h5>
-						<ul>
+						<h4>Get Info</h4>
+						<ul style={{ paddingLeft: '0' }}>
 							<div className="f1">
 								<i
 									className="fa fa-phone"
 									style={{ color: 'green', marginRight: '9px' }}
 								/>
 								<span>Phone:</span>
-								(12) 345 6789
+								<br />
+								(+91) 7069965355
 							</div>
 							<div className="f1">
 								<i
@@ -243,9 +248,10 @@ const Home = () => {
 									style={{ color: 'green', marginRight: '9px' }}
 								/>
 								<span>Email:</span>
-								<a href="#" style={{ color: 'white', borderBottom: 'none' }}>
+								<br />
+								<a href="/" style={{ color: 'white', borderBottom: 'none' }}>
 									{' '}
-									bonytrainer@gmail.com
+									gymmie@gmail.com
 								</a>
 							</div>
 							<div className="f1">
@@ -254,6 +260,7 @@ const Home = () => {
 									style={{ color: 'green', marginRight: '9px' }}
 								/>
 								<span>Address: </span>
+								<br />
 								Surat, Gujarat , India
 							</div>
 						</ul>

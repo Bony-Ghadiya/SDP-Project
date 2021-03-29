@@ -51,7 +51,10 @@ const Reset = () => {
 		<React.Fragment>
 			<MainNavigation />
 			<ErrorModal error={error} onClear={clearError} />
-			<Card className="authentication">
+			<Card
+				className="authentication"
+				style={{ maxWidth: '400px', margin: 'auto' }}
+			>
 				{isLoading && <LoadingSpinner asOverlay />}
 				<form onSubmit={resetSubmitHandler}>
 					<h2>Forget password</h2>

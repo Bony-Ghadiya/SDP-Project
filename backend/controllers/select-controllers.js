@@ -146,7 +146,35 @@ const showTrainerById = async (req, res, next) => {
 	res.json({ trainer: exe.toObject({ getters: true }) });
 };
 
+const showTrainerById2 = async (req, res, next) => {
+	console.log('trainer2');
+	const uid = req.params.uid;
+	console.log(uid);
+
+	let exe;
+	try {
+		exe = await Trainer.findOne({ userid: uid });
+	} catch (err) {
+		const error = new HttpError(
+			'Something went wrong, could not find the trainer.',
+			500
+		);
+		return next(error);
+	}
+
+	if (!exe) {
+		const error = new HttpError(
+			'Could not find trainer for the provided id.',
+			404
+		);
+		return next(error);
+	}
+
+	res.json({ trainer: exe.toObject({ getters: true }) });
+};
+
 exports.getTrainers = getTrainers;
 exports.getTrainerById = getTrainerById;
 exports.acceptRequest = acceptRequest;
 exports.showTrainerById = showTrainerById;
+exports.showTrainerById2 = showTrainerById2;

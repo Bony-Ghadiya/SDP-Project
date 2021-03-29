@@ -24,10 +24,7 @@ main {
 	}
 }
 
-
-
-
-@media (max-width: 424px) {
+@media (max-width: 468px) {
 	.main-header {
 		font-size:x-small
 	}

@@ -35,7 +35,14 @@ const ViewDailyFeedback = () => {
 			)}
 			{!isLoading && data && (
 				<div style={{ textAlign: 'center', color: 'white' }}>
-					<Card style={{ width: '35%', textAlign: 'center', margin: 'auto' }}>
+					<Card
+						className="authentication"
+						style={{
+							maxWidth: '400px',
+							textAlign: 'center',
+							margin: 'auto ',
+						}}
+					>
 						<table className="table1" id="t01" style={{ margin: '0px' }}>
 							<caption>{traineename}'s Daily Feedback</caption>
 							{data.plan.map(p => (
